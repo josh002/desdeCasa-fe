@@ -1,0 +1,30 @@
+.thread-img {
+  width: 100%;
+  height: 20vh;
+  object-fit: cover;
+}
+
+.my-form {
+  white-space: pre-line;
+  .user-chip {
+    display: flex;
+    justify-content: flex-end;
+    ion-chip {
+      margin-right: 16px;
+      ion-icon {
+        font-size: x-large;
+      }
+    }
+  }
+  .title {
+    font-size: x-large;
+    font-weight: bold;
+  }
+  .description {
+    --padding-start: 8px;
+  }
+}
+
+.submit-button {
+  margin-top: 50px;
+}

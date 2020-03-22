@@ -1,0 +1,8 @@
+{
+  "name": "la-corriente",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

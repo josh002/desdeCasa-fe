@@ -1,0 +1,38 @@
+<ion-content>
+
+    <div class="eon6-lightcolor eon6-font-main logo">
+        <img src="../../../assets/imgs/la-corriente.png" alt="">
+    </div>
+
+    <form #form="ngForm" (ngSubmit)="doLogin()">
+        <div class=log-in>
+            <ion-item class="ion-margin-horizontal">
+                <ion-label autocomplete="on" position="floating">Nombre de usuario</ion-label>
+                <ion-input name="name" type="text" [(ngModel)]="account.username" required> </ion-input>
+            </ion-item>
+            <ion-item class="ion-margin-horizontal">
+                <ion-label position="floating">Contraseña</ion-label>
+                <ion-input name="password" type="password" [(ngModel)]="account.password" required>
+                </ion-input>
+            </ion-item>
+
+            <ion-button color="light" fill="outline" shape="round" type="ngSubmit" [disabled]="form.invalid" expand="block">
+                Ingresar
+            </ion-button>
+        </div>
+    </form>
+|
+    <div class="ion-text-right eon6-lightcolor register">
+
+        <ion-label>¿No estás registrado?</ion-label>
+        <ion-button color="light" fill="outline" shape="round" type="ngSubmit" expand="block" [routerLink]="['/register']">
+            Registrar
+        </ion-button>
+    </div>
+
+    <div class="bottom-sun">
+        <img src="../../../assets/imgs/sol.png" alt="">
+    </div>
+
+
+</ion-content>

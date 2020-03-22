@@ -1,0 +1,31 @@
+<ion-toolbar class="eon6-primarycolor">
+
+    <ion-buttons slot="start">
+        <ion-back-button color="light" text="Volver"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title class="eon6-font-main eon6-darkcolor eon6-large-text header-logo">
+        <img src="../../../../assets/icon/stripes.png" alt="">  
+        <ion-label>La Corriente</ion-label>
+    </ion-title>
+
+    <ion-buttons slot="end">
+
+        <!-- Share -->
+        <!-- <ion-button (click)="presentActionSheet()" size="large">
+            <ion-icon color="primary" slot="icon-only" name="share"></ion-icon>
+        </ion-button> -->
+
+        <!-- Handling the profile picture if present -->
+        <ion-button [routerLink]="['/profile']" size="large">
+            <ng-container *ngIf="account && account.picture; else noPicture">
+                <img class="profile-pic" src="{{account.picture}}" (error)="onErrorImage()">
+            </ng-container>
+            <ng-template #noPicture>
+                <ion-icon color="light" slot="icon-only" name="contact"></ion-icon>
+            </ng-template>
+        </ion-button>
+
+    </ion-buttons>
+
+</ion-toolbar>

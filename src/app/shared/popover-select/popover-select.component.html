@@ -1,0 +1,18 @@
+<ion-list-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button disabled="false">
+        <ion-icon name="list" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Topicos</ion-title>
+  </ion-toolbar>
+</ion-list-header>
+
+<ion-list>
+  <ng-container>
+    <ion-item *ngFor="let option of options" (click)="onClick(option)">
+      <ion-label class="ion-text-center">{{option.name}}</ion-label>
+    </ion-item>
+  </ng-container>
+</ion-list>
