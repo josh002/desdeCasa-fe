@@ -20,6 +20,7 @@ import { Street } from 'src/app/models/street.model';
 import * as moment from 'moment';
 import * as crypto from 'crypto-js';
 import { GeolocationService } from 'src/app/services/geolocationService';
+import { AuthService } from 'src/app/services/authService';
 
 @Component({
     selector: 'app-register',
@@ -91,6 +92,7 @@ export class RegisterPage implements OnInit {
         private router: Router,
         public navCtrl: NavController,
         public loadingService: LoadingService,
+        public authService: AuthService,
         public geolocationService: GeolocationService,
         public popoverController: PopoverController
     ) { }
@@ -113,6 +115,19 @@ export class RegisterPage implements OnInit {
         this.utilsService.getDepartment()
             .then((resp: any) => { this.departments = resp.departamentos; })
             .catch(err => { console.log(err); })
+
+        // Setea localización actual del usuario en address
+        this.geolocationService.getCurrentLocation()
+            .then(
+                latLong => {
+                    this.account.latitude = latLong.latitude;
+                    this.account.longitude = latLong.longitude;
+                    return this.authService.cordsToAddress(latLong)
+                }
+            )
+            .then(
+                ({ formatted_address }) => this.account.address = formatted_address
+            )
     }
 
     testMe() {
@@ -194,13 +209,11 @@ export class RegisterPage implements OnInit {
         if (this.accountSubmit.twitter) this.accountSubmit.twitter = this.account.twitter.trim();
         console.log(this.account);
         console.log(this.accountSubmit);
+
+        this.accountSubmit.latitude = this.account.latitude;
+        this.accountSubmit.longitude = this.account.longitude;
     }
-
-
-    testGeolocation = () => {
-        this.geolocationService.getCurrentLocation()
-    }
-
+    
 }
 
 

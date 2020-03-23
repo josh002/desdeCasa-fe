@@ -31,6 +31,7 @@ export class AuthService {
         return this.httpClient.post(`${environment.WS_URL}/register`, account, this.appJsonHeader)
     }
 
+
     editUser = (user: any) => {
         return this.httpClient.put(
             `${environment.WS_URL}/user`,
@@ -79,6 +80,18 @@ export class AuthService {
                 this.appJsonHeader
             )
 
+
+    /**
+     * Dadas cords latitud y longitud, retorna a un address
+     */
+    cordsToAddress = (cords: { latitude: number, longitude: number }): Promise<{ formatted_address: string }> => 
+        this.httpClient
+            .post(
+                `${environment.WS_URL}/utils/cord-to-address`, 
+                cords, 
+                this.appJsonHeader
+            ).toPromise().then((resp: any) => resp.result)
+    
 
 
     /**

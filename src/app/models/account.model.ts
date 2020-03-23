@@ -31,6 +31,9 @@ export class Account {
     facebook?          : string;
     instagram?         : string;
     twitter?           : string;
+    address?           : string;
+    latitude?          : number;
+    longitude?         : number;
 }
 
 /*

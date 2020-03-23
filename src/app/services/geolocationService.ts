@@ -12,13 +12,10 @@ export class GeolocationService {
     ) { }
 
 
-    getCurrentLocation = () => 
+    getCurrentLocation = (): Promise<{ latitude: number, longitude: number }> => 
         this.geolocation.getCurrentPosition()
             .then(
-                resp => {
-                    debugger;
-                    return resp.coords;
-                }
+                ({ coords }) => ({ latitude: coords.latitude, longitude: coords.longitude })
             )
 
 }
