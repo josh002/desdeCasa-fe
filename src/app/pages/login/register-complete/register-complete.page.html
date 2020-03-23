@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button color="primary"></ion-back-button>
+        </ion-buttons>
+
+        <ion-title>Registrarse como:</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content >
+    <ion-button color="primary" shape="round" type="ngSubmit" expand="block" [routerLink]="['./client']" routerLinkActive="router-link-active">
+        Usuario
+    </ion-button>
+    <ion-button color="light" shape="round" type="ngSubmit" expand="block" [routerLink]="['./market']" routerLinkActive="router-link-active">
+        Comercio
+    </ion-button>
+</ion-content>
