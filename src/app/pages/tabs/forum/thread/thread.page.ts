@@ -37,70 +37,9 @@ export class ThreadPage implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.account = this.accountService.get();
-        this.accountService.doSubscribe().subscribe((resp: Account) => { this.account = resp; console.log(this.account); });
-        this.loadingService.presentLoading("Cargando")
-            .then(
-                (r: any) => {
-                    let threadId: number;
-                    this.route.paramMap.subscribe(
-                        (params: Params) => {
-                            this.forumService.getThread({id: params.params.id})
-                                .then(
-                                    (resp: any) => {
-                                        // resp.result.map((r: any) => { if (r.picture) r.picture = r.picture.data.map(a => String.fromCharCode(a)).join(''); })
-                                        this.thread = resp.result[0];
-                                        {
-                                            this.newComment.threadId = this.thread.id;
-                                            this.newComment.userId = +this.account.id;
-                                        }
-                                        this.loadingService.dismissLoading();
-                                        console.log(this.thread);
-                                    })
-                                .catch(
-                                    err => {
-                                        this.loadingService.dismissLoading();
-                                        console.log(err);
-                                    })
-                            this.forumService.getPost(params.params.id)
-                                .then(
-                                    (resp: any) => {
-                                        // resp.result.map((r: any) => { if (r.picture) r.picture = r.picture.data.map(a => String.fromCharCode(a)).join(''); })
-                                        this.comments = resp.result;
-                                        console.log(this.comments);
-                                    })
-                                .catch(
-                                    err => {
-                                        console.log(err);
-                                    })
-                        })
-                })
+       
     }
-
-    doComment() {
-        this.alertService.simpleAlert("Funcion no disponible aún");
-
-        return
-        // this.forumService.createPost(this.newComment)
-        //     .then(
-        //         resp => {
-        //             const tempPush = Object.assign({}, this.newComment);
-        //             tempPush.picture = this.account.picture;
-        //             tempPush.user = this.account.username;
-        //             this.comments.push(tempPush);
-        //             this.newComment.content = '';
-        //             this.ionContent.scrollToBottom();
-        //             console.log(tempPush);
-        //             console.log(resp);
-        //         })
-        //     .catch(
-        //         err => {
-        //             console.log(err);
-        //             return this.alertService.simpleAlert("Algo salió mal, intenta nuevamente");
-        //         })
-
-    }
-
+   
     onErrorImage = () => {
         console.log(`thread.img: Image is not ok`)
         // this.thread.img = '';

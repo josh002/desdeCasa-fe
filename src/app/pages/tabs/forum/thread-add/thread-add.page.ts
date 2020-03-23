@@ -11,6 +11,7 @@ import { Account } from 'src/app/models/account.model';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Subject } from 'rxjs';
 import { AccountService } from 'src/app/services/account.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
     selector: 'app-thread-add',
@@ -37,7 +38,8 @@ export class ThreadAddPage implements OnInit {
         private utilsService: UtilsService,
         private router: Router,
         private alertService: AlertService,
-        private accountService: AccountService
+        private accountService: AccountService,
+        public alertController: AlertController,
     ) { }
 
     ngOnInit() { };
@@ -51,33 +53,16 @@ export class ThreadAddPage implements OnInit {
             .then((resp: any) => { this.politicalParties = resp.result; })
             .catch(err => { console.log(err); })
     }
-
-    onClickPublish = (e) => {
-        e.preventDefault();
-        this.thread.userId = +this.account.id;
-        this.thread.politicalPartyId = this.politicalPartiesSelected.id;
-        console.log(this.thread);
-        this.forumService.createThread(this.thread)
-            .then(
-                resp => {
-                    console.log(resp);
-                    // En un insert exitoso reinicializo el thread cargado
-                    this.thread = new Thread();
-                    this.router.navigate(['/tabs/forum']);
-                }
-            )
-            .catch(
-                resp => {
-                    console.log(resp.error);
-                    return this.alertService.simpleAlert("Ocurrió un error inesperado. Intente nuevamente.");
-                }
-            )
-    }
-
-
-    onErrorImage = () => {
-        console.log("profile.page: Image is not ok")
-        this.account.picture = "";
-    }
+    async confirm() {
+        const alert = await this.alertController.create({
+          header: 'Turno en supermercado',
+          subHeader: 'Don Pepe',
+          message: 'Horario : 8:15',
+          buttons: ['Confirmar']
+        });
+    
+        await alert.present();
+      }
+    
 
 }

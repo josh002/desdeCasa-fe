@@ -92,8 +92,7 @@ export class ForumPage implements OnInit {
                 if (result.data != undefined) {
                     this.queryPoliticalPartyId = result.data.id;
                     this.politicalParty = result.data.name;
-                    this.queryOffset = 0;
-                    this.getThreads();
+                    this.queryOffset = 0;                   
                 }
             });
 
