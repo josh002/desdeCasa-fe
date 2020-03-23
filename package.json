@@ -6,6 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:alt": "ng serve --port 4201",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -29,6 +30,7 @@
     "@ionic-native/core": "*",
     "@ionic-native/date-picker": "^5.17.0",
     "@ionic-native/facebook": "*",
+    "@ionic-native/geolocation": "^5.23.0",
     "@ionic-native/photo-viewer": "*",
     "@ionic-native/splash-screen": "*",
     "@ionic-native/status-bar": "*",
@@ -41,6 +43,7 @@
     "cordova-android": "*",
     "cordova-plugin-datepicker": "^0.9.3",
     "cordova-plugin-facebook4": "*",
+    "cordova-plugin-geolocation": "^4.0.2",
     "core-js": "^3.4.2",
     "corejs": "^1.0.0",
     "crypto-js": "^3.1.9-1",
@@ -108,7 +111,8 @@
       },
       "cordova-plugin-ionic-keyboard": {},
       "com-sarriaroman-photoviewer": {},
-      "cordova-plugin-datepicker": {}
+      "cordova-plugin-datepicker": {},
+      "cordova-plugin-geolocation": {}
     },
     "platforms": [
       "android"

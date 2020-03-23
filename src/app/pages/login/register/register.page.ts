@@ -19,6 +19,7 @@ import { Department } from 'src/app/models/department.model';
 import { Street } from 'src/app/models/street.model';
 import * as moment from 'moment';
 import * as crypto from 'crypto-js';
+import { GeolocationService } from 'src/app/services/geolocationService';
 
 @Component({
     selector: 'app-register',
@@ -90,6 +91,7 @@ export class RegisterPage implements OnInit {
         private router: Router,
         public navCtrl: NavController,
         public loadingService: LoadingService,
+        public geolocationService: GeolocationService,
         public popoverController: PopoverController
     ) { }
 
@@ -192,6 +194,11 @@ export class RegisterPage implements OnInit {
         if (this.accountSubmit.twitter) this.accountSubmit.twitter = this.account.twitter.trim();
         console.log(this.account);
         console.log(this.accountSubmit);
+    }
+
+
+    testGeolocation = () => {
+        this.geolocationService.getCurrentLocation()
     }
 
 }
