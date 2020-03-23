@@ -6,7 +6,7 @@
         </h2>
     </div>
 
-    <form #form="ngForm" (ngSubmit)="doLogin()">
+    <form #form="ngForm" >
         <div class=log-in>
             <ion-item class="ion-margin-horizontal">
                 <ion-label autocomplete="on" position="floating">Nombre de usuario</ion-label>
@@ -18,7 +18,7 @@
                 </ion-input>
             </ion-item>
 
-            <ion-button color="light" fill="outline" shape="round" type="ngSubmit" [disabled]="form.invalid" expand="block">
+            <ion-button color="light" fill="outline" shape="round" type="ngSubmit" [routerLink]="['/tabs/forum']" routerLinkActive="router-link-active"  expand="block">
                 Ingresar
             </ion-button>
         </div>
