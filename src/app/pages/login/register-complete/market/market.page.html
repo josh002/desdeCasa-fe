@@ -1,0 +1,252 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button color="primary"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Registro Comercio</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+    <form #myForm="ngForm" (ngSubmit)="onSubmit()">
+
+        <ion-slides pager="true">
+            <!-- Datos Personales Dueño -->
+            <ion-slide>
+                <ion-content fulscreen>
+                    <ion-list>
+                        <h4 class="ion-text-center">Datos Personales Dueño</h4>
+                        <!-- firstName          -->
+                        <ion-item>
+                            <ion-label color="primary" position="floating">Nombre/s</ion-label>
+                            <ion-input name="firstName" #firstName="ngModel" type="text" [(ngModel)]="account.firstName"
+                                pattern="[A-Za-z]+([ ][A-Za-z]+){0,}[ ]?" required>
+                            </ion-input>
+                        </ion-item>
+                        <ng-container
+                            *ngIf="firstName.invalid && ((firstName.dirty && firstName.touched) || desperationLevel > 3)">
+                            <div class="ux-alert" lines="none" *ngIf="firstName.errors && firstName.errors.required">
+                                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                                <ion-label>Campo Requerido</ion-label>
+                            </div>
+                            <div class="ux-alert" lines="none" *ngIf="firstName.errors && firstName.errors.pattern">
+                                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                                <ion-label>Solo letras y espacios</ion-label>
+                            </div>
+                        </ng-container>
+
+                        <!-- lastName           -->
+                        <ion-item>
+                            <ion-label color="primary" position="floating">Apellido/s</ion-label>
+                            <ion-input name="lastName" #lastName="ngModel" type="text" [(ngModel)]="account.lastName"
+                                pattern="[A-Za-z]+([ ][A-Za-z]+){0,}[ ]?" required>
+                            </ion-input>
+                        </ion-item>
+                        <ng-container
+                            *ngIf="lastName.invalid && ((lastName.dirty && lastName.touched) || desperationLevel > 3)">
+                            <div class="ux-alert" lines="none" *ngIf="lastName.errors && lastName.errors.required">
+                                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                                <ion-label>Campo Requerido</ion-label>
+                            </div>
+                            <div class="ux-alert" lines="none" *ngIf="lastName.errors && lastName.errors.pattern">
+                                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                                <ion-label>Solo letras y espacios</ion-label>
+                            </div>
+                        </ng-container>
+
+                        <!-- DNI                -->
+                        <ion-item>
+                            <ion-label color="primary" position="floating">DNI</ion-label>
+                            <ion-input name="dni" #dni="ngModel" type="text" minlength="7" maxlength="8"
+                                pattern="[0-9]+" [(ngModel)]="account.dni" required>
+                            </ion-input>
+                        </ion-item>
+                        <ng-container *ngIf="dni.invalid && ((dni.dirty && dni.touched) || desperationLevel > 3)">
+                            <div class="ux-alert" lines="none" *ngIf="dni.errors && dni.errors.required">
+                                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                                <ion-label>Campo Requerido</ion-label>
+                            </div>
+                            <div class="ux-alert" lines="none"
+                                *ngIf="dni.errors && (dni.errors.minlength || dni.errors.maxlength)">
+                                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                                <ion-label>Número no válido</ion-label>
+                            </div>
+                            <div class="ux-alert" lines="none" *ngIf="dni.errors && dni.errors.pattern">
+                                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                                <ion-label>Sólo números sin puntos ni guiones</ion-label>
+                            </div>
+                        </ng-container>
+                        <!-- Mail -->
+                        <ion-item>
+                            <ion-label color="primary" autocomplete="off" position="floating">Direccion de correo
+                                electronico
+                            </ion-label>
+                            <ion-input name="email" #email="ngModel" type="email" [(ngModel)]="account.email" required
+                                pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}[ ]?">
+                            </ion-input>
+                        </ion-item>
+                        <ng-container *ngIf="email.invalid && ((email.dirty && email.touched) || desperationLevel > 3)">
+                            <div class="ux-alert" lines="none" *ngIf="email.errors && email.errors.required">
+                                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                                <ion-label>Campo Requerido</ion-label>
+                            </div>
+                            <div class="ux-alert" lines="none" *ngIf="email.errors && email.errors.pattern">
+                                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                                <ion-label>No parece ser una dirección válida</ion-label>
+                            </div>
+                        </ng-container>
+                    </ion-list>
+                </ion-content>
+            </ion-slide>
+            <!-- datos del comercio -->
+            <ion-slide>
+                <ion-content>
+                    <ion-list>
+                        <h4 class="ion-text-center">Datos del Comercio</h4>
+                        <!-- Nombre del comercio -->
+                        <ion-item>
+                            <ion-label color="primary" autocomplete="off" position="floating">Nombre del comercio
+                            </ion-label>
+                            <ion-input name="marketname" type="text" required pattern="[A-Za-z0-9._-]+[ ]?">
+                            </ion-input>
+                        </ion-item>
+                        <ng-container
+                            *ngIf="username.invalid && ((username.dirty && username.touched) || desperationLevel > 3)">
+                            <div class="ux-alert" lines="none">
+                                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                                <ion-label>Campo Requerido</ion-label>
+                            </div>
+                        </ng-container>
+                         <!-- Direccion comercio -->
+                         <ion-list>
+                            <ion-item>
+                                <ion-label color="primary" position="floating">Calle</ion-label>
+                                <ion-input name="adressStreet" #adressStreet="ngModel" type="text"
+                                    [(ngModel)]="account.adressStreet" required>
+                                </ion-input>
+                            </ion-item>
+                            <ng-container
+                                *ngIf="adressStreet.invalid && ((adressStreet.dirty && adressStreet.touched) || desperationLevel > 3)">
+                                <div class="ux-alert" lines="none"
+                                    *ngIf="adressStreet.errors && adressStreet.errors.required">
+                                    <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                                    <ion-label>Campo Requerido</ion-label>
+                                </div>
+                            </ng-container>
+    
+                            <!-- adressmarketNumber  -->
+                            <ion-item>
+                                <ion-label color="primary" position="floating">Número</ion-label>
+                                <ion-input name="adressHouseNumber" #adressHouseNumber="ngModel" type="text"
+                                    [(ngModel)]="account.adressHouseNumber" required>
+                                </ion-input>
+                            </ion-item>
+                            <ng-container
+                                *ngIf="adressHouseNumber.invalid && ((adressHouseNumber.dirty && adressHouseNumber.touched) || desperationLevel > 3)">
+                                <div class="ux-alert" lines="none"
+                                    *ngIf="adressHouseNumber.errors && adressHouseNumber.errors.required">
+                                    <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                                    <ion-label>Campo Requerido</ion-label>
+                                </div>
+                            </ng-container>
+                        </ion-list>
+                        <!-- Horarios del Comercio -->
+                        <h4 class="ion-text-center">Horario de Atención</h4>
+                        <ion-item>
+                            <ion-list>
+                                <h5 class="ion-text-center">Mañana</h5>
+                                <ion-item>
+                                    <ion-label>Desde</ion-label>
+                                    <ion-datetime display-format="HH:mm" hourValues="0,1,2,3,4,5,6,7,8,9,10,11,12" minuteValues="0,30" cancelText="cancelar" doneText="terminado" picker-format="HH:mm " value="1990-02-19T07:43Z">
+                                    </ion-datetime>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label>Hasta</ion-label>
+                                    <ion-datetime display-format="HH:mm" hourValues="0,1,2,3,4,5,6,7,8,9,10,11,12" minuteValues="0,30" cancelText="cancelar" doneText="terminado" picker-format="HH:mm " value="1990-02-19T07:43Z">
+                                    </ion-datetime>
+                                </ion-item>
+                            </ion-list>
+                            <ion-list>
+                                <h5 class="ion-text-center">Tarde</h5>
+                                <ion-item>
+                                    <ion-label>Desde</ion-label>
+                                    <ion-datetime display-format="HH:mm" hourValues="12,13,14,15,16,17,18,19,20,21,22,23" minuteValues="0,30" cancelText="cancelar" doneText="terminado" picker-format="HH:mm " value="1990-02-19T07:43Z">
+                                    </ion-datetime>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label>Hasta</ion-label>
+                                    <ion-datetime display-format="HH:mm" hourValues="12,13,14,15,16,17,18,19,20,21,22,23" minuteValues="0,30" cancelText="cancelar" doneText="terminado" picker-format="HH:mm " value="1990-02-19T07:43Z">
+                                    </ion-datetime>
+                                </ion-item>
+                            </ion-list>
+    
+                        </ion-item>                    
+                       </ion-list>
+                </ion-content>
+                
+            </ion-slide>
+            <!-- Datos de la cuenta -->
+            <ion-slide>
+                <ion-list>
+                    <h4 class="ion-text-center">Datos de la Cuenta</h4>
+                    <!-- Nombre de Usuario -->
+                    <ion-item>
+                        <ion-label color="primary" autocomplete="off" position="floating">Nombre de usuario
+                        </ion-label>
+                        <ion-input name="username" #username="ngModel" type="text" [(ngModel)]="account.username"
+                            required minlength="6" pattern="[A-Za-z0-9._-]+[ ]?">
+                        </ion-input>
+                    </ion-item>
+                    <ng-container
+                        *ngIf="username.invalid && ((username.dirty && username.touched) || desperationLevel > 3)">
+                        <div class="ux-alert" lines="none" *ngIf="username.errors && username.errors.required">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Campo Requerido</ion-label>
+                        </div>
+                        <div class="ux-alert" lines="none" *ngIf="username.errors && username.errors.minlength">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>6 caracteres de longitud mínima</ion-label>
+                        </div>
+                        <div class="ux-alert" lines="none" *ngIf="username.errors && username.errors.pattern">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Solo letras, números, guiones y puntos</ion-label>
+                        </div>
+                    </ng-container>
+
+                    <!-- Contraseña -->
+                    <ion-item>
+                        <ion-label color="primary" position="floating">Contraseña</ion-label>
+                        <ion-input name="password" #password="ngModel" minlength="8" type="password"
+                            pattern="[A-Za-z0-9._-]+" [(ngModel)]="account.password" required>
+                        </ion-input>
+                    </ion-item>
+                    <ng-container
+                        *ngIf="password.invalid && ((password.dirty && password.touched) || desperationLevel > 3)">
+                        <div class="ux-alert" lines="none" *ngIf="password.errors && password.errors.required">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Campo Requerido</ion-label>
+                        </div>
+                        <div class="ux-alert" lines="none" *ngIf="password.errors && password.errors.minlength">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>8 caracteres de longitud mínima</ion-label>
+                        </div>
+                        <div class="ux-alert" lines="none" *ngIf="password.errors && password.errors.pattern">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Solo letras, números, guiones y puntos</ion-label>
+                        </div>
+                    </ng-container>
+                </ion-list>
+            </ion-slide>
+        </ion-slides>
+
+        <div class="ion-padding" (click)=desperateUser()>
+            <ion-button type="ngSubmit" color="primary" shape="round" expand="block" [disabled]="myForm.form.invalid">
+                <ion-label color="light">Crear cuenta</ion-label>
+            </ion-button>
+            <div class="button-helper" lines="none" *ngIf="desperationLevel > 3">
+                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                <ion-label>Revise si le quedaron campos sin completar</ion-label>
+            </div>
+        </div>
+    </form>
+</ion-content>

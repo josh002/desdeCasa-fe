@@ -2,23 +2,6 @@
     <app-baby-header></app-baby-header>
 
     <ion-toolbar>
-
-        <ion-buttons *ngIf="mostrarForo">
-            <!-- <ion-button slot="end" [color]="queryOrderBy=='likes' ? 'secondary' : 'medium'" fill="clear"
-                (click)="doOrderBy('likes')">
-                <ion-icon name="heart"></ion-icon>
-            </ion-button> -->
-            <ion-button slot="end" [color]="queryOrderBy=='created' ? 'secondary' : 'medium'" fill="clear" (click)="doOrderBy('created')">
-                <ion-icon name="hourglass"></ion-icon>
-            </ion-button>
-            <ion-button slot="end" [color]="queryOrderBy=='replies' ? 'secondary' : 'medium'" fill="clear" (click)="doOrderBy('replies')">
-                <ion-icon name="chatbubbles"></ion-icon>
-            </ion-button>
-            <ion-button slot="end" [color]="queryPoliticalPartyId ? 'secondary' : 'medium'" fill="clear" (click)='presentPopover()'>
-                <ion-icon name="options"></ion-icon>
-            </ion-button>
-        </ion-buttons>
-
         <ion-searchbar searchIcon="" placeholder="Buscar" animated mode="ios" autocomplete="true" [(ngModel)]="querySearch" (ionChange)="doSearchBy()" debounce="500" (ionClear)="searchClear()">
 
             <ion-fab-button slot="start" [color]="querySearch ? 'secondary' : 'medium'" size="small" (click)="queryOffset = 0; getThreads()">
@@ -41,73 +24,12 @@
 </ion-header>
 
 <ion-content>
-
-    <!-- Refrescar lista -->
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content color="primary" refreshingSpinner="circles"></ion-refresher-content>
-    </ion-refresher>
-
     <!-- Mensaje si no hay hilos -->
     <!-- <div *ngIf="threads.length == 0" class="no-items-yet"> -->
     <div class="no-items-yet">
-        <ion-icon name="today"></ion-icon>
-        <h4 class="eon6-graycolor">Aún no hay tópicos en esta sección</h4>
-        <h4 class="eon6-darkcolor">Sé el primero en agregar uno</h4>
+        <ion-icon name="clock"></ion-icon>
+        <h4 class="eon6-graycolor">Reserva tu turno para comprar</h4>
     </div>
-
-    <!-- <ng-container *ngIf="threads.length > 0"> -->
-    <ng-container *ngIf="mostrarForo">
-        <!-- Lista de Hilos -->
-        <ion-list lines="none">
-            <ng-container *ngFor="let thread of threads, let i = index">
-                <ion-item>
-                    <ion-avatar slot="start">
-                        <ng-container *ngIf="thread.picture; else noPicture">
-                            <img [src]="thread.picture" (error)="onErrorImage(i)">
-                        </ng-container>
-                        <ng-template #noPicture>
-                            <img src="..\..\..\..\assets\imgs\Profile-Generic.png">
-                        </ng-template>
-                    </ion-avatar>
-                    <ion-label [routerLink]="['/tabs/forum/thread', thread.id]">
-                        <!-- Usuario y Topico -->
-                        <div class="thread-header">
-                            <ion-note class="md" color="dark">{{thread.username}}</ion-note>
-                            <span>&#183;</span>
-                            <ion-note class="md" color="medium">{{getPoliticalPartyName(thread.politicalPartyId)}}
-                            </ion-note>
-                        </div>
-                        <!-- Titulo y Contenido -->
-                        <h3> {{thread.subject}} </h3>
-                        <h4>{{thread.content}}</h4>
-                        <!-- Fecha y replies -->
-                        <div class="thread-footer">
-                            <div>
-                                <fa-icon icon="reply"></fa-icon>
-                                <ion-note>{{repliesMock[i]}}</ion-note>
-                            </div>
-                            <ion-note class="md" color="medium">{{thread.created | date:'d LLL yyyy H:mm'}}</ion-note>
-                        </div>
-                    </ion-label>
-                </ion-item>
-            </ng-container>
-        </ion-list>
-
-        <!-- Infinite Scroll -->
-        <!-- <ion-infinite-scroll threshold="15%" (ionInfinite)="loadMoreData(event)"> -->
-        <!-- <ion-infinite-scroll threshold="15%" (ionInfinite)="loadMoreData($event)"> -->
-        <ion-infinite-scroll threshold="15%" (ionInfinite)="loadMoreData()">
-            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
-            </ion-infinite-scroll-content>
-        </ion-infinite-scroll>
-    </ng-container>
-
-    <!-- FAB Button Agregar Hilo -->
-    <ion-fab *ngIf="mostrarForo" vertical="bottom" horizontal="end" slot="fixed">
-        <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed"> -->
-        <ion-fab-button [routerLink]="['/tabs/forum/thread-add']">
-            <ion-icon color="light" name="add" class="icon"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
+        
 
 </ion-content>

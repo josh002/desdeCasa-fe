@@ -10,6 +10,11 @@ const routes: Routes = [
     { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
     { path: 'thread-add', loadChildren: './pages/tabs/forum/thread-add/thread-add.module#ThreadAddPageModule' },
     { path: 'thread', loadChildren: './pages/tabs/forum/thread/thread.module#ThreadPageModule' },
+    {
+        path: 'register-complete',
+        loadChildren: () => import('./pages/login/register-complete/register-complete.module').then(m => m.RegisterCompletePageModule)
+    },
+
 
 ];
 

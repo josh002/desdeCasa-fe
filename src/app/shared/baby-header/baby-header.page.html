@@ -5,18 +5,11 @@
     </ion-buttons>
 
     <ion-title class="eon6-font-main eon6-darkcolor eon6-large-text header-logo">
-        <img src="../../../../assets/icon/stripes.png" alt="">  
-        <ion-label>La Corriente</ion-label>
+        <img src="../../../../assets/icon/icon.png" alt="">  
+        <ion-label>Desde Casa</ion-label>
     </ion-title>
 
     <ion-buttons slot="end">
-
-        <!-- Share -->
-        <!-- <ion-button (click)="presentActionSheet()" size="large">
-            <ion-icon color="primary" slot="icon-only" name="share"></ion-icon>
-        </ion-button> -->
-
-        <!-- Handling the profile picture if present -->
         <ion-button [routerLink]="['/profile']" size="large">
             <ng-container *ngIf="account && account.picture; else noPicture">
                 <img class="profile-pic" src="{{account.picture}}" (error)="onErrorImage()">

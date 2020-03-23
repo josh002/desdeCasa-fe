@@ -1,5 +1,5 @@
 ion-content {
-     --ion-background-color: linear-gradient(150deg, var(--ion-color-primary), var(--ion-color-secondary));
+     --ion-background-color: linear-gradient(150deg, rgb(0, 173, 231), rgb(0, 178, 238), rgb(0, 180, 239), rgb(1, 173, 235), rgb(1, 171, 232),rgb(0, 160, 222), rgb(0, 147, 207),rgb(1, 131, 189), rgb(2, 119, 172) );
 }
 
 // .full-height {
@@ -9,7 +9,10 @@ ion-content {
 //   // flex-direction: column;
 //   // justify-content: space-around;
 // }
-
+#title{
+    font-size: 8vh;
+    
+}
 .logo {
      //   position: fixed;
      width: 100%;

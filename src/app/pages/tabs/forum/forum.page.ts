@@ -53,8 +53,8 @@ export class ForumPage implements OnInit {
     }
 
     ionViewWillEnter() {
-        this.getThreads();
-        // this.account = this.localStorageService.getObject('user');
+       
+    
         this.account = this.accountService.get();
         this.accountService.doSubscribe().subscribe((resp: Account) => { this.account = resp; console.log(this.account); });
     }
@@ -65,71 +65,15 @@ export class ForumPage implements OnInit {
 
     getPoliticalPartyName(politicalPartyId: number) {
         return this.politicalParties.filter(elem => elem.id == politicalPartyId)[0].name
-    }
-
-    loadMoreData() {
-        this.queryOffset++;
-        this.getThreads(true);
-    }
-
-    searchClear() {
-        this.queryOffset = 0;
-        this.querySearch = undefined;
-        this.getThreads();
-    }
-
-    politicalPartyClear() {
-        this.queryOffset = 0;
-        this.queryPoliticalPartyId = undefined;
-        this.getThreads();
-    }
-
-    doOrderBy(orderBy: string) {
-        this.queryOrderBy = orderBy;
-        this.queryOffset = 0;
-        this.getThreads();
-    }
-
-    doSearchBy() {
-        this.queryOffset = 0;
-        this.getThreads();
-    }
+    } 
 
     randomNumberGenerator(min: number, max: number) {
         return Math.floor(Math.random() * (max - min) + min)
     }
 
-    async doRefresh(event: any) {
-        console.log("Refresh me!");
-        this.queryOffset = 0;
-        await this.getThreads();
-        event.target.complete();
-    }
+    
 
-    getThreads(append: boolean = false) {
-        this.loadingService.presentLoading("Cargando").then(() => {
-            this.forumService.getThread({
-                id: this.queryId,
-                politicalPartyId: this.queryPoliticalPartyId,
-                searchQuery: this.querySearch,
-                offset: this.queryOffset,
-                orderBy: this.queryOrderBy,
-            })
-                .then(
-                    (resp: any) => {
-                        append ? this.threads = this.threads.concat(resp.result) : this.threads = resp.result;
-                        if (this.infiniteScroll) this.infiniteScroll.complete();
-                        this.loadingService.dismissLoading();
-                        console.log(this.threads);
-                        this.threads.forEach(elem => this.repliesMock.push(this.randomNumberGenerator(50, 0)));
-                    })
-                .catch(
-                    err => {
-                        this.loadingService.dismissLoading();
-                        console.log(err);
-                    })
-        });
-    }
+   
 
     async presentPopover() {
 
