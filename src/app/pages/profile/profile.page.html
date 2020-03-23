@@ -3,58 +3,46 @@
 </ion-header>
 
 <ion-content>
-
-    <div class="picture-frame">
-        <!-- Profile picture present -->
-        <div *ngIf="account && account.picture; else noPicture">
-            <div class="i-am-your-father">
-                <!-- Current profile picture -->
-                <img class="profile-pic" [src]="account.picture" (error)="onErrorImage()">
-
-                <ion-fab-button size="small" (click)="onSearchImage()" class="change-pic">
-                    <ion-icon color="light" name="add"></ion-icon>
-                </ion-fab-button>
-            </div>
-        </div>
-        <!-- No profile picture -->
-        <ng-template #noPicture>
-            <div (click)="onSearchImage()" class="upload-pic">
-                <ion-icon color="primary" name="camera"></ion-icon>
-                <label style="text-align: center;">
-                    Subir imagen
-                </label>
-            </div>
-        </ng-template>
-
-        <input style="display: none;" accept="image/*" id="raised-button-file" multiple type="file" (change)="onChangeImage($event)" />
-
-    </div>
-
-
     <ion-card>
         <ion-card-content>
+            <div class="picture-frame">
+                <!-- Profile picture present -->
+                <div *ngIf="account && account.picture; else noPicture">
+                    <div class="i-am-your-father">
+                        <!-- Current profile picture -->
+                        <img class="profile-pic" [src]="account.picture" (error)="onErrorImage()">
 
+                        <ion-fab-button size="small" (click)="onSearchImage()" class="change-pic">
+                            <ion-icon color="light" name="add"></ion-icon>
+                        </ion-fab-button>
+                    </div>
+                </div>
+                <!-- No profile picture -->
+                <ng-template #noPicture>
+                    <div (click)="onSearchImage()" class="upload-pic">
+                        <ion-icon color="primary" name="camera"></ion-icon>
+                        <label style="text-align: center;">
+                            Subir imagen
+                        </label>
+                    </div>
+                </ng-template>
+
+                <input style="display: none;" accept="image/*" id="raised-button-file" multiple type="file"
+                    (change)="onChangeImage($event)" />
+
+            </div>
             <ion-button color="light" class="profile-name" expand="block">
-                <span *ngIf="account && account.username" class="eon6-graycolor">{{ account.username }}</span>
+                <span class="eon6-graycolor">MI NOMBRE</span>
             </ion-button>
-
-            <!-- <ion-button [routerLink]="['/personal-information']" expand="block" color="primary">
-                <ion-label>Información Personal</ion-label>
-                <ion-icon slot="end" name="arrow-dropright"></ion-icon>
-            </ion-button> -->
-
-
+            <ion-button color="success" expand="block" (click)="consultAlert($event)">
+                Mis turnos
+            </ion-button>
+            <ion-button color="danger" expand="block" (click)="cancelAlert($event)">
+                Cancelar Turno
+            </ion-button>
             <ion-button (click)="doLogOut()" expand="block" color="primary">
                 <ion-label> Cerrar sesión</ion-label>
-                <ion-icon slot="end" name="arrow-dropright"></ion-icon>
             </ion-button>
-
-            <!-- <ion-list lines="none">
-                <ion-item (click)="doLogOut()">
-                    Cerrar sesión
-                </ion-item>
-            </ion-list> -->
-
         </ion-card-content>
     </ion-card>
 </ion-content>
