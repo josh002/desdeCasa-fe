@@ -93,7 +93,7 @@ export class ForumPage implements OnInit {
                     this.queryPoliticalPartyId = result.data.id;
                     this.politicalParty = result.data.name;
                     this.queryOffset = 0;
-                    this.getThreads();
+                    // this.getThreads(); // TODO: esto tiraba error, lo comente
                 }
             });
 

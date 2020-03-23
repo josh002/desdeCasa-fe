@@ -19,6 +19,8 @@ import { Department } from 'src/app/models/department.model';
 import { Street } from 'src/app/models/street.model';
 import * as moment from 'moment';
 import * as crypto from 'crypto-js';
+import { GeolocationService } from 'src/app/services/geolocationService';
+import { AuthService } from 'src/app/services/authService';
 
 @Component({
   selector: 'app-client',
@@ -90,7 +92,9 @@ export class ClientPage implements OnInit {
         private router: Router,
         public navCtrl: NavController,
         public loadingService: LoadingService,
-        public popoverController: PopoverController
+        public popoverController: PopoverController,
+        public geolocationService: GeolocationService,
+        public authService: AuthService,
     ) { }
 
     ngOnInit() {
@@ -111,6 +115,20 @@ export class ClientPage implements OnInit {
         this.utilsService.getDepartment()
             .then((resp: any) => { this.departments = resp.departamentos; })
             .catch(err => { console.log(err); })
+
+
+        // Setea localización actual del usuario en address
+        this.geolocationService.getCurrentLocation()
+            .then(
+                latLong => {
+                    this.account.latitude = latLong.latitude;
+                    this.account.longitude = latLong.longitude;
+                    return this.authService.cordsToAddress(latLong)
+                }
+            )
+            .then(
+                ({ formatted_address }) => this.account.address = formatted_address
+            )
     }
 
     testMe() {
@@ -184,14 +202,18 @@ export class ClientPage implements OnInit {
         this.accountSubmit.password = this.account.password.trim();
         this.accountSubmit.dni = +this.account.dni;
         this.accountSubmit.phoneMobile = +this.account.phoneMobile.toString().replace(re1,'');
-        this.accountSubmit.adressStreet = this.account.adressStreet.trim();
-        this.accountSubmit.adressHouseNumber = this.account.adressHouseNumber.trim();
         if (this.accountSubmit.phoneLandline) this.accountSubmit.phoneLandline = +this.account.phoneLandline.toString().replace(re2,'');
         if (this.accountSubmit.facebook) this.accountSubmit.facebook = this.account.facebook.trim();
         if (this.accountSubmit.instagram) this.accountSubmit.instagram = this.account.instagram.trim();
         if (this.accountSubmit.twitter) this.accountSubmit.twitter = this.account.twitter.trim();
         console.log(this.account);
         console.log(this.accountSubmit);
+
+        // this.accountSubmit.adressStreet = this.account.adressStreet.trim();
+        // this.accountSubmit.adressHouseNumber = this.account.adressHouseNumber.trim();
+
+        this.accountSubmit.latitude = this.account.latitude;
+        this.accountSubmit.longitude = this.account.longitude;
     }
 
 }

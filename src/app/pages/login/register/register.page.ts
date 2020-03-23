@@ -116,18 +116,7 @@ export class RegisterPage implements OnInit {
             .then((resp: any) => { this.departments = resp.departamentos; })
             .catch(err => { console.log(err); })
 
-        // Setea localización actual del usuario en address
-        this.geolocationService.getCurrentLocation()
-            .then(
-                latLong => {
-                    this.account.latitude = latLong.latitude;
-                    this.account.longitude = latLong.longitude;
-                    return this.authService.cordsToAddress(latLong)
-                }
-            )
-            .then(
-                ({ formatted_address }) => this.account.address = formatted_address
-            )
+        
     }
 
     testMe() {

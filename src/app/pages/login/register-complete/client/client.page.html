@@ -126,8 +126,24 @@
                             </ng-container>
 
 
-                            <!-- adressStreet       -->
+
+
+                            <!-- address          -->
                             <ion-item>
+                                <ion-label color="primary" position="floating">Direccion</ion-label>
+                                <ion-input name="address" #address="ngModel" type="text" [(ngModel)]="account.address" required>
+                                </ion-input>
+                            </ion-item>
+                            <ng-container *ngIf="address.invalid && ((address.dirty && address.touched) || desperationLevel > 3)">
+                                <div class="ux-alert" lines="none" *ngIf="address.errors && address.errors.required">
+                                    <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                                    <ion-label>Campo Requerido</ion-label>
+                                </div>
+                            </ng-container>
+
+
+                            <!-- adressStreet       -->
+                            <!-- <ion-item>
                                 <ion-label color="primary" position="floating">Calle</ion-label>
                                 <ion-input [disabled]="!account.localidadId" name="adressStreet" #adressStreet="ngModel"
                                     type="text" [(ngModel)]="account.adressStreet" required>
@@ -140,11 +156,11 @@
                                     <ion-icon slot="start" name="information-circle-outline"></ion-icon>
                                     <ion-label>Campo Requerido</ion-label>
                                 </div>
-                            </ng-container>
+                            </ng-container> -->
 
 
                             <!-- adressHouseNumber  -->
-                            <ion-item>
+                            <!-- <ion-item>
                                 <ion-label color="primary" position="floating">Número</ion-label>
                                 <ion-input [disabled]="!account.adressStreet" name="adressHouseNumber"
                                     #adressHouseNumber="ngModel" type="text" [(ngModel)]="account.adressHouseNumber"
@@ -158,7 +174,8 @@
                                     <ion-icon slot="start" name="information-circle-outline"></ion-icon>
                                     <ion-label>Campo Requerido</ion-label>
                                 </div>
-                            </ng-container>
+                            </ng-container> -->
+
                         </ion-list>
                     </ion-list>
                 </ion-content>
