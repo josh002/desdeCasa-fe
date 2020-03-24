@@ -18,7 +18,7 @@ const routes: Routes = [
         loadChildren: () => import('./pages/manage-commerce/manage-commerce.module').then(m => m.ManageCommercePageModule)
     },   {
     path: 'tabs',
-    loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule)
+    loadChildren: () => import('./pages/manage-user/tabs/tabs.module').then( m => m.TabsPageModule)
   },
 ];
 
