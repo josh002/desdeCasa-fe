@@ -10,11 +10,11 @@ const routes: Routes = [
   },
   {
     path: 'client',
-    loadChildren: () => import('./client/client.module').then( m => m.ClientPageModule)
+    loadChildren: () => import('./client/client.module').then(m => m.ClientPageModule)
   },
   {
-    path: 'market',
-    loadChildren: () => import('./market/market.module').then( m => m.MarketPageModule)
+    path: 'commerce',
+    loadChildren: () => import('./commerce/commerce.module').then(m => m.CommercePageModule)
   }
 ];
 
@@ -22,4 +22,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class RegisterCompletePageRoutingModule {}
+export class RegisterCompletePageRoutingModule { }
