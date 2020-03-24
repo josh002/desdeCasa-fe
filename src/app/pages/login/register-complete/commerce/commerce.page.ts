@@ -13,12 +13,12 @@ import * as moment from 'moment';
 import * as crypto from 'crypto-js';
 
 @Component({
-  selector: 'app-market',
-  templateUrl: './market.page.html',
-  styleUrls: ['./market.page.scss'],
+    selector: 'app-commerce',
+    templateUrl: './commerce.page.html',
+    styleUrls: ['./commerce.page.scss'],
 })
 
-export class MarketPage implements OnInit {
+export class CommercePage implements OnInit {
     client = new Client();
     accountSubmit = new Client();
     desperationLevel: number;
@@ -35,7 +35,7 @@ export class MarketPage implements OnInit {
     customYearValues = [2020, 2016, 2008, 2004, 2000, 1996];
     customDayShortNames = ['s\u00f8n', 'man', 'tir', 'ons', 'tor', 'fre', 'l\u00f8r'];
     customMonthShortNames = ['Ene', 'Feb', 'Mar', 'Abr', ' May', ' Jun', ' Jul', ' Ago', ' Sep', ' Oct', ' Nov', ' Dic'];
-    
+
     constructor(
         private loginService: LoginService,
         private alertService: AlertService,
