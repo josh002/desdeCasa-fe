@@ -22,12 +22,19 @@ const routes: Routes = [
             },
             {
                 path: 'get-appointment',
-                loadChildren: () => import('./get-appointment/get-appointment.module').then( m => m.GetAppointmentPageModule)
-              },
+                loadChildren: () => import('./get-appointment/get-appointment.module').then(m => m.GetAppointmentPageModule)
+            },
+            {
+                path: 'logout',
+                loadChildren: () => import('./logout/logout.module').then(m => m.LogoutPageModule)
+            },
+
         ]
     },
-  
-    
+
+
+
+
 ];
 
 @NgModule({
