@@ -3,76 +3,32 @@
 </ion-header>
 
 <ion-content>
-
-    <form class="my-form" #form="ngForm" (ngSubmit)="onClickPublish($event)">
-
-        <!-- <ion-card> -->
-        <img class="thread-img" src="..\..\..\..\..\assets\imgs\mano.png" (error)="onErrorImage()" />
-        <!-- <ion-card-header> -->
-        <!-- <ion-card-subtitle> -->
-        <div class="user-chip">
-            <ion-chip outline="true" color="primary">
-                <ng-container *ngIf="account && account.picture; else noPicture">
-                    <ion-avatar>
-                        <img [src]="account.picture" (error)="onErrorImage()">
-                    </ion-avatar>
-                </ng-container>
-                <ng-template #noPicture>
-                    <ion-icon name="contact" color="primary"></ion-icon>
-                </ng-template>
-                <ion-label color="medium">{{account.username}}</ion-label>
-                <!-- <ion-label color="medium">{{account}}</ion-label> -->
-            </ion-chip>
-        </div>
-        <!-- </ion-card-subtitle> -->
-        <!-- <ion-card-title> -->
-        <ion-textarea class="ion-text-center title" autoGrow="true" name="title" type="text" spellcheck="true"
-            placeholder="Ingresá un título" [(ngModel)]="thread.subject" required maxlength="100" minlength="5">
-        </ion-textarea>
-        <!-- </ion-card-title> -->
-        <!-- </ion-card-header> -->
-        <!-- <ion-card-content class="ion-text-justify"> -->
-        <ion-textarea class="ion-text-justify ion-padding-start description" autoGrow="true" name="content" type="text"
-            spellcheck="true" placeholder="Ingresá una breve descripción del tema a tratar" [(ngModel)]="thread.content"
-            required maxlength="1000" minlength="20">
-        </ion-textarea>
-        <!-- </ion-card-content> -->
-        <!-- </ion-card> -->
-
-        <!-- Categoria -->
-        <!-- <ion-item lines="none">
-            <ion-label color="medium">Categoría</ion-label>
-            <ion-select name="category" slot="end" [(ngModel)]="categorySelected" required>
-                <ion-select-option *ngFor="let category of categories" [(value)]="category">
-                    {{category.name | titlecase}}
-                </ion-select-option>
-            </ion-select>
-        </ion-item> -->
-
-        <!-- politicalPartyId   -->
-        <ion-item lines="none">
-            <ion-label color="primary">Tópico</ion-label>
-            <ion-select name="politicalParty" #politicalParty="ngModel" [(ngModel)]="politicalPartiesSelected" required>
-                <ion-select-option *ngFor="let element of politicalParties" [(value)]="element.id">
-                    {{element.name | titlecase}}
-                </ion-select-option>
-            </ion-select>
-        </ion-item>
-
-
-        <!-- <ng-container *ngIf="politicalParty.invalid && (politicalParty.touched || desperationLevel > 3)"> -->
-        <ng-container *ngIf="politicalParty.invalid && (politicalParty.touched)">
-            <div class="ux-alert" lines="none" *ngIf="politicalParty.errors && politicalParty.errors.required">
-                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
-                <ion-label>Campo Requerido</ion-label>
-            </div>
-        </ng-container>
-
-        <!-- Submit -->
-        <ion-button class="ion-margin-horizontal submit-button" type="ngSubmit" color="primary" shape="round"
-            [disabled]="form.invalid" expand="block">
-            <ion-label color="light">Publicar</ion-label>
-        </ion-button>
-
-    </form>
+    <ion-list>
+        <ion-radio-group allow-empty-selection value="anchovies">
+            <h4 class="ion-text-center">Seleccionar Hora</h4>
+            <ion-item>
+              <ion-label>8:00</ion-label>
+              <ion-radio slot="end" color="primary" value="beef"></ion-radio>
+            </ion-item>
+  
+            <ion-item>
+              <ion-label>8:15</ion-label>
+              <ion-radio slot="end" color="primary" value="anchovies"></ion-radio>
+            </ion-item>
+  
+            <ion-item>
+              <ion-label>8:30</ion-label>
+              <ion-radio slot="end" color="primary" value="sausage"></ion-radio>
+            </ion-item>
+  
+            <ion-item>
+              <ion-label>8:45</ion-label>
+              <ion-radio slot="end" color="primary" value="tomato"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+          <ion-button  expand="block"  shape="round" (click)="confirm($event)" [routerLink]="['/tabs/forum']" routerLinkActive="router-link-active" >
+             Confirmar
+          </ion-button>
+    </ion-list>        
+     
 </ion-content>

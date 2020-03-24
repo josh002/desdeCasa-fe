@@ -3,63 +3,37 @@
 </ion-header>
 
 <ion-content>
-
-    <ion-card *ngIf="thread">
-        <ion-card-header>
-            <ion-card-subtitle>
-                <ion-chip outline="true" color="light">
-                    <ion-avatar>
-                        <ng-container *ngIf="thread.picture; else noPicture">
-                            <img [src]="thread.picture" (error)="onErrorImage()">
-                        </ng-container>
-                        <ng-template #noPicture>
-                            <img src="..\..\..\..\..\assets\imgs\Profile-Generic.png">
-                        </ng-template>
-                    </ion-avatar>
-                    <ion-label color="medium">Por {{thread.username}}</ion-label>
-                </ion-chip>
-            </ion-card-subtitle>
-            <ion-card-title>{{thread.subject}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content class="ion-text-justify">{{thread.content}}</ion-card-content>
-    </ion-card>
-
-    <ion-list *ngIf="thread" lines="none" class="commentaries">
-        <ion-item *ngFor="let comment of comments, let i = index">
-            <ion-avatar slot="start">
-                <ng-container *ngIf="comment.picture; else noPicture">
-                    <img [src]="comment.picture" (error)="onErrorImage4Comments(i)">
-                </ng-container>
-                <ng-template #noPicture>
-                    <img src="..\..\..\..\..\assets\imgs\Profile-Generic.png">
-                </ng-template>
-            </ion-avatar>
-            <ion-label>
-                <div>
-                    <ion-note class="md" color="medium">{{comment.user}}</ion-note>
-                    <ion-note class="md" color="medium">{{comment.created | date:'mediumDate'}}</ion-note>
-                </div>
-                <h3>{{comment.content}}</h3>
-            </ion-label>
-        </ion-item>
+    <ion-list>
+        <h4 class="ion-text-center">HORARIOS</h4>
+        <ion-button expand="block" shape="round" [routerLink]="['/thread-add']" routerLinkActive="router-link-active" >
+            7 a 8
+        </ion-button>
+        <ion-button expand="block" shape="round" [routerLink]="['/thread-add']" routerLinkActive="router-link-active" >
+            8 a 9
+        </ion-button>
+        <ion-button expand="block" shape="round" [routerLink]="['/thread-add']" routerLinkActive="router-link-active"  >
+            10 a 11
+        </ion-button>
+        <ion-button expand="block" shape="round" [routerLink]="['/thread-add']" routerLinkActive="router-link-active" >
+            11 a 12
+        </ion-button>
+        <ion-button expand="block" shape="round" [routerLink]="['/thread-add']" routerLinkActive="router-link-active" >
+            13 a 14
+        </ion-button>
+        <ion-button expand="block" shape="round" [routerLink]="['/thread-add']" routerLinkActive="router-link-active" >
+            15 a 16
+        </ion-button>
+        <ion-button expand="block" shape="round" [routerLink]="['/thread-add']" routerLinkActive="router-link-active" >
+            17 a 18
+        </ion-button>
+        <ion-button expand="block" shape="round" [routerLink]="['/thread-add']" routerLinkActive="router-link-active"  >
+            19 a 20
+        </ion-button>
+        <ion-button expand="block" shape="round" [routerLink]="['/thread-add']" routerLinkActive="router-link-active" >
+            21 a 22
+        </ion-button>
+        <ion-button expand="block" shape="round" [routerLink]="['/thread-add']" routerLinkActive="router-link-active" >
+            22 a 23
+        </ion-button>
     </ion-list>
 </ion-content>
-
-<ion-footer>
-    <ion-item>
-        <ion-avatar slot="start">
-            <ng-container *ngIf="account && account.picture; else noPicture">
-                <img [src]="account.picture" (error)="onErrorImage()">
-            </ng-container>
-            <ng-template #noPicture>
-                <img src="..\..\..\..\..\assets\imgs\Profile-Generic.png">
-            </ng-template>
-        </ion-avatar>
-        <ion-textarea autoGrow="true" rows="1" name="description" type="text" spellcheck="true"
-            placeholder="Comentar..." [(ngModel)]="newComment.content" maxlength="1000">
-        </ion-textarea>
-        <ion-fab-button slot="end" size="small" (click)="doComment()">
-            <ion-icon color="light" name="checkmark"></ion-icon>
-        </ion-fab-button>
-    </ion-item>
-</ion-footer>

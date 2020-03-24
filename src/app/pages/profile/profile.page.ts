@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Account } from 'src/app/models/account.model';
 import { LocalStorageService } from 'src/app/services/localStorageService';
+import { AlertController } from '@ionic/angular';
 
 import { AuthService } from 'src/app/services/authService';
 
@@ -24,7 +25,8 @@ export class ProfilePage implements OnInit {
         private authService: AuthService,
         private router: Router,
         private babyHeaderService: BabyHeaderService,
-        private accountService: AccountService
+        private accountService: AccountService,
+        public alertController: AlertController
     ) { }
 
     ngOnInit() { }
@@ -77,4 +79,23 @@ export class ProfilePage implements OnInit {
         this.localStorageService.clearLocalStorage();
         this.router.navigateByUrl('/start');
     }
+    async cancelAlert() {
+        const alert = await this.alertController.create({
+          header: 'Cancelar turno',
+          subHeader: 'Supermercado Don pepe',
+          buttons: ['Si','No']
+        });
+    
+        await alert.present();
+      }
+      async consultAlert() {
+        const alert = await this.alertController.create({
+          header: 'Turno en',
+          subHeader: 'Supermercado Don pepe',
+          buttons: ['Ok']
+        });
+    
+        await alert.present();
+      }
+     
 }
