@@ -1,0 +1,107 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button color="primary"></ion-back-button>
+        </ion-buttons>
+
+        <ion-title>Editar Comercio</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-list>
+        <!-- Nombre del comercio -->
+        <ion-item>
+            <ion-label color="primary" autocomplete="off" position="floating">Nombre del comercio
+            </ion-label>
+            <ion-input type="text" required
+                pattern="[A-Za-z0-9._-äÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+[ ]?">
+            </ion-input>
+        </ion-item>
+        <ng-container>
+            <div class="ux-alert" lines="none">
+                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                <ion-label>Campo Requerido</ion-label>
+            </div>
+        </ng-container>
+
+        <!-- Direccion comercio -->
+        <ion-item>
+            <ion-label color="primary" position="floating">Calle</ion-label>
+            <ion-input name="adressStreet"  type="text" 
+                required>
+            </ion-input>
+        </ion-item>
+        <ng-container>
+            <div class="ux-alert" lines="none">
+                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                <ion-label>Campo Requerido</ion-label>
+            </div>
+        </ng-container>
+
+        <!-- adressmarketNumber  -->
+        <ion-item>
+            <ion-label color="primary" position="floating">Número</ion-label>
+            <ion-input name="adressHouseNumber" type="text" required>
+            </ion-input>
+        </ion-item>
+        <ng-container>
+            <div class="ux-alert" lines="none">
+                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                <ion-label>Campo Requerido</ion-label>
+            </div>
+        </ng-container>
+
+    </ion-list>
+    <!-- Horarios del Comercio -->
+    <h4 class="ion-text-center eon6-primarycolor">Horario de Atención</h4>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <!-- Horario Corrido           -->
+                <ion-item class="toggle-social-media" lines="none">
+                    <ion-label color="primary">Horario Corrido</ion-label>
+                    <ion-toggle slot="end" name="splitShift" [(ngModel)]="!splitShift">
+                    </ion-toggle>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label color="primary" position="floating">Desde</ion-label>
+                    <ion-datetime display-format="HH:mm" hourValues="0,1,2,3,4,5,6,7,8,9,10,11,12" minuteValues="0,30"
+                        cancelText="cancelar" doneText="terminado" picker-format="HH:mm " value="1990-02-19T07:43Z">
+                    </ion-datetime>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item>
+                    <ion-label color="primary" position="floating">Hasta</ion-label>
+                    <ion-datetime display-format="HH:mm" hourValues="0,1,2,3,4,5,6,7,8,9,10,11,12" minuteValues="0,30"
+                        cancelText="cancelar" doneText="terminado" picker-format="HH:mm " value="1990-02-19T07:43Z">
+                    </ion-datetime>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="splitShift">
+            <ion-col>
+                <ion-item>
+                    <ion-label color="primary" position="floating">Desde</ion-label>
+                    <ion-datetime display-format="HH:mm" hourValues="0,1,2,3,4,5,6,7,8,9,10,11,12" minuteValues="0,30"
+                        cancelText="cancelar" doneText="terminado" picker-format="HH:mm " value="1990-02-19T07:43Z">
+                    </ion-datetime>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item>
+                    <ion-label color="primary" position="floating">Hasta</ion-label>
+                    <ion-datetime display-format="HH:mm" hourValues="0,1,2,3,4,5,6,7,8,9,10,11,12" minuteValues="0,30"
+                        cancelText="cancelar" doneText="terminado" picker-format="HH:mm " value="1990-02-19T07:43Z">
+                    </ion-datetime>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
