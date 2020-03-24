@@ -30,17 +30,18 @@ export class StartPage implements OnInit {
     ) { }
 
     ngOnInit() { }
-    
-    ionViewDidEnter(){
-        this.backButtonSubscription = this.platform.backButton.subscribe(()=>{
+
+    ionViewDidEnter() {
+        this.backButtonSubscription = this.platform.backButton.subscribe(() => {
             navigator['app'].exitApp();
         });
         this.splashScreen.hide();
-      }
-    
-      ionViewWillLeave(){
+    }
+
+    ionViewWillLeave() {
         this.backButtonSubscription.unsubscribe();
-  }
+    }
+    
     ionViewWillEnter() {
         this.account.password = undefined;
         const autoAccount: Account = this.localStorageService.getObject('user');
