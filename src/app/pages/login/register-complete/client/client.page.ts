@@ -1,18 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/services/loginService';
+import { AuthService } from 'src/app/services/authService';
 import { NavController, LoadingController, PopoverController } from '@ionic/angular';
 import { AlertService } from 'src/app/services/alertService';
-import { Client } from 'src/app/models/client.model';
 import { Router } from '@angular/router';
 import { LoadingService } from 'src/app/services/loadingService';
 import { UtilsService } from 'src/app/services/utils.service';
-import * as moment from 'moment';
-import * as crypto from 'crypto-js';
+import { encryptPass } from 'src/app/constants/constants'
 import { GeolocationService } from 'src/app/services/geolocationService';
-import { AuthService } from 'src/app/services/authService';
-import { Locality } from 'src/app/models/locality.model';
-import { Department } from 'src/app/models/department.model';
-import { Street } from 'src/app/models/street.model';
+import { ClientRegister } from 'src/app/models/client-register.interface';
 
 @Component({
     selector: 'app-client',
@@ -20,25 +15,17 @@ import { Street } from 'src/app/models/street.model';
     styleUrls: ['./client.page.scss'],
 })
 export class ClientPage implements OnInit {
-    client = new Client();
-    accountSubmit = new Client();
+    client: ClientRegister = {
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        dni: undefined,
+        address: '',
+    };
     desperationLevel: number;
-    usesFacebook: boolean = false;
-    usesInstagram: boolean = false;
-    usesTwitter: boolean = false;
-    confirmPassword: string;
-    departamentId: number;
-    localities: Locality[];
-    departments: Department[];
-    streets: Street[];
-    minDate: moment.Moment | string = moment(new Date()).subtract(12, 'years').toISOString();
-
-    customYearValues = [2020, 2016, 2008, 2004, 2000, 1996];
-    customDayShortNames = ['s\u00f8n', 'man', 'tir', 'ons', 'tor', 'fre', 'l\u00f8r'];
-    customMonthShortNames = ['Ene', 'Feb', 'Mar', 'Abr', ' May', ' Jun', ' Jul', ' Ago', ' Sep', ' Oct', ' Nov', ' Dic'];
 
     constructor(
-        private loginService: LoginService,
         private alertService: AlertService,
         private utilsService: UtilsService,
         private router: Router,
@@ -51,23 +38,15 @@ export class ClientPage implements OnInit {
 
     ngOnInit() {
         this.desperationLevel = 0;
-        // this.client = this.testAccount;
 
         // Setea localización actual del usuario en address
         this.geolocationService.getCurrentLocation()
             .then(
-                latLong => {
-                    this.client.latitude = latLong.latitude;
-                    this.client.longitude = latLong.longitude;
-                    return this.authService.cordsToAddress(latLong)
-                }
+                latLong => { return this.authService.cordsToAddress(latLong) }
             )
             .then(
                 ({ formatted_address }) => this.client.address = formatted_address
             )
-    }
-
-    testMe() {
     }
 
     desperateUser() {
@@ -75,34 +54,15 @@ export class ClientPage implements OnInit {
         console.log(`Im this desperate: ${this.desperationLevel}`);
     }
 
-    getLocalities() {
-        this.utilsService.getLocality(this.departamentId)
-            .then((resp: any) => {
-                this.localities = resp.localidades;
-                console.log(this.localities);
-            })
-            .catch(err => { console.log(err); })
-    }
-
-    getStreets() {
-        // Es muy complicado de implementar la normalización de calles
-        this.utilsService.getStreet(this.client.localidadId)
-            .then((resp: any) => {
-                console.log(resp);
-                this.streets = resp.calles;
-                console.log(this.streets);
-            })
-            .catch(err => { console.log(err); })
-    }
-
     onSubmit() {
         // Formatear con el método de la clase correspondiente
         // this.formatData();
+        this.client.password = encryptPass(this.client.password);
 
         this.loadingService.presentLoading("Cargando")
             .then(
                 (resp: any) => {
-                    this.loginService.register(this.accountSubmit)
+                    this.authService.register(this.client)
                         .then(
                             (resp: any) => {
                                 this.loadingService.dismissLoading();
@@ -119,8 +79,9 @@ export class ClientPage implements OnInit {
                         )
                         .catch(err => {
                             this.loadingService.dismissLoading();
-                            this.alertService.simpleAlert(err.error.message)
                             console.log(err);
+                            this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
+
                         })
                 }
             )
@@ -128,10 +89,5 @@ export class ClientPage implements OnInit {
 }
 
 
-/**
- * Encripta un password en sha256
- * @param {*} password 
- */
-const encryptPass = password => crypto.SHA256(password).toString()
 
 

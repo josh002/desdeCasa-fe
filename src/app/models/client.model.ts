@@ -9,48 +9,59 @@ export class Client {
     firstName: string = '';
     lastName: string = '';
     address: string = '';
-    latitude?: number;
-    longitude?: number;
+    latitude: number;
+    longitude: number;
     localidadId?: number;
     phone?: number;
-    created?: Date | undefined = undefined;
-    deleted?: Date | null | undefined = undefined;
+    created?: string | Date | undefined = undefined;
+    deleted?: string | Date | null | undefined = undefined;
     resetPasswordToken?: string | undefined = undefined;
     resetPasswordTokenExpires?: string | undefined = undefined;
 
-    // constructor(
-    //     sapId: number | SapId |
-    //     {
-    //         id?: number | undefined,
-    //         sapId: string,
-    //         userId: number;
-    //         cuitCuil: string,
-    //         created?: Date | undefined,
-    //         deleted?: Date | null | undefined,
-    //         description?: string | undefined,
-    //     }
-    // ) {
-    //     if (typeof (sapId) != 'number') {
-    //         this.id = (sapId.id) ? sapId.id : undefined;
-    //         this.sapId = sapId.sapId.trim();
-    //         this.userId = sapId.userId;
-    //         this.cuitCuil = sapId.cuitCuil.trim();
-    //         this.created = (sapId.created) ? moment(sapId.created).format(datetimeFrontendFormat) : undefined;
-    //         this.deleted = (sapId.deleted) ? moment(sapId.deleted).format(datetimeFrontendFormat) : undefined;
-    //         this.description = sapId.description ? sapId.description.trim() : undefined;
-    //     } else {
-    //         // En este caso sapId contiene el user Id al que pertenece
-    //         this.userId = +sapId;
-    //     }
-    // }
+    constructor(
+        client?: Client |
+        {
+            id?: number | undefined,
+            dni: number,
+            email: string,
+            password: string,
+            firstName: string,
+            lastName: string,
+            address: string,
+            latitude: number;
+            longitude: number;
+            localidadId?: number;
+            phone?: number;
+            created?: string | Date | undefined,
+            deleted?: string | Date | null | undefined,
+            resetPasswordToken?: string | undefined,
+            resetPasswordTokenExpires?: string | undefined,
+        }
+    ) {
+        this.id = client.id ? client.id : undefined;
+        this.dni = client.dni;
+        this.email = client.email.trim();
+        this.password = client.password.trim();
+        this.firstName = client.firstName.trim();
+        this.lastName = client.lastName.trim();
+        this.address = client.address.trim();
+        this.latitude = client.latitude;
+        this.longitude = client.longitude;
+        this.localidadId = client.localidadId ? client.localidadId : undefined;
+        this.phone = client.phone ? client.phone : undefined;
+        this.created = client.created ? moment(client.created).format(datetimeFrontendFormat) : undefined;
+        this.deleted = client.deleted ? moment(client.deleted).format(datetimeFrontendFormat) : undefined;
+        this.resetPasswordToken = client.resetPasswordToken;
+        this.resetPasswordTokenExpires = client.resetPasswordTokenExpires;
+    }
 
-    // format = (sapId: SapId) =>
-    //     new SapId({
-    //         id: sapId.id,
-    //         sapId: sapId.sapId.trim(),
-    //         userId: +sapId.userId,
-    //         cuitCuil: sapId.cuitCuil.trim(),
-    //         deleted: sapId.deleted ? moment(sapId.deleted).format(datetimeServerFormat) : undefined,
-    //         description: sapId.description ? sapId.description.trim() : undefined
-    //     })
+    format = () => {
+        this.email.trim();
+        this.password.trim();
+        this.firstName.trim();
+        this.lastName.trim();
+        this.address.trim();
+        this.created ? moment(this.created).format(datetimeServerFormat) : undefined;
+        this.deleted ? moment(this.deleted).format(datetimeServerFormat) : undefined;
+    }
 }

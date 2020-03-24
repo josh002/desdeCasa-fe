@@ -10,7 +10,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './services/authService';
-import { LoginService } from './services/loginService';
 import { LocalStorageService } from './services/localStorageService';
 import { AlertService } from './services/alertService';
 import { Facebook } from '@ionic-native/facebook/ngx';
@@ -50,7 +49,6 @@ library.add(fas,far,fab)
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthService,
-    LoginService,
     AlertService,
     LocalStorageService,
     Facebook,

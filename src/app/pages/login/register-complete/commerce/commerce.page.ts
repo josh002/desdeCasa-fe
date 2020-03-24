@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/services/loginService';
+import { AuthService } from 'src/app/services/authService';
 import { NavController, LoadingController, PopoverController } from '@ionic/angular';
 import { AlertService } from 'src/app/services/alertService';
 import { Client } from 'src/app/models/client.model';
@@ -9,6 +9,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { Locality } from 'src/app/models/locality.model';
 import { Department } from 'src/app/models/department.model';
 import { Street } from 'src/app/models/street.model';
+import { encryptPass } from 'src/app/constants/constants'
 import * as moment from 'moment';
 import * as crypto from 'crypto-js';
 
@@ -37,7 +38,7 @@ export class CommercePage implements OnInit {
     customMonthShortNames = ['Ene', 'Feb', 'Mar', 'Abr', ' May', ' Jun', ' Jul', ' Ago', ' Sep', ' Oct', ' Nov', ' Dic'];
 
     constructor(
-        private loginService: LoginService,
+        private authService: AuthService,
         private alertService: AlertService,
         private utilsService: UtilsService,
         private router: Router,
@@ -49,38 +50,11 @@ export class CommercePage implements OnInit {
     ngOnInit() {
         this.desperationLevel = 0;
         // this.client = this.testAccount;
-
-        this.utilsService.getDepartment()
-            .then((resp: any) => { this.departments = resp.departamentos; })
-            .catch(err => { console.log(err); })
-    }
-
-    testMe() {
     }
 
     desperateUser() {
         this.desperationLevel = ++this.desperationLevel;
         console.log(`Im this desperate: ${this.desperationLevel}`);
-    }
-
-    getLocalities() {
-        this.utilsService.getLocality(this.departamentId)
-            .then((resp: any) => {
-                this.localities = resp.localidades;
-                console.log(this.localities);
-            })
-            .catch(err => { console.log(err); })
-    }
-
-    getStreets() {
-        // Es muy complicado de implementar la normalización de calles
-        this.utilsService.getStreet(this.client.localidadId)
-            .then((resp: any) => {
-                console.log(resp);
-                this.streets = resp.calles;
-                console.log(this.streets);
-            })
-            .catch(err => { console.log(err); })
     }
 
     onSubmit() {
@@ -90,7 +64,7 @@ export class CommercePage implements OnInit {
         this.loadingService.presentLoading("Cargando")
             .then(
                 (resp: any) => {
-                    this.loginService.register(this.accountSubmit)
+                    this.authService.register(this.accountSubmit)
                         .then(
                             (resp: any) => {
                                 this.loadingService.dismissLoading();
@@ -115,10 +89,3 @@ export class CommercePage implements OnInit {
     }
 
 }
-
-
-/**
- * Encripta un password en sha256
- * @param {*} password 
- */
-const encryptPass = password => crypto.SHA256(password).toString()

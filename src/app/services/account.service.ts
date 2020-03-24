@@ -2,23 +2,27 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Client } from '../models/client.model';
 import { LocalStorageService } from './localStorageService';
-import { LoginService } from './loginService';
+import { AuthService } from './authService';
+import { EmailValidator } from '@angular/forms';
+import { stringify } from 'querystring';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AccountService {
-    client: Client = new Client();
+    email: string;
+    password: string;
+    client: Client;
     subject = new Subject<Client>();
 
     constructor(
         private localStorageService: LocalStorageService,
-        private loginService: LoginService,
+        private authService: AuthService,
     ) {
-        this.client.email = this.localStorageService.getObject('email');
-        this.client.password = this.localStorageService.getObject('password');
-        this.loginService.autoLogin(this.client)
-            .then((resp: any) => { if (resp && resp.status == 0) { this.client = resp.result.queryResolve[0]; } })
+        this.email = this.localStorageService.getObject('email');
+        this.password = this.localStorageService.getObject('password');
+        this.authService.login(this.email, this.password, false)
+            .then((resp: any) => { if (resp && resp.status == 0) { this.client = new Client(resp.result.queryResolve[0]) ; } })
             .catch(err => { console.log(err) });
     };
 
@@ -29,7 +33,7 @@ export class AccountService {
     }
 
     update(client: Client) {
-        this.client = client;
+        this.client = new Client(client);
         this.subject.next(this.client);
     }
 
