@@ -16,6 +16,10 @@ const routes: Routes = [
     path: 'edit-market',
     loadChildren: () => import('./pages/profile/edit-market/edit-market.module').then( m => m.EditMarketPageModule)
   },
+  {
+    path: 'manage-commerce',
+    loadChildren: () => import('./pages/manage-commerce/manage-commerce.module').then( m => m.ManageCommercePageModule)
+  },
 
 
 
