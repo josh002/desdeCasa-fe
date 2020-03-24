@@ -1,0 +1,84 @@
+ion-header {
+     ion-fab-button {
+          max-height: 90%;
+          max-width: 90%;
+     }
+     ion-buttons {
+          display: flex;
+          justify-content: center;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          ion-button {
+               font-size: larger;
+               ion-icon {
+                    padding-right: 5px;
+               }
+          }
+     }
+     .filter-chips {
+          display: flex;
+          justify-content: center;
+     }
+}
+
+ion-list-header {
+     display: flex;
+     justify-content: left;
+     ion-label {
+          font-size: larger;
+          color: var(--ion-color-medium);
+     }
+     ion-icon {
+          font-size: 2rem;
+          padding-right: 8px;
+     }
+}
+
+ion-list {
+     padding-top: 0px;
+     ion-item {
+          padding-top: 0px;
+          padding-bottom: 16px;
+     }
+     .thread-header {
+          font-size: small;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          .userName {
+               max-width: 45vw;
+               overflow: hidden;
+               white-space: nowrap;
+               text-overflow: ellipsis;
+          }
+          span {
+               color: var(--ion-color-medium);
+               margin-left: 4px;
+               margin-right: 4px;
+          }
+     }
+     // Titulo
+     h3 {
+          overflow: hidden;
+          white-space: normal;
+          text-overflow: ellipsis;
+          font-weight: bold;
+     }
+     // Contenido
+     h4 {
+          overflow: hidden;
+          white-space: normal;
+          text-overflow: ellipsis;
+          max-height: 50px;
+     }
+     .thread-footer {
+          font-size: small;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          fa-icon {
+               margin-right: 4px;
+               color: var(--ion-color-medium);
+          }
+     }
+}
