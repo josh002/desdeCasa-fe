@@ -82,3 +82,18 @@ ion-list {
           }
      }
 }
+
+
+ion-card {
+     ion-card-title, ion-card-subtitle {
+          text-transform: capitalize;
+     }
+
+     ion-card-subtitle {          
+          margin-bottom: 9px;
+     }
+}
+
+ion-toolbar {
+     margin: 13px 13px 0px -9px;
+}
