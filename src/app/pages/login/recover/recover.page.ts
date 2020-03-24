@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/loginService';
-import { Account } from 'src/app/models/account.model';
+import { Client } from 'src/app/models/client.model';
 import { AlertService } from 'src/app/services/alertService';
 import { Router } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./recover.page.scss'],
 })
 export class RecoverPage implements OnInit {
-    account = new Account();
+    client = new Client();
 
     constructor(
         public loginService: LoginService,
@@ -21,7 +21,7 @@ export class RecoverPage implements OnInit {
     ngOnInit() { }
 
     onClickEnviarCorreo = () => 
-        this.loginService.resetPassword(this.account.email)
+        this.loginService.resetPassword(this.client.email)
             .then(
                 resp => {
                     this.alertService.simpleAlert(resp.message);

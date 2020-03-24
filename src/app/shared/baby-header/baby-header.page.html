@@ -11,8 +11,8 @@
 
     <ion-buttons slot="end">
         <ion-button [routerLink]="['/profile']" size="large">
-            <ng-container *ngIf="account && account.picture; else noPicture">
-                <img class="profile-pic" src="{{account.picture}}" (error)="onErrorImage()">
+            <ng-container *ngIf="client && client.picture; else noPicture">
+                <img class="profile-pic" src="{{client.picture}}" (error)="onErrorImage()">
             </ng-container>
             <ng-template #noPicture>
                 <ion-icon color="light" slot="icon-only" name="contact"></ion-icon>

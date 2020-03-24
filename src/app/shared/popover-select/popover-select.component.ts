@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController, NavParams } from '@ionic/angular';
-import { Category } from 'src/app/models/category.model';
-import { PoliticalParty } from 'src/app/models/politicalParty.model';
 
 @Component({
   selector: 'app-popover-select',

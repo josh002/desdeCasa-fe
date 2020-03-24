@@ -29,97 +29,115 @@
 @import "~animate.css/animate.min";
 
 ion-button {
-  --border-radius: 30px;
-  color: var(--ion-color-light);
+     --border-radius: 30px;
+     color: var(--ion-color-light);
 }
 
 ion-header {
-  --background-color: var(--ion-color-light);
+     --background-color: var(--ion-color-light);
 }
 
 ion-content {
-  --ion-background-color: var(--ion-color-light);
+     --ion-background-color: var(--ion-color-light);
 }
 
 ion-footer {
-  background-color: var(--ion-color-light);
+     background-color: var(--ion-color-light);
 }
 
 ion-alert {
-  --background: var(--ion-color-light) !important;
-  --min-width: 90% !important;
-  --min-height: auto !important;
+     --background: var(--ion-color-light) !important;
+     --min-width: 90% !important;
+     --min-height: auto !important;
 }
 
 ion-action-sheet {
-  --background: var(--ion-color-light) !important;
+     --background: var(--ion-color-light) !important;
 }
 
 ion-popover {
-  --background: var(--ion-color-light) !important;
-  ion-backdrop {
-    opacity: 0.8 !important;
-  }
-  ion-item {
-    --background: var(--ion-color-light) !important;
-  }
-  .popover-wrapper {
-    .popover-content {
-      width: 80vw;
-      max-width: 500px;
-    }
-  }
+     --background: var(--ion-color-light) !important;
+     ion-backdrop {
+          opacity: 0.8 !important;
+     }
+     ion-item {
+          --background: var(--ion-color-light) !important;
+     }
+     .popover-wrapper {
+          .popover-content {
+               width: 80vw;
+               max-width: 500px;
+          }
+     }
 }
 
 .eon6-primarycolor {
-  color: var(--ion-color-primary);
+     color: var(--ion-color-primary);
 }
 
 .eon6-secondarycolor {
-  color: var(--ion-color-secondary);
+     color: var(--ion-color-secondary);
 }
 
 .eon6-darkcolor {
-  color: var(--ion-color-dark);
+     color: var(--ion-color-dark);
 }
 
 .eon6-graycolor {
-  color: var(--ion-color-medium);
+     color: var(--ion-color-medium);
 }
 
 .eon6-lightcolor {
-  color: var(--ion-color-light);
+     color: var(--ion-color-light);
 }
 
 .eon6-font-main {
-  font-family: "Fjalla One";
+     font-family: "Fjalla One";
 }
 
 .eon6-blankspace {
-  min-height: 15%;
-  --ion-background-color: linear-gradient(150deg, var(--ion-color-primary), var(--ion-color-tertiary));
+     min-height: 15%;
+     --ion-background-color: linear-gradient(150deg, var(--ion-color-primary), var(--ion-color-tertiary));
 }
 
 .eon6-large-text {
-  font-size: xx-large;
+     font-size: xx-large;
 }
 
 .ux-alert {
-  display: flex;
-  align-items: center;
-  padding-left: 20px;
-  color: var(--ion-color-danger);
-  font-weight: lighter;
-  --min-height: 0 !important;
-  ion-label {
-    padding-left: 5px;
-    font-size: small;
-  }
-  ion-icon {
-    padding: 3px;
-    font-size: x-large;
-  }
+     display: flex;
+     align-items: center;
+     padding-left: 20px;
+     color: var(--ion-color-danger);
+     font-weight: lighter;
+     --min-height: 0 !important;
+     ion-label {
+          padding-left: 5px;
+          font-size: small;
+     }
+     ion-icon {
+          padding: 3px;
+          font-size: x-large;
+     }
 }
+
+.ux-warning {
+     display: flex;
+     align-items: center;
+     padding-left: 20px;
+     color: var(--ion-color-warning);
+     font-weight: lighter;
+     --min-height: 0 !important;
+     ion-label {
+          padding-left: 5px;
+          font-size: small;
+     }
+     ion-icon {
+          padding: 3px;
+          font-size: x-large;
+     }
+}
+
 //arreglando teclado que sobrepasa el contenido
 // ion-modal {
 //     @media (min-height: 500px) {
@@ -139,7 +157,7 @@ ion-popover {
 //     justify-content: center !important;
 
 //     contain: strict !important;
-// 
+//
 //     .modal-wrapper {
 //         &,
 //         .ion-page,

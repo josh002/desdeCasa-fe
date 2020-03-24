@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
-import { Account } from 'src/app/models/account.model';
+import { Client } from 'src/app/models/client.model';
 import { LocalStorageService } from 'src/app/services/localStorageService';
 import { LoginService } from 'src/app/services/loginService';
 import { Router } from '@angular/router';
@@ -16,7 +16,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 })
 
 export class StartPage implements OnInit {
-    account = new Account();
+    client = new Client();
     private backButtonSubscription;
     constructor(
         private router: Router,
@@ -43,10 +43,10 @@ export class StartPage implements OnInit {
     }
     
     ionViewWillEnter() {
-        this.account.password = undefined;
-        const autoAccount: Account = this.localStorageService.getObject('user');
-        if (autoAccount != null && autoAccount.username != '' && autoAccount.password != '') {
-            this.loginService.autoLogin(this.account)
+        this.client.password = undefined;
+        const autoAccount: Client = this.localStorageService.getObject('user');
+        if (autoAccount != null && autoAccount.email != '' && autoAccount.password != '') {
+            this.loginService.autoLogin(this.client)
                 .then(
                     (resp: any) => { if (resp && resp.status == 0) { this.router.navigate(['/tabs/forum']); } }
                 )
@@ -60,18 +60,18 @@ export class StartPage implements OnInit {
         this.loadingService.presentLoading("Cargando")
             .then(
                 (resp: any) => {
-                    this.account.username = this.account.username.trim();
-                    this.account.password = this.account.password.trim();
-                    this.loginService.login(this.account)
+                    this.client.email = this.client.email.trim();
+                    this.client.password = this.client.password.trim();
+                    this.loginService.login(this.client)
                         .then(
                             (resp: any) => {
                                 this.loadingService.dismissLoading();
                                 if (resp && resp.status == 0) {
                                     console.log(resp);
-                                    this.account = resp.result.queryResolve[0];
+                                    this.client = resp.result.queryResolve[0];
                                     this.localStorageService.setObject('token', resp.result.token);
-                                    this.localStorageService.setObject('username', this.account.username);
-                                    this.localStorageService.setObject('password', this.account.password);
+                                    this.localStorageService.setObject('username', this.client.email);
+                                    this.localStorageService.setObject('password', this.client.password);
                                     this.accountService.update(resp.result.queryResolve[0]);
                                     this.router.navigate(['/tabs/forum']);
                                 } else {
@@ -83,7 +83,7 @@ export class StartPage implements OnInit {
                             }
                         )
                         .catch(err => {
-                            this.account.password = '';
+                            this.client.password = '';
                             this.loadingService.dismissLoading();
                             this.alertService.simpleAlert(err.error.message)
                             console.log(err);

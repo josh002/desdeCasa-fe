@@ -6,14 +6,10 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PopoverSelectComponent } from './popover-select/popover-select.component';
-import { PopoverCategoryComponent } from './popover-category/popover-category.component';
-import { PopoverPriceComponent } from './popover-price/popover-price.component';
 
 @NgModule({
   declarations: [
     PopoverSelectComponent,
-    PopoverCategoryComponent,
-    PopoverPriceComponent
   ],
   imports: [
     CommonModule,
@@ -30,15 +26,11 @@ import { PopoverPriceComponent } from './popover-price/popover-price.component';
   ],
   entryComponents: [ 
     PopoverSelectComponent,
-    PopoverCategoryComponent,
-    PopoverPriceComponent
   ],
   exports: [
     PopoverSelectComponent,
     BabyHeaderPageModule,
     FontAwesomeModule,
-    PopoverCategoryComponent,
-    PopoverPriceComponent
   ]
 })
 export class SharedModule { }

@@ -1,17 +1,19 @@
 ion-content {
-     --ion-background-color: linear-gradient(150deg, rgb(0, 173, 231), rgb(0, 178, 238), rgb(0, 180, 239), rgb(1, 173, 235), rgb(1, 171, 232),rgb(0, 160, 222), rgb(0, 147, 207),rgb(1, 131, 189), rgb(2, 119, 172) );
+     --ion-background-color: linear-gradient(
+          150deg,
+          rgb(0, 173, 231),
+          rgb(0, 178, 238),
+          rgb(0, 180, 239),
+          rgb(1, 173, 235),
+          rgb(1, 171, 232),
+          rgb(0, 160, 222),
+          rgb(0, 147, 207),
+          rgb(1, 131, 189),
+          rgb(2, 119, 172)
+     );
 }
-
-// .full-height {
-//   height: 100%;
-// //   position: relative;
-//   // display: flex;
-//   // flex-direction: column;
-//   // justify-content: space-around;
-// }
-#title{
-    font-size: 8vh;
-    
+#title {
+     font-size: 8vh;
 }
 .logo {
      //   position: fixed;
@@ -64,36 +66,5 @@ ion-content {
           margin-top: 10vh;
           padding-right: 25%;
           padding-left: 25%;
-     }
-}
-
-.bottom-sun {
-     width: 100%;
-     position: absolute;
-     display: flex;
-     justify-content: center;
-     top: 88vh;
-     height: 12vh;
-     overflow: hidden;
-     z-index: 0;
-     img {
-          height: 35vh;
-          width: 35vh;
-          animation: rotation 50s infinite linear;
-     }
-}
-
-@media screen and (max-height: 700px) {
-     .bottom-sun {
-          display: none;
-     }
-}
-
-@keyframes rotation {
-     from {
-          transform: rotate(0deg);
-     }
-     to {
-          transform: rotate(359deg);
      }
 }

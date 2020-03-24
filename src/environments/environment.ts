@@ -3,12 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  /*PC local*/
-  WS_URL: 'http://localhost:3001/api/v1',
-  // WS_URL: 'http://ec2-3-80-143-174.compute-1.amazonaws.com:3001/api/v1',
-  // S3_URL: 'https://bebe-bucket.s3.us-east-2.amazonaws.com',
-  georef_ar_api: 'https://apis.datos.gob.ar/georef/api'
+    production: false,
+    //   WS_URL: 'http://localhost:3001/api/v1',
+    WS_URL: 'http://ec2-3-80-143-174.compute-1.amazonaws.com:3001/api/v1',
+    georef_ar_api: 'https://apis.datos.gob.ar/georef/api'
 };
 
 /*

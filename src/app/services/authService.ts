@@ -7,7 +7,7 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { DefaultResponse } from '../models/defaultResponse.model';
 
 import { map } from 'rxjs/operators';
-import { Account } from '../models/account.model';
+import { Client } from '../models/client.model';
 import * as moment from 'moment';
 
 @Injectable()
@@ -19,16 +19,16 @@ export class AuthService {
     ) { }
 
     // Login por Body
-    login = (account: Account, encrypt: boolean = true) => {
+    login = (client: Client, encrypt: boolean = true) => {
         // Si vengo de autologin el password ya está encriptado
-        if (encrypt) account.password = encryptPass(account.password)
-        return this.httpClient.post(`${environment.WS_URL}/login`, account)
+        if (encrypt) client.password = encryptPass(client.password)
+        return this.httpClient.post(`${environment.WS_URL}/login`, client)
     }
 
-    register = (account: Account) => {
-        account.password = encryptPass(account.password);
-        console.log(account.password);
-        return this.httpClient.post(`${environment.WS_URL}/register`, account, this.appJsonHeader)
+    register = (client: Client) => {
+        client.password = encryptPass(client.password);
+        console.log(client.password);
+        return this.httpClient.post(`${environment.WS_URL}/register`, client, this.appJsonHeader)
     }
 
 

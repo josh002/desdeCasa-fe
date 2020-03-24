@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Account } from '../models/account.model';
+import { Client } from '../models/client.model';
 import { LocalStorageService } from './localStorageService';
 import { LoginService } from './loginService';
 
@@ -8,33 +8,33 @@ import { LoginService } from './loginService';
     providedIn: 'root'
 })
 export class AccountService {
-    account: Account = new Account();
-    subject = new Subject<Account>();
+    client: Client = new Client();
+    subject = new Subject<Client>();
 
     constructor(
         private localStorageService: LocalStorageService,
         private loginService: LoginService,
     ) {
-        this.account.username = this.localStorageService.getObject('username');
-        this.account.password = this.localStorageService.getObject('password');
-        this.loginService.autoLogin(this.account)
-            .then((resp: any) => { if (resp && resp.status == 0) { this.account = resp.result.queryResolve[0]; } })
+        this.client.email = this.localStorageService.getObject('email');
+        this.client.password = this.localStorageService.getObject('password');
+        this.loginService.autoLogin(this.client)
+            .then((resp: any) => { if (resp && resp.status == 0) { this.client = resp.result.queryResolve[0]; } })
             .catch(err => { console.log(err) });
     };
 
-    get = (): Account => this.account;
+    get = (): Client => this.client;
 
     doSubscribe(): Observable<any> {
         return this.subject.asObservable();
     }
 
-    update(account: Account) {
-        this.account = account;
-        this.subject.next(this.account);
+    update(client: Client) {
+        this.client = client;
+        this.subject.next(this.client);
     }
 
     clear() {
-        this.account = undefined;
+        this.client = undefined;
         this.update(undefined);
     }
 

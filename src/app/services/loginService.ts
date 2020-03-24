@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './authService';
 import { LocalStorageService } from './localStorageService';
-import { Account } from '../models/account.model';
+import { Client } from '../models/client.model';
 
 @Injectable()
 export class LoginService {
@@ -11,18 +11,18 @@ export class LoginService {
         private localStorageService: LocalStorageService
     ) { }
 
-    login = (account: Account) =>
-        this.authService.login(account).toPromise()
+    login = (client: Client) =>
+        this.authService.login(client).toPromise()
 
-    autoLogin = (account: Account) =>
-        this.authService.login(account, false).toPromise()
+    autoLogin = (client: Client) =>
+        this.authService.login(client, false).toPromise()
 
-    register = (account: Account) =>
-        this.authService.register(account).toPromise()
+    register = (client: Client) =>
+        this.authService.register(client).toPromise()
 
     resetPassword = (email: string) =>
         this.authService.resetPassword(email).toPromise()
 
-    facebookLogin = (account: Account) =>
+    facebookLogin = (client: Client) =>
         this.authService.facebookLogin()
 }

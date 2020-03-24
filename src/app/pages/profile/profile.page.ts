@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { Account } from 'src/app/models/account.model';
+import { Client } from 'src/app/models/client.model';
 import { LocalStorageService } from 'src/app/services/localStorageService';
 import { AlertController } from '@ionic/angular';
 
@@ -18,7 +18,7 @@ import { AccountService } from 'src/app/services/account.service';
     styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-    account: Account = new Account();
+    client: Client = new Client();
 
     constructor(
         private localStorageService: LocalStorageService,
@@ -32,8 +32,8 @@ export class ProfilePage implements OnInit {
     ngOnInit() { }
 
     ionViewWillEnter() {
-        this.account = this.accountService.get();        
-        this.accountService.doSubscribe().subscribe((resp: Account) => { this.account = resp; console.log(this.account); });
+        this.client = this.accountService.get();        
+        this.accountService.doSubscribe().subscribe((resp: Client) => { this.client = resp; console.log(this.client); });
     }
 
     onChangeImage = (e: any) => {
@@ -43,11 +43,11 @@ export class ProfilePage implements OnInit {
         this.imageToBase64(fileReader, files[0])
             .subscribe(base64image => {
                 // Editar usuario picture
-                this.account.picture = base64image;
-                this.localStorageService.setObject('user', this.account);
+                // this.client.picture = base64image;
+                this.localStorageService.setObject('user', this.client);
                 // Le aviso al servicio BabyHeader que la foto de perfil cambio
                 this.babyHeaderService.updatePicture();
-                this.authService.editUser(this.account)
+                this.authService.editUser(this.client)
                     .then(
                         (resp: any) => {
                             console.log(resp);
@@ -67,7 +67,7 @@ export class ProfilePage implements OnInit {
 
     onErrorImage = () => {
         console.log("profile.page: Image is not ok")
-        this.account.picture = "";
+        // this.client.picture = "";
     }
 
     imageToBase64(fileReader: FileReader, fileToRead: File): Observable<string> {

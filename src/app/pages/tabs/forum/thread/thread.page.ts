@@ -1,14 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LocalStorageService } from 'src/app/services/localStorageService';
-import { ForumService } from 'src/app/services/forum.service';
 import { LoadingService } from 'src/app/services/loadingService';
 import { ActivatedRoute, Router, ParamMap, Params } from '@angular/router';
 import { IonContent } from '@ionic/angular';
-import { Thread } from 'src/app/models/thread.model';
-import { Comment } from 'src/app/models/comment.model';
 import { AlertService } from 'src/app/services/alertService';
-import { Account } from 'src/app/models/account.model';
 import { AccountService } from 'src/app/services/account.service';
+import { Client } from 'src/app/models/client.model';
 
 @Component({
     selector: 'app-thread',
@@ -17,8 +14,7 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class ThreadPage implements OnInit {
     @ViewChild(IonContent, { static: false }) ionContent: IonContent;
-    account: Account = new Account();
-    thread: Thread;
+    client: Client = new Client();
     comments: Comment[];
     newComment: any = {
         content: '',
@@ -28,7 +24,6 @@ export class ThreadPage implements OnInit {
 
     constructor(
         private localStorageService: LocalStorageService,
-        private forumService: ForumService,
         private loadingService: LoadingService,
         private route: ActivatedRoute,
         private router: Router,

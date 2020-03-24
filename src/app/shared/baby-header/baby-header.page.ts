@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Account } from 'src/app/models/account.model';
+import { Client } from 'src/app/models/client.model';
 import { LocalStorageService } from 'src/app/services/localStorageService';
 import { ImagesService } from 'src/app/services/images.service';
 import { ActionSheetController } from '@ionic/angular';
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
     styleUrls: ['./baby-header.page.scss'],
 })
 export class BabyHeaderPage implements OnInit {
-    account: Account;
+    client: Client;
 
     constructor(
         private localStorageService: LocalStorageService,
@@ -21,25 +21,25 @@ export class BabyHeaderPage implements OnInit {
     ) {
         babyHeaderService.pictureUpdated$.subscribe(
             () =>
-                this.account = this.localStorageService.getObject('user')
+                this.client = this.localStorageService.getObject('user')
         );
     }
 
     ngOnInit() {
-        this.account = this.localStorageService.getObject('user');
-        // console.log(`baby-header ngOnInit: ${this.account.picture}`);
+        this.client = this.localStorageService.getObject('user');
+        // console.log(`baby-header ngOnInit: ${this.client.picture}`);
     }
 
     ionViewWillEnter() {
         // Este metodo no es llamado ya que la pagina no llega por routing
-        this.account = this.localStorageService.getObject('user');
-        console.log(`baby-header ionViewWillEnter: ${this.account.picture}`);
+        this.client = this.localStorageService.getObject('user');
+        // console.log(`baby-header ionViewWillEnter: ${this.client.picture}`);
     }
 
-    // Esta funcion es local, el this.account también, no afecta la localStorage
+    // Esta funcion es local, el this.client también, no afecta la localStorage
     onErrorImage = () => {
         console.log("baby-header.page: Image is not ok")
-        this.account.picture = "";
+        // this.client.picture = "";
     }
 
     async presentActionSheet() {

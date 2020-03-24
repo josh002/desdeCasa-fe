@@ -11,11 +11,6 @@ export class UtilsService {
         private httpClient: HttpClient
     ) { }
 
-    getJob = () => { return this.httpClient.get(`${environment.WS_URL}/job`).toPromise() }
-    getStudy = () => { return this.httpClient.get(`${environment.WS_URL}/study`).toPromise() }
-    getPoliticalParty = () => { return this.httpClient.get(`${environment.WS_URL}/political-party`).toPromise() }
-    getSectional = () => { return this.httpClient.get(`${environment.georef_ar_api}/sectional`).toPromise() }
-
     getDepartment = () => {
         let params = new HttpParams();
         params = params.append('provincia', 'Santa Fe');
@@ -44,6 +39,9 @@ export class UtilsService {
         console.log(params);
         return this.httpClient.get(`${environment.georef_ar_api}/calles`, { params }).toPromise()
     }
+
+    areYouThere = () =>
+        this.httpClient.get(`${environment.WS_URL}/are-you-there`).toPromise()
 
     /**
      * Utilidades privadas de Auth

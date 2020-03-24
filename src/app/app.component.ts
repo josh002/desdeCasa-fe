@@ -4,6 +4,11 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+// Setear APP en locale Argentina
+import localeAR from "@angular/common/locales/es-AR";
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeAR);
+
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',

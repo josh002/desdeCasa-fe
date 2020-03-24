@@ -7,10 +7,10 @@
         <ion-card-content>
             <div class="picture-frame">
                 <!-- Profile picture present -->
-                <div *ngIf="account && account.picture; else noPicture">
+                <div *ngIf="client && client.picture; else noPicture">
                     <div class="i-am-your-father">
                         <!-- Current profile picture -->
-                        <img class="profile-pic" [src]="account.picture" (error)="onErrorImage()">
+                        <img class="profile-pic" [src]="client.picture" (error)="onErrorImage()">
 
                         <ion-fab-button size="small" (click)="onSearchImage()" class="change-pic">
                             <ion-icon color="light" name="add"></ion-icon>
