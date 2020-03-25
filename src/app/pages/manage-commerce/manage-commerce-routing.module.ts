@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: ManageCommercePage
+  },
+  {
+    path: 'commerce-tabs',
+    loadChildren: () => import('./commerce-tabs/commerce-tabs.module').then( m => m.CommerceTabsPageModule)
   }
 ];
 
