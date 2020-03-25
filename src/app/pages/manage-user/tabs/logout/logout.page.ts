@@ -18,6 +18,7 @@ export class LogoutPage implements OnInit {
 
   constructor(
     private localStorageService: LocalStorageService,
+    private router: Router,
   ) {
 
   }
@@ -39,7 +40,7 @@ export class LogoutPage implements OnInit {
 
   doLogOut() {
     this.localStorageService.clearLocalStorage();
-    // this.router.navigateByUrl('/start');
+    this.router.navigateByUrl('/start');
   }
 
 
