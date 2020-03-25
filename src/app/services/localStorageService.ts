@@ -12,7 +12,6 @@ export class LocalStorageService {
         localStorage.setItem(key, JSON.stringify(value));
     }
 
-
     /**
      * Obtener algo del localStorage
      */

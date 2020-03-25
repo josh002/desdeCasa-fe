@@ -18,9 +18,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 export class StartPage implements OnInit {
     email: string;
     password: string;
-    client: Client;
-    
-    private backButtonSubscription;  
+
+    private backButtonSubscription;
     constructor(
         private router: Router,
         private localStorageService: LocalStorageService,
@@ -47,8 +46,8 @@ export class StartPage implements OnInit {
 
     ionViewWillEnter() {
         this.password = undefined;
-        const autoAccount: Client = this.localStorageService.getObject('user');
-        if (autoAccount != null && autoAccount.email != '' && autoAccount.password != '') {
+        const autoAccount: Client = this.localStorageService.getObject('user') === null ? undefined : new Client(this.localStorageService.getObject('user'));
+        if (autoAccount && autoAccount.email != '' && autoAccount.password != '') {
             this.authService.login(this.email, this.password, false)
                 .then(
                     (resp: any) => { if (resp && resp.status == 0) { this.router.navigate(['/tabs/forum']); } }
@@ -63,34 +62,29 @@ export class StartPage implements OnInit {
         this.loadingService.presentLoading("Cargando")
             .then(
                 (resp: any) => {
-                    this.client.email = this.client.email.trim();
-                    this.client.password = this.client.password.trim();
-                    this.authService.login(this.email, this.password, false)
+                    this.email = this.email.trim();
+                    this.password = this.password.trim();
+                    this.authService.login(this.email, this.password)
                         .then(
                             (resp: any) => {
                                 this.loadingService.dismissLoading();
                                 if (resp && resp.status == 0) {
                                     console.log(resp);
-                                    this.client = resp.result.queryResolve[0];
-                                    this.localStorageService.setObject('token', resp.result.token);
-                                    this.localStorageService.setObject('email', this.client.email);
+                                    new Client(resp.result.queryResolve[0]);
                                     // add userid a localstorage
-                                    this.localStorageService.setObject('userId', this.client.id);
-                                    this.localStorageService.setObject('password', this.client.password);
                                     this.accountService.update(resp.result.queryResolve[0]);
-                                    this.router.navigate(['/tabs/forum']);
-                                } else {
-                                    if (resp.error) {
-                                        console.log('error response:');
-                                        this.alertService.simpleAlert(resp.error.message);
-                                    }
+                                    this.router.navigate(['/tabs/home']);
                                 }
                             }
                         )
                         .catch(err => {
-                            this.client.password = '';
+                            this.password = '';
                             this.loadingService.dismissLoading();
-                            this.alertService.simpleAlert(err.error.message)
+                            if (err.error.status === -1) {
+                                this.alertService.simpleAlert(err.error.message);
+                            } else {
+                                this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
+                            }
                             console.log(err);
                         })
                 }

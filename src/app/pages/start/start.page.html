@@ -6,7 +6,7 @@
         </h2>
     </div>
 
-    <form #form="ngForm" >
+    <form #myForm="ngForm" (ngSubmit)="doLogin()">
         <div class=log-in>
             <ion-item class="ion-margin-horizontal">
                 <ion-label autocomplete="on" position="floating">Email</ion-label>
@@ -18,20 +18,21 @@
                 </ion-input>
             </ion-item>
 
-            <ion-button color="light" fill="outline" shape="round" type="ngSubmit" [routerLink]="['/tabs/home']" routerLinkActive="router-link-active"  expand="block">
+            <ion-button color="light" [disabled]="myForm.form.invalid" fill="outline" shape="round" type="ngSubmit" routerLinkActive="router-link-active"  expand="block">
                 Ingresar
             </ion-button>
-            <ion-button color="light" fill="outline" shape="round" type="ngSubmit" [routerLink]="['/manage-commerce/commerce-tabs/schedule']" routerLinkActive="router-link-active"  expand="block">
+            <!-- <ion-button color="light" fill="outline" shape="round" type="ngSubmit" [routerLink]="['/manage-commerce/commerce-tabs/schedule']" routerLinkActive="router-link-active"  expand="block">
                 Ingresar comercio
-            </ion-button>
+            </ion-button> -->
         </div>
     </form>
+
     <div class="ion-text-right eon6-lightcolor register">
 
-        <ion-label>¿No estás registrado?</ion-label>
         <ion-button color="light" fill="outline" shape="round" type="ngSubmit" expand="block" [routerLink]="['/register-complete']">
             Registrar
         </ion-button>
+        <ion-label>¿No estás registrado?</ion-label>
     </div>
 
 </ion-content>
