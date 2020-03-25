@@ -16,11 +16,11 @@ export const datetimeFrontendFormat = 'YYYY-MM-DDTHH:mm:ss';
  * Encripta un password en sha256
  * @param {*} password 
  */
-export const encryptPass = password => crypto.SHA256(password).toString()
+export const encryptPass = (password) => crypto.SHA256(password).toString()
 
- /**
- * Constructor del header para HTTP Requests
- */
+/**
+* Constructor del header para HTTP Requests
+*/
 export const appJsonHeader = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json', })
 }

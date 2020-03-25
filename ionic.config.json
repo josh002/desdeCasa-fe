@@ -1,8 +1,8 @@
 {
-  "name": "la-corriente",
-  "integrations": {
-    "cordova": {},
-    "capacitor": {}
-  },
-  "type": "angular"
+    "name": "DesdeCasa",
+    "integrations": {
+        "cordova": {},
+        "capacitor": {}
+    },
+    "type": "angular"
 }
