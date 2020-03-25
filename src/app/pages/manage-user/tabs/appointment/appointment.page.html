@@ -3,14 +3,17 @@
 </ion-header>
 
 <ion-content>
-    <h4>MIS TURNOS</h4>
-    <ion-card-header>
-        <ion-card-subtitle>Nombre comercio</ion-card-subtitle>
-        <ion-card-title>Direccion comercio</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-          <ion-button  expand="block"  shape="round" (click)="myAppointment($event)" >
-              ver turno
-           </ion-button>
-      </ion-card-content>
+    <ion-button class="title-button" color="light" expand="block">
+        <span class="eon6-graycolor">Mis Turnos</span>
+    </ion-button>
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Direccion 123</ion-card-title>       
+            <ion-card-subtitle>Nombre Comercio</ion-card-subtitle>                 
+        </ion-card-header>
+        <ion-button color="primary" shape="round" expand="block">
+            Ver Turno
+        </ion-button>
+    </ion-card>
 </ion-content>
