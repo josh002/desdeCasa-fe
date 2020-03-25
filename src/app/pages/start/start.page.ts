@@ -74,6 +74,8 @@ export class StartPage implements OnInit {
                                     this.client = resp.result.queryResolve[0];
                                     this.localStorageService.setObject('token', resp.result.token);
                                     this.localStorageService.setObject('email', this.client.email);
+                                    // add userid a localstorage
+                                    this.localStorageService.setObject('userId', this.client.id);
                                     this.localStorageService.setObject('password', this.client.password);
                                     this.accountService.update(resp.result.queryResolve[0]);
                                     this.router.navigate(['/tabs/forum']);

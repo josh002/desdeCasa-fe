@@ -5,16 +5,148 @@
 <ion-content>
     <ion-card>
         <ion-card-content>
-            
             <ion-button color="light" class="profile-name" expand="block">
-                <span class="eon6-graycolor">MI NOMBRE</span>
+                <span class="eon6-graycolor">Información personal</span>
             </ion-button>
-            <ion-button expand="block" (click)="cancelAlert($event)">
-                Editar Perfil
-            </ion-button>
-            <ion-button (click)="doLogOut()" expand="block" color="primary">
-                <ion-label> Cerrar sesión</ion-label>
-            </ion-button>
+
+
+            <form #myForm="ngForm" (ngSubmit)="onSubmit()">
+
+
+                <ion-list>
+
+                    <!-- Mail -->
+
+                    <ion-item>
+                        <ion-label color="primary" autocomplete="off" position="floating">Direccion de correo electrónico
+                        </ion-label>
+                        <!-- <ion-input name="email" #email="ngModel" type="email" [(ngModel)]="client.email" required pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}[ ]?"></ion-input> -->
+                        <ion-input name="email" type="email" required pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}[ ]?"></ion-input>
+                    </ion-item>
+
+                    <!-- <ng-container *ngIf="email.invalid && ((email.dirty && email.touched) || desperationLevel > 3)">
+                        <div class="ux-alert" lines="none" *ngIf="email.errors && email.errors.required">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Campo Requerido</ion-label>
+                        </div>
+                        <div class="ux-alert" lines="none" *ngIf="email.errors && email.errors.pattern">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>No parece ser una dirección válida</ion-label>
+                        </div>
+                    </ng-container> -->
+
+                    <!-- Contraseña -->
+
+                    <ion-item>
+                        <ion-label color="primary" position="floating">Contraseña</ion-label>
+                        <!-- <ion-input name="password" #password="ngModel" minlength="8" type="password" pattern="[A-Za-z0-9._-]+" [(ngModel)]="client.password" required> -->
+                        <ion-input name="password" minlength="8" type="password" pattern="[A-Za-z0-9._-]+" required>
+                        </ion-input>
+                    </ion-item>
+                    <!-- <ng-container *ngIf="password.invalid && ((password.dirty && password.touched) || desperationLevel > 3)">
+                        <div class="ux-alert" lines="none" *ngIf="password.errors && password.errors.required">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Campo Requerido</ion-label>
+                        </div>
+                        <div class="ux-alert" lines="none" *ngIf="password.errors && password.errors.minlength">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>8 caracteres de longitud mínima</ion-label>
+                        </div>
+                        <div class="ux-alert" lines="none" *ngIf="password.errors && password.errors.pattern">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Solo letras, números, guiones y puntos</ion-label>
+                        </div>
+                    </ng-container> -->
+
+
+                    <!-- Nombre -->
+
+                    <ion-item>
+                        <ion-label color="primary" position="floating">Nombre</ion-label>
+                        <!-- <ion-input name="firstName" #firstName="ngModel" type="text" [(ngModel)]="client.firstName" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required> -->
+                        <ion-input name="firstName" value="emilio" type="text" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required>
+                        </ion-input>
+                    </ion-item>
+
+                    <!-- <ng-container *ngIf="firstName.invalid && ((firstName.dirty && firstName.touched) || desperationLevel > 3)">
+                    <div class="ux-alert" lines="none" *ngIf="firstName.errors && firstName.errors.required">
+                        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                        <ion-label>Campo Requerido</ion-label>
+                    </div>
+                    <div class="ux-alert" lines="none" *ngIf="firstName.errors && firstName.errors.pattern">
+                        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                        <ion-label>Solo letras y espacios</ion-label>
+                    </div>
+                    </ng-container> -->
+
+                    <!-- Apellido -->
+
+                    <ion-item>
+                        <ion-label color="primary" position="floating">Apellido</ion-label>
+                        <!-- <ion-input name="lastName" #lastName="ngModel" type="text" [(ngModel)]="client.lastName" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required> -->
+                        <ion-input name="lastName" value="Emilio" type="text" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required>
+                        </ion-input>
+                    </ion-item>
+
+                    <!-- <ng-container *ngIf="lastName.invalid && ((lastName.dirty && lastName.touched) || desperationLevel > 3)">
+                    <div class="ux-alert" lines="none" *ngIf="lastName.errors && lastName.errors.required">
+                        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                        <ion-label>Campo Requerido</ion-label>
+                    </div>
+                    <div class="ux-alert" lines="none" *ngIf="lastName.errors && lastName.errors.pattern">
+                        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                        <ion-label>Solo letras y espacios</ion-label>
+                    </div>
+                    </ng-container> -->
+
+                    <!-- DNI -->
+
+                    <!-- Dirección -->
+
+                    <ion-item>
+                        <ion-label color="primary" position="floating">Direccion</ion-label>
+                        <!-- <ion-input name="address" #address="ngModel" type="text" [(ngModel)]="client.address" required> -->
+                        <ion-input name="address" type="text" required>
+                        </ion-input>
+                    </ion-item>
+
+                    <!-- <ng-container *ngIf="address.pristine">
+                    <div class="ux-warning" lines="none">
+                        <ion-icon slot="start" name="warning"></ion-icon>
+                        <ion-label>Ajustá tu dirección</ion-label>
+                    </div>
+                    </ng-container> -->
+
+                    <!-- <ng-container *ngIf="address.invalid && ((address.dirty && address.touched) || desperationLevel > 3)">
+                    <div class="ux-alert" lines="none" *ngIf="address.errors && address.errors.required">
+                        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                        <ion-label>Campo Requerido</ion-label>
+                    </div>
+                    </ng-container> -->
+
+                </ion-list>
+                <!-- Submit Button -->
+
+                <div class="ion-padding">
+                    <ion-button type="ngSubmit" color="primary" shape="round" expand="block">
+                        <ion-label color="light"> Editar Perfil</ion-label>
+                    </ion-button>
+                    <div class="button-helper" lines="none">
+                        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                        <ion-label>Revise si le quedaron campos sin completar</ion-label>
+                    </div>
+                </div>
+                <!-- <div class="ion-padding" (click)=desperateUser()>
+                    <ion-button type="ngSubmit" color="primary" shape="round" expand="block" [disabled]="myForm.form.invalid">
+                        <ion-label color="light"> Editar Perfil</ion-label>
+                    </ion-button>
+                    <div class="button-helper" lines="none" *ngIf="desperationLevel > 3">
+                        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                        <ion-label>Revise si le quedaron campos sin completar</ion-label>
+                    </div>
+                </div> -->
+            </form>
+
         </ion-card-content>
     </ion-card>
 </ion-content>

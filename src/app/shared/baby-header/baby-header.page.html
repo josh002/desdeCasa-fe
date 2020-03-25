@@ -5,20 +5,12 @@
     </ion-buttons>
 
     <ion-title class="eon6-font-main eon6-darkcolor eon6-large-text header-logo">
-        <img src="../../../../assets/icon/icon.png" alt="">  
+        <img src="../../../../assets/icon/icon.png" alt="">
         <ion-label>Desde Casa</ion-label>
     </ion-title>
 
-    <!-- <ion-buttons slot="end">
-        <ion-button [routerLink]="['/profile']" size="large">
-            <ng-container *ngIf="client && client.picture; else noPicture">
-                <img class="profile-pic" src="{{client.picture}}" (error)="onErrorImage()">
-            </ng-container>
-            <ng-template #noPicture>
-                <ion-icon color="light" slot="icon-only" name="contact"></ion-icon>
-            </ng-template>
-        </ion-button>
-
-    </ion-buttons> -->
+    <ion-buttons class="logoutbutton" [routerLink]="['/tabs/logout']" routerLinkActive="router-link-active" slot="end">
+        <ion-icon name="log-out"></ion-icon>
+    </ion-buttons>
 
 </ion-toolbar>
