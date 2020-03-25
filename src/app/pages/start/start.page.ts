@@ -46,11 +46,12 @@ export class StartPage implements OnInit {
 
     ionViewWillEnter() {
         this.password = undefined;
-        const autoAccount: Client = this.localStorageService.getObject('user') === null ? undefined : new Client(this.localStorageService.getObject('user'));
+        const autoAccount: Client = this.localStorageService.getObject('client') === null ? undefined : new Client(this.localStorageService.getObject('client'));
+        console.log(autoAccount);
         if (autoAccount && autoAccount.email != '' && autoAccount.password != '') {
-            this.authService.login(this.email, this.password, false)
+            this.authService.login(autoAccount.email, autoAccount.password, false)
                 .then(
-                    (resp: any) => { if (resp && resp.status == 0) { this.router.navigate(['/tabs/forum']); } }
+                    (resp: any) => { if (resp && resp.status == 0) { this.router.navigate(['/tabs/home']); } }
                 )
                 .catch(
                     err => { console.log(err) }
@@ -70,9 +71,9 @@ export class StartPage implements OnInit {
                                 this.loadingService.dismissLoading();
                                 if (resp && resp.status == 0) {
                                     console.log(resp);
-                                    new Client(resp.result.queryResolve[0]);
-                                    // add userid a localstorage
-                                    this.accountService.update(resp.result.queryResolve[0]);
+                                    const client = new Client(resp.result.queryResolve[0]);
+                                    this.localStorageService.setObject('client', client);
+                                    this.accountService.update(client);
                                     this.router.navigate(['/tabs/home']);
                                 }
                             }
