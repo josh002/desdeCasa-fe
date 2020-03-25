@@ -21,7 +21,7 @@
                             <ion-label color="primary" autocomplete="off" position="floating">Direccion de correo
                                 electronico
                             </ion-label>
-                            <ion-input name="email" #email="ngModel" type="email" [(ngModel)]="client.email" required
+                            <ion-input name="email" #email="ngModel" type="email" [(ngModel)]="commerce.email" required
                                 pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}[ ]?">
                             </ion-input>
                         </ion-item>
@@ -40,7 +40,7 @@
                         <ion-item>
                             <ion-label color="primary" position="floating">Contraseña</ion-label>
                             <ion-input name="password" #password="ngModel" minlength="8" type="password"
-                                pattern="[A-Za-z0-9._-]+" [(ngModel)]="client.password" required>
+                                pattern="[A-Za-z0-9._-]+" [(ngModel)]="commerce.password" required>
                             </ion-input>
                         </ion-item>
                         <ng-container
@@ -59,68 +59,78 @@
                             </div>
                         </ng-container>
 
-                        <!-- firstName          -->
+                        <!-- Nombre del comercio -->
                         <ion-item>
-                            <ion-label color="primary" position="floating">Nombre</ion-label>
-                            <ion-input name="firstName" #firstName="ngModel" type="text" [(ngModel)]="client.firstName"
-                                pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?"
+                            <ion-label color="primary" position="floating">Nombre del Comercio</ion-label>
+                            <ion-input name="shopName" #shopName="ngModel" type="text" [(ngModel)]="commerce.shopName"
                                 required>
                             </ion-input>
                         </ion-item>
                         <ng-container
-                            *ngIf="firstName.invalid && ((firstName.dirty && firstName.touched) || desperationLevel > 3)">
-                            <div class="ux-alert" lines="none" *ngIf="firstName.errors && firstName.errors.required">
+                            *ngIf="shopName.invalid && ((shopName.dirty && shopName.touched) || desperationLevel > 3)">
+                            <div class="ux-alert" lines="none" *ngIf="shopName.errors && shopName.errors.required">
                                 <ion-icon slot="start" name="information-circle-outline"></ion-icon>
                                 <ion-label>Campo Requerido</ion-label>
                             </div>
-                            <div class="ux-alert" lines="none" *ngIf="firstName.errors && firstName.errors.pattern">
+                            <div class="ux-alert" lines="none" *ngIf="shopName.errors && shopName.errors.pattern">
                                 <ion-icon slot="start" name="information-circle-outline"></ion-icon>
                                 <ion-label>Solo letras y espacios</ion-label>
                             </div>
                         </ng-container>
 
-                        <!-- lastName           -->
-                        <ion-item>
-                            <ion-label color="primary" position="floating">Apellido</ion-label>
-                            <ion-input name="lastName" #lastName="ngModel" type="text" [(ngModel)]="client.lastName"
-                                pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?"
-                                required>
-                            </ion-input>
-                        </ion-item>
-                        <ng-container
-                            *ngIf="lastName.invalid && ((lastName.dirty && lastName.touched) || desperationLevel > 3)">
-                            <div class="ux-alert" lines="none" *ngIf="lastName.errors && lastName.errors.required">
-                                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
-                                <ion-label>Campo Requerido</ion-label>
-                            </div>
-                            <div class="ux-alert" lines="none" *ngIf="lastName.errors && lastName.errors.pattern">
-                                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
-                                <ion-label>Solo letras y espacios</ion-label>
-                            </div>
-                        </ng-container>
-
-                        <!-- DNI                -->
+                        <!-- Cuit/Cuil                -->
                         <ion-item>
                             <ion-label color="primary" position="floating">CUIT/CUIL</ion-label>
-                            <ion-input name="dni" #dni="ngModel" type="text" minlength="7" maxlength="8"
-                                pattern="[0-9]+" [(ngModel)]="client.dni" required>
+                            <ion-input name="cuitCuil" #cuitCuil="ngModel" type="text" minlength="7" maxlength="20"
+                                [(ngModel)]="commerce.cuitCuil" required>
                             </ion-input>
                         </ion-item>
-                        <ng-container *ngIf="dni.invalid && ((dni.dirty && dni.touched) || desperationLevel > 3)">
-                            <div class="ux-alert" lines="none" *ngIf="dni.errors && dni.errors.required">
+                        <ng-container
+                            *ngIf="cuitCuil.invalid && ((cuitCuil.dirty && cuitCuil.touched) || desperationLevel > 3)">
+                            <div class="ux-alert" lines="none" *ngIf="cuitCuil.errors && cuitCuil.errors.required">
                                 <ion-icon slot="start" name="information-circle-outline"></ion-icon>
                                 <ion-label>Campo Requerido</ion-label>
                             </div>
                             <div class="ux-alert" lines="none"
-                                *ngIf="dni.errors && (dni.errors.minlength || dni.errors.maxlength)">
+                                *ngIf="cuitCuil.errors && (cuitCuil.errors.minlength || cuitCuil.errors.maxlength)">
                                 <ion-icon slot="start" name="information-circle-outline"></ion-icon>
                                 <ion-label>Número no válido</ion-label>
                             </div>
-                            <div class="ux-alert" lines="none" *ngIf="dni.errors && dni.errors.pattern">
+                        </ng-container>
+
+                        <!-- Direccion comercio -->
+                        <ion-item>
+                            <ion-label color="primary" position="floating">Calle</ion-label>
+                            <ion-input name="address" #address="ngModel" type="text" [(ngModel)]="commerce.address"
+                                required>
+                            </ion-input>
+                        </ion-item>
+                        <ng-container
+                            *ngIf="address.invalid && ((address.dirty && address.touched) || desperationLevel > 3)">
+                            <div class="ux-alert" lines="none" *ngIf="address.errors && address.errors.required">
                                 <ion-icon slot="start" name="information-circle-outline"></ion-icon>
-                                <ion-label>Sólo números sin puntos ni guiones</ion-label>
+                                <ion-label>Campo Requerido</ion-label>
                             </div>
                         </ng-container>
+
+                        <!-- Phone Number -->
+                        <ion-item>
+                            <ion-label color="primary" position="floating">Telefono</ion-label>
+                            <ion-input name="phone" #phone="ngModel" type="number" [(ngModel)]="commerce.phone"
+                                pattern="[0-9]{6,}" required>
+                            </ion-input>
+                        </ion-item>
+                        <ng-container *ngIf="phone.invalid && ((phone.dirty && phone.touched) || desperationLevel > 3)">
+                            <div class="ux-alert" lines="none" *ngIf="phone.errors && phone.errors.required">
+                                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                                <ion-label>Campo Requerido</ion-label>
+                            </div>
+                            <div class="ux-alert" lines="none" *ngIf="phone.errors && phone.errors.pattern">
+                                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                                <ion-label>Ingrese sólo números (min 6)</ion-label>
+                            </div>
+                        </ng-container>
+
                     </ion-list>
                 </ion-content>
             </ion-slide>
@@ -128,57 +138,58 @@
             <!-- Datos del comercio -->
             <ion-slide>
                 <ion-content>
-                    <ion-list>
-                        <!-- Nombre del comercio -->
-                        <ion-item>
-                            <ion-label color="primary" autocomplete="off" position="floating">Nombre del comercio
-                            </ion-label>
-                            <ion-input name="marketName" #marketName="ngModel" type="text"
-                                [(ngModel)]="client.marketName" required
-                                pattern="[A-Za-z0-9._-äÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+[ ]?">
-                            </ion-input>
-                        </ion-item>
-                        <ng-container
-                            *ngIf="marketName.invalid && ((marketName.dirty && marketName.touched) || desperationLevel > 3)">
-                            <div class="ux-alert" lines="none">
-                                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
-                                <ion-label>Campo Requerido</ion-label>
-                            </div>
-                        </ng-container>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col size="9" class="flex-center">
+                                <div>
+                                    <!-- <ion-label color="primary" position="floating">Duración del turno (minutos)</ion-label> -->
+                                    <ion-button (click)="maxClientsPicker()">Max. Clientes</ion-button>
+                                </div>
+                            </ion-col>
+                            <ion-col size="3">
+                                <!-- Max Clients -->
+                                <ion-item>
+                                    <ion-input disabled name="maxClients" #maxClients="ngModel" type="number"
+                                        [(ngModel)]="commerce.maxClients" pattern="[1-9][0-9]*" required>
+                                    </ion-input>
+                                </ion-item>
+                                <ng-container
+                                    *ngIf="maxClients.invalid && ((maxClients.dirty && maxClients.touched) || desperationLevel > 3)">
+                                    <div class="ux-alert" lines="none"
+                                        *ngIf="maxClients.errors && maxClients.errors.required">
+                                        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                                        <ion-label>Campo Requerido</ion-label>
+                                    </div>
+                                </ng-container>
+                            </ion-col>
+                        </ion-row>
 
-                        <!-- Direccion comercio -->
-                        <ion-item>
-                            <ion-label color="primary" position="floating">Calle</ion-label>
-                            <ion-input name="adressStreet" #adressStreet="ngModel" type="text"
-                                [(ngModel)]="client.adressStreet" required>
-                            </ion-input>
-                        </ion-item>
-                        <ng-container
-                            *ngIf="adressStreet.invalid && ((adressStreet.dirty && adressStreet.touched) || desperationLevel > 3)">
-                            <div class="ux-alert" lines="none"
-                                *ngIf="adressStreet.errors && adressStreet.errors.required">
-                                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
-                                <ion-label>Campo Requerido</ion-label>
-                            </div>
-                        </ng-container>
+                        <ion-row>
+                            <ion-col size="9" class="flex-center">
+                                <div>
+                                    <!-- <ion-label color="primary" position="floating">Duración del turno (minutos)</ion-label> -->
+                                    <ion-button (click)="shoppingMinutesPicker()">Tiempo de compra</ion-button>
+                                </div>
+                            </ion-col>
+                            <ion-col size="3">
+                                <!-- Shopping minutes -->
+                                <ion-item>
+                                    <ion-input disabled name="shoppingMinutes" #shoppingMinutes="ngModel" type="number"
+                                        [(ngModel)]="commerce.shoppingMinutes" pattern="[1-9]" required>
+                                    </ion-input>
+                                </ion-item>
+                                <ng-container
+                                    *ngIf="shoppingMinutes.invalid && ((shoppingMinutes.dirty && shoppingMinutes.touched) || desperationLevel > 3)">
+                                    <div class="ux-alert" lines="none"
+                                        *ngIf="shoppingMinutes.errors && shoppingMinutes.errors.pattern">
+                                        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                                        <ion-label>El número no parece válido</ion-label>
+                                    </div>
+                                </ng-container>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
 
-                        <!-- adressmarketNumber  -->
-                        <ion-item>
-                            <ion-label color="primary" position="floating">Número</ion-label>
-                            <ion-input name="adressHouseNumber" #adressHouseNumber="ngModel" type="text"
-                                [(ngModel)]="client.adressHouseNumber" required>
-                            </ion-input>
-                        </ion-item>
-                        <ng-container
-                            *ngIf="adressHouseNumber.invalid && ((adressHouseNumber.dirty && adressHouseNumber.touched) || desperationLevel > 3)">
-                            <div class="ux-alert" lines="none"
-                                *ngIf="adressHouseNumber.errors && adressHouseNumber.errors.required">
-                                <ion-icon slot="start" name="information-circle-outline"></ion-icon>
-                                <ion-label>Campo Requerido</ion-label>
-                            </div>
-                        </ng-container>
-
-                    </ion-list>
                     <!-- Horarios del Comercio -->
                     <h4 class="ion-text-center eon6-primarycolor">Horario de Atención</h4>
                     <ion-grid>
@@ -187,7 +198,7 @@
                                 <!-- Horario Corrido           -->
                                 <ion-item class="toggle-social-media" lines="none">
                                     <ion-label color="primary">Horario Corrido</ion-label>
-                                    <ion-toggle slot="end" name="splitShift" [(ngModel)]="!splitShift">
+                                    <ion-toggle slot="end" name="commerce.splitShift" [(ngModel)]="commerce.splitShift">
                                     </ion-toggle>
                                 </ion-item>
                             </ion-col>
@@ -196,38 +207,62 @@
                             <ion-col>
                                 <ion-item>
                                     <ion-label color="primary" position="floating">Desde</ion-label>
-                                    <ion-datetime display-format="HH:mm" hourValues="0,1,2,3,4,5,6,7,8,9,10,11,12"
-                                        minuteValues="0,30" cancelText="cancelar" doneText="terminado"
-                                        picker-format="HH:mm " value="1990-02-19T07:43Z">
+                                    <ion-datetime 
+                                    name="openTime1"
+                                    locale="es-AR" 
+                                    displayFormat="HH:mm" 
+                                    minuteValues="0, 10, 20, 30, 40, 50"
+                                    cancelText="cancelar" 
+                                    doneText="terminado"
+                                    pickerFormat="HH:mm"
+                                        [(ngModel)]="commerce.openTime1">
                                     </ion-datetime>
                                 </ion-item>
                             </ion-col>
                             <ion-col>
                                 <ion-item>
                                     <ion-label color="primary" position="floating">Hasta</ion-label>
-                                    <ion-datetime display-format="HH:mm" hourValues="0,1,2,3,4,5,6,7,8,9,10,11,12"
-                                        minuteValues="0,30" cancelText="cancelar" doneText="terminado"
-                                        picker-format="HH:mm " value="1990-02-19T07:43Z">
+                                    <ion-datetime 
+                                    name="closeTime1"
+                                    locale="es-AR" 
+                                    displayFormat="HH:mm" 
+                                    minuteValues="0, 10, 20, 30, 40, 50"
+                                    cancelText="cancelar" 
+                                    doneText="terminado"
+                                    pickerFormat="HH:mm"
+                                        [(ngModel)]="commerce.closeTime1">
                                     </ion-datetime>
                                 </ion-item>
                             </ion-col>
                         </ion-row>
-                        <ion-row *ngIf="splitShift">
+                        <ion-row *ngIf="commerce.splitShift">
                             <ion-col>
                                 <ion-item>
                                     <ion-label color="primary" position="floating">Desde</ion-label>
-                                    <ion-datetime display-format="HH:mm" hourValues="0,1,2,3,4,5,6,7,8,9,10,11,12"
-                                        minuteValues="0,30" cancelText="cancelar" doneText="terminado"
-                                        picker-format="HH:mm " value="1990-02-19T07:43Z">
+                                    <ion-datetime 
+                                    name="openTime2"
+                                    locale="es-AR" 
+                                    displayFormat="HH:mm" 
+                                    minuteValues="0, 10, 20, 30, 40, 50"
+                                    cancelText="cancelar" 
+                                    doneText="terminado"
+                                    pickerFormat="HH:mm"
+                                        [(ngModel)]="commerce.openTime2">
                                     </ion-datetime>
                                 </ion-item>
                             </ion-col>
                             <ion-col>
                                 <ion-item>
                                     <ion-label color="primary" position="floating">Hasta</ion-label>
-                                    <ion-datetime display-format="HH:mm" hourValues="0,1,2,3,4,5,6,7,8,9,10,11,12"
-                                        minuteValues="0,30" cancelText="cancelar" doneText="terminado"
-                                        picker-format="HH:mm " value="1990-02-19T07:43Z">
+                                    <ion-datetime 
+                                    name="closeTime2"
+                                    locale="es-AR" 
+                                    displayFormat="HH:mm" 
+                                    minuteValues="0, 10, 20, 30, 40, 50"
+                                    cancelText="cancelar" 
+                                    doneText="terminado"
+                                    pickerFormat="HH:mm"
+                                        [(ngModel)]="commerce.closeTime2">
                                     </ion-datetime>
                                 </ion-item>
                             </ion-col>

@@ -1,6 +1,41 @@
-import { datetimeFrontendFormat, datetimeServerFormat } from '../constants/constants'
-import { Time } from '@angular/common';
+import { datetimeFrontendFormat, datetimeServerFormat, getTime } from '../constants/constants'
 import * as moment from 'moment';
+
+export interface CommerceRegister {
+    email: string,
+    cuitCuil: string,
+    password: string,
+    shopName: string,
+    address: string,
+    maxClients: number,
+    phone: number,
+    splitShift: boolean,
+    openTime1: Date | string,
+    closeTime1: Date | string,
+    openTime2?: Date | string,
+    closeTime2?: Date | string,
+    shoppingMinutes: number,
+}
+
+export const formatCommerce = (commerce: CommerceRegister) => {
+    var newCommerce: CommerceRegister = {
+        email: commerce.email.trim(),
+        cuitCuil: commerce.cuitCuil.trim(),
+        password: commerce.password.trim(),
+        shopName: commerce.shopName.trim(),
+        address: commerce.address.trim(),
+        maxClients: commerce.maxClients,
+        phone: commerce.phone,
+        splitShift: commerce.splitShift,
+        shoppingMinutes: Math.floor(commerce.shoppingMinutes / 10),
+        openTime1: getTime(commerce.openTime1),
+        closeTime1: getTime(commerce.closeTime1),
+        openTime2: commerce.splitShift ? getTime(commerce.openTime2) : undefined,
+        closeTime2: commerce.splitShift ? getTime(commerce.closeTime2) : undefined,
+    };
+
+    return newCommerce
+}
 
 export class Commerce {
     id: number | undefined;
@@ -15,11 +50,11 @@ export class Commerce {
     phone: number;
     phone_secondary?: number;
     splitShift: boolean = false;
-    openTime1: Time;
-    closeTime1: Time;
-    openTime2?: Time;
-    closeTime2?: Time;
-    shoppingMinutes?: number;
+    openTime1: Date | string;
+    closeTime1: Date | string;
+    openTime2?: Date | string;
+    closeTime2?: Date | string;
+    shoppingMinutes: number;
     created?: string | Date | undefined = undefined;
     deleted?: string | Date | null | undefined = undefined;
     resetPasswordToken?: string | undefined = undefined;
@@ -27,7 +62,7 @@ export class Commerce {
 
 
     constructor(
-        commerce: Commerce |
+        commerce?: Commerce |
         {
             id?: number | undefined,
             email: string,
@@ -41,11 +76,11 @@ export class Commerce {
             phone: number,
             phone_secondary?: number,
             splitShift: boolean,
-            openTime1: Time,
-            closeTime1: Time,
-            openTime2?: Time,
-            closeTime2?: Time,
-            shoppingMinutes?: number,
+            openTime1: Date | string,
+            closeTime1: Date | string,
+            openTime2?: Date | string,
+            closeTime2?: Date | string,
+            shoppingMinutes: number,
             created?: string | Date | undefined,
             deleted?: string | Date | null | undefined,
             resetPasswordToken?: string | undefined,
@@ -74,7 +109,7 @@ export class Commerce {
         this.resetPasswordToken = commerce.resetPasswordToken;
         this.resetPasswordTokenExpires = commerce.resetPasswordTokenExpires;
     }
-    
+
     format = () => {
         this.email.trim();
         this.cuitCuil.trim();
