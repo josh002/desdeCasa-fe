@@ -1,6 +1,43 @@
 import { datetimeFrontendFormat, datetimeServerFormat } from '../constants/constants'
 import * as moment from 'moment';
 
+// COPIADO DE COMMERCE, ADAPTAR A CLIENT!
+// export interface CommerceRegister {
+//     email: string,
+//     cuitCuil: string,
+//     password: string,
+//     shopName: string,
+//     address: string,
+//     maxClients: number,
+//     phone: number,
+//     splitShift: boolean,
+//     openTime1: Date | string,
+//     closeTime1: Date | string,
+//     openTime2?: Date | string,
+//     closeTime2?: Date | string,
+//     shoppingMinutes: number,
+// }
+
+// export const formatCommerce = (commerce: CommerceRegister) => {
+//     var newCommerce: CommerceRegister = {
+//         email: commerce.email.trim(),
+//         cuitCuil: commerce.cuitCuil.trim(),
+//         password: commerce.password.trim(),
+//         shopName: commerce.shopName.trim(),
+//         address: commerce.address.trim(),
+//         maxClients: commerce.maxClients,
+//         phone: commerce.phone,
+//         splitShift: commerce.splitShift,
+//         shoppingMinutes: Math.floor(commerce.shoppingMinutes / 10),
+//         openTime1: getTime(commerce.openTime1),
+//         closeTime1: getTime(commerce.closeTime1),
+//         openTime2: commerce.splitShift ? getTime(commerce.openTime2) : undefined,
+//         closeTime2: commerce.splitShift ? getTime(commerce.closeTime2) : undefined,
+//     };
+
+//     return newCommerce
+// }
+
 export class Client {
     id?: number;
     dni: number;
@@ -53,15 +90,5 @@ export class Client {
         this.deleted = client.deleted ? moment(client.deleted).format(datetimeFrontendFormat) : undefined;
         this.resetPasswordToken = client.resetPasswordToken;
         this.resetPasswordTokenExpires = client.resetPasswordTokenExpires;
-    }
-
-    format = () => {
-        this.email.trim();
-        this.password.trim();
-        this.firstName.trim();
-        this.lastName.trim();
-        this.address.trim();
-        this.created ? moment(this.created).format(datetimeServerFormat) : undefined;
-        this.deleted ? moment(this.deleted).format(datetimeServerFormat) : undefined;
     }
 }

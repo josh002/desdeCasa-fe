@@ -41,12 +41,8 @@ export class ClientPage implements OnInit {
 
         // Setea localización actual del usuario en address
         this.geolocationService.getCurrentLocation()
-            .then(
-                latLong => { return this.authService.cordsToAddress(latLong) }
-            )
-            .then(
-                ({ formatted_address }) => this.client.address = formatted_address
-            )
+            .then(latLong => { return this.utilsService.cordsToAddress(latLong) })
+            .then(({ formatted_address }) => this.client.address = formatted_address)
     }
 
     desperateUser() {
@@ -55,6 +51,7 @@ export class ClientPage implements OnInit {
     }
 
     onSubmit() {
+        this.desperationLevel = 0;
         // Formatear con el método de la clase correspondiente
         // this.formatData();
         this.client.password = encryptPass(this.client.password);
@@ -82,10 +79,9 @@ export class ClientPage implements OnInit {
                             console.log(err);
                             if (err.error.status === -1) {
                                 this.alertService.simpleAlert(err.error.message);
-                            }else{
+                            } else {
                                 this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
                             }
-
                         })
                 }
             )
