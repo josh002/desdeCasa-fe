@@ -1,14 +1,19 @@
 ion-card {
-    ion-card-header {
-         text-align: center;
-         ion-card-title,
-         ion-card-subtitle {
-              text-transform: capitalize;
-         }
-    }
-    ion-button{
-        margin-bottom: 2vh;
-        padding-right: 5%;
-        padding-left: 5%;
-    }
+     ion-card-header {
+          text-align: center;
+          ion-card-title,
+          ion-card-subtitle {
+               text-transform: capitalize;
+          }
+     }
+     ion-button {
+          margin-bottom: 2vh;
+          padding-right: 5%;
+          padding-left: 5%;
+     }
+}
+ion-button {
+    margin-top: 2vh;
+     padding-right: 5%;
+     padding-left: 5%;
 }
