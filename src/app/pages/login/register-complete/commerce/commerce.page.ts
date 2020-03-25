@@ -17,38 +17,38 @@ import { Commerce, CommerceRegister, formatCommerce } from 'src/app/models/comme
 
 export class CommercePage implements OnInit {
 
-    // commerce: CommerceRegister = {
-    //     email: '',
-    //     cuitCuil: '',
-    //     password: '',
-    //     shopName: '',
-    //     address: '',
-    //     maxClients: undefined,
-    //     phone: undefined,
-    //     splitShift: false,
-    //     openTime1: new Date('1994-12-15T08:30').toISOString(),
-    //     closeTime1: new Date('1994-12-15T13:30').toISOString(),
-    //     openTime2: new Date('1994-12-15T16:00').toISOString(),
-    //     closeTime2: new Date('1994-12-15T20:00').toISOString(),
-    //     shoppingMinutes: undefined,
-    // };
-
-    // Esto está armado para propósitos de TESTING
     commerce: CommerceRegister = {
-        email: 'cmartinez@eon5.tech',
-        cuitCuil: '20-3456884-0',
-        password: 'doremifasol',
-        shopName: 'Pepito SHOP!',
-        address: 'French 1425',
-        maxClients: 5,
-        phone: 123456789,
+        email: '',
+        cuitCuil: '',
+        password: '',
+        shopName: '',
+        address: '',
+        maxClients: undefined,
+        phone: undefined,
         splitShift: false,
         openTime1: new Date('1994-12-15T08:30').toISOString(),
         closeTime1: new Date('1994-12-15T13:30').toISOString(),
         openTime2: new Date('1994-12-15T16:00').toISOString(),
         closeTime2: new Date('1994-12-15T20:00').toISOString(),
-        shoppingMinutes: 1,
+        shoppingMinutes: undefined,
     };
+
+    // Esto está armado para propósitos de TESTING
+    // commerce: CommerceRegister = {
+    //     email: 'cmartinez@eon5.tech',
+    //     cuitCuil: '20-3456884-0',
+    //     password: 'doremifasol',
+    //     shopName: 'Pepito SHOP!',
+    //     address: 'French 1425',
+    //     maxClients: 5,
+    //     phone: 123456789,
+    //     splitShift: false,
+    //     openTime1: new Date('1994-12-15T08:30').toISOString(),
+    //     closeTime1: new Date('1994-12-15T13:30').toISOString(),
+    //     openTime2: new Date('1994-12-15T16:00').toISOString(),
+    //     closeTime2: new Date('1994-12-15T20:00').toISOString(),
+    //     shoppingMinutes: 1,
+    // };
 
     // Arreglo de posibles duraciones de turnos
     shiftDurations: number[][] = [
@@ -90,7 +90,6 @@ export class CommercePage implements OnInit {
 
     onSubmit() {
         this.desperationLevel = 0;
-        formatCommerce(this.commerce)
         this.loadingService.presentLoading("Cargando")
             .then(
                 () => {

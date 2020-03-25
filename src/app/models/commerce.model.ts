@@ -109,14 +109,4 @@ export class Commerce {
         this.resetPasswordToken = commerce.resetPasswordToken;
         this.resetPasswordTokenExpires = commerce.resetPasswordTokenExpires;
     }
-
-    format = () => {
-        this.email.trim();
-        this.cuitCuil.trim();
-        this.password.trim();
-        this.shopName.trim();
-        this.address.trim();
-        this.created ? moment(this.created).format(datetimeServerFormat) : undefined;
-        this.deleted ? moment(this.deleted).format(datetimeServerFormat) : undefined;
-    }
 }
