@@ -3,22 +3,14 @@
 </ion-header>
 
 <ion-content>
-    <ion-card>
+    <ion-card *ngIf='client'>
 
         <ion-card-header>
             <ion-card-subtitle>cuenta</ion-card-subtitle>
-            <ion-card-title>Emilio jose</ion-card-title>
+            <ion-card-title class="ion-text-center">{{client.firstName}}</ion-card-title>
         </ion-card-header>
 
-
-
-
-
         <ion-card-content>
-
-            <ion-button color="light" class="profile-name" expand="block">
-                <span class="eon6-graycolor">MI NOMBRE</span>
-            </ion-button>
 
             <ion-button (click)="doLogOut()" expand="block" color="primary">
                 <ion-label> Cerrar sesión</ion-label>
