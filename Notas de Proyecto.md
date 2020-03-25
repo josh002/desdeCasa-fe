@@ -66,7 +66,7 @@ Print de pantalla en Ionic: es posible, no se puede evitar que otro celular saqu
 ## Call 18/12/2019 - Evangelina
 
 - [x] Registrate acá: botón en lugar de link - ¿No estás registrado?
-- [ ] Logo de la corriente
+- [ ] Logo de la DesdeCasa
 - [X] Mover Afiliado a otra pantalla.
 - [X] Formato de celular: 0xxx-15xxxxxxx
 - [X] Formato de fijo: 0xxx-4xxxxxxx

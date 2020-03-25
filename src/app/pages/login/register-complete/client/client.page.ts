@@ -54,7 +54,8 @@ export class ClientPage implements OnInit {
         this.desperationLevel = 0;
         // Formatear con el método de la clase correspondiente
         // this.formatData();
-        this.client.password = encryptPass(this.client.password);
+
+        // this.client.password = encryptPass(this.client.password.trim()); //!no va aca se encripta en register
 
         this.loadingService.presentLoading("Cargando")
             .then(

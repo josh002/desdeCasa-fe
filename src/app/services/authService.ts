@@ -21,8 +21,8 @@ export class AuthService {
     // Login por Body
     login = (email: string, password: string, encrypt: boolean = true) => {
         // Si vengo de autologin el password ya está encriptado
-        if (encrypt) password = encryptPass(password)
-        return this.httpClient.post(`${environment.WS_URL}/login`, {email, password}).toPromise()
+        if (encrypt) { password = encryptPass(password); }
+        return this.httpClient.post(`${environment.WS_URL}/login`, { email, password }).toPromise()
     }
 
     register = (client: any) => {
