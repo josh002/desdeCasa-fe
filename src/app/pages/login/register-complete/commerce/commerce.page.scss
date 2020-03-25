@@ -7,8 +7,12 @@ ion-content {
                align-items: center;
                justify-content: center;
           }
+
           ion-slides {
                height: 85%;
+               ion-button {
+                    width: 50vw;
+               }
                ion-list {
                     width: 100%;
                     display: flex;

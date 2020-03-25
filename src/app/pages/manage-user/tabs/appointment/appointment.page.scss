@@ -1,16 +1,31 @@
-
 ion-list {
-    padding-left: 15%;
-    padding-right: 15%;
-}
-ion-button{
-    --border-radius: 5px;
-    --background: rgb(0, 147, 207);
-   
-}
-h4{
-    font-weight: bolder;
+     padding-left: 15%;
+     padding-right: 15%;
 }
 
-
-
+h4 {
+     font-weight: bolder;
+}
+ion-content {
+     text-align: center;
+}
+.title-button {
+     width: 80vw !important;
+     margin-left: 10vw;
+     margin-top: 2vh;
+     margin-bottom: 2vh;
+}
+ion-card {
+     ion-card-header {
+          text-align: center;
+          ion-card-title,
+          ion-card-subtitle {
+               text-transform: capitalize;
+          }
+     }
+     ion-button{
+         margin-bottom: 2vh;
+         padding-right: 5%;
+         padding-left: 5%;
+     }
+}
