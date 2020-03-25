@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PopoverSelectComponent } from './popover-select/popover-select.component';
-import { CommerceHeaderPageModule } from './commerce-header/commerce-header.module';
+
 
 @NgModule({
   declarations: [
@@ -20,12 +20,12 @@ import { CommerceHeaderPageModule } from './commerce-header/commerce-header.modu
     IonicModule,
     RouterModule,
     FontAwesomeModule,
-    CommerceHeaderPageModule
+   
   ],
   providers: [
     BabyHeaderPageModule,
     FontAwesomeModule,
-    CommerceHeaderPageModule
+   
   ],
   entryComponents: [ 
     PopoverSelectComponent,
@@ -34,7 +34,7 @@ import { CommerceHeaderPageModule } from './commerce-header/commerce-header.modu
     PopoverSelectComponent,
     BabyHeaderPageModule,
     FontAwesomeModule,
-    CommerceHeaderPageModule,
+   
   ]
 })
 export class SharedModule { }
