@@ -8,6 +8,7 @@ const routes: Routes = [
     { path: 'register-complete', loadChildren: () => import('./pages/login/register-complete/register-complete.module').then(m => m.RegisterCompletePageModule) },
     { path: 'manage-commerce', loadChildren: () => import('./pages/manage-commerce/manage-commerce.module').then(m => m.ManageCommercePageModule) },
     { path: 'tabs', loadChildren: () => import('./pages/manage-user/tabs/tabs.module').then(m => m.TabsPageModule) },
+
 ];
 
 @NgModule({

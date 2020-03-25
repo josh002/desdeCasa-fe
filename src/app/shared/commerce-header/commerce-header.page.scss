@@ -1,0 +1,30 @@
+ion-toolbar {
+    --background: linear-gradient(150deg, var(--ion-color-primary), var(--ion-color-secondary));
+}
+
+.header-logo {
+    img {
+        height: 6vh;
+        max-height: 50px;
+        border: 0;
+        vertical-align: middle;
+    }
+    ion-label {
+        vertical-align: middle;
+        font-size: x-large;
+    }
+}
+
+.profile-pic {
+    // margin: 5vh auto;
+    width: 8vw;
+    height: 8vw;
+    border-radius: 50%;
+    object-fit: cover;
+    overflow: hidden;
+    text-align: center;
+}
+
+.logoutbutton {
+    font-size: 5vmax;
+}

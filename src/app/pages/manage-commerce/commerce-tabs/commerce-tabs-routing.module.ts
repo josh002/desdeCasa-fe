@@ -16,10 +16,14 @@ const routes: Routes = [
             path: 'edit-commerce',
             loadChildren: () => import('./edit-commerce/edit-commerce.module').then( m => m.EditCommercePageModule)
           },
+          {
+            path: 'logout',
+            loadChildren: () => import('./logout/logout.module').then( m => m.LogoutPageModule)
+          },
     ]
   },
   
-  
+
 ];
 
 @NgModule({
