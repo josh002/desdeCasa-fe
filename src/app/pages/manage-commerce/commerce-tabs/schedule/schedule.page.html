@@ -4,7 +4,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-card>
+    <!-- <ion-card>
         <ion-card-header>
             <ion-card-subtitle>EONES!</ion-card-subtitle>
             <ion-card-title>Mostrar el DIV de aun no tienes turnos como le mostre a Agus anoche si el bookings .length=0
@@ -14,7 +14,7 @@
             Y Acomodar el printeo de variables
         </ion-card-content>
         <div *ngIf="commerce">{{commerce.id}}</div>
-    </ion-card>
+    </ion-card> -->
     <ion-card>
         <ion-card-header>
             <ion-card-subtitle>Turnos</ion-card-subtitle>
@@ -22,14 +22,15 @@
         </ion-card-header>
         <ion-card-content>
             <ion-list>
-                <ion-button *ngFor="let booking of bookings" color="light" expand="block"
-                    [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active">
+                <ion-button *ngFor="let booking of bookings" color="light" expand="block" [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active">
                     <span class="eon6-graycolor">De {{item}}:00 a {{item + 1}}:00</span>
                 </ion-button>
             </ion-list>
         </ion-card-content>
     </ion-card>
 </ion-content>
+
+
 <!-- <ion-item *ngFor="let item of list">
     <ion-card class="my-shift" [routerLink]="['./schedule-hour']" expand="block" >
         <ion-item>
