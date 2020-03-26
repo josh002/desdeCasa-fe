@@ -64,8 +64,8 @@ export class AppointmentHourPage implements OnInit {
                         this.timetable = resp.result;
                     })
                     .catch(err => {
-                        console.log(err);
-                        if (err.error.status === -1) {
+                        console.log('err', err);
+                        if (err && err.error && err.error.status === -1) {
                             this.alertService.simpleAlert(err.error.message);
                         } else {
                             this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
@@ -84,8 +84,8 @@ export class AppointmentHourPage implements OnInit {
                         this.manageWorkHours();
                     })
                     .catch(err => {
-                        console.log(err);
-                        if (err.error.status === -1) {
+                        console.log('err', err);
+                        if (err && err.error && err.error.status === -1) {
                             this.alertService.simpleAlert(err.error.message);
                         } else {
                             this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
@@ -154,7 +154,7 @@ export class AppointmentHourPage implements OnInit {
                 this.router.navigate(['/tabs/home'])
             })
             .catch(err => {
-                console.log(err);
+                console.log('err', err);
                 if (err.error.status == -1) {
                     this.alertService.simpleAlert(err.error.message);
                     this.router.navigate(['/tabs/home'])

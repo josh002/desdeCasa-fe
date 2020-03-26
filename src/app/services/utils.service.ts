@@ -22,6 +22,6 @@ export class UtilsService {
         this.httpClient.post(`${environment.WS_URL}/utils/cord-to-address`, cords, appJsonHeader)
             .toPromise()
             .then((resp: any) => resp.result)
-            .catch((err: any) => {console.log(err); return err});
+            .catch((err: any) => {console.log('err', err); return err});
 
 }

@@ -34,14 +34,14 @@ export class HomePage implements OnInit {
         }
         this.authService.getCommercesByUser(this.client.id)
             .then((resp: any) => {
+                console.log('resp', resp);
                 this.commerces = [];
-                resp.result.forEach(
-                    (element: any) => this.commerces.push(new Commerce(element))
-                )
+                resp.result.forEach((element: any) => this.commerces.push(new Commerce(element)))
             })
             .catch(err => {
-                console.log(err);
-                if (err.error.status === -1) {
+                
+                console.log('err', err);
+                if (err && err.error && err.error.status === -1) {
                     this.alertService.simpleAlert(err.error.message);
                 } else {
                     this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");

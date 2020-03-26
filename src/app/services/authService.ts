@@ -51,17 +51,8 @@ export class AuthService {
     /**
      * Dado un usuario retorna comercios cercanos
      */
-    getCommercesByUser = (userId: number): Promise<{
-        distance: number,
-        id: number,
-        latitude: number,
-        longitude: number,
-        shopName: string,
-        address: string
-    }> =>
-        this.httpClient
-            .get(`${environment.WS_URL}/commerce/user/${userId}`)
-            .toPromise().then((resp: any) => resp.result)
+    getCommercesByUser = (userId: number): Promise<any> =>
+        this.httpClient.get(`${environment.WS_URL}/commerce/user/${userId}`).toPromise()
 
     /**
      * Dado un comercio retorna sus reservas
