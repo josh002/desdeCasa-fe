@@ -22,6 +22,8 @@ export class HomePage implements OnInit {
         private router: Router,
     ) { }
 
+    ngOnInit() {
+  }
     ionViewWillEnter() {
         this.client = this.localStorageService.getObject('client') === null ?
             undefined :

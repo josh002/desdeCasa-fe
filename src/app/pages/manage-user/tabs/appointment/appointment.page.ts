@@ -72,7 +72,7 @@ export class AppointmentPage implements OnInit {
             header: booking.shopName,
             subHeader: booking.address,
             message: `${onlyDate(booking.created)} - ${booking.description.slice(0, 5)}`,
-            cssClass: `alert-user`,
+            cssClass: `alert-query`,
             buttons: [
                 { text: `Cancelar Turno`, role: 'cancel', handler: () => this.youSure() },
                 { text: `Cerrar` }
