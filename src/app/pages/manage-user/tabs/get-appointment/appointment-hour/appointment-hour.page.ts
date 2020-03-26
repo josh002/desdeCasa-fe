@@ -7,7 +7,7 @@ import { Commerce } from 'src/app/models/commerce.model';
 import { Timetable } from 'src/app/models/timetable.model';
 import { BookingService } from 'src/app/services/booking.service';
 import { TimetableService } from 'src/app/services/timetable.service';
-import { formatHHmm } from 'src/app/constants/constants';
+import { formatHHmm, asDate } from 'src/app/constants/constants';
 import { BookingRegister } from 'src/app/models/booking.model';
 import { Client } from 'src/app/models/client.model';
 import { LocalStorageService } from 'src/app/services/localStorageService';
@@ -25,6 +25,15 @@ export class AppointmentHourPage implements OnInit {
     selectedTimetable: Timetable;
     selectedMinutes: number;
     shifts: number[]; // Arreglo con turnos
+
+    startMinute1: number;
+    endMinute1: number;
+    startMinute2: number;
+    endMinute2: number;
+    startHour1: number;
+    endHour1: number;
+    startHour2: number;
+    endHour2: number;
 
     constructor(
         public alertController: AlertController,
@@ -72,12 +81,7 @@ export class AppointmentHourPage implements OnInit {
                             this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
                         }
                         this.commerce = resp.result[0];
-                        // Verifico que no vaya a venir cero o un numero incorrecto;
-                        if (this.commerce.shoppingMinutes < 1) this.commerce.shoppingMinutes = 1;
-                        this.shifts = [];
-                        for (var i = 0; i < 6 / this.commerce.shoppingMinutes; i++) {
-                            this.shifts.push(this.commerce.shoppingMinutes * i * 10);
-                        }
+                        this.manageWorkHours();
                     })
                     .catch(err => {
                         console.log(err);
@@ -90,6 +94,42 @@ export class AppointmentHourPage implements OnInit {
                     });
 
             })
+    }
+
+    manageWorkHours = () => {
+        // Guardo los minutos y las horas de apertura y cierre 
+        this.startMinute1 = asDate(this.commerce.openTime1).getMinutes();
+        this.endMinute1 = asDate(this.commerce.closeTime1).getMinutes();
+        this.startMinute2 = this.commerce.openTime2 === null ? undefined : asDate(this.commerce.openTime2).getMinutes();
+        this.endMinute2 = this.commerce.closeTime2 === null ? undefined : asDate(this.commerce.closeTime2).getMinutes();
+
+        this.startHour1 = asDate(this.commerce.openTime1).getHours();
+        this.endHour1 = asDate(this.commerce.closeTime1).getHours();
+        this.startHour2 = this.commerce.openTime2 === null ? undefined : asDate(this.commerce.openTime2).getHours();
+        this.endHour2 = this.commerce.closeTime2 === null ? undefined : asDate(this.commerce.closeTime2).getHours();
+
+        // Verifico que no vaya a venir cero o un numero incorrecto;
+        if (this.commerce.shoppingMinutes < 1) this.commerce.shoppingMinutes = 1;
+        this.shifts = [];
+        for (var i = 0; i < 6 / this.commerce.shoppingMinutes; i++) {
+            this.shifts.push(this.commerce.shoppingMinutes * i * 10);
+        }
+        if (this.hour == this.startHour1) {
+            this.shifts = this.shifts.filter(elem => elem >= this.startMinute1);
+            console.log('Estamos en la hora de apertura 1');
+        };
+        if (this.hour == this.endHour1) {
+            this.shifts = this.shifts.filter(elem => elem < this.endMinute1);
+            console.log('Estamos en la hora de cierre 1');
+        };
+        if (this.startHour2 && this.hour == this.startHour2) {
+            this.shifts = this.shifts.filter(elem => elem >= this.startMinute2);
+            console.log('Estamos en la hora de apertura 2');
+        };
+        if (this.endHour2 && this.hour == this.endHour2) {
+            this.shifts = this.shifts.filter(elem => elem < this.endMinute2);
+            console.log('Estamos en la hora de cierre 2');
+        };
     }
 
     radioGroupChange(event: any) {
@@ -138,20 +178,5 @@ export class AppointmentHourPage implements OnInit {
 
         await alert.present();
     }
-
-    // async confirm() {
-    //     const alert = await this.alertController.create({
-    //         header: `Turno en:`,
-    //         subHeader: this.commerce.shopName,
-    //         message: `Horario : ${this.hour}:${this.selectedMinutes}`,
-    //         cssClass: `alert-user`,
-    //         buttons: [
-    //             { text: `Revisar`, role: 'cancel', },
-    //             { text: `Confirmar`, handler: () => this.doSubmit() }
-    //         ]
-    //     });
-
-    //     await alert.present();
-    // }
 
 }
