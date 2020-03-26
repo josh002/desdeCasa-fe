@@ -9,7 +9,7 @@
             <ion-radio-group (ionChange)="radioGroupChange($event)">
                 <ng-container *ngFor="let shift of shifts">
                     <ion-item *ngIf="true">
-                        <ion-label>{{hour}}:{{ shift | number: '2.0-0' }}</ion-label>
+                        <ion-label>{{hour}}:{{ shift | number: '2.0-0' }}hs</ion-label>
                         <ion-radio slot="end" color="primary" [value]="shift"></ion-radio>
                     </ion-item>
                 </ng-container>
