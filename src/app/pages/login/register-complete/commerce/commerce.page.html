@@ -207,62 +207,38 @@
                             <ion-col>
                                 <ion-item>
                                     <ion-label color="primary" position="floating">Desde</ion-label>
-                                    <ion-datetime 
-                                    name="openTime1"
-                                    locale="es-AR" 
-                                    displayFormat="HH:mm" 
-                                    minuteValues="0, 10, 20, 30, 40, 50"
-                                    cancelText="cancelar" 
-                                    doneText="terminado"
-                                    pickerFormat="HH:mm"
-                                        [(ngModel)]="commerce.openTime1">
+                                    <ion-datetime name="openTime1" locale="es-AR" displayFormat="HH:mm"
+                                        minuteValues="0, 10, 20, 30, 40, 50" cancelText="cancelar" doneText="terminado"
+                                        pickerFormat="HH:mm" [(ngModel)]="commerce.openTime1">
                                     </ion-datetime>
                                 </ion-item>
                             </ion-col>
                             <ion-col>
                                 <ion-item>
                                     <ion-label color="primary" position="floating">Hasta</ion-label>
-                                    <ion-datetime 
-                                    name="closeTime1"
-                                    locale="es-AR" 
-                                    displayFormat="HH:mm" 
-                                    minuteValues="0, 10, 20, 30, 40, 50"
-                                    cancelText="cancelar" 
-                                    doneText="terminado"
-                                    pickerFormat="HH:mm"
-                                        [(ngModel)]="commerce.closeTime1">
+                                    <ion-datetime name="closeTime1" locale="es-AR" displayFormat="HH:mm"
+                                        minuteValues="0, 10, 20, 30, 40, 50" cancelText="cancelar" doneText="terminado"
+                                        pickerFormat="HH:mm" [(ngModel)]="commerce.closeTime1">
                                     </ion-datetime>
                                 </ion-item>
                             </ion-col>
                         </ion-row>
-                        <ion-row *ngIf="commerce.splitShift">
+                        <ion-row *ngIf="!commerce.splitShift">
                             <ion-col>
                                 <ion-item>
                                     <ion-label color="primary" position="floating">Desde</ion-label>
-                                    <ion-datetime 
-                                    name="openTime2"
-                                    locale="es-AR" 
-                                    displayFormat="HH:mm" 
-                                    minuteValues="0, 10, 20, 30, 40, 50"
-                                    cancelText="cancelar" 
-                                    doneText="terminado"
-                                    pickerFormat="HH:mm"
-                                        [(ngModel)]="commerce.openTime2">
+                                    <ion-datetime name="openTime2" locale="es-AR" displayFormat="HH:mm"
+                                        minuteValues="0, 10, 20, 30, 40, 50" cancelText="cancelar" doneText="terminado"
+                                        pickerFormat="HH:mm" [(ngModel)]="commerce.openTime2">
                                     </ion-datetime>
                                 </ion-item>
                             </ion-col>
                             <ion-col>
                                 <ion-item>
                                     <ion-label color="primary" position="floating">Hasta</ion-label>
-                                    <ion-datetime 
-                                    name="closeTime2"
-                                    locale="es-AR" 
-                                    displayFormat="HH:mm" 
-                                    minuteValues="0, 10, 20, 30, 40, 50"
-                                    cancelText="cancelar" 
-                                    doneText="terminado"
-                                    pickerFormat="HH:mm"
-                                        [(ngModel)]="commerce.closeTime2">
+                                    <ion-datetime name="closeTime2" locale="es-AR" displayFormat="HH:mm"
+                                        minuteValues="0, 10, 20, 30, 40, 50" cancelText="cancelar" doneText="terminado"
+                                        pickerFormat="HH:mm" [(ngModel)]="commerce.closeTime2">
                                     </ion-datetime>
                                 </ion-item>
                             </ion-col>
