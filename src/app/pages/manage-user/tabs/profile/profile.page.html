@@ -20,8 +20,9 @@
 
 
         <ng-container *ngIf="!disabled">
-            <ion-button color="danger" item-end shape="round" (click)=changeDisabled()>
-                <ion-label color="light">Cancelar</ion-label>
+            <ion-button color="danger" class="button-cancel"  item-end shape="round" (click)=changeDisabled()>
+                <ion-label color="light"> X
+                </ion-label>
             </ion-button>
         </ng-container>
 
