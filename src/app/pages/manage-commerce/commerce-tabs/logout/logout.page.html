@@ -4,16 +4,17 @@
 </ion-header>
 
 <ion-content>
-    <ion-card>
+    <ion-card *ngIf='commerce'>
+        <!-- <ion-card> -->
 
         <ion-card-header>
-            <ion-card-subtitle>Cuenta</ion-card-subtitle>
-            <ion-card-title class="ion-text-center"></ion-card-title>
+            <ion-card-subtitle>Comercio</ion-card-subtitle>
+            <ion-card-title class="ion-text-center">{{commerce.shopName | titlecase}}</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
 
-            <ion-button  expand="block" color="primary">
+            <ion-button (click)="doLogOut()" expand="block" color="primary">
                 <ion-label> Cerrar sesión</ion-label>
             </ion-button>
         </ion-card-content>
