@@ -29,7 +29,7 @@ export class TimetableService {
         }
     ) => {
         let params = new HttpParams();
-        if (options && options['description']) params = params.append('email', `${options['email']}`);
+        if (options && options['description']) params = params.append('description', `${options['description']}`);
         return this.httpClient.get(`${environment.WS_URL}/timetable`, { params }).toPromise()
     }
 

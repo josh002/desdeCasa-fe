@@ -24,7 +24,7 @@ export class AppointmentHourPage implements OnInit {
     timetable: Timetable[];
     selectedTimetable: Timetable;
     selectedMinutes: number;
-    shifts: number[] = []; // Arreglo con turnos
+    shifts: number[]; // Arreglo con turnos
 
     constructor(
         public alertController: AlertController,
@@ -74,6 +74,7 @@ export class AppointmentHourPage implements OnInit {
                         this.commerce = resp.result[0];
                         // Verifico que no vaya a venir cero o un numero incorrecto;
                         if (this.commerce.shoppingMinutes < 1) this.commerce.shoppingMinutes = 1;
+                        this.shifts = [];
                         for (var i = 0; i < 6 / this.commerce.shoppingMinutes; i++) {
                             this.shifts.push(this.commerce.shoppingMinutes * i * 10);
                         }
@@ -107,10 +108,10 @@ export class AppointmentHourPage implements OnInit {
             timetableId: this.selectedTimetable.id,
         }
         this.boookingService.createBooking(booking)
-            .then((resp: any) => { 
-                    const { message } = resp;
-                    this.alertService.headerAlert('Agendado!', message)
-                    this.router.navigate(['/tabs/home'])
+            .then((resp: any) => {
+                const { message } = resp;
+                this.alertService.headerAlert('Agendado!', message)
+                this.router.navigate(['/tabs/home'])
             })
             .catch(err => {
                 console.log(err);
@@ -121,6 +122,21 @@ export class AppointmentHourPage implements OnInit {
                     this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
                 }
             });
+    }
+
+    async confirm() {
+        const alert = await this.alertController.create({
+            header: `Turno en:`,
+            subHeader: this.commerce.shopName,
+            message: `Horario : ${this.hour}:${this.selectedMinutes}`,
+            cssClass: `alert-user`,
+            buttons: [
+                { text: `Revisar`, role: 'cancel', },
+                { text: `Confirmar`, handler: () => this.doSubmit() }
+            ]
+        });
+
+        await alert.present();
     }
 
     async confirm() {

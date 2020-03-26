@@ -21,7 +21,7 @@ export class GetAppointmentPage implements OnInit {
     endHour2: number;
 
     // Arreglo con horas
-    hours: number[] = [];
+    hours: number[];
 
     constructor(
         private commerceService: CommerceService,
@@ -33,6 +33,7 @@ export class GetAppointmentPage implements OnInit {
     ngOnInit(){}
 
     ionViewWillEnter() {
+        this.hours = [];
         for (var i = 0; i < 24; i++) this.hours.push(i);
 
         this.route.paramMap.subscribe(

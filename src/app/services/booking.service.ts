@@ -34,10 +34,10 @@ export class BookingService {
     ) => {
         let params = new HttpParams();
         if (options && options['considerDeletes']) params = params.append('considerDeletes', `${options['considerDeletes']}`);
-        if (options && options['userId']) params = params.append('email', `${options['email']}`);
-        if (options && options['timetableId']) params = params.append('shopName', `${options['shopName']}`);
-        if (options && options['commerceId']) params = params.append('latitude', `${options['latitude']}`);
-        if (options && options['created']) params = params.append('longitude', `${options['longitude']}`);
+        if (options && options['userId']) params = params.append('userId', `${options['userId']}`);
+        if (options && options['timetableId']) params = params.append('timetableId', `${options['timetableId']}`);
+        if (options && options['commerceId']) params = params.append('commerceId', `${options['commerceId']}`);
+        if (options && options['created']) params = params.append('created', `${options['created']}`);
         return this.httpClient.get(`${environment.WS_URL}/booking`, { params }).toPromise()
     }
 
@@ -48,9 +48,7 @@ export class BookingService {
     }
 
     deleteBooking = (id: number) => {
-        let params = new HttpParams();
-        params = params.append('id', `${id}`);
-        return this.httpClient.delete(`${environment.WS_URL}/booking`, { params }).toPromise()
+        return this.httpClient.delete(`${environment.WS_URL}/booking/${id}`).toPromise()
     }
     
 }

@@ -50,6 +50,13 @@ export const asDate = (time: string | Date) =>
 * Formatea un numero en '00' (3 -> 03)
 * @param {number} myNumber
 */
-export const formatHHmm = (myNumber :number) =>
+export const formatHHmm = (myNumber: number) =>
     numeral(myNumber).format('00');
+
+/**
+* Retorna un string DD/MM a partir de un Date
+* @param {Date} myDate
+*/
+export const onlyDate = (myDate: Date | string) =>
+    moment(myDate).format('DD/MM')
 
