@@ -27,10 +27,10 @@
 <ion-content>
 
     <!-- modelo de que pasa si no hay productos -->
-    <!-- <div *ngIf="commerces.length" class="no-items-yet">
+    <div *ngIf="commerces && commerces.length == 0" class="no-items-yet">
         <h4 class="eon6-graycolor">No tienes comercios cerca</h4>
         <ion-icon name="card"></ion-icon>
-    </div> -->
+    </div>
 
     <div *ngIf="commerces && commerces.length > 0" class="cards-container">
         <ion-card *ngFor="let commerce of commerces">

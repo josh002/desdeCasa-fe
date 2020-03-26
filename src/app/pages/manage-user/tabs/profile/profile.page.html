@@ -37,7 +37,7 @@
 
                     <ion-item>
                         <ion-label color="primary" position="floating">Apellido</ion-label>
-                        <ion-input name="lastName" #lastName="ngModel" type="text" [(ngModel)]="client.lastName" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required>
+                        <ion-input name="lastName" #lastName="ngModel" type="text" [(ngModel)]="client.lastName" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required></ion-input>
                     </ion-item>
 
                     <ng-container *ngIf="lastName.invalid && ((lastName.dirty && lastName.touched) || desperationLevel > 3)">
@@ -98,8 +98,7 @@
                     <ion-item>
                         <ion-label color="primary" position="floating">Direccion</ion-label>
                         <!-- <ion-input name="address" #address="ngModel" type="text" [(ngModel)]="client.address" required> -->
-                        <ion-input [(ngModel)]="client.address" name="address" type="text" required>
-                        </ion-input>
+                        <ion-input [(ngModel)]="client.address" name="address" type="text" required> </ion-input>
                     </ion-item>
 
                     <ng-container *ngIf="address.pristine">
