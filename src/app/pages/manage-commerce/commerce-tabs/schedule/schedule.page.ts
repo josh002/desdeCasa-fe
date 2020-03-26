@@ -18,10 +18,10 @@ export class SchedulePage implements OnInit {
     ) { }
 
     ngOnInit() {
-        
+
         const currentCommerce: Commerce = this.localStorageService.getObject('commerce');
 
-        this.authService.getBookingsByCommerce(currentCommerce)
+        this.authService.getBookingsByCommerce(currentCommerce.id)
             .then(
                 resp => {
                     debugger;
