@@ -79,7 +79,7 @@ export class AppointmentPage implements OnInit {
             cssClass: `alert-query`,
             buttons: [
                 { text: `Cancelar Turno`, cssClass:"cancel-button", role: 'cancel', handler: () => this.youSure() },
-                { text: `Cerrar` }
+                { text: `Cerrar`, cssClass:"accept-button" }
             ]
         });
 
@@ -93,8 +93,8 @@ export class AppointmentPage implements OnInit {
             // message: `${onlyDate(booking.created)} - ${booking.description.slice(0,5)}`,
             cssClass: `alert-query`,
             buttons: [
-                { text: `Salir`, role: 'cancel' },
-                { text: `Aceptar`, cssClass:"cancel-button", handler: () => this.doCancel() }
+                { text: `No`, role: 'cancel',cssClass:"accept-button" },
+                { text: `Si`,cssClass:"cancel-button-yes", handler: () => this.doCancel() }
             ]
         });
 
