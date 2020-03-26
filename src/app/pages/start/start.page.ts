@@ -114,12 +114,12 @@ export class StartPage implements OnInit {
                                     err => {
                                         this.password = '';
                                         this.loadingService.dismissLoading();
-                                        if (err.error.status === -1) {
+                                        if (err && err.error && err.error.status === -1) {
                                             this.alertService.simpleAlert(err.error.message);
                                         } else {
                                             this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
                                         }
-                                        console.log(err);
+                                        console.log('err', err);
                                     }
                                 )
 

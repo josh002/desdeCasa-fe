@@ -40,13 +40,17 @@ export class AppointmentPage implements OnInit {
                 });;
                 console.log(this.bookings);
 
+
             })
             .catch(err => {
-                console.log(err);
+                console.log('err', err);
                 this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
                 this.router.navigate(['/tabs/home']);
             });
+
     }
+
+
 
     doCancel() {
         console.log('cancelar turno');
@@ -62,7 +66,7 @@ export class AppointmentPage implements OnInit {
                 }
             })
             .catch((err: any) => {
-                console.log(err);
+                console.log('err', err);
             });
     }
 

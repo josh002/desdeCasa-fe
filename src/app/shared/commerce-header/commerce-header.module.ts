@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CommerceHeaderPageRoutingModule } from './commerce-header-routing.module';
 
 import { CommerceHeaderPage } from './commerce-header.page';
+
 import { RouterModule } from '@angular/router';
 
 @NgModule({

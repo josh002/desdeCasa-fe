@@ -36,7 +36,7 @@ export class SchedulePage implements OnInit {
                 console.log('bookings', this.bookings)
             })
             .catch(err => {
-                console.log(err);
+                console.log('err', err);
                 this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
             });
 
