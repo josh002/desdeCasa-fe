@@ -1,6 +1,7 @@
 import * as crypto from 'crypto-js';
 import { environment } from 'src/environments/environment';
 import { HttpHeaders } from '@angular/common/http';
+import * as moment from 'moment';
 
 /**
  * Formato global para el datetime que debe ir a la Database
@@ -33,5 +34,13 @@ export const getTime = (datetime: string | Date) => {
     } else {
         console.log('the getTime() conversion wasnt neither string neither Date type');
     }
+    // Agregar un chequeo de isNan() por si el string no tiene el formato Correcto;
     return datetime
 }
+
+/**
+* Transforma un string HH:mm en un objeto Date
+* @param {string} time - HH:mm recibido del backend
+*/
+export const asDate = (time: string | Date) =>
+    new Date(moment(time, "HH:mm").toISOString());

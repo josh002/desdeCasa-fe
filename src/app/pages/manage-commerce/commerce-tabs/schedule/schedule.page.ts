@@ -12,6 +12,8 @@ export class SchedulePage implements OnInit {
 
     bookings: any[]
 
+    list = [7, 9, 11, 13, 15, 17, 19, 21, 22, 23];
+
     constructor(
         private authService: AuthService,
         private localStorageService: LocalStorageService
@@ -29,5 +31,6 @@ export class SchedulePage implements OnInit {
             )
 
     }
+
 
 }

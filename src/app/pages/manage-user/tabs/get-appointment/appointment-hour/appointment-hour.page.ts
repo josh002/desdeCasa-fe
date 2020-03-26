@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { AlertService } from 'src/app/services/alertService';
 
 @Component({
   selector: 'app-appointment-hour',
@@ -10,16 +11,21 @@ export class AppointmentHourPage implements OnInit {
 
   constructor(
     public alertController: AlertController,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
   }
+  
   async confirm() {
     const alert = await this.alertController.create({
       header: 'Turno en supermercado',
       subHeader: 'Don Pepe',
       message: 'Horario : 8:15',
-      buttons: ['OK']
+      cssClass:'alert-user',
+      buttons: [{
+          text:'Confirmar',          
+        }]
     });
 
     await alert.present();

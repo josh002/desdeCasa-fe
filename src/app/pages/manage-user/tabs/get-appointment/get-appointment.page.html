@@ -6,13 +6,39 @@
 </ion-header>
 
 <ion-content>
+    <ion-card>
+        <ion-list>
+            <h4 class="ion-text-center">Ver Turnos</h4>
+            <ng-container *ngFor="let hour of hours">
+                <ion-button *ngIf="(hour >= startHour1 && hour < endHour1) || (hour >= startHour2 && hour < endHour2)"
+                    color="light" expand="block" [routerLink]="['./appointment-hour', hour]"
+                    routerLinkActive="router-link-active">
+                    <span class="eon6-graycolor">{{hour}} a {{hour+1}}</span>
+                    <!-- <span class="eon6-graycolor">{{hour}} a {{hour+1}}</span> -->
+                </ion-button>
+            </ng-container>
 
-    <!-- <ion-item> -->
-    <ion-card-header>
+            <!-- <ion-item>
+                <ion-label>Notifications</ion-label>
+                <ion-select value="notifications" interface="action-sheet">
+                    <ion-select-option value="enable">Enable</ion-select-option>
+                    <ion-select-option value="mute">Mute</ion-select-option>
+                    <ion-select-option value="mute_week">Mute for a week</ion-select-option>
+                    <ion-select-option value="mute_year">Mute for a year</ion-select-option>
+                </ion-select>
+            </ion-item> -->
+
+        </ion-list>
+    </ion-card>
+</ion-content>
+
+
+<!-- <ion-item> -->
+<!-- <ion-card-header>
         <ion-card-title class=ion-text-center>Seleccionar Turno</ion-card-title>
     </ion-card-header>
 
-    <ion-list>
+    <ion-list lines="none">
 
         <ion-item>
             <ion-card class="my-shift" [routerLink]="['./appointment-hour']" expand="block">
@@ -33,7 +59,7 @@
         </ion-item>
 
     </ion-list>
-</ion-content>
+</ion-content> -->
 
 
 <!-- <ion-item>

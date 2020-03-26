@@ -6,7 +6,7 @@ import { AppointmentHourPage } from './appointment-hour.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: AppointmentHourPage
   }
 ];
