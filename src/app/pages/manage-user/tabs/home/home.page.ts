@@ -24,6 +24,7 @@ export class HomePage implements OnInit {
             .then(
                 commerces => {
                     this.commerces = commerces
+
                 }
             )
     }
