@@ -137,7 +137,26 @@ ion-popover {
           font-size: x-large;
      }
 }
+//estilos de alerta
+.alert-commerce {
+    h2{
+        text-align: center;
+        font-size: x-large !important;
+        
+    }
+    .alert-message{
+        font-size: x-large !important;
 
+    }
+    
+     text-align: center !important;
+     button {
+         border-radius: 20px !important;
+         background-color: var(--ion-color-primary)!important;
+         color: white !important;
+        
+     }
+    }  
 //arreglando teclado que sobrepasa el contenido
 // ion-modal {
 //     @media (min-height: 500px) {
