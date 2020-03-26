@@ -139,19 +139,19 @@ export class AppointmentHourPage implements OnInit {
         await alert.present();
     }
 
-    async confirm() {
-        const alert = await this.alertController.create({
-            header: `Turno en:`,
-            subHeader: this.commerce.shopName,
-            message: `Horario : ${this.hour}:${this.selectedMinutes}`,
-            cssClass: `alert-user`,
-            buttons: [
-                { text: `Revisar`, role: 'cancel', },
-                { text: `Confirmar`, handler: () => this.doSubmit() }
-            ]
-        });
+    // async confirm() {
+    //     const alert = await this.alertController.create({
+    //         header: `Turno en:`,
+    //         subHeader: this.commerce.shopName,
+    //         message: `Horario : ${this.hour}:${this.selectedMinutes}`,
+    //         cssClass: `alert-user`,
+    //         buttons: [
+    //             { text: `Revisar`, role: 'cancel', },
+    //             { text: `Confirmar`, handler: () => this.doSubmit() }
+    //         ]
+    //     });
 
-        await alert.present();
-    }
+    //     await alert.present();
+    // }
 
 }
