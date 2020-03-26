@@ -10,13 +10,27 @@
             <ion-card-title>Información personal</ion-card-title>
         </ion-card-header>
 
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title ion-text-left>Editar</ion-card-title>
+                <ion-toggle ion-text-right [(ngModel)]="disabled"></ion-toggle>
+            </ion-card-header>
+        </ion-card>
+
+
+
+
+
+
+
+
         <ion-card-content>
             <form #myForm="ngForm" (ngSubmit)="onSubmit()">
 
                 <ion-list>
                     <!-- Nombre -->
 
-                    <ion-item>
+                    <ion-item [(disabled)]="disabled">
                         <ion-label color="primary" position="floating">Nombre</ion-label>
                         <ion-input name="firstName" #firstName="ngModel" type="text" [(ngModel)]="client.firstName" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required>
                         </ion-input>
@@ -35,7 +49,7 @@
 
                     <!-- Apellido -->
 
-                    <ion-item>
+                    <ion-item [(disabled)]="disabled">
                         <ion-label color="primary" position="floating">Apellido</ion-label>
                         <ion-input name="lastName" #lastName="ngModel" type="text" [(ngModel)]="client.lastName" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required></ion-input>
                     </ion-item>
@@ -53,7 +67,7 @@
 
                     <!-- Mail -->
 
-                    <ion-item>
+                    <ion-item [(disabled)]="disabled">
                         <ion-label color="primary" autocomplete="off" position="floating">Direccion de correo electrónico</ion-label>
                         <ion-input #email="ngModel" [(ngModel)]="client.email" name="email" type="email" required pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}[ ]?"></ion-input>
                     </ion-item>
@@ -95,10 +109,9 @@
 
                     <!-- Dirección -->
 
-                    <ion-item>
+                    <ion-item [(disabled)]="disabled">
                         <ion-label color="primary" position="floating">Direccion</ion-label>
-                        <!-- <ion-input name="address" #address="ngModel" type="text" [(ngModel)]="client.address" required> -->
-                        <ion-input [(ngModel)]="client.address" name="address" type="text" required> </ion-input>
+                        <ion-input name="address" #address="ngModel" type="text" [(ngModel)]="client.address" required> </ion-input>
                     </ion-item>
 
                     <ng-container *ngIf="address.pristine">
@@ -118,24 +131,20 @@
                 </ion-list>
                 <!-- Submit Button -->
 
-                <div class="ion-padding">
-                    <ion-button type="ngSubmit" color="primary" shape="round" expand="block">
-                        <ion-label color="light"> Editar Perfil</ion-label>
-                    </ion-button>
-                    <div class="button-helper" lines="none">
-                        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
-                        <ion-label>Revise si le quedaron campos sin completar</ion-label>
+                <ng-container *ngIf="!disabled">
+                    <div class="ion-padding" (click)=desperateUser()>
+                        <ion-button type="ngSubmit" color="primary" shape="round" expand="block" [disabled]="myForm.form.invalid">
+                            <ion-label color="light"> Editar Perfil</ion-label>
+                        </ion-button>
+                        <div class="button-helper" lines="none" *ngIf="desperationLevel > 3">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Revise si le quedaron campos sin completar</ion-label>
+                        </div>
                     </div>
-                </div>
-                <!-- <div class="ion-padding" (click)=desperateUser()>
-                    <ion-button type="ngSubmit" color="primary" shape="round" expand="block" [disabled]="myForm.form.invalid">
-                        <ion-label color="light"> Editar Perfil</ion-label>
-                    </ion-button>
-                    <div class="button-helper" lines="none" *ngIf="desperationLevel > 3">
-                        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
-                        <ion-label>Revise si le quedaron campos sin completar</ion-label>
-                    </div>
-                </div> -->
+                </ng-container>
+
+
+
             </form>
 
         </ion-card-content>

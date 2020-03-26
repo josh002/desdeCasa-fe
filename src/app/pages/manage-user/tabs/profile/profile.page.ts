@@ -27,6 +27,8 @@ export class ProfilePage implements OnInit {
 
     desperationLevel: number;
 
+    disabled: boolean = true;
+
     constructor(
         private authService: AuthService,
         private loadingService: LoadingService,
@@ -35,10 +37,16 @@ export class ProfilePage implements OnInit {
         private localStorageService: LocalStorageService
     ) { }
 
+
+    desperateUser() {
+        this.desperationLevel = ++this.desperationLevel;
+        console.log(`Im this desperate: ${this.desperationLevel}`);
+    }
+
     ngOnInit() {
 
         this.client = this.localStorageService.getObject('client');
-        
+
     }
 
 
