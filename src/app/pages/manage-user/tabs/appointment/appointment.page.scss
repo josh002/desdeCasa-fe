@@ -8,6 +8,9 @@ h4 {
 }
 ion-content {
   text-align: center;
+  ion-card-header {
+    text-align: left;
+  }
 }
 .title-button {
   width: 90vw !important;
