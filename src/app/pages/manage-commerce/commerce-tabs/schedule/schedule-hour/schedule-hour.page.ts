@@ -7,6 +7,11 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./schedule-hour.page.scss'],
 })
 export class ScheduleHourPage implements OnInit {
+    //datos usados en este componente
+    name = 'Juan';
+    lastName ='Gonzales';
+    dni = '126548785';
+    myArray = [1,2,3,4,5,6,87,9,8,7]
 
   constructor(
     public alertController: AlertController,
@@ -19,7 +24,8 @@ export class ScheduleHourPage implements OnInit {
       header: 'Turno en supermercado',
       subHeader: 'Don Pepe',
       message: 'Horario : 8:15',
-      buttons: ['Cancelar Turno', 'OK']
+      cssClass: 'alert-commerce',
+      buttons: ['OK']
     });
     await alert.present();
   }

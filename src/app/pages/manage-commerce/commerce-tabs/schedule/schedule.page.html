@@ -8,41 +8,17 @@
     <ion-card>
         <ion-list>
             <h4 class="ion-text-center">Ver Turnos</h4>
-            <ion-button color="light" expand="block" [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active" >
-                <span class="eon6-graycolor">7 a 8</span>
-            </ion-button>
-            <ion-button color="light" expand="block" [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active" >
-                <span class="eon6-graycolor">8 a 9</span>
-            </ion-button>
-            <ion-button color="light" expand="block" [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active" >
-                <span class="eon6-graycolor">9 a 10</span>
-            </ion-button>
-            <ion-button color="light" expand="block" [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active" >
-                <span class="eon6-graycolor">11 a 12</span>
-            </ion-button>
-            <ion-button color="light" expand="block" [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active" >
-                <span class="eon6-graycolor">12 a 13</span>
-            </ion-button>
-            <ion-button color="light" expand="block" [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active" >
-                <span class="eon6-graycolor">14 a 15</span>
-            </ion-button>
-            <ion-button color="light" expand="block" [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active" >
-                <span class="eon6-graycolor">16 a 17</span>
-            </ion-button>
-            <ion-button color="light" expand="block" [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active" >
-                <span class="eon6-graycolor">18 a 19</span>
-            </ion-button>
-            <ion-button color="light" expand="block" [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active" >
-                <span class="eon6-graycolor">20 a 21</span>
-            </ion-button>
-            <ion-button color="light" expand="block" [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active" >
-                <span class="eon6-graycolor">21 a 22</span>
-            </ion-button>
-            <ion-button color="light" expand="block" [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active" >
-                <span class="eon6-graycolor">22 a 23</span>
-            </ion-button>          
-            
+            <ion-button *ngFor="let item of list" color="light" expand="block" [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active" >
+                <span class="eon6-graycolor">De {{item}}:00 a {{item + 1}}:00</span>
+            </ion-button>            
         </ion-list>
     </ion-card>
 
 </ion-content>
+<!-- <ion-item *ngFor="let item of list">
+    <ion-card class="my-shift" [routerLink]="['./schedule-hour']" expand="block" >
+        <ion-item>
+            <ion-label>{{item}} a {{item + 1}}</ion-label>
+        </ion-item>
+    </ion-card>
+</ion-item>   -->
