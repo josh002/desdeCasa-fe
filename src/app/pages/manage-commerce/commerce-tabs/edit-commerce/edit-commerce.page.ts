@@ -10,9 +10,9 @@ import { CommerceService } from 'src/app/services/commerce.service';
 import { Commerce, CommerceRegister, formatCommerce } from 'src/app/models/commerce.model';
 import { LocalStorageService } from 'src/app/services/localStorageService';
 @Component({
-  selector: 'app-edit-commerce',
-  templateUrl: './edit-commerce.page.html',
-  styleUrls: ['./edit-commerce.page.scss'],
+    selector: 'app-edit-commerce',
+    templateUrl: './edit-commerce.page.html',
+    styleUrls: ['./edit-commerce.page.scss'],
 })
 export class EditCommercePage implements OnInit {
     commerce: Commerce = {
@@ -34,6 +34,8 @@ export class EditCommercePage implements OnInit {
         id: null
     };
 
+    editInfo: boolean = true;
+    editconfig: boolean = true;
     // Esto está armado para propósitos de TESTING
     // commerce: CommerceRegister = {
     //     email: 'cmartinez@eon5.tech',
@@ -102,6 +104,9 @@ export class EditCommercePage implements OnInit {
                             (resp: any) => {
                                 this.loadingService.dismissLoading();
                                 if (resp && resp.status === 0) {
+                                    this.localStorageService.setObject('commerce', this.commerce);
+                                    this.editInfo = true;
+                                    this.editconfig = true;
                                     const { message } = resp;
                                     this.alertService.headerAlert('Exito', message)
                                     this.router.navigate(['/manage-commerce/commerce-tabs/schedule'])
@@ -184,6 +189,15 @@ export class EditCommercePage implements OnInit {
         }
 
         return options;
+    }
+
+    changeDisabledinfo() {
+        this.editInfo = !this.editInfo
+        this.commerce = this.localStorageService.getObject('commerce');
+    }
+    changeDisabledconfig() {
+        this.editconfig = !this.editconfig
+        this.commerce = this.localStorageService.getObject('commerce');
     }
 
 }
