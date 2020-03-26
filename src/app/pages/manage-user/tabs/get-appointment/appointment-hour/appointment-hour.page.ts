@@ -14,6 +14,7 @@ export class AppointmentHourPage implements OnInit {
 
   ngOnInit() {
   }
+  
   async confirm() {
     const alert = await this.alertController.create({
       header: 'Turno en supermercado',
