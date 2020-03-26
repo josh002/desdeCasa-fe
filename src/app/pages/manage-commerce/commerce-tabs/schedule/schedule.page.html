@@ -4,16 +4,19 @@
 </ion-header>
 
 <ion-content>
-
     <ion-card>
-        <ion-list>
-            <h4 class="ion-text-center">Ver Turnos</h4>
-            <ion-button *ngFor="let item of list" color="light" expand="block" [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active" >
-                <span class="eon6-graycolor">De {{item}}:00 a {{item + 1}}:00</span>
-            </ion-button>            
-        </ion-list>
+        <ion-card-header>
+            <ion-card-subtitle>Turnos</ion-card-subtitle>
+            <ion-card-title>Lista de Turnos</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list>
+                <ion-button *ngFor="let item of list" color="light" expand="block" [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active" >
+                    <span class="eon6-graycolor">De {{item}}:00 a {{item + 1}}:00</span>
+                </ion-button>            
+            </ion-list>
+        </ion-card-content>
     </ion-card>
-
 </ion-content>
 <!-- <ion-item *ngFor="let item of list">
     <ion-card class="my-shift" [routerLink]="['./schedule-hour']" expand="block" >

@@ -1,31 +1,32 @@
 ion-list {
-     padding-left: 15%;
-     padding-right: 15%;
+  padding-left: 15%;
+  padding-right: 15%;
 }
 
 h4 {
-     font-weight: bolder;
+  font-weight: bolder;
 }
 ion-content {
-     text-align: center;
+  text-align: center;
+  ion-card-header {
+    text-align: left;
+  }
 }
 .title-button {
-     width: 90vw !important;    
-     margin-top: 2vh;
-     margin-bottom: 2vh;
+  width: 90vw !important;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
 }
 ion-card {
-     ion-card-header {
-          text-align: center;
-          ion-card-title,
-          ion-card-subtitle {
-               text-transform: capitalize;
-          }
-     }
-     ion-button{
-         margin-bottom: 2vh;
-         padding-right: 5%;
-         padding-left: 5%;
-     }
+  ion-card-header {
+    ion-card-title,
+    ion-card-subtitle {
+      text-transform: capitalize;
+    }
+  }
+  ion-button {
+    margin-bottom: 2vh;
+    padding-right: 5%;
+    padding-left: 5%;
+  }
 }
-
