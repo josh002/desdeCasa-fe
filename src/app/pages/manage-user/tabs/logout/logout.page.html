@@ -6,8 +6,8 @@
     <ion-card *ngIf='client'>
 
         <ion-card-header>
-            <ion-card-subtitle>cuenta</ion-card-subtitle>
-            <ion-card-title class="ion-text-center">{{client.firstName}}</ion-card-title>
+            <ion-card-subtitle>Cuenta</ion-card-subtitle>
+            <ion-card-title class="ion-text-center">{{client.firstName | titlecase}}</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
