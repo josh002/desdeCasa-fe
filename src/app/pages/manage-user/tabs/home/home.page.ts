@@ -18,13 +18,11 @@ export class HomePage implements OnInit {
     ) { }
 
     ngOnInit() {
-        // const userId = this.localStorageService.getObject('userId');
-        const userId = 13;
+        const client = this.localStorageService.getObject('client');
 
-        this.authService.getCommercesByUser(userId)
+        this.authService.getCommercesByUser(client.id)
             .then(
                 commerces => {
-                    // debugger;
                     this.commerces = commerces
                 }
             )

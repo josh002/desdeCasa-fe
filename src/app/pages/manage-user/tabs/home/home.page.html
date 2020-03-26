@@ -26,6 +26,12 @@
 </ion-header>
 <ion-content>
 
+    <!-- modelo de que pasa si no hay productos -->
+    <!-- <div *ngIf="products.length == 0" class="no-items-yet">
+        <h4 class="eon6-graycolor">No tienes productos publicados</h4>
+        <ion-icon name="card"></ion-icon>
+    </div> -->
+
     <div *ngIf="commerces && commerces.length > 0" class="cards-container">
         <ion-card *ngFor="let commerce of commerces">
             <ion-card-header>

@@ -20,8 +20,7 @@
                     <ion-item>
                         <ion-label color="primary" autocomplete="off" position="floating">Direccion de correo electrónico
                         </ion-label>
-                        <!-- <ion-input name="email" #email="ngModel" type="email" [(ngModel)]="client.email" required pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}[ ]?"></ion-input> -->
-                        <ion-input name="email" type="email" required pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}[ ]?"></ion-input>
+                        <ion-input [(ngModel)]="client.email" name="email" type="email" required pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}[ ]?"></ion-input>
                     </ion-item>
 
                     <!-- <ng-container *ngIf="email.invalid && ((email.dirty && email.touched) || desperationLevel > 3)">
@@ -37,12 +36,11 @@
 
                     <!-- Contraseña -->
 
-                    <ion-item>
+                    <!-- <ion-item>
                         <ion-label color="primary" position="floating">Contraseña</ion-label>
-                        <!-- <ion-input name="password" #password="ngModel" minlength="8" type="password" pattern="[A-Za-z0-9._-]+" [(ngModel)]="client.password" required> -->
-                        <ion-input name="password" minlength="8" type="password" pattern="[A-Za-z0-9._-]+" required>
+                        <ion-input [(ngModel)]="client.password" name="password" minlength="8" type="password" pattern="[A-Za-z0-9._-]+" required>
                         </ion-input>
-                    </ion-item>
+                    </ion-item> -->
                     <!-- <ng-container *ngIf="password.invalid && ((password.dirty && password.touched) || desperationLevel > 3)">
                         <div class="ux-alert" lines="none" *ngIf="password.errors && password.errors.required">
                             <ion-icon slot="start" name="information-circle-outline"></ion-icon>
@@ -64,7 +62,7 @@
                     <ion-item>
                         <ion-label color="primary" position="floating">Nombre</ion-label>
                         <!-- <ion-input name="firstName" #firstName="ngModel" type="text" [(ngModel)]="client.firstName" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required> -->
-                        <ion-input name="firstName" value="emilio" type="text" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required>
+                        <ion-input [(ngModel)]="client.firstName" name="firstName" value="emilio" type="text" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required>
                         </ion-input>
                     </ion-item>
 
@@ -84,7 +82,7 @@
                     <ion-item>
                         <ion-label color="primary" position="floating">Apellido</ion-label>
                         <!-- <ion-input name="lastName" #lastName="ngModel" type="text" [(ngModel)]="client.lastName" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required> -->
-                        <ion-input name="lastName" value="Emilio" type="text" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required>
+                        <ion-input [(ngModel)]="client.lastName" name="lastName" value="Emilio" type="text" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required>
                         </ion-input>
                     </ion-item>
 
@@ -106,7 +104,7 @@
                     <ion-item>
                         <ion-label color="primary" position="floating">Direccion</ion-label>
                         <!-- <ion-input name="address" #address="ngModel" type="text" [(ngModel)]="client.address" required> -->
-                        <ion-input name="address" type="text" required>
+                        <ion-input [(ngModel)]="client.address" name="address" type="text" required>
                         </ion-input>
                     </ion-item>
 
