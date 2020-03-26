@@ -6,8 +6,8 @@
 </ion-header>
 
 <ion-content fullscreen>
-    <form #myForm="ngForm" (ngSubmit)="onSubmit()">
-        <ion-slides pager="true">
+    <form #myForm="ngForm" (ngSubmit)="onSubmit()" style="height: 100%;">
+        <ion-slides style="height: 84%;" pager="true">
             <!-- Datos Personales Dueño -->
             <ion-slide>
                 <ion-content fullscreen>
@@ -34,7 +34,7 @@
                         </ng-container>
 
                         <!-- Contraseña -->
-                        <ion-item>
+                        <!-- <ion-item>
                             <ion-label color="primary" position="floating">Contraseña</ion-label>
                             <ion-input name="password" #password="ngModel" minlength="8" type="password"
                                 pattern="[A-Za-z0-9._-]+" [(ngModel)]="commerce.password" required>
@@ -54,7 +54,7 @@
                                 <ion-icon slot="start" name="information-circle-outline"></ion-icon>
                                 <ion-label>Solo letras, números, guiones y puntos</ion-label>
                             </div>
-                        </ng-container>
+                        </ng-container> -->
 
                         <!-- Nombre del comercio -->
                         <ion-item>
@@ -272,7 +272,7 @@
 
         <div class="ion-padding" (click)=desperateUser()>
             <ion-button type="ngSubmit" color="primary" shape="round" expand="block" [disabled]="myForm.form.invalid">
-                <ion-label color="light">Crear cuenta</ion-label>
+                <ion-label color="light">Editar cuenta</ion-label>
             </ion-button>
             <div class="button-helper" lines="none" *ngIf="desperationLevel > 3">
                 <ion-icon slot="start" name="information-circle-outline"></ion-icon>

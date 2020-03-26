@@ -8,13 +8,14 @@ import { UtilsService } from 'src/app/services/utils.service';
 // import { GeolocationService } from 'src/app/services/geolocationService';
 import { CommerceService } from 'src/app/services/commerce.service';
 import { Commerce, CommerceRegister, formatCommerce } from 'src/app/models/commerce.model';
+import { LocalStorageService } from 'src/app/services/localStorageService';
 @Component({
   selector: 'app-edit-commerce',
   templateUrl: './edit-commerce.page.html',
   styleUrls: ['./edit-commerce.page.scss'],
 })
 export class EditCommercePage implements OnInit {
-    commerce: CommerceRegister = {
+    commerce: Commerce = {
         email: '',
         cuitCuil: '',
         password: '',
@@ -28,6 +29,9 @@ export class EditCommercePage implements OnInit {
         openTime2: new Date('1994-12-15T16:00').toISOString(),
         closeTime2: new Date('1994-12-15T20:00').toISOString(),
         shoppingMinutes: undefined,
+        latitude: null,
+        longitude: null,
+        id: null
     };
 
     // Esto está armado para propósitos de TESTING
@@ -65,6 +69,7 @@ export class EditCommercePage implements OnInit {
         private utilsService: UtilsService,
         public navCtrl: NavController,
         public loadingService: LoadingService,
+        public localStorageService: LocalStorageService,
         public popoverController: PopoverController,
         public pickerController: PickerController
     ) { }
@@ -78,6 +83,8 @@ export class EditCommercePage implements OnInit {
         for (var i = 1; i < 60; i++) {
             this.clientsMax[0].push(i);
         }
+
+        this.commerce = this.localStorageService.getObject('commerce');
     }
 
     desperateUser() {
@@ -90,14 +97,14 @@ export class EditCommercePage implements OnInit {
         this.loadingService.presentLoading("Cargando")
             .then(
                 () => {
-                    this.commerceService.register(formatCommerce(this.commerce))
+                    this.commerceService.editCommerce(this.commerce)
                         .then(
                             (resp: any) => {
                                 this.loadingService.dismissLoading();
                                 if (resp && resp.status === 0) {
                                     const { message } = resp;
                                     this.alertService.headerAlert('Exito', message)
-                                    this.router.navigate(['/start'])
+                                    this.router.navigate(['/manage-commerce/commerce-tabs/schedule'])
                                 } else {
                                     if (resp.error) {
                                         this.alertService.simpleAlert(resp.error.message)
