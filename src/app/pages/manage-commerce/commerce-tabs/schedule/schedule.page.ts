@@ -12,18 +12,16 @@ export class SchedulePage implements OnInit {
 
     bookings: any[]
 
-    list = [7, 9, 11, 13, 15, 17, 19, 21, 22, 23];
-
     constructor(
         private authService: AuthService,
         private localStorageService: LocalStorageService
     ) { }
 
     ngOnInit() {
-
+        
         const currentCommerce: Commerce = this.localStorageService.getObject('commerce');
 
-        this.authService.getBookingsByCommerce(currentCommerce.id)
+        this.authService.getBookingsByCommerce(currentCommerce)
             .then(
                 resp => {
                     debugger;
