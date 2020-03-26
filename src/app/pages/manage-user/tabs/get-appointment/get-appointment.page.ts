@@ -30,14 +30,15 @@ export class GetAppointmentPage implements OnInit {
         private route: ActivatedRoute,
     ) { }
 
-    ngOnInit() {
-        // Traer por path params
-        this.id = 18;
+    ngOnInit(){}
+
+    ionViewWillEnter() {
         for (var i = 0; i < 24; i++) this.hours.push(i);
 
         this.route.paramMap.subscribe(
             (params: Params) => {
                 const commerceId: number = params.params.id;
+                localStorage.setItem('commerceId', `${commerceId}`);
 
                 this.commerceService.getCommerceById(commerceId)
                     .then((resp: any) => {

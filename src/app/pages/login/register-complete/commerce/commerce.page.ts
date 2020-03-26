@@ -52,7 +52,7 @@ export class CommercePage implements OnInit {
 
     // Arreglo de posibles duraciones de turnos
     shiftDurations: number[][] = [
-        [10, 20, 30, 40, 50, 60]
+        [10, 20, 30, 60]
     ];
     // Arreglo de posible cantidad de clientes
     clientsMax: number[][] = [

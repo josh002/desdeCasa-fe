@@ -2,6 +2,7 @@ import * as crypto from 'crypto-js';
 import { environment } from 'src/environments/environment';
 import { HttpHeaders } from '@angular/common/http';
 import * as moment from 'moment';
+var numeral = require('numeral');
 
 /**
  * Formato global para el datetime que debe ir a la Database
@@ -44,3 +45,11 @@ export const getTime = (datetime: string | Date) => {
 */
 export const asDate = (time: string | Date) =>
     new Date(moment(time, "HH:mm").toISOString());
+
+/**
+* Formatea un numero en '00' (3 -> 03)
+* @param {number} myNumber
+*/
+export const formatHHmm = (myNumber :number) =>
+    numeral(myNumber).format('00');
+

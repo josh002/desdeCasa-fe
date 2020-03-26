@@ -140,71 +140,63 @@ ion-popover {
 //estilos de alerta
 
 // comercio
-.alert-commerce { 
-    h2{
-        text-align: center;
-        font-size: x-large !important;
-        
-    }
-    .alert-message{
-        font-size: x-large !important;
-
-    }
-    
-     text-align: center !important;
-     button {
-         border-radius: 20px !important;
-         background-color: var(--ion-color-primary)!important;
-         color: white !important;
-         text-transform: capitalize !important;
-        
+.alert-commerce {
+     h2 {
+          text-align: center;
+          font-size: x-large !important;
      }
-} 
-//comercio
-.alert-user{
-    h2{
-        text-align: center;
-        font-size: x-large !important;
-        
-    }
-    .alert-message{
-        font-size: x-large !important;
+     .alert-message {
+          font-size: x-large !important;
+     }
 
-    }
-    
      text-align: center !important;
      button {
-         border-radius: 20px !important;
-         background-color: var(--ion-color-primary)!important;
-         color: white !important;
-         text-transform: capitalize !important;
-        
+          border-radius: 20px !important;
+          background-color: var(--ion-color-primary) !important;
+          color: white !important;
+          text-transform: capitalize !important;
      }
 }
-.alert-query{
-    h2{
-        text-align: center;
-        font-size: x-large !important;
-        
-    }
-    .alert-message{
-        font-size: x-large !important;
+//comercio
+.alert-user {
+     h2 {
+          text-align: center;
+          font-size: x-large !important;
+     }
+     .alert-message {
+          font-size: x-large !important;
+     }
 
-    }
-    
      text-align: center !important;
      button {
-         border-radius: 20px !important;
-         background-color: var(--ion-color-primary)!important;
-         color: white !important;
-         text-transform: capitalize !important;
-        
+        //   border-radius: 20px !important;
+        //   background-color: var(--ion-color-primary) !important;
+        //   color: white !important;
+          text-transform: capitalize !important;
      }
-     .cancel-button{
-        background-color: var(--ion-color-danger)!important;
-        text-transform: capitalize !important;        
+}
+
+.alert-query {
+     h2 {
+          text-align: center;
+          font-size: x-large !important;
      }
-} 
+     .alert-message {
+          font-size: x-large !important;
+     }
+
+     text-align: center !important;
+     button {
+          border-radius: 20px !important;
+          background-color: var(--ion-color-primary) !important;
+          color: white !important;
+          text-transform: capitalize !important;
+     }
+     .cancel-button {
+          background-color: var(--ion-color-danger) !important;
+          text-transform: capitalize !important;
+     }
+}
 //arreglando teclado que sobrepasa el contenido
 // ion-modal {
 //     @media (min-height: 500px) {
