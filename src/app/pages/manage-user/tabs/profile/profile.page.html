@@ -5,29 +5,60 @@
 <ion-content>
     <ion-card>
 
-
         <ion-card-header>
             <ion-card-subtitle>Cuenta</ion-card-subtitle>
             <ion-card-title>Información personal</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
-
             <form #myForm="ngForm" (ngSubmit)="onSubmit()">
 
                 <ion-list>
+                    <!-- Nombre -->
+
+                    <ion-item>
+                        <ion-label color="primary" position="floating">Nombre</ion-label>
+                        <ion-input name="firstName" #firstName="ngModel" type="text" [(ngModel)]="client.firstName" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required>
+                        </ion-input>
+                    </ion-item>
+
+                    <ng-container *ngIf="firstName.invalid && ((firstName.dirty && firstName.touched) || desperationLevel > 3)">
+                        <div class="ux-alert" lines="none" *ngIf="firstName.errors && firstName.errors.required">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Campo Requerido</ion-label>
+                        </div>
+                        <div class="ux-alert" lines="none" *ngIf="firstName.errors && firstName.errors.pattern">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Solo letras y espacios</ion-label>
+                        </div>
+                    </ng-container>
+
+                    <!-- Apellido -->
+
+                    <ion-item>
+                        <ion-label color="primary" position="floating">Apellido</ion-label>
+                        <ion-input name="lastName" #lastName="ngModel" type="text" [(ngModel)]="client.lastName" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required></ion-input>
+                    </ion-item>
+
+                    <ng-container *ngIf="lastName.invalid && ((lastName.dirty && lastName.touched) || desperationLevel > 3)">
+                        <div class="ux-alert" lines="none" *ngIf="lastName.errors && lastName.errors.required">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Campo Requerido</ion-label>
+                        </div>
+                        <div class="ux-alert" lines="none" *ngIf="lastName.errors && lastName.errors.pattern">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Solo letras y espacios</ion-label>
+                        </div>
+                    </ng-container>
 
                     <!-- Mail -->
 
                     <ion-item>
-                        <ion-label color="primary" autocomplete="off" position="floating">Direccion de correo
-                            electrónico
-                        </ion-label>
-                        <ion-input [(ngModel)]="client.email" name="email" type="email" required
-                            pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}[ ]?"></ion-input>
+                        <ion-label color="primary" autocomplete="off" position="floating">Direccion de correo electrónico</ion-label>
+                        <ion-input #email="ngModel" [(ngModel)]="client.email" name="email" type="email" required pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}[ ]?"></ion-input>
                     </ion-item>
 
-                    <!-- <ng-container *ngIf="email.invalid && ((email.dirty && email.touched) || desperationLevel > 3)">
+                    <ng-container *ngIf="email.invalid && ((email.dirty && email.touched) || desperationLevel > 3)">
                         <div class="ux-alert" lines="none" *ngIf="email.errors && email.errors.required">
                             <ion-icon slot="start" name="information-circle-outline"></ion-icon>
                             <ion-label>Campo Requerido</ion-label>
@@ -36,7 +67,7 @@
                             <ion-icon slot="start" name="information-circle-outline"></ion-icon>
                             <ion-label>No parece ser una dirección válida</ion-label>
                         </div>
-                    </ng-container> -->
+                    </ng-container>
 
                     <!-- Contraseña -->
 
@@ -60,51 +91,6 @@
                         </div>
                     </ng-container> -->
 
-
-                    <!-- Nombre -->
-
-                    <ion-item>
-                        <ion-label color="primary" position="floating">Nombre</ion-label>
-                        <!-- <ion-input name="firstName" #firstName="ngModel" type="text" [(ngModel)]="client.firstName" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required> -->
-                        <ion-input [(ngModel)]="client.firstName" name="firstName" value="emilio" type="text"
-                            pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?"
-                            required>
-                        </ion-input>
-                    </ion-item>
-
-                    <!-- <ng-container *ngIf="firstName.invalid && ((firstName.dirty && firstName.touched) || desperationLevel > 3)">
-                    <div class="ux-alert" lines="none" *ngIf="firstName.errors && firstName.errors.required">
-                        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
-                        <ion-label>Campo Requerido</ion-label>
-                    </div>
-                    <div class="ux-alert" lines="none" *ngIf="firstName.errors && firstName.errors.pattern">
-                        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
-                        <ion-label>Solo letras y espacios</ion-label>
-                    </div>
-                    </ng-container> -->
-
-                    <!-- Apellido -->
-
-                    <ion-item>
-                        <ion-label color="primary" position="floating">Apellido</ion-label>
-                        <!-- <ion-input name="lastName" #lastName="ngModel" type="text" [(ngModel)]="client.lastName" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required> -->
-                        <ion-input [(ngModel)]="client.lastName" name="lastName" value="Emilio" type="text"
-                            pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?"
-                            required>
-                        </ion-input>
-                    </ion-item>
-
-                    <!-- <ng-container *ngIf="lastName.invalid && ((lastName.dirty && lastName.touched) || desperationLevel > 3)">
-                    <div class="ux-alert" lines="none" *ngIf="lastName.errors && lastName.errors.required">
-                        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
-                        <ion-label>Campo Requerido</ion-label>
-                    </div>
-                    <div class="ux-alert" lines="none" *ngIf="lastName.errors && lastName.errors.pattern">
-                        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
-                        <ion-label>Solo letras y espacios</ion-label>
-                    </div>
-                    </ng-container> -->
-
                     <!-- DNI -->
 
                     <!-- Dirección -->
@@ -112,23 +98,22 @@
                     <ion-item>
                         <ion-label color="primary" position="floating">Direccion</ion-label>
                         <!-- <ion-input name="address" #address="ngModel" type="text" [(ngModel)]="client.address" required> -->
-                        <ion-input [(ngModel)]="client.address" name="address" type="text" required>
-                        </ion-input>
+                        <ion-input [(ngModel)]="client.address" name="address" type="text" required> </ion-input>
                     </ion-item>
 
-                    <!-- <ng-container *ngIf="address.pristine">
-                    <div class="ux-warning" lines="none">
-                        <ion-icon slot="start" name="warning"></ion-icon>
-                        <ion-label>Ajustá tu dirección</ion-label>
-                    </div>
-                    </ng-container> -->
+                    <ng-container *ngIf="address.pristine">
+                        <div class="ux-warning" lines="none">
+                            <ion-icon slot="start" name="warning"></ion-icon>
+                            <ion-label>Ajustá tu dirección</ion-label>
+                        </div>
+                    </ng-container>
 
-                    <!-- <ng-container *ngIf="address.invalid && ((address.dirty && address.touched) || desperationLevel > 3)">
-                    <div class="ux-alert" lines="none" *ngIf="address.errors && address.errors.required">
-                        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
-                        <ion-label>Campo Requerido</ion-label>
-                    </div>
-                    </ng-container> -->
+                    <ng-container *ngIf="address.invalid && ((address.dirty && address.touched) || desperationLevel > 3)">
+                        <div class="ux-alert" lines="none" *ngIf="address.errors && address.errors.required">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Campo Requerido</ion-label>
+                        </div>
+                    </ng-container>
 
                 </ion-list>
                 <!-- Submit Button -->
