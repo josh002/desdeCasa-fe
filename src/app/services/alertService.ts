@@ -11,7 +11,8 @@ export class AlertService {
 
     simpleAlert = (message) => {
         this.alertController.create({
-            message, buttons: ['OK']
+            message, buttons: ['OK'],
+            cssClass:'alert-user',
         })
             .then(alert => {
                 alert.present();
@@ -21,7 +22,8 @@ export class AlertService {
 
     headerAlert = (header, message) => {
         this.alertController.create({
-            header, message, buttons: ['OK']
+            header, message, buttons: ['OK'],
+            cssClass:'alert-user',
         })
             .then(alert => {
                 alert.present();

@@ -169,10 +169,11 @@ ion-popover {
 
      text-align: center !important;
      button {
-        //   border-radius: 20px !important;
-        //   background-color: var(--ion-color-primary) !important;
-        //   color: white !important;
+          border-radius: 20px !important;
+          background-color: var(--ion-color-primary) !important;
+          color: white !important;
           text-transform: capitalize !important;
+        //   background-color: blue !important;
      }
 }
 
