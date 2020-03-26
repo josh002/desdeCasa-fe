@@ -1,5 +1,6 @@
 <ion-header>
-    <app-commerce-header></app-commerce-header>
+    <!-- <app-commerce-header></app-commerce-header> -->
+    <app-baby-header></app-baby-header>
 </ion-header>
 
 <ion-content>
@@ -10,9 +11,10 @@
         </ion-card-header>
         <ion-card-content>
             <ion-list>
-                <ion-button *ngFor="let item of list" color="light" expand="block" [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active" >
+                <ion-button *ngFor="let item of list" color="light" expand="block" [routerLink]="['./schedule-hour']"
+                    routerLinkActive="router-link-active">
                     <span class="eon6-graycolor">De {{item}}:00 a {{item + 1}}:00</span>
-                </ion-button>            
+                </ion-button>
             </ion-list>
         </ion-card-content>
     </ion-card>
