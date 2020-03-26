@@ -25,6 +25,11 @@ export class AuthService {
         return this.httpClient.post(`${environment.WS_URL}/login`, { email, password }).toPromise()
     }
 
+    loginCommerce = (email: string, password: string, encrypt: boolean = true) => {
+        if (encrypt) { password = encryptPass(password); }
+        return this.httpClient.post(`${environment.WS_URL}/commerce/login`, { email, password }).toPromise()
+    }
+
     register = (client: any) => {
         client.password = encryptPass(client.password);
         console.log(client.password);
@@ -33,7 +38,7 @@ export class AuthService {
 
 
     editUser = (client: Client) => {
-        return this.httpClient.put(`${environment.WS_URL}/user`, client, appJsonHeader).toPromise()
+        return this.httpClient.put(`${environment.WS_URL}/user/${client.id}`, client, appJsonHeader).toPromise()
     }
 
     /**
@@ -56,5 +61,20 @@ export class AuthService {
     }> =>
         this.httpClient
             .get(`${environment.WS_URL}/commerce/user/${userId}`)
+            .toPromise().then((resp: any) => resp.result)
+
+    /**
+     * Dado un comercio retorna sus reservas
+     */
+    getBookingsByCommerce = (commerceId: number): Promise<{
+        distance: number,
+        id: number,
+        latitude: number,
+        longitude: number,
+        shopName: string,
+        address: string
+    }> =>
+        this.httpClient
+            .get(`${environment.WS_URL}/booking?commerceId=${commerceId}`)
             .toPromise().then((resp: any) => resp.result)
 }

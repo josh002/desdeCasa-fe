@@ -8,6 +8,7 @@ import { AlertService } from 'src/app/services/alertService';
 import { AccountService } from 'src/app/services/account.service';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { Commerce } from 'src/app/models/commerce.model';
 
 @Component({
     selector: 'app-start',
@@ -76,20 +77,39 @@ export class StartPage implements OnInit {
                                     console.log(resp);
                                     const client = new Client(resp.result.queryResolve[0]);
                                     this.localStorageService.setObject('client', client);
-                                    this.accountService.update(client);
+                                    // this.accountService.update(client);
                                     this.router.navigate(['/tabs/home']);
                                 }
                             }
                         )
                         .catch(err => {
-                            this.password = '';
-                            this.loadingService.dismissLoading();
-                            if (err.error.status === -1) {
-                                this.alertService.simpleAlert(err.error.message);
-                            } else {
-                                this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
-                            }
-                            console.log(err);
+
+                            this.authService.loginCommerce(this.email, this.password)
+                                .then(
+                                    (resp: any) => {
+                                        this.loadingService.dismissLoading();
+                                        if (resp && resp.status == 0) {
+                                            console.log(resp);
+                                            const commerce = new Commerce(resp.result.queryResolve[0]);
+                                            this.localStorageService.setObject('commerce', commerce);
+                                            
+                                            this.router.navigate(['/manage-commerce/commerce-tabs/schedule']);
+                                        }
+                                    }
+                                )
+                                .catch(
+                                    err => {
+                                        this.password = '';
+                                        this.loadingService.dismissLoading();
+                                        if (err.error.status === -1) {
+                                            this.alertService.simpleAlert(err.error.message);
+                                        } else {
+                                            this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
+                                        }
+                                        console.log(err);
+                                    }
+                                )
+
                         })
                 }
             );
