@@ -4,17 +4,23 @@
 </ion-header>
 
 <ion-content>
-    <ion-button class="button-title" color="light" expand="block" >
-        <span class="eon6-graycolor">Clientes</span>
-    </ion-button>
-    <ion-card *ngFor="let item of myArray">
-        <ion-card-header>
-            <ion-card-title class="eon6-graycolor">Nombre: {{name}} {{lastName}}</ion-card-title>
-            <ion-card-subtitle class="eon6-graycolor">Dni: {{dni}}</ion-card-subtitle>            
+    <ion-card>
+        <ion-card-header class="card-header">
+            <ion-card-subtitle>Clientes</ion-card-subtitle>
+            <ion-card-title>Lista de clientes</ion-card-title>
         </ion-card-header>
-        <ion-button  expand="block" (click)="myAppointment()">
-            Detalles
-        </ion-button>
+        <ion-card-content>
+            <ion-card *ngFor="let item of myArray" class="client-card">
+                <ion-card-header>
+                    <ion-card-title class="eon6-graycolor">Nombre: {{name}} {{lastName}}</ion-card-title>
+                    <ion-card-subtitle class="eon6-graycolor">Dni: {{dni}}</ion-card-subtitle>            
+                </ion-card-header>
+                <ion-button  expand="block" (click)="myAppointment()">
+                    Detalles
+                </ion-button>
+            </ion-card>
+        </ion-card-content>
     </ion-card>
+    
     
 </ion-content>
