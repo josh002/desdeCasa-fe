@@ -78,8 +78,8 @@ export class AppointmentPage implements OnInit {
             message: `${onlyDate(booking.created)} - ${booking.description.slice(0, 5)}`,
             cssClass: `alert-query`,
             buttons: [
-                { text: `Cancelar Turno`, role: 'cancel', handler: () => this.youSure() },
-                { text: `Cerrar` }
+                { text: `Cancelar Turno`, cssClass:"cancel-button", role: 'cancel', handler: () => this.youSure() },
+                { text: `Cerrar`, cssClass:"accept-button" }
             ]
         });
 
@@ -91,10 +91,10 @@ export class AppointmentPage implements OnInit {
             header: `¿Desea cancelar este turno?`,
             // subHeader: booking.address,
             // message: `${onlyDate(booking.created)} - ${booking.description.slice(0,5)}`,
-            cssClass: `alert-user`,
+            cssClass: `alert-query`,
             buttons: [
-                { text: `No`, role: 'cancel', },
-                { text: `Cancelar`, handler: () => this.doCancel() }
+                { text: `No`, role: 'cancel',cssClass:"accept-button" },
+                { text: `Si`,cssClass:"cancel-button-yes", handler: () => this.doCancel() }
             ]
         });
 
