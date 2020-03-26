@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,7 +14,8 @@ import { CommerceTabsPage } from './commerce-tabs.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CommerceTabsPageRoutingModule
+    CommerceTabsPageRoutingModule,
+    SharedModule
   ],
   declarations: [CommerceTabsPage]
 })
