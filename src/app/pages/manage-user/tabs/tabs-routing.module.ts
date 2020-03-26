@@ -24,14 +24,14 @@ const routes: Routes = [
                 path: 'get-appointment/:id',
                 loadChildren: () => import('./get-appointment/get-appointment.module').then(m => m.GetAppointmentPageModule)
             },
-            {
-                path: 'logout',
-                loadChildren: () => import('./logout/logout.module').then(m => m.LogoutPageModule)
-            },
+            
 
         ]
     },
-
+    {
+        path: 'logout',
+        loadChildren: () => import('./logout/logout.module').then(m => m.LogoutPageModule)
+    },
 
 
 
