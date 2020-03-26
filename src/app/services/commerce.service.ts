@@ -33,9 +33,9 @@ export class CommerceService {
         this.httpClient.post<DefaultResponse<any>>(`${environment.WS_URL}/reset-password`, { email }, appJsonHeader).toPromise()
 
     editCommerce = (commerce: Commerce) => {
-        let params = new HttpParams();
-        params = params.append('id', `${commerce.id}`);
-        return this.httpClient.put(`${environment.WS_URL}/commerce`, commerce, appJsonHeader).toPromise()
+        // let params = new HttpParams();
+        // params = params.append('id', `${commerce.id}`);
+        return this.httpClient.put(`${environment.WS_URL}/commerce/${commerce.id}`, commerce, appJsonHeader).toPromise()
     }
 
     getCommerce = (
