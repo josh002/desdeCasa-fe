@@ -22,7 +22,13 @@
         </ion-card-header>
         <ion-card-content>
             <ion-list>
-                <ion-button *ngFor="let booking of bookings" color="light" expand="block" [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active">
+                <!-- <ion-card *ngIf="bookings && bookings.length == 0" class="no-items-yet">
+                    <ion-card-header>
+                        <ion-card-title>No tienes turnos</ion-card-title>
+                    </ion-card-header>
+                </ion-card> -->
+                <ion-button *ngFor="let booking of bookings" color="light" expand="block"
+                    [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active">
                     <span class="eon6-graycolor">De {{item}}:00 a {{item + 1}}:00</span>
                 </ion-button>
             </ion-list>
