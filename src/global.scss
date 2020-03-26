@@ -194,6 +194,8 @@ ion-popover {
           text-transform: capitalize !important;
      }
      .cancel-button {
+            display: block !important;
+          float: left !important;
           background-color: var(--ion-color-danger) !important;
           text-transform: capitalize !important;
      }
