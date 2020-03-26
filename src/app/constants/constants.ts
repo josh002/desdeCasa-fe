@@ -2,7 +2,8 @@ import * as crypto from 'crypto-js';
 import { environment } from 'src/environments/environment';
 import { HttpHeaders } from '@angular/common/http';
 import * as moment from 'moment';
-var numeral = require('numeral');
+const numeral = require('numeral');
+// const numerals = require('numeral')
 
 /**
  * Formato global para el datetime que debe ir a la Database
