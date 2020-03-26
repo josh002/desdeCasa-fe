@@ -66,15 +66,6 @@ export class AuthService {
     /**
      * Dado un comercio retorna sus reservas
      */
-    getBookingsByCommerce = (commerceId: number): Promise<{
-        distance: number,
-        id: number,
-        latitude: number,
-        longitude: number,
-        shopName: string,
-        address: string
-    }> =>
-        this.httpClient
-            .get(`${environment.WS_URL}/booking?commerceId=${commerceId}`)
-            .toPromise().then((resp: any) => resp.result)
+    getBookingsByCommerce = (commerceId: number): Promise<any> =>
+        this.httpClient.get(`${environment.WS_URL}/booking?commerceId=${commerceId}`).toPromise()
 }
