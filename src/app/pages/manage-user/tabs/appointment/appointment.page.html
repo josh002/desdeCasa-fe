@@ -3,19 +3,29 @@
 </ion-header>
 
 <ion-content>
-    <ion-card-header class="card-header">
-        <ion-card-subtitle>Turnos</ion-card-subtitle>
-        <ion-card-title>Mis Turnos</ion-card-title>
-    </ion-card-header>
-
-    <ion-card *ngFor="let booking of bookings">
-        <ion-card-header>
-            <ion-card-title>{{booking.shopName}}</ion-card-title>
-            <ion-card-subtitle>{{booking.address}}</ion-card-subtitle>
-            <div>{{booking.created | date: 'mediumDate':'-3':'es-Ar'}} {{booking.description | slice:0:5}} hs</div>
+    <ion-card>
+        <ion-card-header class="card-header">
+            <ion-card-subtitle>Turnos</ion-card-subtitle>
+            <ion-card-title>Mis Turnos</ion-card-title>
         </ion-card-header>
-        <ion-button color="primary" shape="round" expand="block" (click)="myAppointment(booking)">
-            Ver Turno
-        </ion-button>
+
+
+
+        <ion-card *ngIf="bookings && bookings.length == 0" class="no-items-yet">
+            <ion-card-header>
+                <ion-card-title>No tienes turnos</ion-card-title>
+            </ion-card-header>
+        </ion-card>
+
+        <ion-card *ngFor="let booking of bookings">
+            <ion-card-header>
+                <ion-card-title>{{booking.shopName}}</ion-card-title>
+                <ion-card-subtitle>{{booking.address}}</ion-card-subtitle>
+                <div>{{booking.created | date: 'mediumDate':'-3':'es-Ar'}} {{booking.description | slice:0:5}} hs</div>
+            </ion-card-header>
+            <ion-button color="primary" shape="round" expand="block" (click)="myAppointment(booking)">
+                Ver Turno
+            </ion-button>
+        </ion-card>
     </ion-card>
 </ion-content>
