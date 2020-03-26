@@ -3,15 +3,16 @@
 </ion-header>
 
 <ion-content>
-    <ion-button class="title-button" color="light" >
-        <span class="eon6-graycolor">Mis Turnos</span>
-    </ion-button>
+    <ion-card-header class="card-header">
+        <ion-card-subtitle>Turnos</ion-card-subtitle>
+        <ion-card-title>Mis Turnos</ion-card-title>
+    </ion-card-header>
 
     <ion-card *ngFor="let booking of bookings">
         <ion-card-header>
-            <ion-card-title>{{booking.shopName}}</ion-card-title>       
-            <ion-card-subtitle>{{booking.address}}</ion-card-subtitle> 
-            <div>{{booking.created | date: 'mediumDate':'-3':'es-Ar'}}  {{booking.description | slice:0:5}} hs</div>
+            <ion-card-title>{{booking.shopName}}</ion-card-title>
+            <ion-card-subtitle>{{booking.address}}</ion-card-subtitle>
+            <div>{{booking.created | date: 'mediumDate':'-3':'es-Ar'}} {{booking.description | slice:0:5}} hs</div>
         </ion-card-header>
         <ion-button color="primary" shape="round" expand="block" (click)="myAppointment(booking)">
             Ver Turno

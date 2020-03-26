@@ -11,27 +11,20 @@
             <ion-card-title>Información personal</ion-card-title>
         </ion-card-header>
 
-        <ion-button color="light" class="profile-name" expand="block">
-            <span class="eon6-graycolor">Información personal</span>
-        </ion-button>
-
-
-
-
         <ion-card-content>
 
-
             <form #myForm="ngForm" (ngSubmit)="onSubmit()">
-
 
                 <ion-list>
 
                     <!-- Mail -->
 
                     <ion-item>
-                        <ion-label color="primary" autocomplete="off" position="floating">Direccion de correo electrónico
+                        <ion-label color="primary" autocomplete="off" position="floating">Direccion de correo
+                            electrónico
                         </ion-label>
-                        <ion-input [(ngModel)]="client.email" name="email" type="email" required pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}[ ]?"></ion-input>
+                        <ion-input [(ngModel)]="client.email" name="email" type="email" required
+                            pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}[ ]?"></ion-input>
                     </ion-item>
 
                     <!-- <ng-container *ngIf="email.invalid && ((email.dirty && email.touched) || desperationLevel > 3)">
@@ -73,7 +66,9 @@
                     <ion-item>
                         <ion-label color="primary" position="floating">Nombre</ion-label>
                         <!-- <ion-input name="firstName" #firstName="ngModel" type="text" [(ngModel)]="client.firstName" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required> -->
-                        <ion-input [(ngModel)]="client.firstName" name="firstName" value="emilio" type="text" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required>
+                        <ion-input [(ngModel)]="client.firstName" name="firstName" value="emilio" type="text"
+                            pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?"
+                            required>
                         </ion-input>
                     </ion-item>
 
@@ -93,7 +88,9 @@
                     <ion-item>
                         <ion-label color="primary" position="floating">Apellido</ion-label>
                         <!-- <ion-input name="lastName" #lastName="ngModel" type="text" [(ngModel)]="client.lastName" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required> -->
-                        <ion-input [(ngModel)]="client.lastName" name="lastName" value="Emilio" type="text" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required>
+                        <ion-input [(ngModel)]="client.lastName" name="lastName" value="Emilio" type="text"
+                            pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?"
+                            required>
                         </ion-input>
                     </ion-item>
 
