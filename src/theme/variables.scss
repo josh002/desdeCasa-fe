@@ -1,5 +1,6 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,500&display=swap");
 
 /** Ionic CSS Variables **/
 :root {
@@ -14,7 +15,7 @@
   --ion-tab-bar-border-color: none;
 
   // Tipografias de la aplicacion
-  --ion-font-family: "Lato";
+  --ion-font-family: "Montserrat", sans-serif;
 
   // Otras variables
   --google-color: #db4437;
@@ -85,4 +86,3 @@
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 }
-
