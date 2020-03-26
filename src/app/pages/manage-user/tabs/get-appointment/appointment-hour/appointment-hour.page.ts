@@ -24,8 +24,7 @@ export class AppointmentHourPage implements OnInit {
       message: 'Horario : 8:15',
       cssClass:'alert-user',
       buttons: [{
-          text:'Confirmar',
-          
+          text:'Confirmar',          
         }]
     });
 
