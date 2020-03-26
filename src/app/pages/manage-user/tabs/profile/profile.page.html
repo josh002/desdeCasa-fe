@@ -10,19 +10,20 @@
             <ion-card-title>Información personal</ion-card-title>
         </ion-card-header>
 
-        <ion-card>
-            <ion-card-header>
-                <ion-card-title ion-text-left>Editar</ion-card-title>
-                <ion-toggle ion-text-right [(ngModel)]="disabled"></ion-toggle>
-            </ion-card-header>
-        </ion-card>
+
+        <ng-container *ngIf="disabled">
+            <ion-button color="primary" class="boton-edit" shape="round" expand="block" (click)=changeDisabled()>
+                <ion-label Slots="start" color="light"> Editar Perfil</ion-label>
+                <ion-icon Slots="end" name="create"></ion-icon>
+            </ion-button>
+        </ng-container>
 
 
-
-
-
-
-
+        <ng-container *ngIf="!disabled">
+            <ion-button color="danger" item-end shape="round" (click)=changeDisabled()>
+                <ion-label color="light">Cancelar</ion-label>
+            </ion-button>
+        </ng-container>
 
         <ion-card-content>
             <form #myForm="ngForm" (ngSubmit)="onSubmit()">

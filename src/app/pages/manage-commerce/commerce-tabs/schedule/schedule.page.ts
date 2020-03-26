@@ -22,7 +22,9 @@ export class SchedulePage implements OnInit {
         private router: Router,
     ) { }
 
-    ngOnInit() {
+    ngOnInit() { };
+
+    ionViewWillEnter() {
         this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
         this.authService.getBookingsByCommerce(this.commerce.id)
             .then((resp: any) => {

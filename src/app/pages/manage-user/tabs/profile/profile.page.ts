@@ -63,6 +63,8 @@ export class ProfilePage implements OnInit {
                                 this.loadingService.dismissLoading();
                                 if (resp && resp.status === 0) {
                                     const { message } = resp;
+                                    this.localStorageService.setObject('client', this.client);
+                                    this.disabled = true;
                                     this.alertService.headerAlert('Exito', message)
                                     this.router.navigate(['/tabs/home'])
                                 } else {
@@ -73,6 +75,7 @@ export class ProfilePage implements OnInit {
                             }
                         )
                         .catch(err => {
+                            this.changeDisabled();
                             this.loadingService.dismissLoading();
                             console.log(err);
                             if (err.error.status === -1) {
@@ -83,6 +86,11 @@ export class ProfilePage implements OnInit {
                         })
                 }
             )
+    }
+
+    changeDisabled() {
+        this.disabled = !this.disabled;
+        this.client = this.localStorageService.getObject('client');
     }
 
 }
