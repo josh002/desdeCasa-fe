@@ -2,7 +2,8 @@ import * as crypto from 'crypto-js';
 import { environment } from 'src/environments/environment';
 import { HttpHeaders } from '@angular/common/http';
 import * as moment from 'moment';
-const numeral = require('numeral');
+import * as numeral from 'numeral';
+// const numeral = require('numeral');
 // const numerals = require('numeral')
 
 /**
