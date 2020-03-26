@@ -3,24 +3,19 @@
 </ion-header>
 
 <ion-content>
-        <h4 class="ion-text-center">Seleccionar hora</h4>
+    <h4 class="ion-text-center">Seleccionar hora</h4>
     <ion-list>
-
         <ion-card>
             <ion-radio-group (ionChange)="radioGroupChange($event)">
-                <ion-item *ngFor="let shift of shifts">
-                    <ion-label>{{hour}}:{{ shift | number: '2.0-0' }}</ion-label>
-                    <ion-radio slot="end" color="primary" [value]="shift" ></ion-radio>
-                </ion-item>
+                <ng-container *ngFor="let shift of shifts">
+                    <ion-item *ngIf="true">
+                        <ion-label>{{hour}}:{{ shift | number: '2.0-0' }}</ion-label>
+                        <ion-radio slot="end" color="primary" [value]="shift"></ion-radio>
+                    </ion-item>
+                </ng-container>
             </ion-radio-group>
-<!-- 
-            <ion-button expand="block" shape="round" (click)="confirm($event)" [routerLink]="['/tabs/home']"
-                routerLinkActive="router-link-active">
-                Confirmar
-            </ion-button> -->
-            
-            <ion-button [disabled]="!selectedMinutes" expand="block" shape="round" (click)="confirm()"
-                routerLinkActive="router-link-active">
+
+            <ion-button [disabled]="!selectedMinutes" expand="block" shape="round" (click)="confirm()">
                 Confirmar
             </ion-button>
 

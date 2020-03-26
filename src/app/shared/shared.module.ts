@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PopoverSelectComponent } from './popover-select/popover-select.component';
+import { CommerceHeaderPageModule } from './commerce-header/commerce-header.module';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { PopoverSelectComponent } from './popover-select/popover-select.componen
   imports: [
     CommonModule,
     BabyHeaderPageModule,
+    CommerceHeaderPageModule,
     CommonModule,
     FormsModule,
     IonicModule,
@@ -24,6 +26,7 @@ import { PopoverSelectComponent } from './popover-select/popover-select.componen
   ],
   providers: [
     BabyHeaderPageModule,
+    CommerceHeaderPageModule,
     FontAwesomeModule,
    
   ],
@@ -33,6 +36,7 @@ import { PopoverSelectComponent } from './popover-select/popover-select.componen
   exports: [
     PopoverSelectComponent,
     BabyHeaderPageModule,
+    CommerceHeaderPageModule,
     FontAwesomeModule,
    
   ]

@@ -7,14 +7,20 @@ import { IonicModule } from '@ionic/angular';
 import { CommerceHeaderPageRoutingModule } from './commerce-header-routing.module';
 
 import { CommerceHeaderPage } from './commerce-header.page';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    CommerceHeaderPageRoutingModule
-  ],
-  declarations: [CommerceHeaderPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        CommerceHeaderPageRoutingModule,
+        RouterModule
+    ],
+    exports: [
+        CommerceHeaderPage
+    ],
+    declarations: [CommerceHeaderPage],
+    //   providers: [CommerceHeaderService]
 })
-export class CommerceHeaderPageModule {}
+export class CommerceHeaderPageModule { }
