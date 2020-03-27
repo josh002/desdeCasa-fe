@@ -5,127 +5,32 @@
     <app-baby-header></app-baby-header>
 </ion-header>
 
-
-
 <ion-content>
 
     <ion-card-header>
         <ion-card-title class=ion-text-center>Seleccionar Turno</ion-card-title>
     </ion-card-header>
 
-
     <ion-list lines="none">
 
         <ng-container *ngFor="let hour of hours">
-            <ion-item *ngIf="(hour >= startHour1 && hour < endHour1) || (hour >= startHour2 && hour < endHour2)">
-                <ion-card class="my-shift" color="light" expand="block" [routerLink]="['./appointment-hour', hour]"
-                    routerLinkActive="router-link-active">
+            <ion-item
+                *ngIf="(hour.hour >= startHour1 && hour.hour < endHour1) || (hour.hour >= startHour2 && hour.hour < endHour2)">
+                <ion-card *ngIf="hour.taken < commerce.maxClients" class="my-shift" color="light" expand="block" [routerLink]="['./appointment-hour', hour.hour]">
                     <ion-item>
-                        <ion-label class="eon6-graycolor">{{hour}}HS A {{hour+1}}HS</ion-label>
-                        <ion-label color="success">disponible</ion-label>
-                        <!-- <span class="eon6-graycolor">{{hour}} a {{hour+1}}</span> -->
+                        <ion-label class="eon6-graycolor">{{hour.hour}}HS A {{hour.hour+1}}HS</ion-label>
+                        <ion-label color="success">Disponible</ion-label>
+                    </ion-item>
+                </ion-card>
+                <ion-card *ngIf="hour.taken >= commerce.maxClients" class="my-shift" color="light" expand="block">
+                    <ion-item>
+                        <ion-label class="eon6-graycolor">{{hour.hour}}HS A {{hour.hour+1}}HS</ion-label>
+                        <ion-label color="danger">Completo</ion-label>
                     </ion-item>
                 </ion-card>
             </ion-item>
         </ng-container>
-        <!-- <ion-item>
-                <ion-label>Notifications</ion-label>
-                <ion-select-option value="notifications" interface="action-sheet">
-                    <ion-select-option value="enable">Enable</ion-select-option>
-                    <ion-select-option value="mute">Mute</ion-select-option>
-                    <ion-select-option value="mute_week">Mute for a week</ion-select-option>
-                    <ion-select-option value="mute_year">Mute for a year</ion-select-option>
-                </ion-select-option>
-            </ion-item> -->
 
     </ion-list>
 
 </ion-content>
-
-
-
-<!-- <ion-item> -->
-<!-- <ion-card-header>
-        <ion-card-title class=ion-text-center>Seleccionar Turno</ion-card-title>
-    </ion-card-header>
-
-    <ion-list lines="none">
-
-        <ion-item>
-            <ion-card class="my-shift" [routerLink]="['./appointment-hour']" expand="block">
-                <ion-item>
-                    <ion-label>DE 7HS A 8HS</ion-label>
-                    <ion-label color="success">disponible</ion-label>
-                </ion-item>
-            </ion-card>
-        </ion-item>
-
-        <ion-item>
-            <ion-card class="my-shift" [routerLink]="['./appointment-hour']" expand="block">
-                <ion-item>
-                    <ion-label>DE 8HS A 9HS</ion-label>
-                    <ion-label color="danger">no disponible</ion-label>
-                </ion-item>
-            </ion-card>
-        </ion-item>
-
-    </ion-list>
-</ion-content> -->
-
-
-<!-- <ion-item>
-            <ion-card id="my-card" color="light" expand="block" [routerLink]="['./appointment-hour']"
-                routerLinkActive="router-link-active" type="button"><span class="eon6-graycolor"> DE 7HS A 8HS
-                </span>
-                <ion-chip>
-                    <ion-label color="success">disponible</ion-label>
-                </ion-chip>
-            </ion-card>
-        </ion-item>
-
-        <ion-item>
-            <ion-card id="my-card" color="light" expand="block" [routerLink]="['./appointment-hour']"
-                routerLinkActive="router-link-active" type="button"><span class="eon6-graycolor"> DE 8HS A 9HS
-                </span>
-                <ion-chip>
-                    <ion-label color="danger">no disponible</ion-label>
-                </ion-chip>
-                <ion-chip style="padding: 0px">
-                    <ion-icon name="arrow-round-forward"></ion-icon>
-                </ion-chip>
-            </ion-card>
-        </ion-item> -->
-
-
-
-
-
-
-
-<!-- 
-        <ion-content>
-            <ion-card>
-                <ion-list>
-                    <h4 class="ion-text-center">Ver Turnos</h4>
-                    <ng-container *ngFor="let hour of hours">
-                        <ion-button *ngIf="(hour >= startHour1 && hour < endHour1) || (hour >= startHour2 && hour < endHour2)"
-                            color="light" expand="block" [routerLink]="['./appointment-hour', hour]"
-                            routerLinkActive="router-link-active">
-                            <span class="eon6-graycolor">{{hour}} a {{hour+1}}</span>
-                            <!-- <span class="eon6-graycolor">{{hour}} a {{hour+1}}</span> -->
-<!-- </ion-button>
-                    </ng-container> -->
-
-<!-- <ion-item>
-                        <ion-label>Notifications</ion-label>
-                        <ion-select value="notifications" interface="action-sheet">
-                            <ion-select-option value="enable">Enable</ion-select-option>
-                            <ion-select-option value="mute">Mute</ion-select-option>
-                            <ion-select-option value="mute_week">Mute for a week</ion-select-option>
-                            <ion-select-option value="mute_year">Mute for a year</ion-select-option>
-                        </ion-select>
-                    </ion-item> -->
-
-<!-- </ion-list>
-            </ion-card>
-        </ion-content> -->

@@ -62,3 +62,10 @@ export const formatHHmm = (myNumber: number) =>
 export const onlyDate = (myDate: Date | string) =>
     moment(myDate).format('DD/MM')
 
+/**
+* Retorna un string YYYY-MM-DD a partir de un Date
+* @param {Date} myDate
+*/
+export const fullDate = (myDate: Date | string) =>
+    moment(myDate).subtract(2,'day').format('YYYY-MM-DD')
+

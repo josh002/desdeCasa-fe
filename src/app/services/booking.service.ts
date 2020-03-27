@@ -47,6 +47,13 @@ export class BookingService {
         return this.httpClient.get(`${environment.WS_URL}/booking/${id}`, { params }).toPromise()
     }
 
+    getBookingDayShifts = (commerceId: number, created: string) => {
+        let params = new HttpParams();
+        params = params.append('commerceId', `${commerceId}`);
+        params = params.append('created', `${created}`);
+        return this.httpClient.get(`${environment.WS_URL}/booking-day-shifts`, { params }).toPromise()
+    }
+
     deleteBooking = (id: number) => {
         return this.httpClient.delete(`${environment.WS_URL}/booking/${id}`).toPromise()
     }

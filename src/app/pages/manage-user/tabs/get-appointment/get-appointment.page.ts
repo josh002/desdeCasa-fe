@@ -3,9 +3,15 @@ import { CommerceService } from 'src/app/services/commerce.service';
 import { Commerce } from 'src/app/models/commerce.model';
 import { AlertService } from 'src/app/services/alertService';
 import { Router, Params, ActivatedRoute } from '@angular/router';
-import { getTime, asDate } from 'src/app/constants/constants';
+import { getTime, asDate, fullDate } from 'src/app/constants/constants';
 import * as moment from 'moment';
 import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons';
+import { BookingService } from 'src/app/services/booking.service';
+
+interface OccupiedShifts {
+    hour: number,
+    taken: number
+}
 
 @Component({
     selector: 'app-get-appointment',
@@ -21,20 +27,19 @@ export class GetAppointmentPage implements OnInit {
     endHour2: number;
 
     // Arreglo con horas
-    hours: number[];
+    hours: OccupiedShifts[];
 
     constructor(
         private commerceService: CommerceService,
+        private bookingService: BookingService,
         private alertService: AlertService,
         private router: Router,
         private route: ActivatedRoute,
     ) { }
 
-    ngOnInit(){}
+    ngOnInit() { }
 
     ionViewWillEnter() {
-        this.hours = [];
-        for (var i = 0; i < 24; i++) this.hours.push(i);
 
         this.route.paramMap.subscribe(
             (params: Params) => {
@@ -47,8 +52,9 @@ export class GetAppointmentPage implements OnInit {
                             this.router.navigate(['/tabs/home']);
                             this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
                         }
-                        this.commerce = resp.result[0];
+                        this.commerce = new Commerce(resp.result[0]);
                         console.log(this.commerce);
+                        this.commerce.maxClients=3;
 
                         this.startHour1 = asDate(this.commerce.openTime1).getHours();
                         this.endHour1 = asDate(this.commerce.closeTime1).getHours();
@@ -57,6 +63,24 @@ export class GetAppointmentPage implements OnInit {
                         if (asDate(this.commerce.closeTime1).getMinutes() > 0) this.endHour1++;
                         if (asDate(this.commerce.closeTime2).getMinutes() > 0) this.endHour2++;
 
+                    })
+                    .catch(err => {
+                        console.log('err', err);
+                        if (err && err.error && err.error.status === -1) {
+                            this.alertService.simpleAlert(err.error.message);
+                        } else {
+                            this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
+                        }
+                        this.router.navigate(['/tabs/home']);
+                    });
+
+                this.bookingService.getBookingDayShifts(commerceId, fullDate(new Date()))
+                    .then((resp: any) => {
+                        this.hours = [];
+                        resp.result.forEach(element => {
+                            this.hours.push(element);
+                        });
+                        console.log('hours', this.hours);
                     })
                     .catch(err => {
                         console.log('err', err);
