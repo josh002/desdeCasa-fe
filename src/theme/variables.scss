@@ -1,6 +1,13 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../assets/fonts/Montserrat-Medium.ttf");
+}
 
 /** Ionic CSS Variables **/
 :root {
