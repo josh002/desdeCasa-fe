@@ -16,14 +16,15 @@
         <ng-container *ngFor="let hour of hours">
             <ion-item
                 *ngIf="(hour.hour >= startHour1 && hour.hour < endHour1) || (hour.hour >= startHour2 && hour.hour < endHour2)">
-                <ion-card *ngIf="hour.taken < commerce.maxClients" class="my-shift" color="light" expand="block"
-                    [routerLink]="['./appointment-hour', hour.hour]">
+                <ion-card *ngIf="hour.taken < commerce.maxClients * (6 / commerce.shoppingMinutes)" class="my-shift"
+                    color="light" expand="block" [routerLink]="['./appointment-hour', hour.hour]">
                     <ion-item>
                         <ion-label class="eon6-graycolor">{{+hour.hour}}HS A {{+hour.hour+1}}HS</ion-label>
                         <ion-label color="success">Disponible</ion-label>
                     </ion-item>
                 </ion-card>
-                <ion-card *ngIf="hour.taken >= commerce.maxClients" class="my-shift" color="light" expand="block">
+                <ion-card *ngIf="hour.taken >= commerce.maxClients * (6 / commerce.shoppingMinutes)" class="my-shift"
+                    color="light" expand="block">
                     <ion-item>
                         <ion-label class="eon6-graycolor">{{+hour.hour}}HS A {{+hour.hour+1}}HS</ion-label>
                         <ion-label color="danger">Completo</ion-label>
