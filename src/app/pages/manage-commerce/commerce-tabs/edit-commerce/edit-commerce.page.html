@@ -54,6 +54,7 @@
                                     [(ngModel)]="commerce.maxClients" pattern="[1-9][0-9]*" required>
                                 </ion-input>
                             </ion-item>
+                            <ng-container
                                 *ngIf="maxClients.invalid && ((maxClients.dirty && maxClients.touched) || desperationLevel > 3)">
                                 <div class="ux-alert" lines="none"
                                     *ngIf="maxClients.errors && maxClients.errors.required">
