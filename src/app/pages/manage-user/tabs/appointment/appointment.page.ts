@@ -79,7 +79,7 @@ export class AppointmentPage implements OnInit {
             cssClass: `alert-query`,
             buttons: [
                 { text: `Cancelar Turno`, cssClass:"cancel-button", role: 'cancel', handler: () => this.youSure() },
-                { text: `Cerrar`, cssClass:"accept-button" }
+                { text: `Ok`, cssClass:"accept-button" }
             ]
         });
 
