@@ -10,17 +10,17 @@
             <ion-card-title>Lista de clientes</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-            <ion-card *ngFor="let item of myArray" class="client-card">
+            <ion-card *ngFor="let booking of bookings" class="client-card">
                 <ion-card-header>
                     <ion-card-title class="eon6-graycolor">Nombre: {{name}} {{lastName}}</ion-card-title>
-                    <ion-card-subtitle class="eon6-graycolor">Dni: {{dni}}</ion-card-subtitle>            
+                    <ion-card-subtitle class="eon6-graycolor">Dni: {{dni}}</ion-card-subtitle>
                 </ion-card-header>
-                <ion-button  expand="block" (click)="myAppointment()">
+                <ion-button expand="block" (click)="myAppointment()">
                     Detalles
                 </ion-button>
             </ion-card>
         </ion-card-content>
     </ion-card>
-    
-    
+
+
 </ion-content>
