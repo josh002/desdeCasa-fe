@@ -54,7 +54,6 @@ export class GetAppointmentPage implements OnInit {
                         }
                         this.commerce = new Commerce(resp.result[0]);
                         console.log(this.commerce);
-                        this.commerce.maxClients=3;
 
                         this.startHour1 = asDate(this.commerce.openTime1).getHours();
                         this.endHour1 = asDate(this.commerce.closeTime1).getHours();
