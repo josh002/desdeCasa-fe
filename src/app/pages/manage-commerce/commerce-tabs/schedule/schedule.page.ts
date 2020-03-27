@@ -5,7 +5,13 @@ import { Commerce } from 'src/app/models/commerce.model';
 import { Booking } from 'src/app/models/booking.model';
 import { AlertService } from 'src/app/services/alertService';
 import { Router } from '@angular/router';
-import { asDate } from 'src/app/constants/constants';
+import { asDate, fullDate } from 'src/app/constants/constants';
+import { BookingService } from 'src/app/services/booking.service';
+
+interface OccupiedShifts {
+    hour: number,
+    taken: number
+}
 
 @Component({
     selector: 'app-schedule',
@@ -13,7 +19,6 @@ import { asDate } from 'src/app/constants/constants';
     styleUrls: ['./schedule.page.scss'],
 })
 export class SchedulePage implements OnInit {
-    // bookings: any[];
     commerce: Commerce;
 
     startHour1: number;
@@ -22,11 +27,12 @@ export class SchedulePage implements OnInit {
     endHour2: number;
 
     // Arreglo con horas
-    hours: number[];
+    hours: OccupiedShifts[];
 
     constructor(
         private authService: AuthService,
         private localStorageService: LocalStorageService,
+        private bookingService: BookingService,
         private alertService: AlertService,
         private router: Router,
     ) { }
@@ -34,8 +40,6 @@ export class SchedulePage implements OnInit {
     ngOnInit() { };
 
     ionViewWillEnter() {
-        this.hours = [];
-        for (var i = 0; i < 24; i++) this.hours.push(i);
         this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
 
         this.startHour1 = asDate(this.commerce.openTime1).getHours();
@@ -45,26 +49,23 @@ export class SchedulePage implements OnInit {
         if (asDate(this.commerce.closeTime1).getMinutes() > 0) this.endHour1++;
         if (asDate(this.commerce.closeTime2).getMinutes() > 0) this.endHour2++;
 
-        // this.route.paramMap.subscribe(
-        //     (params: Params) => {
-        //         const hour: number = params.params.id;
-
-        //         this.authService.getBookingsByCommerce(this.commerce.id)
-        //             .then((resp: any) => {
-        //                 console.log('commerce', this.commerce);
-        //                 this.bookings = [];
-        //                 resp.result.forEach(elem => this.bookings.push(new Booking(elem)));
-        //                 // this.bookings = this.bookings.filter(elem => elem.description == hour);
-        //                 console.log('bookings', this.bookings)
-        //             })
-        //             .catch(err => {
-        //                 console.log('err', err);
-        //                 this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
-        //             });
-
-        //     }
-        // )
-
+        this.bookingService.getBookingDayShifts(this.commerce.id, fullDate(new Date()))
+            .then((resp: any) => {
+                this.hours = [];
+                resp.result.forEach(element => {
+                    this.hours.push(element);
+                });
+                console.log('hours', this.hours);
+            })
+            .catch(err => {
+                console.log('err', err);
+                if (err && err.error && err.error.status === -1) {
+                    this.alertService.simpleAlert(err.error.message);
+                } else {
+                    this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
+                }
+                this.router.navigate(['/tabs/home']);
+            });
 
     }
 }

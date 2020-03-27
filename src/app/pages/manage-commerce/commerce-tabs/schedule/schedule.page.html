@@ -1,24 +1,11 @@
 <ion-header>
     <app-commerce-header></app-commerce-header>
-    <!-- <app-baby-header></app-baby-header> -->
 </ion-header>
 
 <ion-content>
 
-    <!-- <ion-card>
-        <ion-card-header>
-            <ion-card-subtitle>EONES!</ion-card-subtitle>
-            <ion-card-title>Mostrar el DIV de aun no tienes turnos como le mostre a Agus anoche si el bookings .length=0
-            </ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-            Y Acomodar el printeo de variables
-        </ion-card-content>
-        <div *ngIf="commerce">{{commerce.id}}</div>
-    </ion-card> -->
-
-    <!-- <ng-container *ngIf="bookings && bookings.length == 0" class="no-items-yet"> -->
-    <ng-container *ngIf="true">
+    <ng-container *ngIf="bookings && bookings.length == 0" class="no-items-yet">
+        <!-- <ng-container *ngIf="true"> -->
         <!-- card de NO hay turnos -->
         <ion-card>
             <ion-card-header>
@@ -26,7 +13,6 @@
             </ion-card-header>
         </ion-card>
     </ng-container>
-
 
     <!-- card de cuando HAY turnos -->
     <ion-card>
@@ -38,12 +24,16 @@
         <ion-card-content>
             <ion-list lines="none">
                 <ng-container *ngFor="let hour of hours">
-                    <ion-item *ngIf="(hour >= startHour1 && hour < endHour1) || (hour >= startHour2 && hour < endHour2)">
-                        <ion-card class="my-shift" color="light" expand="block" [routerLink]="['./schedule-hour', hour]" routerLinkActive="router-link-active">
+                    <ion-item
+                        *ngIf="(hour.hour >= startHour1 && hour.hour < endHour1) || (hour.hour >= startHour2 && hour.hour < endHour2)">
+                        <ion-card class="my-shift" color="light" expand="block" [routerLink]="['./schedule-hour', hour.hour]">
                             <ion-item>
-                                <ion-label class="eon6-graycolor">{{hour}}HS A {{hour+1}}HS</ion-label>
+                                <ion-badge slot="start" style="min-width: 25px;" color="secondary">{{hour.taken}}</ion-badge>
+                                <ion-label class="eon6-graycolor">{{hour.hour}}HS A {{+hour.hour+1}}HS</ion-label>
+
+                                <!-- <ion-label class="eon6-graycolor">{{hour.taken}}</ion-label> -->
                                 <!-- <ion-label color="success">disponible</ion-label> -->
-                                <!-- <span class="eon6-graycolor">{{hour}} a {{hour+1}}</span> -->
+                                <!-- <span class="eon6-graycolor">{{hour.hour}} a {{hour.hour+1}}</span> -->
                             </ion-item>
                         </ion-card>
                     </ion-item>

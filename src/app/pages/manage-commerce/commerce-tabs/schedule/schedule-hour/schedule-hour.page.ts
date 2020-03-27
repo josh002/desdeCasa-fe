@@ -6,72 +6,71 @@ import { Commerce } from 'src/app/models/commerce.model';
 import { Booking } from 'src/app/models/booking.model';
 import { AlertService } from 'src/app/services/alertService';
 import { Router, Params, ActivatedRoute } from '@angular/router';
-import { asDate } from 'src/app/constants/constants';
+import { asDate,formatHHmm } from 'src/app/constants/constants';
+import { BookingService } from 'src/app/services/booking.service';
 
 @Component({
-  selector: 'app-schedule-hour',
-  templateUrl: './schedule-hour.page.html',
-  styleUrls: ['./schedule-hour.page.scss'],
+    selector: 'app-schedule-hour',
+    templateUrl: './schedule-hour.page.html',
+    styleUrls: ['./schedule-hour.page.scss'],
 })
 export class ScheduleHourPage implements OnInit {
-  //datos usados en este componente
-  // name = 'Juan';
-  // lastName = 'Gonzales';
-  // dni = '126548785';
+    bookingsForCommerce: any[];
+    commerce: Commerce;
 
-  bookings: any[];
-  commerce: Commerce;
+    constructor(
+        public alertController: AlertController,
+        private authService: AuthService,
+        private localStorageService: LocalStorageService,
+        private alertService: AlertService,
+        private bookingService: BookingService,
+        private router: Router,
+        private route: ActivatedRoute,
+    ) { }
 
-  constructor(
-    public alertController: AlertController,
-    private authService: AuthService,
-    private localStorageService: LocalStorageService,
-    private alertService: AlertService,
-    private router: Router,
-    private route: ActivatedRoute,
-  ) { }
+    ngOnInit() { }
 
-  ngOnInit() {
-  }
+    async myAppointment(bookingForCommerce: any) {
+        const alert = await this.alertController.create({
+            header: `${bookingForCommerce.firstName} ${bookingForCommerce.lastName}`,
+            subHeader: `${bookingForCommerce.dni}`,
+            message: `Horario: ${asDate(bookingForCommerce.description).getHours()}:${formatHHmm(asDate(bookingForCommerce.description).getMinutes())}`,
+            cssClass: 'alert-commerce',
+            buttons: ['OK']
+        });
+        await alert.present();
+    }
 
+    ionViewWillEnter() {
+        this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
 
-  async myAppointment() {
-    const alert = await this.alertController.create({
-      header: 'Turno en supermercado',
-      subHeader: 'Don Pepe',
-      message: 'Horario : 8:15',
-      cssClass: 'alert-commerce',
-      buttons: ['OK']
-    });
-    await alert.present();
-  }
+        this.route.paramMap.subscribe(
+            (params: Params) => {
+                const hour: number = params.params.id;
 
+                this.bookingService.getBookingForCommerce({ commerceId: this.commerce.id })
+                    .then((resp: any) => {
+                        console.log('commerce', this.commerce);
+                        this.bookingsForCommerce = [];
+                        // Restaurar este metodo cuando exista el BookingForCommerce model:
+                        // resp.result.forEach(elem => this.bookingsForCommerce.push(new Booking(elem)));
+                        // Por lo pronto dejar este:
+                        this.bookingsForCommerce = resp.result;
+                        console.log('bookingsForCommerce', this.bookingsForCommerce)
+                        this.bookingsForCommerce = this.bookingsForCommerce.filter(elem => {
+                            asDate(elem.description).getHours() == hour
+                            console.log(asDate(elem.description).getHours() == hour);
+                            return asDate(elem.description).getHours() == hour
+                        });
+                    })
+                    .catch(err => {
+                        console.log('err', err);
+                        this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
+                    });
 
-  ionViewWillEnter() {
+            }
+        )
 
-    this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
-
-    this.route.paramMap.subscribe(
-      (params: Params) => {
-        const hour: number = params.params.id;
-
-        // this.authService.getBookingsByCommerce(this.commerce.id)
-        this.authService.getBookingsByCommerce(20)
-          .then((resp: any) => {
-            console.log('commerce', this.commerce);
-            this.bookings = [];
-            resp.result.forEach(elem => this.bookings.push(new Booking(elem)));
-            // this.bookings = this.bookings.filter(elem => elem.description == hour);            
-            console.log('bookings', this.bookings)
-          })
-          .catch(err => {
-            console.log('err', err);
-            this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
-          });
-
-      }
-    )
-
-  }
+    }
 
 }

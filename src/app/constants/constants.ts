@@ -67,5 +67,5 @@ export const onlyDate = (myDate: Date | string) =>
 * @param {Date} myDate
 */
 export const fullDate = (myDate: Date | string) =>
-    moment(myDate).subtract(2,'day').format('YYYY-MM-DD')
+    moment(myDate).format('YYYY-MM-DD')
 

@@ -41,6 +41,24 @@ export class BookingService {
         return this.httpClient.get(`${environment.WS_URL}/booking`, { params }).toPromise()
     }
 
+    getBookingForCommerce = (
+        options?: {
+            considerDeletes?: boolean,
+            userId?: number,
+            timetableId?: number,
+            commerceId?: number,
+            created?: Date | string,
+        }
+    ) => {
+        let params = new HttpParams();
+        if (options && options['considerDeletes']) params = params.append('considerDeletes', `${options['considerDeletes']}`);
+        if (options && options['userId']) params = params.append('userId', `${options['userId']}`);
+        if (options && options['timetableId']) params = params.append('timetableId', `${options['timetableId']}`);
+        if (options && options['commerceId']) params = params.append('commerceId', `${options['commerceId']}`);
+        if (options && options['created']) params = params.append('created', `${options['created']}`);
+        return this.httpClient.get(`${environment.WS_URL}/booking-for-commerce`, { params }).toPromise()
+    }
+
     getBookingById = (id: number) => {
         let params = new HttpParams();
         params = params.append('id', `${id}`);
