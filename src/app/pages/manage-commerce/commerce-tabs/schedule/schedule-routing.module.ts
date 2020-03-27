@@ -9,8 +9,8 @@ const routes: Routes = [
     component: SchedulePage
   },
   {
-    path: 'schedule-hour',
-    loadChildren: () => import('./schedule-hour/schedule-hour.module').then( m => m.ScheduleHourPageModule)
+    path: 'schedule-hour/:id',
+    loadChildren: () => import('./schedule-hour/schedule-hour.module').then(m => m.ScheduleHourPageModule)
   }
 ];
 
@@ -18,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class SchedulePageRoutingModule {}
+export class SchedulePageRoutingModule { }

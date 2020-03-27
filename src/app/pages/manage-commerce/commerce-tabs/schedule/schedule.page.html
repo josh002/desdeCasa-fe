@@ -4,6 +4,7 @@
 </ion-header>
 
 <ion-content>
+
     <!-- <ion-card>
         <ion-card-header>
             <ion-card-subtitle>EONES!</ion-card-subtitle>
@@ -15,25 +16,50 @@
         </ion-card-content>
         <div *ngIf="commerce">{{commerce.id}}</div>
     </ion-card> -->
+
+    <!-- <ng-container *ngIf="bookings && bookings.length == 0" class="no-items-yet"> -->
+    <ng-container *ngIf="true">
+        <!-- card de NO hay turnos -->
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>No tienes turnos</ion-card-title>
+            </ion-card-header>
+        </ion-card>
+    </ng-container>
+
+
+    <!-- card de cuando HAY turnos -->
     <ion-card>
         <ion-card-header>
             <ion-card-subtitle>Turnos</ion-card-subtitle>
             <ion-card-title>Lista de Turnos</ion-card-title>
         </ion-card-header>
+
         <ion-card-content>
-            <ion-list>
-                <!-- <ion-card *ngIf="bookings && bookings.length == 0" class="no-items-yet">
-                    <ion-card-header>
-                        <ion-card-title>No tienes turnos</ion-card-title>
-                    </ion-card-header>
-                </ion-card> -->
-                <ion-button *ngFor="let booking of bookings" color="light" expand="block"
-                    [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active">
+            <ion-list lines="none">
+                <ng-container *ngFor="let hour of hours">
+                    <ion-item *ngIf="(hour >= startHour1 && hour < endHour1) || (hour >= startHour2 && hour < endHour2)">
+                        <ion-card class="my-shift" color="light" expand="block" [routerLink]="['./schedule-hour', hour]" routerLinkActive="router-link-active">
+                            <ion-item>
+                                <ion-label class="eon6-graycolor">{{hour}}HS A {{hour+1}}HS</ion-label>
+                                <!-- <ion-label color="success">disponible</ion-label> -->
+                                <!-- <span class="eon6-graycolor">{{hour}} a {{hour+1}}</span> -->
+                            </ion-item>
+                        </ion-card>
+                    </ion-item>
+                </ng-container>
+
+            </ion-list>
+
+            <!-- <ion-list>
+                <ion-button *ngFor="let booking of bookings" color="light" expand="block" [routerLink]="['./schedule-hour']" routerLinkActive="router-link-active">
                     <span class="eon6-graycolor">De {{item}}:00 a {{item + 1}}:00</span>
                 </ion-button>
-            </ion-list>
+            </ion-list> -->
         </ion-card-content>
     </ion-card>
+
+
 </ion-content>
 
 
