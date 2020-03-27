@@ -3,11 +3,13 @@ ion-header {
           max-height: 90%;
           max-width: 90%;
      }
+    
      ion-buttons {
           display: flex;
           justify-content: center;
           margin-top: 10px;
           margin-bottom: 10px;
+          
           ion-button {
                font-size: larger;
                ion-icon {
@@ -89,12 +91,21 @@ ion-card {
      ion-card-title, ion-card-subtitle {
           text-transform: capitalize;
      }
-
+     ion-card-content{
+        padding-left:0;
+        padding-right:0;
+    }
      ion-card-subtitle {          
           margin-bottom: 9px;
      }
+     ion-button {
+        padding-left: 5%;
+        padding-right: 5%;}
 }
 
 ion-toolbar {
      margin: 13px 13px 0px -9px;
+}
+.header-title{   
+    text-align: left;
 }

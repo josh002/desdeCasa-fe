@@ -25,28 +25,37 @@
     </ion-toolbar> -->
 </ion-header>
 <ion-content>
-
-    <!-- modelo de que pasa si no hay productos -->
-    <ion-card *ngIf="commerces && commerces.length == 0" class="no-items-yet">
+    <ion-card>
         <ion-card-header>
-            <ion-card-title>No tienes comercios cerca</ion-card-title>
-            <ion-card-subtitle>Intenta de nuevo más tarde</ion-card-subtitle>
+            <ion-card-subtitle class="header-title">Pedir Turnos</ion-card-subtitle>
+            <ion-card-title class="header-title">Lugares Cercanos</ion-card-title>
         </ion-card-header>
+        <ion-card-content>
+            <ion-card *ngIf="commerces && commerces.length == 0" class="no-items-yet ">
+                <ion-card-header>
+                    <ion-card-title>No tienes comercios cerca</ion-card-title>
+                    <ion-card-subtitle>Intenta de nuevo más tarde</ion-card-subtitle>
+                </ion-card-header>
+            </ion-card>
+
+            <div *ngIf="commerces && commerces.length > 0" class="cards-container">
+                <ion-card *ngFor="let commerce of commerces">
+                    <ion-card-header>
+                        <ion-card-title>{{ commerce.shopName }}</ion-card-title>
+                        <ion-card-subtitle>{{ commerce.address }}</ion-card-subtitle>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-button expand="block" shape="round" [routerLink]="['/tabs/get-appointment', commerce.id]"
+                            routerLinkActive="router-link-active">
+                            Reservar Turno
+                        </ion-button>
+                    </ion-card-content>
+
+                </ion-card>
+            </div>
+        </ion-card-content>
     </ion-card>
+    <!-- modelo de que pasa si no hay productos -->
 
-    <div *ngIf="commerces && commerces.length > 0" class="cards-container">
-        <ion-card *ngFor="let commerce of commerces">
-            <ion-card-header>
-                <ion-card-title>{{ commerce.shopName }}</ion-card-title>
-                <ion-card-subtitle>{{ commerce.address }}</ion-card-subtitle>
-            </ion-card-header>
-            <ion-card-content>
-                <ion-button expand="block" shape="round" [routerLink]="['/tabs/get-appointment', commerce.id]"
-                    routerLinkActive="router-link-active">
-                    Reservar Turno
-                </ion-button>
-            </ion-card-content>
-
-        </ion-card>
-    </div>
+    
 </ion-content>
