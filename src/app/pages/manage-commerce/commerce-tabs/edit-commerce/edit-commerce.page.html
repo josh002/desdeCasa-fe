@@ -239,7 +239,7 @@
                     <!-- Phone Number -->
                     <ion-item [(disabled)]="editInfo">
                         <ion-label color="primary" position="floating">Telefono</ion-label>
-                        <ion-input name="phone" #phone="ngModel" type="number" [(ngModel)]="commerce.phone" pattern="[0-9]{6,}" required>
+                        <ion-input name="phone" #phone="ngModel" type="phone" [(ngModel)]="commerce.phone" pattern="[0-9]{6,}" required>
                         </ion-input>
                     </ion-item>
                     <ng-container *ngIf="phone.invalid && ((phone.dirty && phone.touched) || desperationLevel > 3)">
