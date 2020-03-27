@@ -2,6 +2,9 @@ import { datetimeFrontendFormat, datetimeServerFormat, getTime } from '../consta
 import * as moment from 'moment';
 
 export interface CommerceRegister {
+    id?: number,
+    latitude?: number,
+    longitude?: number,
     email: string,
     cuitCuil: string,
     password: string,
@@ -17,8 +20,11 @@ export interface CommerceRegister {
     shoppingMinutes: number,
 }
 
-export const formatCommerce = (commerce: CommerceRegister) => {
+export const formatCommerce = (commerce: CommerceRegister | Commerce) => {
     var newCommerce: CommerceRegister = {
+        id: commerce.id ? commerce.id : undefined,
+        latitude: commerce.latitude ? commerce.latitude : undefined,
+        longitude: commerce.longitude ? commerce.longitude : undefined,
         email: commerce.email.trim(),
         cuitCuil: commerce.cuitCuil.trim(),
         password: commerce.password.trim(),

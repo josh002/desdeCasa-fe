@@ -15,6 +15,7 @@ import { LocalStorageService } from 'src/app/services/localStorageService';
     styleUrls: ['./edit-commerce.page.scss'],
 })
 export class EditCommercePage implements OnInit {
+
     commerce: Commerce = {
         email: '',
         cuitCuil: '',
@@ -86,7 +87,7 @@ export class EditCommercePage implements OnInit {
             this.clientsMax[0].push(i);
         }
 
-        this.commerce = this.localStorageService.getObject('commerce');
+        this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
     }
 
     desperateUser() {
@@ -96,10 +97,12 @@ export class EditCommercePage implements OnInit {
 
     onSubmit() {
         this.desperationLevel = 0;
+        // console.log('commerce.openTime1', this.commerce.openTime1);
+        // console.log('format commerce', formatCommerce(this.commerce).openTime1);
         this.loadingService.presentLoading("Cargando")
             .then(
                 () => {
-                    this.commerceService.editCommerce(this.commerce)
+                    this.commerceService.editCommerce(formatCommerce(this.commerce))
                         .then(
                             (resp: any) => {
                                 this.loadingService.dismissLoading();
@@ -193,11 +196,11 @@ export class EditCommercePage implements OnInit {
 
     changeDisabledinfo() {
         this.editInfo = !this.editInfo
-        this.commerce = this.localStorageService.getObject('commerce');
+        this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
     }
     changeDisabledconfig() {
         this.editconfig = !this.editconfig
-        this.commerce = this.localStorageService.getObject('commerce');
+        this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
     }
 
 }

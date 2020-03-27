@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { encryptPass, appJsonHeader } from '../constants/constants';
 import { environment } from 'src/environments/environment';
 import { DefaultResponse } from '../models/defaultResponse.model';
-import { Commerce } from '../models/commerce.model';
+import { Commerce, CommerceRegister } from '../models/commerce.model';
 
 @Injectable({
     providedIn: 'root'
@@ -32,7 +32,7 @@ export class CommerceService {
     resetPassword = (email: string) =>
         this.httpClient.post<DefaultResponse<any>>(`${environment.WS_URL}/reset-password`, { email }, appJsonHeader).toPromise()
 
-    editCommerce = (commerce: Commerce) => {
+    editCommerce = (commerce: Commerce | CommerceRegister) => {
         // let params = new HttpParams();
         // params = params.append('id', `${commerce.id}`);
         return this.httpClient.put(`${environment.WS_URL}/commerce/${commerce.id}`, commerce, appJsonHeader).toPromise()

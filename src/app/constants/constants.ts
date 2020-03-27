@@ -30,13 +30,20 @@ export const appJsonHeader = {
 }
 
 export const getTime = (datetime: string | Date) => {
-    if (typeof datetime === 'string') datetime = new Date(datetime);
+    console.log('getTime() pre', datetime);
+    if (typeof datetime === 'string') {
+        if (datetime.length === 8) {
+            datetime = moment(datetime, "HH:mm:ss").toISOString();
+        };
+        datetime = new Date(datetime);
+    };
 
     if (datetime instanceof Date) {
         datetime = `${datetime.getHours()}:${datetime.getMinutes()}`
     } else {
         console.log('the getTime() conversion wasnt neither string neither Date type');
     }
+    console.log('getTime()', datetime);
     // Agregar un chequeo de isNan() por si el string no tiene el formato Correcto;
     return datetime
 }
