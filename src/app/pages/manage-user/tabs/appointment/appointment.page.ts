@@ -43,8 +43,8 @@ export class AppointmentPage implements OnInit {
                     this.bookings.push(new Booking(element));
 
                     //    moment(element.created, "YYYY-MM-DD").unix() > Date.now()
-                    console.log(moment(element.created, "YYYY-MM-DD").subtract(1, "day").unix());
-                    console.log((Date.now() / 1000));
+                    // console.log(moment(element.created, "YYYY-MM-DD").subtract(1, "day").unix());
+                    // console.log((Date.now() / 1000));
                 });
                 console.log("antes de filtrar", this.bookings)
                 this.bookings = this.bookings.filter(
