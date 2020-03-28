@@ -31,6 +31,14 @@ export class AlertService {
         ;
     }
 
+    marketMapAlert= (header,subHeader,message) =>{
+        this.alertController.create({
+            header,subHeader,message,buttons: ['OK'],
+            cssClass:'marketMapAlert',
+        }).then(alert => {
+            alert.present();
+        });
+    }
     // simpleAlert = (header, subHeader, message) =>
     //     this.alertController.create({
     //         header, subHeader, message, buttons: ['OK']

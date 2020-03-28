@@ -24,7 +24,10 @@ const routes: Routes = [
                 path: 'get-appointment/:id',
                 loadChildren: () => import('./get-appointment/get-appointment.module').then(m => m.GetAppointmentPageModule)
             },
-            
+            {
+                path: 'maps',
+                loadChildren: () => import('./maps/maps.module').then( m => m.MapsPageModule)
+              },
 
         ]
     },
@@ -32,6 +35,8 @@ const routes: Routes = [
         path: 'logout',
         loadChildren: () => import('./logout/logout.module').then(m => m.LogoutPageModule)
     },
+  
+
 
 
 
