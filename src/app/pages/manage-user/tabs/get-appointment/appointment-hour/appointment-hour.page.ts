@@ -168,15 +168,32 @@ export class AppointmentHourPage implements OnInit {
                     )
             )
 
+        const { maxClients } = this.commerce;
+        // debugger;
+
         // Despues seteo los shifts ocupados
         this.shifts = this.shifts.map(
-            shift => ({
-                value: shift,
-                fa: `${formatHHmm(this.hour)}:${formatHHmm(shift)}:00`,
-                busy: busyTimetables.some(
-                    btt => btt.description == `${formatHHmm(this.hour)}:${formatHHmm(shift)}:00`
-                )
-            })
+            shift => {
+                const currentTimeTable = busyTimetables
+                    .find(
+                        btt => btt.description == `${formatHHmm(this.hour)}:${formatHHmm(shift)}:00`
+                    );
+
+                const cantBusy = this.commerceBookings
+                    .reduce(
+                        (acum, current) => currentTimeTable && currentTimeTable.id === current.timetableId ?
+                            acum + 1 : acum,
+                        0
+                    )
+
+                // debugger;
+
+                return {
+                    value: shift,
+                    fa: `${formatHHmm(this.hour)}:${formatHHmm(shift)}:00`,
+                    busy: cantBusy >= maxClients
+                }
+            }
         )
 
     }
