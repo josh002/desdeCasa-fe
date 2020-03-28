@@ -8,9 +8,10 @@ import { Timetable } from 'src/app/models/timetable.model';
 import { BookingService } from 'src/app/services/booking.service';
 import { TimetableService } from 'src/app/services/timetable.service';
 import { formatHHmm, asDate } from 'src/app/constants/constants';
-import { BookingRegister } from 'src/app/models/booking.model';
+import { BookingRegister, Booking } from 'src/app/models/booking.model';
 import { Client } from 'src/app/models/client.model';
 import { LocalStorageService } from 'src/app/services/localStorageService';
+import { AuthService } from 'src/app/services/authService';
 
 @Component({
     selector: 'app-appointment-hour',
@@ -24,7 +25,8 @@ export class AppointmentHourPage implements OnInit {
     timetable: Timetable[];
     selectedTimetable: Timetable;
     selectedMinutes: number;
-    shifts: number[]; // Arreglo con turnos
+    // shifts: number[]; // Arreglo con turnos
+    shifts: any[]; // Arreglo con turnos
 
     startMinute1: number;
     endMinute1: number;
@@ -35,6 +37,8 @@ export class AppointmentHourPage implements OnInit {
     startHour2: number;
     endHour2: number;
 
+    commerceBookings: Booking[]
+
     constructor(
         public alertController: AlertController,
         private alertService: AlertService,
@@ -43,7 +47,8 @@ export class AppointmentHourPage implements OnInit {
         private route: ActivatedRoute,
         private boookingService: BookingService,
         private localStorageService: LocalStorageService,
-        private timetableService: TimetableService
+        private timetableService: TimetableService,
+        private authService: AuthService
     ) { }
 
     ngOnInit() {
@@ -81,7 +86,28 @@ export class AppointmentHourPage implements OnInit {
                             this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
                         }
                         this.commerce = resp.result[0];
-                        this.manageWorkHours();
+
+
+
+
+
+                    // Busco los bookings del comercio actual
+                    this.authService.getBookingsByCommerce(commerceId)
+                        .then(
+                            resp => {
+                                this.commerceBookings = resp.result;
+                                this.manageWorkHours();
+                            }
+                        )
+                        .catch(err => {
+                            console.log('err', err);
+                            if (err && err.error && err.error.status === -1) {
+                                this.alertService.simpleAlert(err.error.message);
+                            } else {
+                                this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
+                            }
+                            this.router.navigate(['/tabs/home']);
+                        });
                     })
                     .catch(err => {
                         console.log('err', err);
@@ -130,6 +156,29 @@ export class AppointmentHourPage implements OnInit {
             this.shifts = this.shifts.filter(elem => elem < this.endMinute2);
             console.log('Estamos en la hora de cierre 2');
         };
+
+        // Filtrar los shifts ya reservados
+
+        // 1ro busco los timetables ocupados
+        const busyTimetables = this.timetable
+            .filter(
+                tt => this.commerceBookings
+                    .some(
+                        booking => booking.timetableId === tt.id
+                    )
+            )
+
+        // Despues seteo los shifts ocupados
+        this.shifts = this.shifts.map(
+            shift => ({
+                value: shift,
+                fa: `${formatHHmm(this.hour)}:${formatHHmm(shift)}:00`,
+                busy: busyTimetables.some(
+                    btt => btt.description == `${formatHHmm(this.hour)}:${formatHHmm(shift)}:00`
+                )
+            })
+        )
+
     }
 
     radioGroupChange(event: any) {

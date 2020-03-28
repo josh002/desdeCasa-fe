@@ -67,6 +67,7 @@ export class CommerceService {
         params = params.append('id', `${id}`);
         return this.httpClient.get(`${environment.WS_URL}/commerce/${id}`, { params }).toPromise()
     }
+    
 
     deleteCommerce = (id: number) => {
         let params = new HttpParams();

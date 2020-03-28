@@ -75,6 +75,8 @@ export class GetAppointmentPage implements OnInit {
 
                 this.bookingService.getBookingDayShifts(commerceId, fullDate(new Date()))
                     .then((resp: any) => {
+                        // TODO: el bucle es al p2, podes hacer:
+                        // this.hours = resp.result
                         this.hours = [];
                         resp.result.forEach(element => {
                             this.hours.push(element);
