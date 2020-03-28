@@ -5,6 +5,8 @@ import { Commerce } from 'src/app/models/commerce.model';
 import { Client } from 'src/app/models/client.model';
 import { AlertService } from 'src/app/services/alertService';
 import { Router } from '@angular/router';
+import { GoogleMaps, GoogleMapsEvent, LatLng, MarkerOptions, Marker } from "@ionic-native/google-maps";
+import { Platform } from "@ionic/angular";
 
 @Component({
     selector: 'app-home',
@@ -20,6 +22,7 @@ export class HomePage implements OnInit {
         private authService: AuthService,
         private alertService: AlertService,
         private router: Router,
+        public platform: Platform
     ) { }
 
     ngOnInit() { }
@@ -49,6 +52,48 @@ export class HomePage implements OnInit {
                 this.router.navigate(['/start']);
             });
     }
+    ngAfterViewInit() {
+		this.platform.ready().then(() => this.loadMap());
+	}
 
+    loadMap() {
+		/* The create() function will take the ID of your map element */
+        const map = GoogleMaps.create('map');
+        
 
+		map.one( GoogleMapsEvent.MAP_READY ).then((data: any) => {
+			const coordinates: LatLng = new LatLng(this.client.latitude, this.client.longitude);
+        //POSICION DEL USUARIO
+			map.setCameraTarget(coordinates);
+            map.setCameraZoom(15);
+            map.addMarker({
+                title:'Mi ubicacion',
+                icon: 'blue',
+                animation: 'DROP',
+                position :{
+                    lat: this.client.latitude,
+                    lng: this.client.longitude,
+                }
+            }).then((marker: Marker) => {
+                marker.showInfoWindow();
+            });
+        
+        //MOSTRANDO LOS COMERCIOS CERDA DEL USUARIO EN EL MAPA
+        this.commerces.forEach((commerce)=>{
+            map.addMarker({
+                title: commerce.shopName,
+                icon: 'red',
+                animation: 'DROP',
+                position :{
+                    lat: commerce.latitude,
+                    lng: commerce.longitude,
+                }
+            }).then((marker: Marker) => {
+                marker.showInfoWindow();
+            });
+        })
+        });
+        
+	}
+    
 }
