@@ -236,6 +236,13 @@ ion-popover {
         text-transform: capitalize !important;
         //   height: 50px !important;
    }
+   .getAppointment{
+    background-color: var(--ion-color-light) !important;
+    color: var(--ion-color-medium) !important;
+    box-shadow: 1px 1px 2px 1px !important;
+    padding-right: 11vw !important;
+    padding-left: 11vw !important;
+   }
 }
 //arreglando teclado que sobrepasa el contenido
 // ion-modal {

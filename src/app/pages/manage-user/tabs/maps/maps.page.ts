@@ -99,7 +99,7 @@ export class MapsPage implements OnInit {
 	}
     onMarketClick(marker:Marker,commerce){
             marker.addEventListener(GoogleMapsEvent.MARKER_CLICK).subscribe( x => { 
-                this.alertService.marketMapAlert(commerce.shopName,'Telefono : ' + commerce.phone,commerce.address)
+                this.alertService.marketMapAlert(commerce.shopName,'Telefono : ' + commerce.phone,commerce.address, commerce.id)
                 });
     }
 }
