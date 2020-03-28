@@ -12,6 +12,7 @@ import { BookingRegister, Booking } from 'src/app/models/booking.model';
 import { Client } from 'src/app/models/client.model';
 import { LocalStorageService } from 'src/app/services/localStorageService';
 import { AuthService } from 'src/app/services/authService';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-appointment-hour',
@@ -27,6 +28,9 @@ export class AppointmentHourPage implements OnInit {
     selectedMinutes: number;
     // shifts: number[]; // Arreglo con turnos
     shifts: any[]; // Arreglo con turnos
+
+    // Esta linea luego podrá usarse cuando el día sea variable
+    whatDayIsIt: string = new Date().toLocaleDateString();
 
     startMinute1: number;
     endMinute1: number;
@@ -87,27 +91,28 @@ export class AppointmentHourPage implements OnInit {
                         }
                         this.commerce = resp.result[0];
 
-
-
-
-
-                    // Busco los bookings del comercio actual
-                    this.authService.getBookingsByCommerce(commerceId)
-                        .then(
-                            resp => {
-                                this.commerceBookings = resp.result;
-                                this.manageWorkHours();
-                            }
-                        )
-                        .catch(err => {
-                            console.log('err', err);
-                            if (err && err.error && err.error.status === -1) {
-                                this.alertService.simpleAlert(err.error.message);
-                            } else {
-                                this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
-                            }
-                            this.router.navigate(['/tabs/home']);
-                        });
+                        // Busco los bookings del comercio actual
+                        this.authService.getBookingsByCommerce(commerceId)
+                            .then(
+                                resp => {
+                                    console.clear();
+                                    this.commerceBookings = resp.result.filter(
+                                        booking =>
+                                            // Filtro aquellos que no corresponden al día de hoy
+                                            this.whatDayIsIt === new Date(moment(booking.created, "YYYY-MM-DDTHH:mm:ss").toISOString()).toLocaleDateString()
+                                    );
+                                    this.manageWorkHours();
+                                }
+                            )
+                            .catch(err => {
+                                console.log('err', err);
+                                if (err && err.error && err.error.status === -1) {
+                                    this.alertService.simpleAlert(err.error.message);
+                                } else {
+                                    this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
+                                }
+                                this.router.navigate(['/tabs/home']);
+                            });
                     })
                     .catch(err => {
                         console.log('err', err);
@@ -164,12 +169,11 @@ export class AppointmentHourPage implements OnInit {
             .filter(
                 tt => this.commerceBookings
                     .some(
-                        booking => booking.timetableId === tt.id
+                        elem => elem.timetableId === tt.id
                     )
-            )
+            );
 
         const { maxClients } = this.commerce;
-        // debugger;
 
         // Despues seteo los shifts ocupados
         this.shifts = this.shifts.map(
@@ -185,8 +189,6 @@ export class AppointmentHourPage implements OnInit {
                             acum + 1 : acum,
                         0
                     )
-
-                // debugger;
 
                 return {
                     value: shift,

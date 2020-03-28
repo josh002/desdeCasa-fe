@@ -78,9 +78,7 @@ export class StartPage implements OnInit {
             .then(
                 (resp: any) => {
                     this.email = this.email.trim();
-                    console.log("original pass", this.password);
                     this.password = this.password.trim();
-                    console.log("trim pass", this.password.trim());
 
                     this.authService.login(this.email, this.password)
                         .then(
