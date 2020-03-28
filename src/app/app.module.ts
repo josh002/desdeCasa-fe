@@ -25,6 +25,7 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { GoogleMaps } from '@ionic-native/google-maps';
 
 registerLocaleData(localeEsAr, 'es-Ar');
 library.add(fas,far,fab)
@@ -52,6 +53,7 @@ library.add(fas,far,fab)
     AlertService,
     LocalStorageService,
     Facebook,
+    GoogleMaps,
     LoadingService,
     Geolocation,
     { provide: LOCALE_ID, useValue: 'es-AR' }
