@@ -8,6 +8,7 @@ import { LocalStorageService } from 'src/app/services/localStorageService';
 import { Router } from '@angular/router';
 import { Booking } from 'src/app/models/booking.model';
 import { onlyDate } from 'src/app/constants/constants';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-appointment',
@@ -35,12 +36,23 @@ export class AppointmentPage implements OnInit {
         console.log(this.client);
         this.bookingService.getBooking({ userId: this.client.id })
             .then((resp: any) => {
+                console.log("respuesta", resp);
+                this.bookings = [];
                 resp.result.forEach(element => {
+                    // if lafechaesmenor nolopusho
                     this.bookings.push(new Booking(element));
-                });;
-                console.log(this.bookings);
 
+                    //    moment(element.created, "YYYY-MM-DD").unix() > Date.now()
+                    console.log(moment(element.created, "YYYY-MM-DD").subtract(1, "day").unix());
+                    console.log((Date.now() / 1000));
+                });
+                console.log("antes de filtrar", this.bookings)
+                this.bookings = this.bookings.filter(
+                    elem =>
+                        moment(elem.created, "YYYY-MM-DD").add(1, "day").unix() * 1000 > (Date.now())
+                );
 
+                console.log("booking", this.bookings);
             })
             .catch(err => {
                 console.log('err', err);
@@ -78,8 +90,8 @@ export class AppointmentPage implements OnInit {
             message: `${onlyDate(booking.created)} - ${booking.description.slice(0, 5)}`,
             cssClass: `alert-query`,
             buttons: [
-                { text: `Cancelar Turno`, cssClass:"cancel-button", role: 'cancel', handler: () => this.youSure() },
-                { text: `Ok`, cssClass:"accept-button" }
+                { text: `Cancelar Turno`, cssClass: "cancel-button", role: 'cancel', handler: () => this.youSure() },
+                { text: `Ok`, cssClass: "accept-button" }
             ]
         });
 
@@ -93,8 +105,8 @@ export class AppointmentPage implements OnInit {
             // message: `${onlyDate(booking.created)} - ${booking.description.slice(0,5)}`,
             cssClass: `alert-query`,
             buttons: [
-                { text: `No`, role: 'cancel',cssClass:"accept-button" },
-                { text: `Si`,cssClass:"cancel-button-yes", handler: () => this.doCancel() }
+                { text: `No`, role: 'cancel', cssClass: "accept-button" },
+                { text: `Si`, cssClass: "cancel-button-yes", handler: () => this.doCancel() }
             ]
         });
 

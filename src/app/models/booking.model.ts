@@ -15,6 +15,7 @@ export class Booking {
     timetableId: number;
     commerceId: number;
     created: Date | string;
+    // created: any;
     description: string;
     shopName: string;
     address: string;
@@ -27,20 +28,24 @@ export class Booking {
             timetableId: number;
             commerceId: number;
             created: Date | string;
+            // created: any;
             description: string;
             shopName: string;
             address: string;
             phone: number;
         }
     ) {
+        // 2020-03-27T00:00:00.000Z
+        console.log("booking-created", booking.created)
         this.id = +booking.id;
         this.userId = +booking.userId;
         this.timetableId = +booking.timetableId;
         this.commerceId = +booking.commerceId;
-        this.created = new Date(booking.created);
+        this.created = new Date(moment(booking.created, "YYYY-MM-DDTHH:mm:ss").toISOString());
         this.description = booking.description.trim();
         this.shopName = booking.shopName.trim();
         this.address = booking.address.trim();
         this.phone = +booking.phone;
+        console.log("this.created", this.created)
     }
 }
