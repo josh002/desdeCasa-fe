@@ -86,8 +86,8 @@ export class AppointmentPage implements OnInit {
         this.cancelBookingId = booking.id;
         const alert = await this.alertController.create({
             header: booking.shopName,
-            subHeader: booking.address,
-            message: `${onlyDate(booking.created)} - ${booking.description.slice(0, 5)}`,
+            subHeader: `${onlyDate(booking.created)} - ${booking.description.slice(0, 5)}`,
+            message: booking.address,
             cssClass: `alert-query`,
             buttons: [
                 { text: `Cancelar Turno`, cssClass: "cancel-button", role: 'cancel', handler: () => this.youSure() },
