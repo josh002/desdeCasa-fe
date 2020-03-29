@@ -7,13 +7,13 @@ import * as numeral from 'numeral';
 // const numerals = require('numeral')
 
 export const welcomeText = `
-<h3 style="eon6-primarycolor">Gracias por instalar nuestra APP</h3>
-<h6>Ésta es su primer versión y trabajamos muy duro para evitar que tengas que hacer largas colas. Puede que todavía nos queden cosas por mejorar!<br><br>Seguimos trabajando y agradecemos tu ayuda para hacer frente al virus.</h6>
+<h5 style="eon6-primarycolor">Gracias por instalar nuestra APP</h4>
+<h6>Ésta es su primera versión y trabajamos muy duro para evitar que tengas que hacer largas colas. Puede que todavía nos queden cosas por mejorar!<br><br>Seguimos trabajando y agradecemos tu ayuda para hacer frente al virus.</h6>
 `;
 
 export const addressHelperText = `
-<h3 style="eon6-primarycolor">Pellegrini 1001, Rosario, Santa Fe</h3>
-<h6>Seguimos trabajando muy duro, mientras tanto te pedimos que para esta primer versión ingreses tu dirección incluyendo Ciudad y Provincia.</h6>
+<h5>Seguimos trabajando muy duro, mientras tanto te pedimos que para esta primera versión ingreses tu dirección incluyendo Ciudad y Provincia.</h6>
+<h6 style="eon6-primarycolor">Ejemplo: <br>Pellegrini 1001, Rosario, Santa Fe</h6>
 `;
 
 export const addressInputHelperText = `¿Es correcta tu dirección?`;

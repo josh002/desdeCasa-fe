@@ -4,8 +4,9 @@
 
 export const environment = {
     production: false,
-    // WS_URL: 'http://localhost:3001/api/v1',
-    WS_URL: 'http://54.172.118.239:3001/api/v1', // Eon6
+    // WS_URL: 'http://localhost:3001/api/v1',              // local
+    // WS_URL: 'http://54.172.118.239:3001/api/v1',         // Eon6
+    WS_URL: 'http://200.55.243.179:3001/api/v1',         // prod
     georef_ar_api: 'https://apis.datos.gob.ar/georef/api'
 };
 
