@@ -229,7 +229,9 @@ export class AppointmentHourPage implements OnInit {
             userId: this.client.id,
             commerceId: this.commerce.id,
             timetableId: this.selectedTimetable.id,
+            created: moment().format('YYYY-MM-DD'),
         }
+        console.log(booking)
         this.boookingService.createBooking(booking)
             .then((resp: any) => {
                 const { message } = resp;

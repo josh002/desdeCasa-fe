@@ -25,6 +25,10 @@ export class GetAppointmentPage implements OnInit {
     endHour1: number;
     startHour2: number;
     endHour2: number;
+    startMinute1: number;
+    endMinute1: number;
+    startMinute2: number;
+    endMinute2: number;
 
 
     // Arreglo con horas
@@ -53,6 +57,7 @@ export class GetAppointmentPage implements OnInit {
                             this.router.navigate(['/tabs/home']);
                             this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
                         }
+                        console.log(resp.result[0]);
                         this.commerce = new Commerce(resp.result[0]);
                         if (this.commerce.shoppingMinutes < 1) this.commerce.shoppingMinutes = 1;
                         console.log(this.commerce);
@@ -63,6 +68,11 @@ export class GetAppointmentPage implements OnInit {
                         this.endHour2 = this.commerce.closeTime2 === null ? undefined : asDate(this.commerce.closeTime2).getHours();
                         if (asDate(this.commerce.closeTime1).getMinutes() > 0) this.endHour1++;
                         if (asDate(this.commerce.closeTime2).getMinutes() > 0) this.endHour2++;
+
+                        this.startMinute1 = asDate(this.commerce.openTime1).getMinutes();
+                        this.endMinute1 = asDate(this.commerce.closeTime1).getMinutes();
+                        this.startMinute2 = this.commerce.openTime2 === null ? undefined : asDate(this.commerce.openTime2).getMinutes();
+                        this.endMinute2 = this.commerce.closeTime2 === null ? undefined : asDate(this.commerce.closeTime2).getMinutes();
 
                     })
                     .catch(err => {
@@ -82,12 +92,37 @@ export class GetAppointmentPage implements OnInit {
                         this.hours = [];
                         resp.result.forEach(element => {
                             var currentHour = new Date().getHours();
+                            var currentHour = new Date().getHours();
                             var currentMinute = new Date().getMinutes();
-                           
-                            if (element.hour > currentHour)
-                                this.hours.push(element);
-                            if (element.hour == currentHour && (60 - this.commerce.shoppingMinutes * 10 > currentMinute))
-                                this.hours.push(element);
+
+                            // var criticalTime: boolean = 10*this.commerce.shoppingMinutes + currentMinute > closingMinutes
+
+                            // Si estamos en este caso 
+                            if (element.hour > currentHour) this.hours.push(element);
+
+                            // // Si se cumple esta condicion la endHour1/2 están aumentadas en +1
+                            // const compensateExtraHour = (asDate(this.commerce.closeTime1).getMinutes() > 0) ? 1 : 0;
+
+                            // // El local tiene un horario de cierre que no es en punto
+                            // if (asDate(this.commerce.closeTime1).getMinutes() > 0) {
+                            //     // endHour está incrementada en 1
+                            //     if (currentHour == this.endHour1 - 1) {
+                            //         if (element.hour == currentHour && (this.endMinute1 - this.commerce.shoppingMinutes * 10 > currentMinute))
+                            //             this.hours.push(element);
+                            //     } else {
+                            //         if (element.hour == currentHour && (60 - this.commerce.shoppingMinutes * 10 > currentMinute))
+                            //             this.hours.push(element);
+                            //     }
+
+                            // } else {
+                            //             this.hours.push(element);
+                            //     }
+                            // }
+
+                            // Considerar para el posible segundo turno
+                            // if (this.commerce.closeTime2 && asDate(this.commerce.closeTime2).getMinutes() > 0) {
+
+                            // }
                         });
                         console.log('hours', this.hours);
 
