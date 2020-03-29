@@ -9,6 +9,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { CommerceService } from 'src/app/services/commerce.service';
 import { Commerce, CommerceRegister, formatCommerce } from 'src/app/models/commerce.model';
 import { LocalStorageService } from 'src/app/services/localStorageService';
+import * as moment from 'moment';
 @Component({
     selector: 'app-edit-commerce',
     templateUrl: './edit-commerce.page.html',
@@ -97,8 +98,18 @@ export class EditCommercePage implements OnInit {
 
     onSubmit() {
         this.desperationLevel = 0;
-        // console.log('commerce.openTime1', this.commerce.openTime1);
-        // console.log('format commerce', formatCommerce(this.commerce).openTime1);
+        if (moment(this.commerce.openTime1).unix() > moment(this.commerce.closeTime1).unix()) {
+            this.alertService.simpleAlert('La primer hora de cierre no puede ser menor que la primer hora de apertura');
+            return
+        }
+        if (this.commerce.splitShift) if (moment(this.commerce.closeTime1).unix() > moment(this.commerce.openTime2).unix()) {
+            this.alertService.simpleAlert('La segunda hora de apertura no puede ser menor que la primer hora de cierre');
+            return
+        }
+        if (this.commerce.splitShift) if (moment(this.commerce.openTime2).unix() > moment(this.commerce.closeTime2).unix()) {
+            this.alertService.simpleAlert('La segunda hora de cierre no puede ser menor que la segunda hora de apertura');
+            return
+        }
         this.loadingService.presentLoading("Cargando")
             .then(
                 () => {

@@ -1,15 +1,10 @@
 <ion-header>
     <app-commerce-header></app-commerce-header>
-
-
-
 </ion-header>
 
 <ion-content fullscreen>
     <!-- <ion-content> -->
     <form #myForm="ngForm" (ngSubmit)="onSubmit()" style="height: 100%;">
-
-
 
         <!-- Datos del comercio -->
         <!-- <ion-slide> -->
@@ -152,8 +147,8 @@
                     </ion-row>
                     <ng-container *ngIf="!editconfig">
                         <div class="ion-padding" (click)=desperateUser()>
-                            <ion-button type="ngSubmit" color="primary" shape="round" expand="block"
-                                [disabled]="myForm.form.invalid">
+                            <ion-button type="ngSubmit " color="primary" shape="round" expand="block"
+                                [disabled]="myForm.form.invalid || !commerce.maxClients > 0 || !commerce.shoppingMinutes > 0">
                                 <ion-label color="light">Guardar</ion-label>
                             </ion-button>
                             <div class="button-helper" lines="none" *ngIf="desperationLevel > 3">
@@ -303,13 +298,9 @@
                 </ng-container>
                 <div class="div-paddin"></div>
 
-
-
             </ion-card-content>
         </ion-card>
         <!-- </ion-content> -->
-
-
 
     </form>
 </ion-content>
