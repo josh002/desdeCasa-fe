@@ -88,6 +88,7 @@ export class EditCommercePage implements OnInit {
         }
 
         this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
+        this.commerce.shoppingMinutes = this.commerce.shoppingMinutes*10;
     }
 
     desperateUser() {
@@ -197,10 +198,12 @@ export class EditCommercePage implements OnInit {
     changeDisabledinfo() {
         this.editInfo = !this.editInfo
         this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
+        this.commerce.shoppingMinutes = this.commerce.shoppingMinutes*10
     }
     changeDisabledconfig() {
         this.editconfig = !this.editconfig
         this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
+        this.commerce.shoppingMinutes = this.commerce.shoppingMinutes*10
     }
 
 }
