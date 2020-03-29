@@ -94,6 +94,17 @@ export class ProfilePage implements OnInit {
         this.disableHelper = true;
     }
 
+    getDepartments() {
+        this.selectedDepartment = undefined;
+        this.utilsService.getDepartment(this.selectedProvince.id)
+            .then((resp: any) => {
+                this.departments = [];
+                resp.departamentos.forEach(element => this.departments.push(new Department(element)));
+                console.log(this.departments);
+            })
+            .catch(err => { console.log(err); })
+    }
+
     onSubmit(form: any) {
         this.desperationLevel = 0;
         console.log('form', form);
