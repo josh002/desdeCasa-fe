@@ -26,8 +26,10 @@ export class GetAppointmentPage implements OnInit {
     startHour2: number;
     endHour2: number;
 
+
     // Arreglo con horas
     hours: OccupiedShifts[];
+
 
     constructor(
         private commerceService: CommerceService,
@@ -40,7 +42,6 @@ export class GetAppointmentPage implements OnInit {
     ngOnInit() { }
 
     ionViewWillEnter() {
-
         this.route.paramMap.subscribe(
             (params: Params) => {
                 const commerceId: number = params.params.id;
@@ -79,9 +80,16 @@ export class GetAppointmentPage implements OnInit {
                         // this.hours = resp.result
                         this.hours = [];
                         resp.result.forEach(element => {
-                            this.hours.push(element);
+                            var currentHour = new Date().getHours();
+                            var currentMinute = new Date().getMinutes();
+                           
+                            if (element.hour > currentHour)
+                                this.hours.push(element);
+                            if (element.hour == currentHour && (60 - this.commerce.shoppingMinutes * 10 > currentMinute))
+                                this.hours.push(element);
                         });
                         console.log('hours', this.hours);
+
                     })
                     .catch(err => {
                         console.log('err', err);
@@ -92,6 +100,7 @@ export class GetAppointmentPage implements OnInit {
                         }
                         this.router.navigate(['/tabs/home']);
                     });
+
             }
         )
     }

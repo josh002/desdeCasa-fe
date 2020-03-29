@@ -85,7 +85,7 @@ export class AppointmentHourPage implements OnInit {
                             this.router.navigate(['/tabs/home']);
                             this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
                         }
-                        this.commerce = resp.result[0];
+                        this.commerce = new Commerce(resp.result[0]);
 
 
 
@@ -134,11 +134,22 @@ export class AppointmentHourPage implements OnInit {
         this.startHour2 = this.commerce.openTime2 === null ? undefined : asDate(this.commerce.openTime2).getHours();
         this.endHour2 = this.commerce.closeTime2 === null ? undefined : asDate(this.commerce.closeTime2).getHours();
 
+        // Verifico la fecha y hora actual
+        var currentMinutes = new Date().getMinutes();
+        var currentHour = new Date().getHours()
+        var currentDate = new Date()
+
+        // Acá me va a llegar la fecha para la que se solicita el turno 
+        //var bookingDate = lo que llegue cuando esté implementado
+
         // Verifico que no vaya a venir cero o un numero incorrecto;
         if (this.commerce.shoppingMinutes < 1) this.commerce.shoppingMinutes = 1;
         this.shifts = [];
         for (var i = 0; i < 6 / this.commerce.shoppingMinutes; i++) {
+              
+            if(this.commerce.shoppingMinutes * i * 10 >= currentMinutes || this.hour != currentHour)
             this.shifts.push(this.commerce.shoppingMinutes * i * 10);
+            
         }
         if (this.hour == this.startHour1) {
             this.shifts = this.shifts.filter(elem => elem >= this.startMinute1);
@@ -149,11 +160,15 @@ export class AppointmentHourPage implements OnInit {
             console.log('Estamos en la hora de cierre 1');
         };
         if (this.startHour2 && this.hour == this.startHour2) {
+          
             this.shifts = this.shifts.filter(elem => elem >= this.startMinute2);
             console.log('Estamos en la hora de apertura 2');
         };
         if (this.endHour2 && this.hour == this.endHour2) {
-            this.shifts = this.shifts.filter(elem => elem < this.endMinute2);
+            // console.log("shifts", this.shifts)
+            // console.log("end minutes", this.startMinute2)
+
+            this.shifts = this.shifts.filter(elem => elem > this.endMinute2);
             console.log('Estamos en la hora de cierre 2');
         };
 
