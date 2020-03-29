@@ -45,6 +45,7 @@
         "cordova-plugin-datepicker": "^0.9.3",
         "cordova-plugin-facebook4": "*",
         "cordova-plugin-geolocation": "^4.0.2",
+        "cordova-plugin-googlemaps": "^2.6.2",
         "core-js": "^3.4.2",
         "corejs": "^1.0.0",
         "crypto-js": "^3.1.9-1",
@@ -117,7 +118,9 @@
             "cordova-plugin-datepicker": {},
             "cordova-plugin-geolocation": {},
             "cordova-plugin-googlemaps": {
-                "API_KEY_FOR_ANDROID": "AIzaSyBvnvlf-C4kmhammlz61Q7mbCiFGlgkCrc"
+                "API_KEY_FOR_ANDROID": "AIzaSyBvnvlf-C4kmhammlz61Q7mbCiFGlgkCrc",
+                "PLAY_SERVICES_VERSION": "15.0.1",
+                "ANDROID_SUPPORT_V4_VERSION": "27.+"
             }
         },
         "platforms": [

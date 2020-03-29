@@ -16,6 +16,11 @@ export const addressHelperText = `
 <h6>Seguimos trabajando muy duro, mientras tanto te pedimos que para esta primer versión ingreses tu dirección incluyendo Ciudad y Provincia.</h6>
 `;
 
+export const addressInputHelperText = `
+<h3 style="eon6-primarycolor">Pellegrini 1001, Rosario, Santa Fe</h3>
+<h6>Seguimos trabajando muy duro, mientras tanto te pedimos que para esta primer versión ingreses tu dirección incluyendo Ciudad y Provincia.</h6>
+`;
+
 /**
  * Formato global para el datetime que debe ir a la Database
  */
