@@ -87,14 +87,22 @@ export class EditCommercePage implements OnInit {
         for (var i = 1; i < 60; i++) {
             this.clientsMax[0].push(i);
         }
-
         this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
-        this.commerce.shoppingMinutes = this.commerce.shoppingMinutes*10;
+        this.commerce.shoppingMinutes = this.commerce.shoppingMinutes * 10;
     }
 
     desperateUser() {
         this.desperationLevel = ++this.desperationLevel;
         console.log(`Im this desperate: ${this.desperationLevel}`);
+    }
+
+    changeDisabledinfo() {
+        this.editInfo = !this.editInfo
+        // this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
+    }
+    changeDisabledconfig() {
+        this.editconfig = !this.editconfig
+        // this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
     }
 
     onSubmit() {
@@ -119,7 +127,8 @@ export class EditCommercePage implements OnInit {
                             (resp: any) => {
                                 this.loadingService.dismissLoading();
                                 if (resp && resp.status === 0) {
-                                    this.localStorageService.setObject('commerce', this.commerce);
+                                    const temporaryCommerce = new Commerce({ ...this.commerce, shoppingMinutes: (this.commerce.shoppingMinutes / 10) });
+                                    this.localStorageService.setObject('commerce', temporaryCommerce);
                                     this.editInfo = true;
                                     this.editconfig = true;
                                     const { message } = resp;
@@ -204,17 +213,6 @@ export class EditCommercePage implements OnInit {
         }
 
         return options;
-    }
-
-    changeDisabledinfo() {
-        this.editInfo = !this.editInfo
-        this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
-        this.commerce.shoppingMinutes = this.commerce.shoppingMinutes*10
-    }
-    changeDisabledconfig() {
-        this.editconfig = !this.editconfig
-        this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
-        this.commerce.shoppingMinutes = this.commerce.shoppingMinutes*10
     }
 
 }
