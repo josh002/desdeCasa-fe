@@ -76,3 +76,21 @@ export const onlyDate = (myDate: Date | string) =>
 export const fullDate = (myDate: Date | string) =>
     moment(myDate).format('YYYY-MM-DD')
 
+
+    /*
+    // Esto me servira para filtrar horarios de bookings segun día     cuando haya que hcaerlo 
+
+       whatDayIsIt: string = new Date().toLocaleDateString();
+    this.authService.getBookingsByCommerce(commerceId)
+    .then(
+        resp => {
+            console.clear();
+            this.commerceBookings = resp.result.filter(
+                booking =>
+                    // Filtro aquellos que no corresponden al día de hoy
+                    this.whatDayIsIt === new Date(moment(booking.created, "YYYY-MM-DDTHH:mm:ss").toISOString()).toLocaleDateString()
+            );
+            this.manageWorkHours();
+        }
+    )
+    */

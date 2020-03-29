@@ -8,6 +8,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { GeolocationService } from 'src/app/services/geolocationService';
 import { CommerceService } from 'src/app/services/commerce.service';
 import { Commerce, CommerceRegister, formatCommerce } from 'src/app/models/commerce.model';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-commerce',
@@ -17,38 +18,38 @@ import { Commerce, CommerceRegister, formatCommerce } from 'src/app/models/comme
 
 export class CommercePage implements OnInit {
 
+    // commerce: CommerceRegister = {
+    //     email: '',
+    //     cuitCuil: '',
+    //     password: '',
+    //     shopName: '',
+    //     address: '',
+    //     maxClients: undefined,
+    //     phone: undefined,
+    //     splitShift: true,
+    //     openTime1: new Date('1994-12-15T08:30').toISOString(),
+    //     closeTime1: new Date('1994-12-15T13:30').toISOString(),
+    //     openTime2: new Date('1994-12-15T16:00').toISOString(),
+    //     closeTime2: new Date('1994-12-15T20:00').toISOString(),
+    //     shoppingMinutes: undefined,
+    // };
+
+    // Esto está armado para propósitos de TESTING
     commerce: CommerceRegister = {
-        email: '',
-        cuitCuil: '',
-        password: '',
-        shopName: '',
-        address: '',
-        maxClients: undefined,
-        phone: undefined,
+        email: 'cmartinez@eon5.tech',
+        cuitCuil: '20-3456884-0',
+        password: 'doremifasol',
+        shopName: 'Pepito SHOP!',
+        address: 'French 1425',
+        maxClients: 5,
+        phone: 123456789,
         splitShift: false,
         openTime1: new Date('1994-12-15T08:30').toISOString(),
         closeTime1: new Date('1994-12-15T13:30').toISOString(),
         openTime2: new Date('1994-12-15T16:00').toISOString(),
         closeTime2: new Date('1994-12-15T20:00').toISOString(),
-        shoppingMinutes: undefined,
+        shoppingMinutes: 1,
     };
-
-    // Esto está armado para propósitos de TESTING
-    // commerce: CommerceRegister = {
-    //     email: 'cmartinez@eon5.tech',
-    //     cuitCuil: '20-3456884-0',
-    //     password: 'doremifasol',
-    //     shopName: 'Pepito SHOP!',
-    //     address: 'French 1425',
-    //     maxClients: 5,
-    //     phone: 123456789,
-    //     splitShift: false,
-    //     openTime1: new Date('1994-12-15T08:30').toISOString(),
-    //     closeTime1: new Date('1994-12-15T13:30').toISOString(),
-    //     openTime2: new Date('1994-12-15T16:00').toISOString(),
-    //     closeTime2: new Date('1994-12-15T20:00').toISOString(),
-    //     shoppingMinutes: 1,
-    // };
 
     // Arreglo de posibles duraciones de turnos
     shiftDurations: number[][] = [
@@ -90,6 +91,14 @@ export class CommercePage implements OnInit {
 
     onSubmit() {
         this.desperationLevel = 0;
+        console.log('openTime1', this.commerce.openTime1);
+        if(moment(this.commerce.openTime1).unix() > moment(this.commerce.closeTime1).unix()) this.alertService.simpleAlert('La primer hora de cierre no puede ser menor que la primer hora de apertura');
+        if(moment(this.commerce.closeTime1).unix() > moment(this.commerce.openTime2).unix()) this.alertService.simpleAlert('La segunda hora de apertura no puede ser menor que la primer hora de cierre');
+        if(moment(this.commerce.openTime2).unix() > moment(this.commerce.closeTime2).unix()) this.alertService.simpleAlert('La segunda hora de cierre no puede ser menor que la segunda hora de apertura');
+        console.log('closeTime1', this.commerce.closeTime1);
+        console.log('openTime2', this.commerce.openTime2);
+        console.log('openTime2', this.commerce.openTime2);
+        return 
         this.loadingService.presentLoading("Cargando")
             .then(
                 () => {

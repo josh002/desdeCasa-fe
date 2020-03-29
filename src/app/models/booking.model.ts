@@ -35,8 +35,6 @@ export class Booking {
             phone: number;
         }
     ) {
-        // 2020-03-27T00:00:00.000Z
-        console.log("booking-created", booking.created)
         this.id = +booking.id;
         this.userId = +booking.userId;
         this.timetableId = +booking.timetableId;
@@ -46,6 +44,5 @@ export class Booking {
         this.shopName = booking.shopName.trim();
         this.address = booking.address.trim();
         this.phone = +booking.phone;
-        console.log("this.created", this.created)
     }
 }
