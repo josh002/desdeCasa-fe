@@ -104,7 +104,7 @@
                         <ion-col>
                             <!-- Horario Corrido           -->
                             <ion-item [(disabled)]="editconfig" class="toggle-social-media" lines="none">
-                                <ion-label color="primary">Horario Corrido</ion-label>
+                                <ion-label color="primary">Horario Cortado</ion-label>
                                 <ion-toggle slot="end" name="commerce.splitShift" [(ngModel)]="commerce.splitShift">
                                 </ion-toggle>
                             </ion-item>
@@ -130,7 +130,7 @@
                             </ion-item>
                         </ion-col>
                     </ion-row>
-                    <ion-row *ngIf="!commerce.splitShift">
+                    <ion-row *ngIf="commerce.splitShift">
                         <ion-col>
                             <ion-item [(disabled)]="editconfig">
                                 <ion-label color="primary" position="floating">Desde</ion-label>

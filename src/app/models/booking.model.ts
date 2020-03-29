@@ -7,6 +7,7 @@ export interface BookingRegister {
     userId: number;
     commerceId: number;
     timetableId: number;
+    created: Date | string;
 }
 
 export class Booking {
