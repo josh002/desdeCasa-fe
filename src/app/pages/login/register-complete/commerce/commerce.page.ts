@@ -8,8 +8,10 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { GeolocationService } from 'src/app/services/geolocationService';
 import { CommerceService } from 'src/app/services/commerce.service';
 import { Commerce, CommerceRegister, formatCommerce } from 'src/app/models/commerce.model';
-import { addressHelperText } from 'src/app/constants/constants';
+import { addressHelperText, addressInputHelperText } from 'src/app/constants/constants';
 import * as moment from 'moment';
+import { Province } from 'src/app/models/province.model';
+import { Department } from 'src/app/models/department.model';
 
 @Component({
     selector: 'app-commerce',
@@ -18,39 +20,47 @@ import * as moment from 'moment';
 })
 
 export class CommercePage implements OnInit {
+    readonly addressInputHelperText = addressInputHelperText;
+    
+    disableHelper: boolean = false;
+    desperationLevel: number;
+    selectedProvince: Province;
+    selectedDepartment: Department;
+    provinces: Province[];
+    departments: Department[];
 
-    commerce: CommerceRegister = {
-        email: '',
-        cuitCuil: '',
-        password: '',
-        shopName: '',
-        address: '',
-        maxClients: undefined,
-        phone: undefined,
-        splitShift: true,
-        openTime1: new Date('1994-12-15T08:30').toISOString(),
-        closeTime1: new Date('1994-12-15T13:30').toISOString(),
-        openTime2: new Date('1994-12-15T16:00').toISOString(),
-        closeTime2: new Date('1994-12-15T20:00').toISOString(),
-        shoppingMinutes: undefined,
-    };
-
-    // Esto está armado para propósitos de TESTING
     // commerce: CommerceRegister = {
-    //     email: 'cmartinez@eon5.tech',
-    //     cuitCuil: '20-3456884-0',
-    //     password: 'doremifasol',
-    //     shopName: 'Pepito SHOP!',
-    //     address: 'French 1425',
-    //     maxClients: 5,
-    //     phone: 123456789,
-    //     splitShift: false,
+    //     email: '',
+    //     cuitCuil: '',
+    //     password: '',
+    //     shopName: '',
+    //     address: '',
+    //     maxClients: undefined,
+    //     phone: undefined,
+    //     splitShift: true,
     //     openTime1: new Date('1994-12-15T08:30').toISOString(),
     //     closeTime1: new Date('1994-12-15T13:30').toISOString(),
     //     openTime2: new Date('1994-12-15T16:00').toISOString(),
     //     closeTime2: new Date('1994-12-15T20:00').toISOString(),
-    //     shoppingMinutes: 1,
+    //     shoppingMinutes: undefined,
     // };
+
+    // Esto está armado para propósitos de TESTING
+    commerce: CommerceRegister = {
+        email: 'cmartinez@eon5.tech',
+        cuitCuil: '20-3456884-0',
+        password: 'doremifasol',
+        shopName: 'Pepito SHOP!',
+        address: 'French 1425',
+        maxClients: 5,
+        phone: 123456789,
+        splitShift: false,
+        openTime1: new Date('1994-12-15T08:30').toISOString(),
+        closeTime1: new Date('1994-12-15T13:30').toISOString(),
+        openTime2: new Date('1994-12-15T16:00').toISOString(),
+        closeTime2: new Date('1994-12-15T20:00').toISOString(),
+        shoppingMinutes: 1,
+    };
 
     // Arreglo de posibles duraciones de turnos
     shiftDurations: number[][] = [
@@ -61,7 +71,6 @@ export class CommercePage implements OnInit {
         []
     ];
 
-    desperationLevel: number;
     constructor(
         private alertService: AlertService,
         private router: Router,
@@ -76,17 +85,23 @@ export class CommercePage implements OnInit {
 
     ngOnInit() {
         this.desperationLevel = 0;
+        this.utilsService.getProvince()
+            .then((resp: any) => {
+                this.provinces = [];
+                resp.provincias.forEach(element => this.provinces.push(new Province(element)));
+                console.log(this.provinces);
+            })
+            .catch(err => { console.log(err); })
     }
 
-    ionViewWillEnter(){
+    ionViewWillEnter() {
         // Setea localización actual del usuario en address
         this.geolocationService.getCurrentLocation()
             .then(latLong => { return this.utilsService.cordsToAddress(latLong) })
-            .then(({ formatted_address }) => this.commerce.address = formatted_address)
+            .then(({ formatted_address }) => this.commerce.address = formatted_address.substring(0, formatted_address.indexOf(',')))
         for (var i = 1; i < 60; i++) {
             this.clientsMax[0].push(i);
         }
-        this.alertService.simpleAlert(addressHelperText);
     }
 
     desperateUser() {
@@ -94,7 +109,23 @@ export class CommercePage implements OnInit {
         console.log(`Im this desperate: ${this.desperationLevel}`);
     }
 
-    onSubmit() {
+    addressHelper() {
+        if (!this.disableHelper) this.alertService.simpleAlert(addressHelperText);
+        this.disableHelper = true;
+    }
+
+    getDepartments() {
+        this.selectedDepartment = undefined;
+        this.utilsService.getDepartment(this.selectedProvince.id)
+            .then((resp: any) => {
+                this.departments = [];
+                resp.departamentos.forEach(element => this.departments.push(new Department(element)));
+                console.log(this.departments);
+            })
+            .catch(err => { console.log(err); })
+    }
+
+    onSubmit(form: any) {
         this.desperationLevel = 0;
         if (moment(this.commerce.openTime1).unix() > moment(this.commerce.closeTime1).unix()) {
             this.alertService.simpleAlert('La primer hora de cierre no puede ser menor que la primer hora de apertura');
@@ -108,16 +139,21 @@ export class CommercePage implements OnInit {
             this.alertService.simpleAlert('La segunda hora de cierre no puede ser menor que la segunda hora de apertura');
             return
         }
-
+        console.log('form', form);
         this.loadingService.presentLoading("Cargando")
             .then(
                 () => {
-                    this.commerceService.register(formatCommerce(this.commerce))
+                    const temporaryCommerce: CommerceRegister = {
+                        ...this.commerce,
+                        address: `${this.commerce.address}, ${this.selectedDepartment.nombre}, ${this.selectedProvince.nombre}, Argentina`
+                    };
+                    this.commerceService.register(formatCommerce(temporaryCommerce))
                         .then(
                             (resp: any) => {
                                 this.loadingService.dismissLoading();
                                 if (resp && resp.status === 0) {
                                     const { message } = resp;
+                                    console.log(form.reset());
                                     this.alertService.headerAlert('Exito', message)
                                     this.router.navigate(['/start'])
                                 } else {

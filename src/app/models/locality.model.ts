@@ -12,6 +12,10 @@ export class Locality {
     nombre                   : string;
     provincia_id             : number;
     provincia_nombre         : string;
+
+    constructor(){
+        alert('Constructor no creado.\nCrear a partir de los constructores de Province o Department como modelo base');
+    }
 }
 
 /*

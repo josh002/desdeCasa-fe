@@ -9,7 +9,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { CommerceService } from 'src/app/services/commerce.service';
 import { Commerce, CommerceRegister, formatCommerce } from 'src/app/models/commerce.model';
 import { LocalStorageService } from 'src/app/services/localStorageService';
-import { addressHelperText } from 'src/app/constants/constants';
+import { addressHelperText, addressInputHelperText } from 'src/app/constants/constants';
 import * as moment from 'moment';
 @Component({
     selector: 'app-edit-commerce',
@@ -17,6 +17,7 @@ import * as moment from 'moment';
     styleUrls: ['./edit-commerce.page.scss'],
 })
 export class EditCommercePage implements OnInit {
+    readonly addressInputHelperText = addressInputHelperText;
 
     commerce: Commerce = {
         email: '',
@@ -92,13 +93,15 @@ export class EditCommercePage implements OnInit {
         this.commerce.shoppingMinutes = this.commerce.shoppingMinutes * 10;
     }
 
-    ionViewWillEnter(){
-        this.alertService.simpleAlert(addressHelperText);
-    }
+    ionViewWillEnter() { }
 
     desperateUser() {
         this.desperationLevel = ++this.desperationLevel;
         console.log(`Im this desperate: ${this.desperationLevel}`);
+    }
+
+    addressHelper() {
+        this.alertService.simpleAlert(addressHelperText);
     }
 
     changeDisabledinfo() {
@@ -110,7 +113,7 @@ export class EditCommercePage implements OnInit {
         // this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
     }
 
-    onSubmit() {
+    onSubmit(form: any) {
         this.desperationLevel = 0;
         if (moment(this.commerce.openTime1).unix() > moment(this.commerce.closeTime1).unix()) {
             this.alertService.simpleAlert('La primer hora de cierre no puede ser menor que la primer hora de apertura');

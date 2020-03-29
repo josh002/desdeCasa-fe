@@ -5,7 +5,7 @@
 export const environment = {
     production: false,
     // WS_URL: 'http://localhost:3001/api/v1',
-    WS_URL: 'http://54.172.118.239:3001/api/v1',
+    WS_URL: 'http://54.172.118.239:3001/api/v1', // Eon6
     georef_ar_api: 'https://apis.datos.gob.ar/georef/api'
 };
 

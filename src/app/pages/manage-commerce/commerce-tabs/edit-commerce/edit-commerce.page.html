@@ -4,7 +4,7 @@
 
 <ion-content fullscreen>
     <!-- <ion-content> -->
-    <form #myForm="ngForm" (ngSubmit)="onSubmit()" style="height: 100%;">
+    <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" style="height: 100%;">
 
         <!-- Datos del comercio -->
         <!-- <ion-slide> -->
@@ -148,7 +148,7 @@
                     <ng-container *ngIf="!editconfig">
                         <div class="ion-padding" (click)=desperateUser()>
                             <ion-button type="ngSubmit " color="primary" shape="round" expand="block"
-                                [disabled]="myForm.form.invalid || !commerce.maxClients > 0 || !commerce.shoppingMinutes > 0">
+                                [disabled]="myForm.form.invalid || !(commerce.maxClients > 0) || !(commerce.shoppingMinutes > 0)">
                                 <ion-label color="light">Guardar</ion-label>
                             </ion-button>
                             <div class="button-helper" lines="none" *ngIf="desperationLevel > 3">
@@ -250,14 +250,14 @@
                     <!-- Direccion comercio -->
                     <ion-item [(disabled)]="editInfo">
                         <ion-label color="primary" position="floating">Dirección</ion-label>
-                        <ion-input name="address" #address="ngModel" type="text" [(ngModel)]="commerce.address"
+                        <ion-input name="address" #address="ngModel" type="text" (ionFocus)="addressHelper()" [(ngModel)]="commerce.address"
                             required>
                         </ion-input>
                     </ion-item>
                     <ng-container *ngIf="address.pristine">
-                        <div class="ux-warning" lines="none">
-                            <ion-icon slot="start" name="warning"></ion-izcon>
-                            <ion-label>Ajustá tu dirección y no te olvides de Ciudad y Provincia</ion-label>
+                        <div class="ux-alert" lines="none">
+                            <ion-icon slot="start" name="warning"></ion-icon>
+                            <ion-label>{{addressInputHelperText}}</ion-label>
                         </div>
                     </ng-container>
                     <ng-container

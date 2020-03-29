@@ -27,7 +27,7 @@
         </ng-container>
 
         <ion-card-content>
-            <form #myForm="ngForm" (ngSubmit)="onSubmit()">
+            <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
 
                 <ion-list>
                     <!-- Nombre -->
@@ -113,13 +113,13 @@
 
                     <ion-item [(disabled)]="disabled">
                         <ion-label color="primary" position="floating">Direccion</ion-label>
-                        <ion-input name="address" #address="ngModel" type="text" [(ngModel)]="client.address" required> </ion-input>
+                        <ion-input name="address" #address="ngModel" type="text" (ionFocus)="addressHelper()" [(ngModel)]="client.address" required> </ion-input>
                     </ion-item>
 
                     <ng-container *ngIf="address.pristine">
-                        <div class="ux-warning" lines="none">
+                        <div class="ux-alert" lines="none">
                             <ion-icon slot="start" name="warning"></ion-icon>
-                            <ion-label>Ajustá tu dirección y no te olvides de Ciudad y Provincia</ion-label>
+                            <ion-label>{{addressInputHelperText}}</ion-label>
                         </div>
                     </ng-container>
 

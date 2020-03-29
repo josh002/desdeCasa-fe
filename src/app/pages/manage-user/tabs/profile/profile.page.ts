@@ -6,7 +6,7 @@ import { AlertService } from 'src/app/services/alertService';
 import { Router } from '@angular/router';
 import { Client } from 'src/app/models/client.model';
 import { LocalStorageService } from 'src/app/services/localStorageService';
-import { addressHelperText } from 'src/app/constants/constants';
+import { addressHelperText, addressInputHelperText } from 'src/app/constants/constants';
 
 @Component({
     selector: 'app-profile',
@@ -14,6 +14,7 @@ import { addressHelperText } from 'src/app/constants/constants';
     styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+    readonly addressInputHelperText = addressInputHelperText;
 
     client: Client = {
         email: '',
@@ -43,15 +44,19 @@ export class ProfilePage implements OnInit {
         console.log(`Im this desperate: ${this.desperationLevel}`);
     }
 
+    addressHelper() {
+        this.alertService.simpleAlert(addressHelperText);
+    }
+
     ngOnInit() {
         this.client = this.localStorageService.getObject('client');
     }
 
-    ionViewWillEnter(){
+    ionViewWillEnter() {
         this.alertService.simpleAlert(addressHelperText);
     }
 
-    onSubmit() {
+    onSubmit(form: any) {
         this.desperationLevel = 0;
 
         this.loadingService.presentLoading("Cargando")
