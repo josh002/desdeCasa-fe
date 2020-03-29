@@ -107,22 +107,52 @@
                         </div>
                     </ng-container> -->
 
-                    <!-- DNI -->
+                    <!-- Provincia      -->
+                    <ion-item [(disabled)]="disabled">
+                        <ion-label position="floating" color="primary">Provincia</ion-label>
+                        <ion-select name="province" #province="ngModel" [(ngModel)]="selectedProvince"
+                            (ionChange)=getDepartments() required>
+                            <ion-select-option *ngFor="let element of provinces" [(value)]="element">
+                                {{element.nombre | titlecase}}
+                            </ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <ng-container *ngIf="province.invalid && (province.touched || desperationLevel > 3)">
+                        <div class="ux-alert" lines="none" *ngIf="province.errors && province.errors.required">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Campo Requerido</ion-label>
+                        </div>
+                    </ng-container>
+
+                    <!-- Departamento      -->
+                    <ion-item [(disabled)]="disabled">
+                        <ion-label position="floating" color="primary">Departamento</ion-label>
+                        <ion-select name="department" #department="ngModel" [disabled]="!selectedProvince"
+                            [(ngModel)]="selectedDepartment" required>
+                            <ion-select-option *ngFor="let element of departments" [(value)]="element">
+                                {{element.nombre | titlecase}}
+                            </ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <ng-container *ngIf="department.invalid && (department.touched || desperationLevel > 3)">
+                        <div class="ux-alert" lines="none" *ngIf="department.errors && department.errors.required">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Campo Requerido</ion-label>
+                        </div>
+                    </ng-container>
+
 
                     <!-- Dirección -->
-
                     <ion-item [(disabled)]="disabled">
                         <ion-label color="primary" position="floating">Direccion</ion-label>
-                        <ion-input name="address" #address="ngModel" type="text" (ionFocus)="addressHelper()" [(ngModel)]="client.address" required> </ion-input>
+                        <ion-input name="address" #address="ngModel" type="text" (ionFocus)="addressHelper()" [disabled]="!selectedDepartment" [(ngModel)]="client.address" required> </ion-input>
                     </ion-item>
-
-                    <ng-container *ngIf="address.pristine">
+                    <ng-container *ngIf="!disabled && address.pristine">
                         <div class="ux-alert" lines="none">
                             <ion-icon slot="start" name="warning"></ion-icon>
                             <ion-label>{{addressInputHelperText}}</ion-label>
                         </div>
                     </ng-container>
-
                     <ng-container *ngIf="address.invalid && ((address.dirty && address.touched) || desperationLevel > 3)">
                         <div class="ux-alert" lines="none" *ngIf="address.errors && address.errors.required">
                             <ion-icon slot="start" name="information-circle-outline"></ion-icon>

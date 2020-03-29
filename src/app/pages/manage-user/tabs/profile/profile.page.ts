@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { Client } from 'src/app/models/client.model';
 import { LocalStorageService } from 'src/app/services/localStorageService';
 import { addressHelperText, addressInputHelperText } from 'src/app/constants/constants';
+import { UtilsService } from 'src/app/services/utils.service';
+import { Department } from 'src/app/models/department.model';
+import { Province } from 'src/app/models/province.model';
 
 @Component({
     selector: 'app-profile',
@@ -15,6 +18,14 @@ import { addressHelperText, addressInputHelperText } from 'src/app/constants/con
 })
 export class ProfilePage implements OnInit {
     readonly addressInputHelperText = addressInputHelperText;
+
+    disableHelper: boolean = false;
+    desperationLevel: number = 0;
+    selectedProvince: Province;
+    selectedDepartment: Department;
+    provinces: Province[];
+    departments: Department[];
+    disabled: boolean = true;
 
     client: Client = {
         email: '',
@@ -27,42 +38,73 @@ export class ProfilePage implements OnInit {
         longitude: null
     };
 
-    desperationLevel: number;
-
-    disabled: boolean = true;
-
     constructor(
         private authService: AuthService,
         private loadingService: LoadingService,
         private alertService: AlertService,
         private router: Router,
-        private localStorageService: LocalStorageService
+        private localStorageService: LocalStorageService,
+        private utilsService: UtilsService,
     ) { }
 
+
+    ngOnInit() { }
+
+    ionViewWillEnter() {
+        this.client = this.localStorageService.getObject('client');
+        this.guessMyLocation();
+    }
+
+    guessMyLocation() {
+        const addressArray = this.client.address.split(', ');
+        const guessedAddress: string = addressArray[0];
+        const guessedDepartment: string = addressArray[1];
+        const guessedProvince: string = addressArray[2];
+
+        this.client.address = guessedAddress.trim();
+        console.log('Split me in three!', addressArray)
+        this.utilsService.getProvince()
+            .then((resp: any) => {
+                this.provinces = [];
+                resp.provincias.forEach(element => this.provinces.push(new Province(element)));
+                const filteredProvince: Province[] = this.provinces.filter(elem => guessedProvince ? guessedProvince.includes(elem.nombre) : false);
+                this.selectedProvince = filteredProvince.length == 1 ? filteredProvince[0] : undefined;
+                console.log(this.provinces);
+                if (this.selectedProvince) {
+                    this.utilsService.getDepartment(this.selectedProvince.id)
+                        .then((resp: any) => {
+                            this.departments = [];
+                            resp.departamentos.forEach(element => this.departments.push(new Department(element)));
+                            const filteredDepartment: Department[] = this.departments.filter(elem => guessedDepartment ? guessedDepartment.includes(elem.nombre) : false);
+                            this.selectedDepartment = filteredDepartment.length == 1 ? filteredDepartment[0] : undefined;
+                            console.log(this.departments);
+                        })
+                }
+            })
+            .catch(err => { console.log(err); })
+    }
+
     desperateUser() {
-        this.desperationLevel = ++this.desperationLevel;
+       this.desperationLevel = this.desperationLevel ? ++this.desperationLevel : 0;
         console.log(`Im this desperate: ${this.desperationLevel}`);
     }
 
     addressHelper() {
-        this.alertService.simpleAlert(addressHelperText);
-    }
-
-    ngOnInit() {
-        this.client = this.localStorageService.getObject('client');
-    }
-
-    ionViewWillEnter() {
-        this.alertService.simpleAlert(addressHelperText);
+        if (!this.disableHelper) this.alertService.simpleAlert(addressHelperText);
+        this.disableHelper = true;
     }
 
     onSubmit(form: any) {
         this.desperationLevel = 0;
-
+        console.log('form', form);
         this.loadingService.presentLoading("Cargando")
             .then(
                 (resp: any) => {
-                    this.authService.editUser(this.client)
+                    const temporaryClient: Client = new Client({
+                        ...this.client,
+                        address: `${this.client.address}, ${this.selectedDepartment.nombre}, ${this.selectedProvince.nombre}, Argentina`
+                    });
+                    this.authService.editUser(temporaryClient)
                         .then(
                             (resp: any) => {
                                 this.loadingService.dismissLoading();

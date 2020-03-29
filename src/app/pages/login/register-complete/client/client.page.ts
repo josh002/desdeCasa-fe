@@ -76,7 +76,7 @@ export class ClientPage implements OnInit {
     }
 
     desperateUser() {
-        this.desperationLevel = ++this.desperationLevel;
+        this.desperationLevel = this.desperationLevel ? ++this.desperationLevel : 0;
         console.log(`Im this desperate: ${this.desperationLevel}`);
     }
 

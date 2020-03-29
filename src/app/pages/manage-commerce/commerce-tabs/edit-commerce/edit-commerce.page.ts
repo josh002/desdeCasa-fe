@@ -5,12 +5,14 @@ import { AlertService } from 'src/app/services/alertService';
 import { Router } from '@angular/router';
 import { LoadingService } from 'src/app/services/loadingService';
 import { UtilsService } from 'src/app/services/utils.service';
-// import { GeolocationService } from 'src/app/services/geolocationService';
 import { CommerceService } from 'src/app/services/commerce.service';
 import { Commerce, CommerceRegister, formatCommerce } from 'src/app/models/commerce.model';
 import { LocalStorageService } from 'src/app/services/localStorageService';
 import { addressHelperText, addressInputHelperText } from 'src/app/constants/constants';
 import * as moment from 'moment';
+import { Province } from 'src/app/models/province.model';
+import { Department } from 'src/app/models/department.model';
+
 @Component({
     selector: 'app-edit-commerce',
     templateUrl: './edit-commerce.page.html',
@@ -18,6 +20,15 @@ import * as moment from 'moment';
 })
 export class EditCommercePage implements OnInit {
     readonly addressInputHelperText = addressInputHelperText;
+
+    disableHelper: boolean = false;
+    desperationLevel: number = 0;
+    selectedProvince: Province;
+    selectedDepartment: Department;
+    provinces: Province[];
+    departments: Department[];
+    editInfo: boolean = true;
+    editconfig: boolean = true;
 
     commerce: Commerce = {
         email: '',
@@ -38,8 +49,6 @@ export class EditCommercePage implements OnInit {
         id: null
     };
 
-    editInfo: boolean = true;
-    editconfig: boolean = true;
     // Esto está armado para propósitos de TESTING
     // commerce: CommerceRegister = {
     //     email: 'cmartinez@eon5.tech',
@@ -66,7 +75,6 @@ export class EditCommercePage implements OnInit {
         []
     ];
 
-    desperationLevel: number;
     constructor(
         private alertService: AlertService,
         private router: Router,
@@ -89,19 +97,62 @@ export class EditCommercePage implements OnInit {
         for (var i = 1; i < 60; i++) {
             this.clientsMax[0].push(i);
         }
-        this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
-        this.commerce.shoppingMinutes = this.commerce.shoppingMinutes * 10;
     }
 
-    ionViewWillEnter() { }
+    ionViewWillEnter() {
+        this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
+        this.commerce.shoppingMinutes = this.commerce.shoppingMinutes * 10;
+        this.guessMyLocation();
+    }
+
+    guessMyLocation() {
+        const addressArray = this.commerce.address.split(', ');
+        const guessedAddress: string = addressArray[0];
+        const guessedDepartment: string = addressArray[1];
+        const guessedProvince: string = addressArray[2];
+
+        this.commerce.address = guessedAddress.trim();
+        console.log('Split me in three!', addressArray)
+        this.utilsService.getProvince()
+            .then((resp: any) => {
+                this.provinces = [];
+                resp.provincias.forEach(element => this.provinces.push(new Province(element)));
+                const filteredProvince: Province[] = this.provinces.filter(elem => guessedProvince ? guessedProvince.includes(elem.nombre) : false);
+                this.selectedProvince = filteredProvince.length == 1 ? filteredProvince[0] : undefined;
+                console.log(this.provinces);
+                if (this.selectedProvince) {
+                    this.utilsService.getDepartment(this.selectedProvince.id)
+                        .then((resp: any) => {
+                            this.departments = [];
+                            resp.departamentos.forEach(element => this.departments.push(new Department(element)));
+                            const filteredDepartment: Department[] = this.departments.filter(elem => guessedDepartment ? guessedDepartment.includes(elem.nombre) : false);
+                            this.selectedDepartment = filteredDepartment.length == 1 ? filteredDepartment[0] : undefined;
+                            console.log(this.departments);
+                        })
+                }
+            })
+            .catch(err => { console.log(err); })
+    }
 
     desperateUser() {
-        this.desperationLevel = ++this.desperationLevel;
+        this.desperationLevel = this.desperationLevel ? ++this.desperationLevel : 0;
         console.log(`Im this desperate: ${this.desperationLevel}`);
     }
 
     addressHelper() {
-        this.alertService.simpleAlert(addressHelperText);
+        if (!this.disableHelper) this.alertService.simpleAlert(addressHelperText);
+        this.disableHelper = true;
+    }
+
+    getDepartments() {
+        this.selectedDepartment = undefined;
+        this.utilsService.getDepartment(this.selectedProvince.id)
+            .then((resp: any) => {
+                this.departments = [];
+                resp.departamentos.forEach(element => this.departments.push(new Department(element)));
+                console.log(this.departments);
+            })
+            .catch(err => { console.log(err); })
     }
 
     changeDisabledinfo() {
@@ -127,15 +178,20 @@ export class EditCommercePage implements OnInit {
             this.alertService.simpleAlert('La segunda hora de cierre no puede ser menor que la segunda hora de apertura');
             return
         }
+        console.log('form', form);
         this.loadingService.presentLoading("Cargando")
             .then(
                 () => {
-                    this.commerceService.editCommerce(formatCommerce(this.commerce))
+                    const temporaryCommerce = new Commerce({
+                        ...this.commerce,
+                        shoppingMinutes: (this.commerce.shoppingMinutes / 10),
+                        address: `${this.commerce.address}, ${this.selectedDepartment.nombre}, ${this.selectedProvince.nombre}, Argentina`
+                    });
+                    this.commerceService.editCommerce(formatCommerce(temporaryCommerce))
                         .then(
                             (resp: any) => {
                                 this.loadingService.dismissLoading();
                                 if (resp && resp.status === 0) {
-                                    const temporaryCommerce = new Commerce({ ...this.commerce, shoppingMinutes: (this.commerce.shoppingMinutes / 10) });
                                     this.localStorageService.setObject('commerce', temporaryCommerce);
                                     this.editInfo = true;
                                     this.editconfig = true;
