@@ -6,6 +6,7 @@ import { AlertService } from 'src/app/services/alertService';
 import { Router } from '@angular/router';
 import { Client } from 'src/app/models/client.model';
 import { LocalStorageService } from 'src/app/services/localStorageService';
+import { addressHelperText } from 'src/app/constants/constants';
 
 @Component({
     selector: 'app-profile',
@@ -37,22 +38,21 @@ export class ProfilePage implements OnInit {
         private localStorageService: LocalStorageService
     ) { }
 
-
     desperateUser() {
         this.desperationLevel = ++this.desperationLevel;
         console.log(`Im this desperate: ${this.desperationLevel}`);
     }
 
     ngOnInit() {
-
         this.client = this.localStorageService.getObject('client');
-
     }
 
+    ionViewWillEnter(){
+        this.alertService.simpleAlert(addressHelperText);
+    }
 
     onSubmit() {
         this.desperationLevel = 0;
-
 
         this.loadingService.presentLoading("Cargando")
             .then(

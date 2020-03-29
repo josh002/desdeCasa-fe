@@ -8,6 +8,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { GeolocationService } from 'src/app/services/geolocationService';
 import { CommerceService } from 'src/app/services/commerce.service';
 import { Commerce, CommerceRegister, formatCommerce } from 'src/app/models/commerce.model';
+import { addressHelperText } from 'src/app/constants/constants';
 import * as moment from 'moment';
 
 @Component({
@@ -75,6 +76,9 @@ export class CommercePage implements OnInit {
 
     ngOnInit() {
         this.desperationLevel = 0;
+    }
+
+    ionViewWillEnter(){
         // Setea localización actual del usuario en address
         this.geolocationService.getCurrentLocation()
             .then(latLong => { return this.utilsService.cordsToAddress(latLong) })
@@ -82,6 +86,7 @@ export class CommercePage implements OnInit {
         for (var i = 1; i < 60; i++) {
             this.clientsMax[0].push(i);
         }
+        this.alertService.simpleAlert(addressHelperText);
     }
 
     desperateUser() {

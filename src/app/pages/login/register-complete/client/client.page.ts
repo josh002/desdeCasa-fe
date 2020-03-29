@@ -8,6 +8,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { encryptPass } from 'src/app/constants/constants'
 import { GeolocationService } from 'src/app/services/geolocationService';
 import { ClientRegister } from 'src/app/models/client-register.interface';
+import { addressHelperText } from 'src/app/constants/constants';
 
 @Component({
     selector: 'app-client',
@@ -38,11 +39,14 @@ export class ClientPage implements OnInit {
 
     ngOnInit() {
         this.desperationLevel = 0;
-
+    }   
+    
+    ionViewWillEnter(){
         // Setea localización actual del usuario en address
         this.geolocationService.getCurrentLocation()
             .then(latLong => { return this.utilsService.cordsToAddress(latLong) })
             .then(({ formatted_address }) => this.client.address = formatted_address)
+        this.alertService.simpleAlert(addressHelperText);
     }
 
     desperateUser() {

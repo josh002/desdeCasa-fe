@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { welcomeText } from 'src/app/constants/constants';
+import { AlertService } from 'src/app/services/alertService';
 
 @Component({
   selector: 'app-register-complete',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterCompletePage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private alertService: AlertService
+  ) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
+    this.alertService.simpleAlert(welcomeText);
   }
 
 }

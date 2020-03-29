@@ -9,6 +9,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { CommerceService } from 'src/app/services/commerce.service';
 import { Commerce, CommerceRegister, formatCommerce } from 'src/app/models/commerce.model';
 import { LocalStorageService } from 'src/app/services/localStorageService';
+import { addressHelperText } from 'src/app/constants/constants';
 import * as moment from 'moment';
 @Component({
     selector: 'app-edit-commerce',
@@ -89,6 +90,10 @@ export class EditCommercePage implements OnInit {
         }
         this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
         this.commerce.shoppingMinutes = this.commerce.shoppingMinutes * 10;
+    }
+
+    ionViewWillEnter(){
+        this.alertService.simpleAlert(addressHelperText);
     }
 
     desperateUser() {
