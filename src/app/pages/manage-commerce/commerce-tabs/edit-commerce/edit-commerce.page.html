@@ -249,11 +249,17 @@
 
                     <!-- Direccion comercio -->
                     <ion-item [(disabled)]="editInfo">
-                        <ion-label color="primary" position="floating">Calle</ion-label>
+                        <ion-label color="primary" position="floating">Dirección</ion-label>
                         <ion-input name="address" #address="ngModel" type="text" [(ngModel)]="commerce.address"
                             required>
                         </ion-input>
                     </ion-item>
+                    <ng-container *ngIf="address.pristine">
+                        <div class="ux-warning" lines="none">
+                            <ion-icon slot="start" name="warning"></ion-icon>
+                            <ion-label>No te olvides de Ciudad y Provincia</ion-label>
+                        </div>
+                    </ng-container>
                     <ng-container
                         *ngIf="address.invalid && ((address.dirty && address.touched) || desperationLevel > 3)">
                         <div class="ux-alert" lines="none" *ngIf="address.errors && address.errors.required">
