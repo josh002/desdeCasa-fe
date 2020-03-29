@@ -54,6 +54,7 @@ export class GetAppointmentPage implements OnInit {
                             this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
                         }
                         this.commerce = new Commerce(resp.result[0]);
+                        if (this.commerce.shoppingMinutes < 1) this.commerce.shoppingMinutes = 1;
                         console.log(this.commerce);
 
                         this.startHour1 = asDate(this.commerce.openTime1).getHours();
