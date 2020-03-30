@@ -15,7 +15,7 @@ import { Platform } from "@ionic/angular";
 export class HomePage implements OnInit {
     client: Client;
     commerces: Commerce[];
-
+    private backButtonSubscription;
     constructor(
         private localStorageService: LocalStorageService,
         private authService: AuthService,
@@ -25,6 +25,16 @@ export class HomePage implements OnInit {
     ) { }
 
     ngOnInit() { }
+    
+    ionViewDidEnter() {
+        this.backButtonSubscription = this.platform.backButton.subscribe(() => {
+            navigator['app'].exitApp();
+        });
+    }
+
+    ionViewWillLeave() {
+        this.backButtonSubscription.unsubscribe();
+    }
 
     ionViewWillEnter() {
         this.client = this.localStorageService.getObject('client') === null ?

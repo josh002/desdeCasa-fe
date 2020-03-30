@@ -7,6 +7,7 @@ import { AlertService } from 'src/app/services/alertService';
 import { Router } from '@angular/router';
 import { asDate, fullDate } from 'src/app/constants/constants';
 import { BookingService } from 'src/app/services/booking.service';
+import { Platform } from '@ionic/angular';
 
 interface OccupiedShifts {
     hour: number,
@@ -20,7 +21,7 @@ interface OccupiedShifts {
 })
 export class SchedulePage implements OnInit {
     commerce: Commerce;
-
+    private backButtonSubscription;
     startHour1: number;
     endHour1: number;
     startHour2: number;
@@ -35,6 +36,7 @@ export class SchedulePage implements OnInit {
         private bookingService: BookingService,
         private alertService: AlertService,
         private router: Router,
+        private platform: Platform,
     ) { }
 
     ngOnInit() { };
@@ -67,5 +69,14 @@ export class SchedulePage implements OnInit {
                 this.router.navigate(['/tabs/home']);
             });
 
+    }
+    ionViewDidEnter() {
+        this.backButtonSubscription = this.platform.backButton.subscribe(() => {
+            navigator['app'].exitApp();
+        });
+    }
+
+    ionViewWillLeave() {
+        this.backButtonSubscription.unsubscribe();
     }
 }
