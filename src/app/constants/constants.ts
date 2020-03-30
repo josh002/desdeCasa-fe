@@ -89,20 +89,35 @@ export const fullDate = (myDate: Date | string) =>
     moment(myDate).format('YYYY-MM-DD')
 
 
-    /*
-    // Esto me servira para filtrar horarios de bookings segun día     cuando haya que hcaerlo 
+/**
+* Devuelve la cantidad de minutos que hay en una fecha dada
+* @param {string} datetimePickerString - Thu Dec 15 1994 08:30:00 GMT-0300
+*/
+export const fromDatetimePickerToMinutesInDay = (datetimePickerString: string | Date) => {
+    let hours: number;
+    let minutes: number;
+    if (typeof (datetimePickerString) == 'string') {
+        hours = +datetimePickerString.substring(datetimePickerString.indexOf(':') - 2, datetimePickerString.indexOf(':'));
+        minutes = +datetimePickerString.substring(datetimePickerString.indexOf(':') + 1, datetimePickerString.indexOf(':') + 3);
+    }
+    return minutes + 60 * hours
+}
 
-       whatDayIsIt: string = new Date().toLocaleDateString();
-    this.authService.getBookingsByCommerce(commerceId)
-    .then(
-        resp => {
-            console.clear();
-            this.commerceBookings = resp.result.filter(
-                booking =>
-                    // Filtro aquellos que no corresponden al día de hoy
-                    this.whatDayIsIt === new Date(moment(booking.created, "YYYY-MM-DDTHH:mm:ss").toISOString()).toLocaleDateString()
-            );
-            this.manageWorkHours();
-        }
-    )
-    */
+
+/*
+// Esto me servira para filtrar horarios de bookings segun día     cuando haya que hcaerlo
+
+   whatDayIsIt: string = new Date().toLocaleDateString();
+this.authService.getBookingsByCommerce(commerceId)
+.then(
+    resp => {
+        console.clear();
+        this.commerceBookings = resp.result.filter(
+            booking =>
+                // Filtro aquellos que no corresponden al día de hoy
+                this.whatDayIsIt === new Date(moment(booking.created, "YYYY-MM-DDTHH:mm:ss").toISOString()).toLocaleDateString()
+        );
+        this.manageWorkHours();
+    }
+)
+*/

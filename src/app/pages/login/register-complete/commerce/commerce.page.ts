@@ -12,6 +12,8 @@ import { addressHelperText, addressInputHelperText, asDate } from 'src/app/const
 import * as moment from 'moment';
 import { Province } from 'src/app/models/province.model';
 import { Department } from 'src/app/models/department.model';
+import { fromDatetimePickerToMinutesInDay } from 'src/app/constants/constants'
+import { from } from 'rxjs';
 
 @Component({
     selector: 'app-commerce',
@@ -97,6 +99,7 @@ export class CommercePage implements OnInit {
     }
 
     ionViewWillEnter() {
+
         // Setea localización actual del usuario en address
         this.geolocationService.getCurrentLocation()
             .then(latLong => { return this.utilsService.cordsToAddress(latLong) })
@@ -135,21 +138,37 @@ export class CommercePage implements OnInit {
         console.log('selectedDepartmentName', this.selectedDepartmentName);
         console.log('selectedDepartment', this.selectedDepartment);
     }
-    
+
     onSubmit(form: any) {
+
+
+        console.log("openTime1", fromDatetimePickerToMinutesInDay(this.commerce.openTime1));
+        console.log("closeTime1", fromDatetimePickerToMinutesInDay(this.commerce.closeTime1));
+        console.log("openTime2", fromDatetimePickerToMinutesInDay(this.commerce.openTime2));
+        console.log("closeTime2", fromDatetimePickerToMinutesInDay(this.commerce.closeTime2));
+        this.alertService.simpleAlert('QUITAR RETURN. SACAR COMMERCE HARDCODED.');
+
         this.desperationLevel = 0;
-        if (moment(asDate(this.commerce.openTime1)).unix() > moment(asDate(this.commerce.closeTime1)).unix()) {
+
+
+        if (fromDatetimePickerToMinutesInDay(this.commerce.openTime1) > fromDatetimePickerToMinutesInDay(this.commerce.closeTime1)) {
             this.alertService.simpleAlert('La primer hora de cierre no puede ser menor que la primer hora de apertura');
             return
         }
-        if (this.commerce.splitShift) if (moment(asDate(this.commerce.closeTime1)).unix() > moment(asDate(this.commerce.openTime2)).unix()) {
-            this.alertService.simpleAlert('La segunda hora de apertura no puede ser menor que la primer hora de cierre');
-            return
+        if (this.commerce.splitShift) {
+            if (fromDatetimePickerToMinutesInDay(this.commerce.closeTime1) > fromDatetimePickerToMinutesInDay(this.commerce.openTime2)) {
+                this.alertService.simpleAlert('La segunda hora de apertura no puede ser menor que la primer hora de cierre');
+                return
+            }
         }
-        if (this.commerce.splitShift) if (moment(asDate(this.commerce.openTime2)).unix() > moment(asDate(this.commerce.closeTime2)).unix()) {
-            this.alertService.simpleAlert('La segunda hora de cierre no puede ser menor que la segunda hora de apertura');
-            return
+        if (this.commerce.splitShift) {
+            if (fromDatetimePickerToMinutesInDay(this.commerce.openTime2) > fromDatetimePickerToMinutesInDay(this.commerce.closeTime2)) {
+                this.alertService.simpleAlert('La segunda hora de cierre no puede ser menor que la segunda hora de apertura');
+                return
+            }
         }
+
+        return
         console.log('form', form);
         this.loadingService.presentLoading("Cargando")
             .then(
