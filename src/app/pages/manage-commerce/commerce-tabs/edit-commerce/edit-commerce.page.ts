@@ -184,7 +184,7 @@ export class EditCommercePage implements OnInit {
                 () => {
                     const temporaryCommerce = new Commerce({
                         ...this.commerce,
-                        shoppingMinutes: (this.commerce.shoppingMinutes / 10),
+                        shoppingMinutes: (this.commerce.shoppingMinutes),
                         address: `${this.commerce.address}, ${this.selectedDepartment.nombre}, ${this.selectedProvince.nombre}, Argentina`
                     });
                     this.commerceService.editCommerce(formatCommerce(temporaryCommerce))
@@ -192,7 +192,9 @@ export class EditCommercePage implements OnInit {
                             (resp: any) => {
                                 this.loadingService.dismissLoading();
                                 if (resp && resp.status === 0) {
+                                    temporaryCommerce.shoppingMinutes = temporaryCommerce.shoppingMinutes / 10;
                                     this.localStorageService.setObject('commerce', temporaryCommerce);
+                                    console.log("shoping minutes despues", temporaryCommerce)
                                     this.editInfo = true;
                                     this.editconfig = true;
                                     const { message } = resp;
@@ -230,6 +232,7 @@ export class EditCommercePage implements OnInit {
                     handler: (value) => {
                         this.commerce.shoppingMinutes = +value['col-0'].value;
                         console.log(`Picked Value`, value);
+                        console.log("shoping minutes despues", this.commerce.shoppingMinutes)
                     }
                 }
             ]
