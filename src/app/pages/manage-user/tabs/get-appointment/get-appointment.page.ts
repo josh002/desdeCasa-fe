@@ -29,11 +29,10 @@ export class GetAppointmentPage implements OnInit {
     endMinute1: number;
     startMinute2: number;
     endMinute2: number;
-
+    currentHour: number;
 
     // Arreglo con horas
     hours: OccupiedShifts[];
-
 
     constructor(
         private commerceService: CommerceService,
@@ -46,6 +45,7 @@ export class GetAppointmentPage implements OnInit {
     ngOnInit() { }
 
     ionViewWillEnter() {
+        this.currentHour = new Date().getHours();
         this.route.paramMap.subscribe(
             (params: Params) => {
                 const commerceId: number = params.params.id;
@@ -91,14 +91,18 @@ export class GetAppointmentPage implements OnInit {
                         // this.hours = resp.result
                         this.hours = [];
                         resp.result.forEach(element => {
-                            var currentHour = new Date().getHours();
-                            var currentHour = new Date().getHours();
-                            var currentMinute = new Date().getMinutes();
+                            /*
+                             * Versión vieja, más robusta
+                             * Manejamos desde el html como se muestra
+                             */
+                            this.hours.push(element);
+
+                            // var currentMinute = new Date().getMinutes();
 
                             // var criticalTime: boolean = 10*this.commerce.shoppingMinutes + currentMinute > closingMinutes
 
                             // Si estamos en este caso 
-                            if (element.hour > currentHour) this.hours.push(element);
+                            // if (element.hour > currentHour) this.hours.push(element);
 
                             // // Si se cumple esta condicion la endHour1/2 están aumentadas en +1
                             // const compensateExtraHour = (asDate(this.commerce.closeTime1).getMinutes() > 0) ? 1 : 0;

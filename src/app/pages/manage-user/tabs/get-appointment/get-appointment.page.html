@@ -4,7 +4,7 @@
     </ion-buttons>
     <app-baby-header></app-baby-header>
 </ion-header>
-  
+
 <ion-content>
 
     <ion-card-header>
@@ -12,9 +12,8 @@
     </ion-card-header>
 
     <ion-list lines="none">
-
         <ng-container *ngFor="let hour of hours">
-            <ion-item
+            <ion-item [disabled]="currentHour > hour.hour"
                 *ngIf="(hour.hour >= startHour1 && hour.hour < endHour1) || (hour.hour >= startHour2 && hour.hour < endHour2)">
                 <ion-card *ngIf="hour.taken < commerce.maxClients * (6 / commerce.shoppingMinutes)" class="my-shift"
                     color="light" expand="block" [routerLink]="['./appointment-hour', hour.hour]">
@@ -34,5 +33,4 @@
         </ng-container>
 
     </ion-list>
-
 </ion-content>
