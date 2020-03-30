@@ -20,7 +20,7 @@
 
 
         <ng-container *ngIf="!disabled">
-            <ion-button color="danger" class="button-cancel"  item-end shape="round" (click)=changeDisabled()>
+            <ion-button color="danger" class="button-cancel" item-end shape="round" (click)=changeDisabled()>
                 <ion-label color="light"> X
                 </ion-label>
             </ion-button>
@@ -34,11 +34,14 @@
 
                     <ion-item [(disabled)]="disabled">
                         <ion-label color="primary" position="floating">Nombre</ion-label>
-                        <ion-input name="firstName" #firstName="ngModel" type="text" [(ngModel)]="client.firstName" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required>
+                        <ion-input name="firstName" #firstName="ngModel" type="text" [(ngModel)]="client.firstName"
+                            pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?"
+                            required>
                         </ion-input>
                     </ion-item>
 
-                    <ng-container *ngIf="firstName.invalid && ((firstName.dirty && firstName.touched) || desperationLevel > 3)">
+                    <ng-container
+                        *ngIf="firstName.invalid && ((firstName.dirty && firstName.touched) || desperationLevel > 3)">
                         <div class="ux-alert" lines="none" *ngIf="firstName.errors && firstName.errors.required">
                             <ion-icon slot="start" name="information-circle-outline"></ion-icon>
                             <ion-label>Campo Requerido</ion-label>
@@ -53,10 +56,13 @@
 
                     <ion-item [(disabled)]="disabled">
                         <ion-label color="primary" position="floating">Apellido</ion-label>
-                        <ion-input name="lastName" #lastName="ngModel" type="text" [(ngModel)]="client.lastName" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required></ion-input>
+                        <ion-input name="lastName" #lastName="ngModel" type="text" [(ngModel)]="client.lastName"
+                            pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?"
+                            required></ion-input>
                     </ion-item>
 
-                    <ng-container *ngIf="lastName.invalid && ((lastName.dirty && lastName.touched) || desperationLevel > 3)">
+                    <ng-container
+                        *ngIf="lastName.invalid && ((lastName.dirty && lastName.touched) || desperationLevel > 3)">
                         <div class="ux-alert" lines="none" *ngIf="lastName.errors && lastName.errors.required">
                             <ion-icon slot="start" name="information-circle-outline"></ion-icon>
                             <ion-label>Campo Requerido</ion-label>
@@ -70,8 +76,10 @@
                     <!-- Mail -->
 
                     <ion-item [(disabled)]="disabled">
-                        <ion-label color="primary" autocomplete="off" position="floating">Direccion de correo electrónico</ion-label>
-                        <ion-input #email="ngModel" [(ngModel)]="client.email" name="email" type="email" required pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}[ ]?"></ion-input>
+                        <ion-label color="primary" autocomplete="off" position="floating">Direccion de correo
+                            electrónico</ion-label>
+                        <ion-input #email="ngModel" [(ngModel)]="client.email" name="email" type="email" required
+                            pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}[ ]?"></ion-input>
                     </ion-item>
 
                     <ng-container *ngIf="email.invalid && ((email.dirty && email.touched) || desperationLevel > 3)">
@@ -110,10 +118,10 @@
                     <!-- Provincia      -->
                     <ion-item [(disabled)]="disabled">
                         <ion-label position="floating" color="primary">Provincia</ion-label>
-                        <ion-select name="province" #province="ngModel" [(ngModel)]="selectedProvince"
-                            (ionChange)=getDepartments() required>
-                            <ion-select-option *ngFor="let element of provinces" (value)="element">
-                                {{element.nombre | titlecase}}
+                        <ion-select name="province" #province="ngModel" [(ngModel)]="selectedProvinceName"
+                            (ionChange)=onProvinceChange() required>
+                            <ion-select-option *ngFor="let province of provinces" [(value)]="province.nombre">
+                                {{province.nombre | titlecase}}
                             </ion-select-option>
                         </ion-select>
                     </ion-item>
@@ -128,9 +136,9 @@
                     <ion-item [(disabled)]="disabled">
                         <ion-label position="floating" color="primary">Departamento</ion-label>
                         <ion-select name="department" #department="ngModel" [disabled]="!selectedProvince"
-                            [(ngModel)]="selectedDepartment" required>
-                            <ion-select-option *ngFor="let element of departments" (value)="element">
-                                {{element.nombre | titlecase}}
+                            (ionChange)=onDepartmentChange() [(ngModel)]="selectedDepartmentName" required>
+                            <ion-select-option *ngFor="let department of departments" [(value)]="department.nombre">
+                                {{department.nombre | titlecase}}
                             </ion-select-option>
                         </ion-select>
                     </ion-item>
@@ -141,12 +149,12 @@
                         </div>
                     </ng-container>
 
-
                     <!-- Dirección -->
                     <ion-item [(disabled)]="disabled">
                         <ion-label color="primary" position="floating">Direccion</ion-label>
                         <!-- <ion-input name="address" #address="ngModel" type="text" (ionFocus)="addressHelper()" [disabled]="!selectedDepartment" [(ngModel)]="client.address" required> </ion-input> -->
-                        <ion-input name="address" #address="ngModel" type="text" [disabled]="!selectedDepartment" [(ngModel)]="client.address" required> </ion-input>
+                        <ion-input name="address" #address="ngModel" type="text" [disabled]="!selectedDepartment"
+                            [(ngModel)]="client.address" required> </ion-input>
                     </ion-item>
                     <ng-container *ngIf="!disabled && address.pristine">
                         <div class="ux-alert" lines="none">
@@ -154,7 +162,8 @@
                             <ion-label>{{addressInputHelperText}}</ion-label>
                         </div>
                     </ng-container>
-                    <ng-container *ngIf="address.invalid && ((address.dirty && address.touched) || desperationLevel > 3)">
+                    <ng-container
+                        *ngIf="address.invalid && ((address.dirty && address.touched) || desperationLevel > 3)">
                         <div class="ux-alert" lines="none" *ngIf="address.errors && address.errors.required">
                             <ion-icon slot="start" name="information-circle-outline"></ion-icon>
                             <ion-label>Campo Requerido</ion-label>
@@ -166,7 +175,8 @@
 
                 <ng-container *ngIf="!disabled">
                     <div class="ion-padding" (click)=desperateUser()>
-                        <ion-button type="ngSubmit" color="primary" shape="round" expand="block" [disabled]="myForm.form.invalid">
+                        <ion-button type="ngSubmit" color="primary" shape="round" expand="block"
+                            [disabled]="myForm.form.invalid">
                             <ion-label color="light"> Editar Perfil</ion-label>
                         </ion-button>
                         <div class="button-helper" lines="none" *ngIf="desperationLevel > 3">

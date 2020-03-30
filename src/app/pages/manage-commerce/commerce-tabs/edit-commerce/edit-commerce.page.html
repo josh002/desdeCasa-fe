@@ -250,10 +250,10 @@
                     <!-- Provincia      -->
                     <ion-item [(disabled)]="editInfo">
                         <ion-label position="floating" color="primary">Provincia</ion-label>
-                        <ion-select name="province" #province="ngModel" [(ngModel)]="selectedProvince"
-                            (ionChange)=getDepartments() required>
-                            <ion-select-option *ngFor="let element of provinces" (value)="element">
-                                {{element.nombre | titlecase}}
+                        <ion-select name="province" #province="ngModel" [(ngModel)]="selectedProvinceName"
+                            (ionChange)=onProvinceChange() required>
+                            <ion-select-option *ngFor="let province of provinces" [(value)]="province.nombre">
+                                {{province.nombre | titlecase}}
                             </ion-select-option>
                         </ion-select>
                     </ion-item>
@@ -268,9 +268,9 @@
                     <ion-item [(disabled)]="editInfo">
                         <ion-label position="floating" color="primary">Departamento</ion-label>
                         <ion-select name="department" #department="ngModel" [disabled]="!selectedProvince"
-                            [(ngModel)]="selectedDepartment" required>
-                            <ion-select-option *ngFor="let element of departments" (value)="element">
-                                {{element.nombre | titlecase}}
+                            (ionChange)=onDepartmentChange() [(ngModel)]="selectedDepartmentName" required>
+                            <ion-select-option *ngFor="let department of departments" [(value)]="department.nombre">
+                                {{department.nombre | titlecase}}
                             </ion-select-option>
                         </ion-select>
                     </ion-item>

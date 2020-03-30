@@ -21,10 +21,12 @@ export class ProfilePage implements OnInit {
 
     disableHelper: boolean = false;
     desperationLevel: number = 0;
-    selectedProvince: Province;
-    selectedDepartment: Department;
     provinces: Province[];
     departments: Department[];
+    selectedProvince: Province;
+    selectedDepartment: Department;
+    selectedProvinceName: string;
+    selectedDepartmentName: string;
     disabled: boolean = true;
 
     client: Client = {
@@ -69,7 +71,10 @@ export class ProfilePage implements OnInit {
                 resp.provincias.forEach(element => this.provinces.push(new Province(element)));
                 const filteredProvince: Province[] = this.provinces.filter(elem => guessedProvince ? guessedProvince.includes(elem.nombre) : false);
                 this.selectedProvince = filteredProvince.length == 1 ? filteredProvince[0] : undefined;
+                this.selectedProvinceName = this.selectedProvince ? this.selectedProvince.nombre : undefined;
                 console.log(this.provinces);
+                console.log('this.selectedProvince', this.selectedProvince);
+                console.log('this.selectedProvinceName', this.selectedProvinceName);
                 if (this.selectedProvince) {
                     this.utilsService.getDepartment(this.selectedProvince.id)
                         .then((resp: any) => {
@@ -77,6 +82,7 @@ export class ProfilePage implements OnInit {
                             resp.departamentos.forEach(element => this.departments.push(new Department(element)));
                             const filteredDepartment: Department[] = this.departments.filter(elem => guessedDepartment ? guessedDepartment.includes(elem.nombre) : false);
                             this.selectedDepartment = filteredDepartment.length == 1 ? filteredDepartment[0] : undefined;
+                            this.selectedDepartmentName = this.selectedDepartment ? this.selectedDepartment.nombre : undefined;
                             console.log(this.departments);
                         })
                 }
@@ -85,7 +91,7 @@ export class ProfilePage implements OnInit {
     }
 
     desperateUser() {
-       this.desperationLevel = this.desperationLevel ? ++this.desperationLevel : 0;
+        this.desperationLevel = this.desperationLevel ? ++this.desperationLevel : 0;
         console.log(`Im this desperate: ${this.desperationLevel}`);
     }
 
@@ -94,8 +100,15 @@ export class ProfilePage implements OnInit {
         this.disableHelper = true;
     }
 
-    getDepartments() {
+    changeDisabled() {
+        this.disabled = !this.disabled;
+    }
+
+    onProvinceChange() {
+        this.selectedDepartmentName = undefined;
         this.selectedDepartment = undefined;
+        this.selectedProvince = this.selectedProvinceName ? this.provinces.filter(elem => this.selectedProvinceName.includes(elem.nombre))[0] : undefined;
+        console.log('selectedProvinceName', this.selectedProvinceName);
         this.utilsService.getDepartment(this.selectedProvince.id)
             .then((resp: any) => {
                 this.departments = [];
@@ -103,6 +116,12 @@ export class ProfilePage implements OnInit {
                 console.log(this.departments);
             })
             .catch(err => { console.log(err); })
+    }
+
+    onDepartmentChange() {
+        this.selectedDepartment = this.selectedDepartmentName ? this.departments.filter(elem => this.selectedDepartmentName.includes(elem.nombre))[0] : undefined;
+        console.log('selectedDepartmentName', this.selectedDepartmentName);
+        console.log('selectedDepartment', this.selectedDepartment);
     }
 
     onSubmit(form: any) {
@@ -121,7 +140,7 @@ export class ProfilePage implements OnInit {
                                 this.loadingService.dismissLoading();
                                 if (resp && resp.status === 0) {
                                     const { message } = resp;
-                                    this.localStorageService.setObject('client', this.client);
+                                    this.localStorageService.setObject('client', temporaryClient);
                                     this.disabled = true;
                                     this.alertService.headerAlert('Exito', message)
                                     this.router.navigate(['/tabs/home'])
@@ -144,11 +163,6 @@ export class ProfilePage implements OnInit {
                         })
                 }
             )
-    }
-
-    changeDisabled() {
-        this.disabled = !this.disabled;
-        this.client = this.localStorageService.getObject('client');
     }
 
 }

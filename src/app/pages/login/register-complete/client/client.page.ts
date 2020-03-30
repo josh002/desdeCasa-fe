@@ -32,10 +32,12 @@ export class ClientPage implements OnInit {
     };
     disableHelper: boolean = false;
     desperationLevel: number;
-    selectedProvince: Province;
-    selectedDepartment: Department;
     provinces: Province[];
     departments: Department[];
+    selectedProvince: Province;
+    selectedDepartment: Department;
+    selectedProvinceName: string;
+    selectedDepartmentName: string;
 
     // client: ClientRegister = {
     //     email: 'cmartinez@eon6.tech',
@@ -85,8 +87,11 @@ export class ClientPage implements OnInit {
         this.disableHelper = true;
     }
 
-    getDepartments() {
+    onProvinceChange() {
+        this.selectedDepartmentName = undefined;
         this.selectedDepartment = undefined;
+        this.selectedProvince = this.selectedProvinceName ? this.provinces.filter(elem => this.selectedProvinceName.includes(elem.nombre))[0] : undefined;
+        console.log('selectedProvinceName', this.selectedProvinceName);
         this.utilsService.getDepartment(this.selectedProvince.id)
             .then((resp: any) => {
                 this.departments = [];
@@ -94,6 +99,12 @@ export class ClientPage implements OnInit {
                 console.log(this.departments);
             })
             .catch(err => { console.log(err); })
+    }
+
+    onDepartmentChange() {
+        this.selectedDepartment = this.selectedDepartmentName ? this.departments.filter(elem => this.selectedDepartmentName.includes(elem.nombre))[0] : undefined;
+        console.log('selectedDepartmentName', this.selectedDepartmentName);
+        console.log('selectedDepartment', this.selectedDepartment);
     }
 
     onSubmit(form: any) {

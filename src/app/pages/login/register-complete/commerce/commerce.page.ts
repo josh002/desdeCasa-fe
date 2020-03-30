@@ -8,7 +8,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { GeolocationService } from 'src/app/services/geolocationService';
 import { CommerceService } from 'src/app/services/commerce.service';
 import { Commerce, CommerceRegister, formatCommerce } from 'src/app/models/commerce.model';
-import { addressHelperText, addressInputHelperText } from 'src/app/constants/constants';
+import { addressHelperText, addressInputHelperText, asDate } from 'src/app/constants/constants';
 import * as moment from 'moment';
 import { Province } from 'src/app/models/province.model';
 import { Department } from 'src/app/models/department.model';
@@ -21,13 +21,15 @@ import { Department } from 'src/app/models/department.model';
 
 export class CommercePage implements OnInit {
     readonly addressInputHelperText = addressInputHelperText;
-    
+
     disableHelper: boolean = false;
     desperationLevel: number;
-    selectedProvince: Province;
-    selectedDepartment: Department;
     provinces: Province[];
     departments: Department[];
+    selectedProvince: Province;
+    selectedDepartment: Department;
+    selectedProvinceName: string;
+    selectedDepartmentName: string;
 
     commerce: CommerceRegister = {
         email: '',
@@ -114,8 +116,11 @@ export class CommercePage implements OnInit {
         this.disableHelper = true;
     }
 
-    getDepartments() {
+    onProvinceChange() {
+        this.selectedDepartmentName = undefined;
         this.selectedDepartment = undefined;
+        this.selectedProvince = this.selectedProvinceName ? this.provinces.filter(elem => this.selectedProvinceName.includes(elem.nombre))[0] : undefined;
+        console.log('selectedProvinceName', this.selectedProvinceName);
         this.utilsService.getDepartment(this.selectedProvince.id)
             .then((resp: any) => {
                 this.departments = [];
@@ -125,17 +130,23 @@ export class CommercePage implements OnInit {
             .catch(err => { console.log(err); })
     }
 
+    onDepartmentChange() {
+        this.selectedDepartment = this.selectedDepartmentName ? this.departments.filter(elem => this.selectedDepartmentName.includes(elem.nombre))[0] : undefined;
+        console.log('selectedDepartmentName', this.selectedDepartmentName);
+        console.log('selectedDepartment', this.selectedDepartment);
+    }
+    
     onSubmit(form: any) {
         this.desperationLevel = 0;
-        if (moment(this.commerce.openTime1).unix() > moment(this.commerce.closeTime1).unix()) {
+        if (moment(asDate(this.commerce.openTime1)).unix() > moment(asDate(this.commerce.closeTime1)).unix()) {
             this.alertService.simpleAlert('La primer hora de cierre no puede ser menor que la primer hora de apertura');
             return
         }
-        if (this.commerce.splitShift) if (moment(this.commerce.closeTime1).unix() > moment(this.commerce.openTime2).unix()) {
+        if (this.commerce.splitShift) if (moment(asDate(this.commerce.closeTime1)).unix() > moment(asDate(this.commerce.openTime2)).unix()) {
             this.alertService.simpleAlert('La segunda hora de apertura no puede ser menor que la primer hora de cierre');
             return
         }
-        if (this.commerce.splitShift) if (moment(this.commerce.openTime2).unix() > moment(this.commerce.closeTime2).unix()) {
+        if (this.commerce.splitShift) if (moment(asDate(this.commerce.openTime2)).unix() > moment(asDate(this.commerce.closeTime2)).unix()) {
             this.alertService.simpleAlert('La segunda hora de cierre no puede ser menor que la segunda hora de apertura');
             return
         }

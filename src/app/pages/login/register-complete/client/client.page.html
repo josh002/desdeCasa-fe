@@ -58,7 +58,7 @@
             </ion-list>
 
             <!-- Nombre -->
-            <ion-item>  
+            <ion-item>
                 <ion-label color="primary" position="floating">Nombre</ion-label>
                 <ion-input name="firstName" #firstName="ngModel" type="text" [(ngModel)]="client.firstName"
                     pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?"
@@ -75,7 +75,7 @@
                     <ion-label>Solo letras y espacios</ion-label>
                 </div>
             </ng-container>
-            
+
             <!-- Apellido -->
             <ion-item>
                 <ion-label color="primary" position="floating">Apellido</ion-label>
@@ -94,7 +94,7 @@
                     <ion-label>Solo letras y espacios</ion-label>
                 </div>
             </ng-container>
-            
+
             <!-- DNI -->
             <ion-item>
                 <ion-label color="primary" position="floating">DNI</ion-label>
@@ -117,12 +117,13 @@
                 </div>
             </ng-container>
 
-             <!-- Provincia      -->
+            <!-- Provincia      -->
             <ion-item>
                 <ion-label position="floating" color="primary">Provincia</ion-label>
-                <ion-select name="province" #province="ngModel" [(ngModel)]="selectedProvince" (ionChange)=getDepartments() required>
-                    <ion-select-option *ngFor="let element of provinces" (value)="element">
-                        {{element.nombre | titlecase}}
+                <ion-select name="province" #province="ngModel" [(ngModel)]="selectedProvinceName"
+                    (ionChange)=onProvinceChange() required>
+                    <ion-select-option *ngFor="let province of provinces" [(value)]="province.nombre">
+                        {{province.nombre | titlecase}}
                     </ion-select-option>
                 </ion-select>
             </ion-item>
@@ -136,9 +137,10 @@
             <!-- Departamento      -->
             <ion-item>
                 <ion-label position="floating" color="primary">Departamento</ion-label>
-                <ion-select name="department" #department="ngModel" [disabled]="!selectedProvince" [(ngModel)]="selectedDepartment" required>
-                    <ion-select-option *ngFor="let element of departments" (value)="element">
-                        {{element.nombre | titlecase}}
+                <ion-select name="department" #department="ngModel" [disabled]="!selectedProvince"
+                    (ionChange)=onDepartmentChange() [(ngModel)]="selectedDepartmentName" required>
+                    <ion-select-option *ngFor="let department of departments" [(value)]="department.nombre">
+                        {{department.nombre | titlecase}}
                     </ion-select-option>
                 </ion-select>
             </ion-item>
@@ -153,7 +155,8 @@
             <ion-item>
                 <ion-label color="primary" position="floating">Direccion</ion-label>
                 <!-- <ion-input name="address" #address="ngModel" type="text" (ionFocus)="addressHelper()" [disabled]="!selectedDepartment" [(ngModel)]="client.address" required> -->
-                <ion-input name="address" #address="ngModel" type="text" [disabled]="!selectedDepartment" [(ngModel)]="client.address" required>
+                <ion-input name="address" #address="ngModel" type="text" [disabled]="!selectedDepartment"
+                    [(ngModel)]="client.address" required>
                 </ion-input>
             </ion-item>
             <ng-container *ngIf="address.pristine">
@@ -171,8 +174,8 @@
 
             <!-- Submit Button -->
             <div class="ion-padding" (click)=desperateUser()>
-                    <ion-button type="ngSubmit" color="primary" shape="round" expand="block"
-                        [disabled]="myForm.form.invalid">
+                <ion-button type="ngSubmit" color="primary" shape="round" expand="block"
+                    [disabled]="myForm.form.invalid">
                     <ion-label color="light">Crear cuenta</ion-label>
                 </ion-button>
                 <div class="button-helper" lines="none" *ngIf="desperationLevel > 3">

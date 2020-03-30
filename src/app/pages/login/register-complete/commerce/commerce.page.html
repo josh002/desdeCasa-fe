@@ -92,12 +92,13 @@
                 </div>
             </ng-container>
 
-             <!-- Provincia      -->
-             <ion-item>
+            <!-- Provincia      -->
+            <ion-item>
                 <ion-label position="floating" color="primary">Provincia</ion-label>
-                <ion-select name="province" #province="ngModel" [(ngModel)]="selectedProvince" (ionChange)=getDepartments() required>
-                    <ion-select-option *ngFor="let element of provinces" (value)="element">
-                        {{element.nombre | titlecase}}
+                <ion-select name="province" #province="ngModel" [(ngModel)]="selectedProvinceName"
+                    (ionChange)=onProvinceChange() required>
+                    <ion-select-option *ngFor="let province of provinces" [(value)]="province.nombre">
+                        {{province.nombre | titlecase}}
                     </ion-select-option>
                 </ion-select>
             </ion-item>
@@ -111,9 +112,10 @@
             <!-- Departamento      -->
             <ion-item>
                 <ion-label position="floating" color="primary">Departamento</ion-label>
-                <ion-select name="department" #department="ngModel" [disabled]="!selectedProvince" [(ngModel)]="selectedDepartment" required>
-                    <ion-select-option *ngFor="let element of departments" (value)="element">
-                        {{element.nombre | titlecase}}
+                <ion-select name="department" #department="ngModel" [disabled]="!selectedProvince"
+                    (ionChange)=onDepartmentChange() [(ngModel)]="selectedDepartmentName" required>
+                    <ion-select-option *ngFor="let department of departments" [(value)]="department.nombre">
+                        {{department.nombre | titlecase}}
                     </ion-select-option>
                 </ion-select>
             </ion-item>
@@ -129,15 +131,16 @@
                 <ion-label color="primary" position="floating">Dirección</ion-label>
                 <!-- <ion-input name="address" #address="ngModel" type="text" (ionFocus)="addressHelper()" [(ngModel)]="commerce.address" required>
                 </ion-input> -->
-                <ion-input name="address" #address="ngModel" type="text" [disabled]="!selectedDepartment" [(ngModel)]="commerce.address" required>
+                <ion-input name="address" #address="ngModel" type="text" [disabled]="!selectedDepartment"
+                    [(ngModel)]="commerce.address" required>
                 </ion-input>
             </ion-item>
-                    <ng-container *ngIf="address.pristine">
-                        <div class="ux-alert" lines="none">
-                            <ion-icon slot="start" name="warning"></ion-icon>
-                            <ion-label>{{addressInputHelperText}}</ion-label>
-                        </div>
-                    </ng-container>
+            <ng-container *ngIf="address.pristine">
+                <div class="ux-alert" lines="none">
+                    <ion-icon slot="start" name="warning"></ion-icon>
+                    <ion-label>{{addressInputHelperText}}</ion-label>
+                </div>
+            </ng-container>
             <ng-container *ngIf="address.invalid && ((address.dirty && address.touched) || desperationLevel > 3)">
                 <div class="ux-alert" lines="none" *ngIf="address.errors && address.errors.required">
                     <ion-icon slot="start" name="information-circle-outline"></ion-icon>
