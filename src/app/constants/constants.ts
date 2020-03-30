@@ -8,7 +8,7 @@ import * as numeral from 'numeral';
 
 export const welcomeText = `
 <h5 style="eon6-primarycolor">Gracias por instalar nuestra APP</h4>
-<h6>Ésta es su primera versión y trabajamos muy duro para evitar que tengas que hacer largas colas. Puede que todavía nos queden cosas por mejorar!<br><br>Seguimos trabajando y agradecemos tu ayuda para hacer frente al virus.</h6>
+<h6>Ésta es su primera versión y trabajamos muy duro para evitar que tengas que hacer largas colas. Puede que todavía nos queden cosas por mejorar!<br><br>Seguimos trabajando y agradecemos tu ayuda para hacer frente al COVID-19.</h6>
 `;
 
 export const addressHelperText = `

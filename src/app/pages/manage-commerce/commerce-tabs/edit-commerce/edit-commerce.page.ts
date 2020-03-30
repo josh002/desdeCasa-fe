@@ -8,7 +8,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { CommerceService } from 'src/app/services/commerce.service';
 import { Commerce, CommerceRegister, formatCommerce } from 'src/app/models/commerce.model';
 import { LocalStorageService } from 'src/app/services/localStorageService';
-import { addressHelperText, addressInputHelperText, asDate } from 'src/app/constants/constants';
+import { addressHelperText, addressInputHelperText, asDate, fromDatetimePickerToMinutesInDay } from 'src/app/constants/constants';
 import * as moment from 'moment';
 import { Province } from 'src/app/models/province.model';
 import { Department } from 'src/app/models/department.model';
@@ -181,18 +181,23 @@ export class EditCommercePage implements OnInit {
 
     onSubmit(form: any) {
         this.desperationLevel = 0;
-        if (moment(asDate(this.commerce.openTime1)).unix() > moment(asDate(this.commerce.closeTime1)).unix()) {
+        if (fromDatetimePickerToMinutesInDay(this.commerce.openTime1) > fromDatetimePickerToMinutesInDay(this.commerce.closeTime1)) {
             this.alertService.simpleAlert('La primer hora de cierre no puede ser menor que la primer hora de apertura');
             return
         }
-        if (this.commerce.splitShift) if (moment(asDate(this.commerce.closeTime1)).unix() > moment(asDate(this.commerce.openTime2)).unix()) {
-            this.alertService.simpleAlert('La segunda hora de apertura no puede ser menor que la primer hora de cierre');
-            return
+        if (this.commerce.splitShift) {
+            if (fromDatetimePickerToMinutesInDay(this.commerce.closeTime1) > fromDatetimePickerToMinutesInDay(this.commerce.openTime2)) {
+                this.alertService.simpleAlert('La segunda hora de apertura no puede ser menor que la primer hora de cierre');
+                return
+            }
         }
-        if (this.commerce.splitShift) if (moment(asDate(this.commerce.openTime2)).unix() > moment(asDate(this.commerce.closeTime2)).unix()) {
-            this.alertService.simpleAlert('La segunda hora de cierre no puede ser menor que la segunda hora de apertura');
-            return
+        if (this.commerce.splitShift) {
+            if (fromDatetimePickerToMinutesInDay(this.commerce.openTime2) > fromDatetimePickerToMinutesInDay(this.commerce.closeTime2)) {
+                this.alertService.simpleAlert('La segunda hora de cierre no puede ser menor que la segunda hora de apertura');
+                return
+            }
         }
+
         console.log('form', form);
 
 

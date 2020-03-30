@@ -140,16 +140,7 @@ export class CommercePage implements OnInit {
     }
 
     onSubmit(form: any) {
-
-
-        console.log("openTime1", fromDatetimePickerToMinutesInDay(this.commerce.openTime1));
-        console.log("closeTime1", fromDatetimePickerToMinutesInDay(this.commerce.closeTime1));
-        console.log("openTime2", fromDatetimePickerToMinutesInDay(this.commerce.openTime2));
-        console.log("closeTime2", fromDatetimePickerToMinutesInDay(this.commerce.closeTime2));
-        this.alertService.simpleAlert('QUITAR RETURN. SACAR COMMERCE HARDCODED.');
-
         this.desperationLevel = 0;
-
 
         if (fromDatetimePickerToMinutesInDay(this.commerce.openTime1) > fromDatetimePickerToMinutesInDay(this.commerce.closeTime1)) {
             this.alertService.simpleAlert('La primer hora de cierre no puede ser menor que la primer hora de apertura');
@@ -168,7 +159,7 @@ export class CommercePage implements OnInit {
             }
         }
 
-        return
+
         console.log('form', form);
         this.loadingService.presentLoading("Cargando")
             .then(
