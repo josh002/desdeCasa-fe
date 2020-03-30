@@ -210,6 +210,7 @@ export class EditCommercePage implements OnInit {
                                 if (resp && resp.status === 0) {                                    
                                     temporaryCommerce.shoppingMinutes = temporaryCommerce.shoppingMinutes / 10;
                                     this.localStorageService.setObject('commerce', temporaryCommerce);
+                                    console.log("shoping minutes despues", temporaryCommerce)
                                     this.editInfo = true;
                                     this.editconfig = true;
                                     const { message } = resp;
@@ -247,6 +248,7 @@ export class EditCommercePage implements OnInit {
                     handler: (value) => {
                         this.commerce.shoppingMinutes = +value['col-0'].value;
                         console.log(`Picked Value`, value);
+                        console.log("shoping minutes despues", this.commerce.shoppingMinutes)
                     }
                 }
             ]
