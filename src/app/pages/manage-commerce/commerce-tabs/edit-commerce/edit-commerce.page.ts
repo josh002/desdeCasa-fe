@@ -195,7 +195,7 @@ export class EditCommercePage implements OnInit {
         }
         console.log('form', form);
 
-        return
+
         this.loadingService.presentLoading("Cargando")
             .then(
                 () => {
@@ -207,7 +207,7 @@ export class EditCommercePage implements OnInit {
                         .then(
                             (resp: any) => {
                                 this.loadingService.dismissLoading();
-                                if (resp && resp.status === 0) {                                    
+                                if (resp && resp.status === 0) {
                                     temporaryCommerce.shoppingMinutes = temporaryCommerce.shoppingMinutes / 10;
                                     this.localStorageService.setObject('commerce', temporaryCommerce);
                                     console.log("shoping minutes despues", temporaryCommerce)
