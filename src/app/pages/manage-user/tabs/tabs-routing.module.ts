@@ -10,7 +10,17 @@ const routes: Routes = [
         children: [
             {
                 path: 'home',
-                loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+                    },
+                    {
+                        path: 'get-appointment/:id',
+                        loadChildren: () => import('./get-appointment/get-appointment.module').then(m => m.GetAppointmentPageModule)
+                    },
+                ]
+
             },
             {
                 path: 'profile',
@@ -20,22 +30,18 @@ const routes: Routes = [
                 path: 'appointment',
                 loadChildren: () => import('./appointment/appointment.module').then(m => m.AppointmentPageModule)
             },
-            {
-                path: 'get-appointment/:id',
-                loadChildren: () => import('./get-appointment/get-appointment.module').then(m => m.GetAppointmentPageModule)
-            },
+
             {
                 path: 'maps',
-                loadChildren: () => import('./maps/maps.module').then( m => m.MapsPageModule)
-              },
-
+                loadChildren: () => import('./maps/maps.module').then(m => m.MapsPageModule)
+            },
         ]
     },
     {
         path: 'logout',
         loadChildren: () => import('./logout/logout.module').then(m => m.LogoutPageModule)
     },
-  
+
 
 
 
