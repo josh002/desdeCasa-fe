@@ -40,10 +40,10 @@ export class CommercePage implements OnInit {
         maxClients: undefined,
         phone: undefined,
         splitShift: true,
-        openTime1: new Date('1994-12-15T08:30').toISOString(),
-        closeTime1: new Date('1994-12-15T13:30').toISOString(),
-        openTime2: new Date('1994-12-15T16:00').toISOString(),
-        closeTime2: new Date('1994-12-15T20:00').toISOString(),
+        openTime1: new Date('1994-12-15T08:30').toString(),
+        closeTime1: new Date('1994-12-15T13:30').toString(),
+        openTime2: new Date('1994-12-15T16:00').toString(),
+        closeTime2: new Date('1994-12-15T20:00').toString(),
         shoppingMinutes: undefined,
     };
 
@@ -57,10 +57,10 @@ export class CommercePage implements OnInit {
     //     maxClients: 5,
     //     phone: 123456789,
     //     splitShift: false,
-    //     openTime1: new Date('1994-12-15T08:30').toISOString(),
-    //     closeTime1: new Date('1994-12-15T13:30').toISOString(),
-    //     openTime2: new Date('1994-12-15T16:00').toISOString(),
-    //     closeTime2: new Date('1994-12-15T20:00').toISOString(),
+    //     openTime1: new Date('1994-12-15T08:30').toString(),
+    //     closeTime1: new Date('1994-12-15T13:30').toString(),
+    //     openTime2: new Date('1994-12-15T16:00').toString(),
+    //     closeTime2: new Date('1994-12-15T20:00').toString(),
     //     shoppingMinutes: 1,
     // };
 
