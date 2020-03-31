@@ -30,7 +30,7 @@ export class CommerceService {
      * @param email
      */
     resetPassword = (email: string) =>
-        this.httpClient.post<DefaultResponse<any>>(`${environment.WS_URL}/reset-password`, { email }, appJsonHeader).toPromise()
+        this.httpClient.post<DefaultResponse<any>>(`${environment.WS_URL}/commerce/reset-password`, { email }, appJsonHeader).toPromise()
 
     editCommerce = (commerce: Commerce | CommerceRegister) => {
         // let params = new HttpParams();
@@ -67,7 +67,7 @@ export class CommerceService {
         params = params.append('id', `${id}`);
         return this.httpClient.get(`${environment.WS_URL}/commerce/${id}`, { params }).toPromise()
     }
-    
+
 
     deleteCommerce = (id: number) => {
         let params = new HttpParams();

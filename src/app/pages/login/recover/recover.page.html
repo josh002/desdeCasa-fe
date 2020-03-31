@@ -23,7 +23,11 @@
                     <div class="ion-text-left ion-margin eon6-primarycolor">
                         <h4>Recuperar cuenta</h4>
                     </div>
-
+                    <ion-item class="toggle-social-media" lines="none">
+                        <ion-label color="primary">¿Es una cuenta de comercio?</ion-label>
+                        <ion-toggle slot="end" name="isCommerce" [(ngModel)]="isCommerce">
+                        </ion-toggle>
+                    </ion-item>
                     <div>
                         <ion-item class="ion-margin-horizontal">
                             <ion-label color="primary" autocomplete="on" position="floating">Direccion de correo
