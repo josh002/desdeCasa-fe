@@ -3,8 +3,14 @@
     padding-left: 4vw;
     padding-right: 4vw;
 }
-.button-cancel{
-    margin-left: 70vw;   
-   font-weight: bolder;
-  width: 1vw;
+
+.button-cancel {
+    margin-left: 70vw;
+    font-weight: bolder;
+    width: 1vw;
+}
+
+.eye {
+    display: flex;
+    align-self: end;
 }

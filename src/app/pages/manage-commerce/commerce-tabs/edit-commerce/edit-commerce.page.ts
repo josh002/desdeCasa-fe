@@ -31,6 +31,8 @@ export class EditCommercePage implements OnInit {
     selectedDepartmentName: string;
     editInfo: boolean = true;
     editconfig: boolean = true;
+    newPassword: string = "";
+    actualPassword: string = "";
 
     commerce: Commerce = {
         email: '',
@@ -105,6 +107,8 @@ export class EditCommercePage implements OnInit {
         this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
         this.commerce.shoppingMinutes = this.commerce.shoppingMinutes * 10;
         this.guessMyLocation();
+        this.newPassword = "";
+        this.actualPassword = "";
     }
 
     guessMyLocation() {

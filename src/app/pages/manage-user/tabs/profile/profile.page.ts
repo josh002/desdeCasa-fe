@@ -28,6 +28,10 @@ export class ProfilePage implements OnInit {
     selectedProvinceName: string;
     selectedDepartmentName: string;
     disabled: boolean = true;
+    disabledPass: boolean = true;
+    togglePass: boolean = false;
+    newPassword: string = "";
+    actualPassword: string = "";
 
     client: Client = {
         email: '',
@@ -55,6 +59,10 @@ export class ProfilePage implements OnInit {
     ionViewWillEnter() {
         this.client = this.localStorageService.getObject('client');
         this.guessMyLocation();
+        this.newPassword = "";
+        this.actualPassword = "";
+        this.disabled = true;
+        this.disabledPass = true;
     }
 
     guessMyLocation() {
@@ -121,6 +129,14 @@ export class ProfilePage implements OnInit {
     changeDisabled() {
         this.disabled = !this.disabled;
     }
+    changeDisabledPass() {
+        this.disabledPass = !this.disabledPass;
+    }
+
+    togglePassword() {
+        this.togglePass = !this.togglePass;
+    }
+
 
     onProvinceChange() {
         this.selectedDepartmentName = undefined;
@@ -196,5 +212,15 @@ export class ProfilePage implements OnInit {
                 }
             )
     }
+
+
+    resetPassword(form: any) {
+        this.desperationLevel = 0;
+
+
+
+
+    }
+
 
 }
