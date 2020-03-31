@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./recover.page.scss'],
 })
 export class RecoverPage implements OnInit {
-    client = new Client();
+    // client = new Client();
 
     constructor(
         public authService: AuthService,
@@ -20,16 +20,16 @@ export class RecoverPage implements OnInit {
 
     ngOnInit() { }
 
-    onClickEnviarCorreo = () => 
-        this.authService.resetPassword(this.client.email)
-            .then(
-                resp => {
-                    this.alertService.simpleAlert(resp.message);
-                    this.router.navigate(['/login']);
-                }
-            )
-            .catch(
-                err => this.alertService.simpleAlert(err.message)
-            )
+    // onClickEnviarCorreo = () => 
+    //     this.authService.resetPassword(this.client.email)
+    //         .then(
+    //             resp => {
+    //                 this.alertService.simpleAlert(resp.message);
+    //                 this.router.navigate(['/login']);
+    //             }
+    //         )
+    //         .catch(
+    //             err => this.alertService.simpleAlert(err.message)
+    //         )
     
 }
