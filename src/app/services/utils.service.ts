@@ -42,9 +42,10 @@ export class UtilsService {
         return this.httpClient.get(`${environment.georef_ar_api}/departamentos`, { params }).toPromise()
     }
 
-    getLocality = (departamentId: number) => {
+    getLocality = (options: { departamentId?: number, provinceId?: number }) => {
         let params = new HttpParams();
-        params = params.append('departamento', `${departamentId}`);
+        if (options && options['departamentId']) params = params.append('departamento', `${options['departamentId']}`);
+        if (options && options['provinceId']) params = params.append('provincia', `${options['provinceId']}`);
         params = params.append('aplanar', 'true');
         params = params.append('max', '1000');
         params = params.append('orden', 'nombre');

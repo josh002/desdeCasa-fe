@@ -35,7 +35,7 @@
             <!-- Contraseña -->
             <ion-item>
                 <ion-label color="primary" position="floating">Contraseña</ion-label>
-                <ion-input name="password" #password="ngModel" minlength="8" type="password" pattern="[A-Za-z0-9._-]+" [(ngModel)]="commerce.password" required>
+                <ion-input name="password" #password="ngModel" minlength="4" type="password" pattern="[A-Za-z0-9._-]+" [(ngModel)]="commerce.password" required>
                 </ion-input>
             </ion-item>
             <ng-container *ngIf="password.invalid && ((password.dirty && password.touched) || desperationLevel > 3)">
@@ -45,7 +45,7 @@
                 </div>
                 <div class="ux-alert" lines="none" *ngIf="password.errors && password.errors.minlength">
                     <ion-icon slot="start" name="information-circle-outline"></ion-icon>
-                    <ion-label>8 caracteres de longitud mínima</ion-label>
+                    <ion-label>4 caracteres de longitud mínima</ion-label>
                 </div>
                 <div class="ux-alert" lines="none" *ngIf="password.errors && password.errors.pattern">
                     <ion-icon slot="start" name="information-circle-outline"></ion-icon>

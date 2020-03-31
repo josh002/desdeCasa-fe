@@ -2,7 +2,7 @@
 <widget id="com.eon6.desdecasa" version="0.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Desde Casa</name>
     <description>Una aplicación para que no tengas que haces más colas.</description>
-    <author email="hi@ionicframework.com" href="http://ionicframework.com/">Eon6 Team</author>
+    <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
