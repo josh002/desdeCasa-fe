@@ -27,7 +27,7 @@ export class RecoverPage implements OnInit {
             .then(
                 resp => {
                     this.alertService.simpleAlert(resp.message);
-                    this.router.navigate(['/login']);
+                    this.router.navigate(['/start']);
                 }
             )
             .catch(err => {
