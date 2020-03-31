@@ -49,6 +49,9 @@ ion-content {
           padding-right: 25%;
           padding-left: 25%;
      }
+     .recover {
+          margin-top: 3vh;
+     }
 }
 
 .register {
@@ -59,6 +62,7 @@ ion-content {
      z-index: 10;
      ion-label {
           text-align: center;
+          margin-top: 3vh;
      }
      ion-button {
           height: 6vh;
