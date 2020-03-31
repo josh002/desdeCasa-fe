@@ -1,14 +1,24 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button color="primary"></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            <div class="ion-text-left ion-margin eon6-primarycolor eon6-font-main brand-title">
+                <h1>Desde Casa</h1>
+            </div>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
 <ion-content class="ion-text-center">
 
     <!-- <form #form="ngForm" (ngSubmit)="doLogin(form)"> -->
     <form #form="ngForm">
         <ion-grid>
-            <ion-row class="ion-justify-content-center">
+            <ion-row class=" ion-justify-content-center">
                 <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
 
-                    <div class="ion-text-left ion-margin eon6-primarycolor eon6-font-main brand-title">
-                        <h1>Desde Casa</h1>
-                    </div>
+
 
                     <div class="ion-text-left ion-margin eon6-primarycolor">
                         <h4>Recuperar cuenta</h4>
@@ -16,11 +26,11 @@
 
                     <div>
                         <ion-item class="ion-margin-horizontal">
-                            <ion-label color="medium" autocomplete="on" position="stacked">Direccion de correo
+                            <ion-label color="primary" autocomplete="on" position="floating">Direccion de correo
                                 electronico</ion-label>
-                            <ion-input name="email" type="email" [(ngModel)]="client.email" required
-                                pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}">
-                            </ion-input>
+                            <!-- <ion-label autocomplete="on" position="floating">Email</ion-label> -->
+                            <ion-input name="name" type="text" [(ngModel)]="email" required
+                                pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}[ ]?"> </ion-input>
                         </ion-item>
                     </div>
 
@@ -36,10 +46,6 @@
                     <div class="ion-text-left ion-margin eon6-graycolor">
                         <h6>Te enviaremos un correo con los pasos para recuperar tu cuenta, por favor revisa tu bandeja
                             de entrada.</h6>
-                    </div>
-
-                    <div class="ion-text-right ion-padding eon6-primarycolor return-icon">
-                        <ion-icon name="arrow-dropleft" [routerLink]="['/start']"></ion-icon>
                     </div>
 
                 </ion-col>
