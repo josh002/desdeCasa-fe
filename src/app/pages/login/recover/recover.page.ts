@@ -30,8 +30,9 @@ export class RecoverPage implements OnInit {
                     this.router.navigate(['/login']);
                 }
             )
-            .catch(
-                err => this.alertService.simpleAlert(err.message)
-            )
+            .catch(err => {
+                this.alertService.simpleAlert(err.error.message);
+                console.log(err);
+            })
 
 }
