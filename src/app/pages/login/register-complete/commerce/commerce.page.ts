@@ -122,19 +122,33 @@ export class CommercePage implements OnInit {
     onProvinceChange() {
         this.selectedDepartmentName = undefined;
         this.selectedDepartment = undefined;
-        this.selectedProvince = this.selectedProvinceName ? this.provinces.filter(elem => this.selectedProvinceName.includes(elem.nombre))[0] : undefined;
+        this.selectedProvince = this.selectedProvinceName ? this.provinces.filter(elem => this.selectedProvinceName == (elem.nombre))[0] : undefined;
+        console.log(this.selectedProvince);
         console.log('selectedProvinceName', this.selectedProvinceName);
-        this.utilsService.getDepartment(this.selectedProvince.id)
-            .then((resp: any) => {
-                this.departments = [];
-                resp.departamentos.forEach(element => this.departments.push(new Department(element)));
-                console.log(this.departments);
-            })
-            .catch(err => { console.log(err); })
+        // Si es CABA tengo que traer localidades en lugar de departamentos
+        if (this.selectedProvinceName && this.selectedProvinceName == "Ciudad Autónoma de Buenos Aires") {
+            console.log('Es CABA');
+            this.utilsService.getLocality({ provinceId: this.selectedProvince.id })
+                .then((resp: any) => {
+                    this.departments = [];
+                    resp.localidades.forEach(element => this.departments.push(new Department(element)));
+                    console.log(this.departments);
+                })
+                .catch(err => { console.log(err); })
+        } else {
+            console.log('No es CABA');
+            this.utilsService.getDepartment(this.selectedProvince.id)
+                .then((resp: any) => {
+                    this.departments = [];
+                    resp.departamentos.forEach(element => this.departments.push(new Department(element)));
+                    console.log(this.departments);
+                })
+                .catch(err => { console.log(err); })
+        }
     }
 
     onDepartmentChange() {
-        this.selectedDepartment = this.selectedDepartmentName ? this.departments.filter(elem => this.selectedDepartmentName.includes(elem.nombre))[0] : undefined;
+        this.selectedDepartment = this.selectedDepartmentName ? this.departments.filter(elem => this.selectedDepartmentName == elem.nombre)[0] : undefined;
         console.log('selectedDepartmentName', this.selectedDepartmentName);
         console.log('selectedDepartment', this.selectedDepartment);
     }

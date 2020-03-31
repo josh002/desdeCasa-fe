@@ -95,7 +95,6 @@ export class AppointmentHourPage implements OnInit {
                         this.authService.getBookingsByCommerce(commerceId)
                             .then(
                                 resp => {
-                                    console.clear();
                                     this.commerceBookings = resp.result.filter(
                                         booking =>
                                             // Filtro aquellos que no corresponden al día de hoy
