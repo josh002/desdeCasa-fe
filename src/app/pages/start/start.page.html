@@ -14,8 +14,9 @@
             </ion-item>
             <ion-item class="ion-margin-horizontal">
                 <ion-label position="floating">Contraseña</ion-label>
-                <ion-input name="password" type="password" [(ngModel)]="password" required>
-                </ion-input>
+                <ion-input name="password" [type]=" togglePass ? 'text':'password'" [(ngModel)]="password" required></ion-input>
+                <ion-icon class="eye" *ngIf="!togglePass" name="eye" (click)="togglePassword()" slot="end"></ion-icon>
+                <ion-icon class="eye" *ngIf="togglePass" name="eye-off" (click)="togglePassword()" slot="end"></ion-icon>
             </ion-item>
 
             <ion-button color="light" [disabled]="myForm.form.invalid" fill="outline" shape="round" type="ngSubmit" routerLinkActive="router-link-active" expand="block">
