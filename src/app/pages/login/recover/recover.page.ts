@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class RecoverPage implements OnInit {
     // client = new Client();
-
+    email = ""
     constructor(
         public authService: AuthService,
         private alertService: AlertService,
@@ -20,8 +20,9 @@ export class RecoverPage implements OnInit {
 
     ngOnInit() { }
 
+
     onClickEnviarCorreo = () =>
-        this.authService.resetPassword(this.client.email)
+        this.authService.resetPassword(this.email)
             .then(
                 resp => {
                     this.alertService.simpleAlert(resp.message);

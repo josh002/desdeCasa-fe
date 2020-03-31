@@ -15,7 +15,7 @@
     <!-- <form #form="ngForm" (ngSubmit)="doLogin(form)"> -->
     <form #form="ngForm">
         <ion-grid>
-            <ion-row class="ion-justify-content-center">
+            <ion-row class=" ion-justify-content-center">
                 <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
 
 
@@ -29,7 +29,8 @@
                             <ion-label color="medium" autocomplete="on" position="stacked">Direccion de correo
                                 electronico</ion-label>
                             <ion-label autocomplete="on" position="floating">Email</ion-label>
-                            <ion-input name="name" type="text" [(ngModel)]="email" required> </ion-input>
+                            <ion-input name="name" type="text" [(ngModel)]="email" required
+                                pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}[ ]?"> </ion-input>
                         </ion-item>
                     </div>
 
