@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class RecoverPage implements OnInit {
     // client = new Client();
     email = ""
+
     constructor(
         public authService: AuthService,
         private alertService: AlertService,
