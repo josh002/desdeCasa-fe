@@ -220,10 +220,24 @@ export class ProfilePage implements OnInit {
     }
 
     resetPass(form: any) {
-        console.log("hacer la logica de el formulario");
-        console.log("password", this.password);
-        console.log("newPassword", this.newPassword);
+        this.desperationLevel = 0;
+        this.loadingService.presentLoading("Cargando");
 
+        this.authService.changePassword(this.client.id, this.password, this.newPassword)
+            .then((resp: any) => {
+                this.loadingService.dismissLoading();
+                this.alertService.simpleAlert("Contraseña actualizada");
+                this.changeDisabledPass();
+            })
+            .catch(err => {
+                this.loadingService.dismissLoading();
+                console.log('err', err);
+                if (err && err.error && err.error.status === -1) {
+                    this.alertService.simpleAlert(err.error.message);
+                } else {
+                    this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
+                }
+            })
     }
 
 }

@@ -31,6 +31,12 @@ export class EditCommercePage implements OnInit {
     selectedDepartmentName: string;
     editInfo: boolean = true;
     editconfig: boolean = true;
+    disabled: boolean = true;
+    disabledPass: boolean = true;
+    password: string = "";
+    newPassword: string = "";
+    togglePass: boolean = false;
+
 
     commerce: Commerce = {
         email: '',
@@ -105,6 +111,12 @@ export class EditCommercePage implements OnInit {
         this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
         this.commerce.shoppingMinutes = this.commerce.shoppingMinutes * 10;
         this.guessMyLocation();
+        this.disabled = true;
+        this.disabledPass = true;
+        this.password = "";
+        this.newPassword = "";
+        this.desperationLevel = 0;
+        this.togglePass = false;
     }
 
     guessMyLocation() {
@@ -191,6 +203,16 @@ export class EditCommercePage implements OnInit {
     changeDisabledconfig() {
         this.editconfig = !this.editconfig
         // this.commerce = new Commerce(this.localStorageService.getObject('commerce'));
+    }
+
+    togglePassword() {
+        this.togglePass = !this.togglePass;
+    }
+
+    changeDisabledPass() {
+        this.disabledPass = !this.disabledPass;
+        this.password = "";
+        this.newPassword = "";
     }
 
     onSubmit(form: any) {
@@ -316,5 +338,34 @@ export class EditCommercePage implements OnInit {
 
         return options;
     }
+
+    resetPass(form: any) {
+        this.desperationLevel = 0;
+        this.loadingService.presentLoading("Cargando");
+
+        this.commerceService.changePassword(this.commerce.id, this.password, this.newPassword)
+            .then((resp: any) => {
+                this.loadingService.dismissLoading();
+                this.alertService.simpleAlert("Contraseña actualizada");
+                this.changeDisabledPass();
+            })
+            .catch(err => {
+                // this.changeDisabledPass();
+                this.loadingService.dismissLoading();
+                console.log('err', err);
+                if (err && err.error && err.error.status === -1) {
+                    this.alertService.simpleAlert(err.error.message);
+                } else {
+                    this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
+                }
+            })
+
+
+
+
+
+    }
+
+
 
 }

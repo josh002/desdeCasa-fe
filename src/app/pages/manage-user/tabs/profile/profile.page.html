@@ -238,7 +238,7 @@
                     <!-- constraseña nueva -->
 
                     <ion-item [(disabled)]="disabledPass">
-                        <ion-label color="primary" position="floating">Contraseña Actual</ion-label>
+                        <ion-label color="primary" position="floating">Nueva Contraseña</ion-label>
                         <ion-input [(ngModel)]="newPassword" #newPass="ngModel" name="newPass" minlength="4" [type]=" togglePass ? 'text':'password'" pattern="[A-Za-z0-9._-]+" required>
                         </ion-input>
                         <!-- <ion-icon class="eye" *ngIf="!togglePass" name="eye" (click)="togglePassword()" slot="end"></ion-icon>

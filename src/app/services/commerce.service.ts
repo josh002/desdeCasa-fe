@@ -38,6 +38,14 @@ export class CommerceService {
         return this.httpClient.put(`${environment.WS_URL}/commerce/${commerce.id}`, commerce, appJsonHeader).toPromise()
     }
 
+    changePassword = (id: number, password: string, newPassword: string) => {
+        password = encryptPass(password);
+        newPassword = encryptPass(newPassword);
+        return this.httpClient.post<DefaultResponse<any>>(`${environment.WS_URL}/commerce/change-password/${id}`, { password, newPassword }, appJsonHeader).toPromise()
+    }
+
+
+
     getCommerce = (
         options?: {
             considerDeletes?: boolean,

@@ -48,6 +48,20 @@ export class AuthService {
     resetPassword = (email: string) =>
         this.httpClient.post<DefaultResponse<any>>(`${environment.WS_URL}/reset-password`, { email }, appJsonHeader).toPromise()
 
+
+    /**
+    * Inicia proceso para cambiar clave
+    * @param id {number} id del usuario
+    * @param password {string} contraseña actual
+    * @param newPassword {string}  nueva contraseña
+    **/
+    changePassword = (id: number, password: string, newPassword: string) => {
+        password = encryptPass(password);
+        newPassword = encryptPass(newPassword);
+        return this.httpClient.post<DefaultResponse<any>>(`${environment.WS_URL}/change-password/${id}`, { password, newPassword }, appJsonHeader).toPromise()
+    }
+
+
     /**
      * Dado un usuario retorna comercios cercanos
      */
