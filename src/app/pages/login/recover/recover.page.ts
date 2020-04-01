@@ -36,7 +36,7 @@ export class RecoverPage implements OnInit {
                     }
                 )
                 .catch(
-                    err => this.alertService.simpleAlert(err.message)
+                    err => this.alertService.simpleAlert(err.statusText)
                 )
         else
             this.authService.resetPassword(this.email)
@@ -47,7 +47,10 @@ export class RecoverPage implements OnInit {
                     }
                 )
                 .catch(
-                    err => this.alertService.simpleAlert(err.message)
+                    err => {
+                        this.alertService.simpleAlert(err.statusText);
+                        console.log(err)
+                    }
                 )
     }
 }
