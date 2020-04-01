@@ -10,6 +10,7 @@ import { addressHelperText, addressInputHelperText } from 'src/app/constants/con
 import { UtilsService } from 'src/app/services/utils.service';
 import { Department } from 'src/app/models/department.model';
 import { Province } from 'src/app/models/province.model';
+import { Platform } from '@ionic/angular';
 
 @Component({
     selector: 'app-profile',
@@ -18,7 +19,7 @@ import { Province } from 'src/app/models/province.model';
 })
 export class ProfilePage implements OnInit {
     readonly addressInputHelperText = addressInputHelperText;
-
+    private backButtonSubscription;
     disableHelper: boolean = false;
     desperationLevel: number = 0;
     provinces: Province[];
@@ -47,6 +48,7 @@ export class ProfilePage implements OnInit {
         private router: Router,
         private localStorageService: LocalStorageService,
         private utilsService: UtilsService,
+        private platform: Platform,
     ) { }
 
 
@@ -55,6 +57,15 @@ export class ProfilePage implements OnInit {
     ionViewWillEnter() {
         this.client = this.localStorageService.getObject('client');
         this.guessMyLocation();
+    }
+    ionViewDidEnter() {
+        this.backButtonSubscription = this.platform.backButton.subscribe(() => {
+            navigator['app'].exitApp();
+        });
+    }
+
+    ionViewWillLeave() {
+        this.backButtonSubscription.unsubscribe();
     }
 
     guessMyLocation() {

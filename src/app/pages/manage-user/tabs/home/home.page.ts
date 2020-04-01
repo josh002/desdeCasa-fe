@@ -60,6 +60,10 @@ export class HomePage implements OnInit {
                 }
                 this.router.navigate(['/start']);
             });
+    }
+    goLogout(){
+        // this.router.navigate(['/tabs/home/logout'])
+        alert('hola')
     }   
     
 }

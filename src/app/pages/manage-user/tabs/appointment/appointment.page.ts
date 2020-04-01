@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, Platform } from '@ionic/angular';
 import { Client } from 'src/app/models/client.model';
 import { Commerce } from 'src/app/models/commerce.model';
 import { BookingService } from 'src/app/services/booking.service';
@@ -19,13 +19,15 @@ export class AppointmentPage implements OnInit {
     client: Client;
     bookings: Booking[];
     cancelBookingId: number;
-
+    private backButtonSubscription;
     constructor(
         public alertController: AlertController,
         private bookingService: BookingService,
         private alertService: AlertService,
         private localStorageService: LocalStorageService,
         private router: Router,
+        private platform: Platform,
+
     ) { }
 
     ngOnInit() { }
@@ -62,6 +64,15 @@ export class AppointmentPage implements OnInit {
 
     }
 
+    ionViewDidEnter() {
+        this.backButtonSubscription = this.platform.backButton.subscribe(() => {
+            navigator['app'].exitApp();
+        });
+    }
+
+    ionViewWillLeave() {
+        this.backButtonSubscription.unsubscribe();
+    }
 
 
     doCancel() {

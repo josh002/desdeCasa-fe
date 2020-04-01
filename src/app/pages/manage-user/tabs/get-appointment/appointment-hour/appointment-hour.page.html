@@ -1,5 +1,20 @@
 <ion-header>
-    <app-baby-header></app-baby-header>
+    <ion-toolbar class="eon6-primarycolor">
+
+        <ion-buttons slot="start">
+            <ion-back-button color="light" text=""></ion-back-button>
+        </ion-buttons>
+    
+        <ion-title class="eon6-font-main eon6-darkcolor eon6-large-text header-logo">
+            <img src="../../../../assets/icon/icon.png" alt="">
+            <ion-label>Desde Casa</ion-label>
+        </ion-title>
+    
+        <ion-buttons class="logoutbutton" [routerLink]="['../../logout']" routerLinkActive="router-link-active" slot="end">
+            <ion-icon color="light" name="log-out"></ion-icon>
+        </ion-buttons>
+    
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>

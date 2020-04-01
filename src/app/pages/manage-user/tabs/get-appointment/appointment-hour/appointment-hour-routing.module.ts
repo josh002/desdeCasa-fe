@@ -5,16 +5,17 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AppointmentHourPage } from './appointment-hour.page';
 
 const routes: Routes = [
-  {
-    path: ':id',
-    component: AppointmentHourPage
-  }
+    {
+        path: ':id',
+        component: AppointmentHourPage
+    }, 
+    
 ];
 
 @NgModule({
-  imports: [
-    SharedModule,  
-    RouterModule.forChild(routes)],
-  exports: [RouterModule],
+    imports: [
+        SharedModule,
+        RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
-export class AppointmentHourPageRoutingModule {}
+export class AppointmentHourPageRoutingModule { }

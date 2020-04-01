@@ -19,31 +19,50 @@ const routes: Routes = [
                         path: 'get-appointment/:id',
                         loadChildren: () => import('./get-appointment/get-appointment.module').then(m => m.GetAppointmentPageModule)
                     },
+                    {
+                        path: 'logout',
+                        loadChildren: () => import('./logout/logout.module').then(m => m.LogoutPageModule)
+                    },
                 ]
 
             },
             {
                 path: 'profile',
-                loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
+                    },
+                    {
+                        path: 'logout',
+                        loadChildren: () => import('./logout/logout.module').then(m => m.LogoutPageModule)
+                    },
+                ]
+
             },
             {
                 path: 'appointment',
-                loadChildren: () => import('./appointment/appointment.module').then(m => m.AppointmentPageModule)
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () => import('./appointment/appointment.module').then(m => m.AppointmentPageModule)
+                    },
+                    {
+                        path: 'logout',
+                        loadChildren: () => import('./logout/logout.module').then(m => m.LogoutPageModule)
+                    },
+                ]
+
             },
 
             {
                 path: 'maps',
                 loadChildren: () => import('./maps/maps.module').then(m => m.MapsPageModule)
             },
+
         ]
+
     },
-    {
-        path: 'logout',
-        loadChildren: () => import('./logout/logout.module').then(m => m.LogoutPageModule)
-    },
-
-
-
 
 
 ];
