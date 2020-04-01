@@ -21,9 +21,7 @@ export class StartPage implements OnInit {
     email: string;
     password: string;
     togglePass: boolean = false;
-    togglePassIcon: string;
-    iconOn: string = "eye";
-    iconOff: string = "eye-off";
+
 
     private backButtonSubscription;
     constructor(
@@ -45,12 +43,12 @@ export class StartPage implements OnInit {
             navigator['app'].exitApp();
         });
         this.splashScreen.hide();
+
     }
 
     ionViewWillLeave() {
         this.backButtonSubscription.unsubscribe();
         this.togglePass = false;
-        this.togglePassIcon = this.iconOn;
     }
 
     ionViewWillEnter() {
@@ -136,8 +134,5 @@ export class StartPage implements OnInit {
 
     togglePassword() {
         this.togglePass = !this.togglePass;
-        if (this.togglePass) {
-            this.togglePassIcon = this.iconOff;
-        }
     }
 } 
