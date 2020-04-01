@@ -29,6 +29,11 @@ export class ProfilePage implements OnInit {
     selectedProvinceName: string;
     selectedDepartmentName: string;
     disabled: boolean = true;
+    disabledPass: boolean = true;
+    password: string = "";
+    newPassword: string = "";
+    togglePass: boolean = false;
+
 
     client: Client = {
         email: '',
@@ -57,6 +62,12 @@ export class ProfilePage implements OnInit {
     ionViewWillEnter() {
         this.client = this.localStorageService.getObject('client');
         this.guessMyLocation();
+        this.disabled = true;
+        this.disabledPass = true;
+        this.password = "";
+        this.newPassword = "";
+        this.desperationLevel = 0;
+        this.togglePass = false;
     }
     ionViewDidEnter() {
         this.backButtonSubscription = this.platform.backButton.subscribe(() => {
@@ -119,6 +130,11 @@ export class ProfilePage implements OnInit {
             .catch(err => { console.log(err); })
     }
 
+
+    togglePassword() {
+        this.togglePass = !this.togglePass;
+    }
+
     desperateUser() {
         this.desperationLevel = this.desperationLevel ? ++this.desperationLevel : 0;
         console.log(`Im this desperate: ${this.desperationLevel}`);
@@ -131,6 +147,12 @@ export class ProfilePage implements OnInit {
 
     changeDisabled() {
         this.disabled = !this.disabled;
+    }
+
+    changeDisabledPass() {
+        this.disabledPass = !this.disabledPass;
+        this.password = "";
+        this.newPassword = "";
     }
 
     onProvinceChange() {
@@ -206,6 +228,27 @@ export class ProfilePage implements OnInit {
                         })
                 }
             )
+    }
+
+    resetPass(form: any) {
+        this.desperationLevel = 0;
+        this.loadingService.presentLoading("Cargando");
+
+        this.authService.changePassword(this.client.id, this.password, this.newPassword)
+            .then((resp: any) => {
+                this.loadingService.dismissLoading();
+                this.alertService.simpleAlert("Contraseña actualizada");
+                this.changeDisabledPass();
+            })
+            .catch(err => {
+                this.loadingService.dismissLoading();
+                console.log('err', err);
+                if (err && err.error && err.error.status === -1) {
+                    this.alertService.simpleAlert(err.error.message);
+                } else {
+                    this.alertService.simpleAlert("Ocurrió un error inesperado. Intente más tarde.");
+                }
+            })
     }
 
 }

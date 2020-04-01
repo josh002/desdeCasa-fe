@@ -34,14 +34,11 @@
 
                     <ion-item [(disabled)]="disabled">
                         <ion-label color="primary" position="floating">Nombre</ion-label>
-                        <ion-input name="firstName" #firstName="ngModel" type="text" [(ngModel)]="client.firstName"
-                            pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?"
-                            required>
+                        <ion-input name="firstName" #firstName="ngModel" type="text" [(ngModel)]="client.firstName" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required>
                         </ion-input>
                     </ion-item>
 
-                    <ng-container
-                        *ngIf="firstName.invalid && ((firstName.dirty && firstName.touched) || desperationLevel > 3)">
+                    <ng-container *ngIf="firstName.invalid && ((firstName.dirty && firstName.touched) || desperationLevel > 3)">
                         <div class="ux-alert" lines="none" *ngIf="firstName.errors && firstName.errors.required">
                             <ion-icon slot="start" name="information-circle-outline"></ion-icon>
                             <ion-label>Campo Requerido</ion-label>
@@ -56,13 +53,10 @@
 
                     <ion-item [(disabled)]="disabled">
                         <ion-label color="primary" position="floating">Apellido</ion-label>
-                        <ion-input name="lastName" #lastName="ngModel" type="text" [(ngModel)]="client.lastName"
-                            pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?"
-                            required></ion-input>
+                        <ion-input name="lastName" #lastName="ngModel" type="text" [(ngModel)]="client.lastName" pattern="[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+([ ][A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙñÑ]+){0,}[ ]?" required></ion-input>
                     </ion-item>
 
-                    <ng-container
-                        *ngIf="lastName.invalid && ((lastName.dirty && lastName.touched) || desperationLevel > 3)">
+                    <ng-container *ngIf="lastName.invalid && ((lastName.dirty && lastName.touched) || desperationLevel > 3)">
                         <div class="ux-alert" lines="none" *ngIf="lastName.errors && lastName.errors.required">
                             <ion-icon slot="start" name="information-circle-outline"></ion-icon>
                             <ion-label>Campo Requerido</ion-label>
@@ -76,10 +70,9 @@
                     <!-- Mail -->
 
                     <ion-item [(disabled)]="disabled">
-                        <ion-label color="primary" autocomplete="off" position="floating">Direccion de correo
-                            electrónico</ion-label>
-                        <ion-input #email="ngModel" [(ngModel)]="client.email" name="email" type="email" required
-                            pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}[ ]?"></ion-input>
+                        <ion-label color="primary" autocomplete="off" position="floating">Direccion de correo electrónico
+                        </ion-label>
+                        <ion-input #email="ngModel" [(ngModel)]="client.email" name="email" type="email" required pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z0-9-_.]{2,}[.]{1}[a-zA-Z]{2,}[ ]?"></ion-input>
                     </ion-item>
 
                     <ng-container *ngIf="email.invalid && ((email.dirty && email.touched) || desperationLevel > 3)">
@@ -118,8 +111,7 @@
                     <!-- Provincia      -->
                     <ion-item [(disabled)]="disabled">
                         <ion-label position="floating" color="primary">Provincia</ion-label>
-                        <ion-select name="province" #province="ngModel" [(ngModel)]="selectedProvinceName"
-                            (ionChange)=onProvinceChange() required>
+                        <ion-select name="province" #province="ngModel" [(ngModel)]="selectedProvinceName" (ionChange)=onProvinceChange() required>
                             <ion-select-option *ngFor="let province of provinces" [(value)]="province.nombre">
                                 {{province.nombre | titlecase}}
                             </ion-select-option>
@@ -135,8 +127,7 @@
                     <!-- Departamento      -->
                     <ion-item [(disabled)]="disabled">
                         <ion-label position="floating" color="primary">Departamento</ion-label>
-                        <ion-select name="department" #department="ngModel" [disabled]="!selectedProvince"
-                            (ionChange)=onDepartmentChange() [(ngModel)]="selectedDepartmentName" required>
+                        <ion-select name="department" #department="ngModel" [disabled]="!selectedProvince" (ionChange)=onDepartmentChange() [(ngModel)]="selectedDepartmentName" required>
                             <ion-select-option *ngFor="let department of departments" [(value)]="department.nombre">
                                 {{department.nombre | titlecase}}
                             </ion-select-option>
@@ -153,8 +144,7 @@
                     <ion-item [(disabled)]="disabled">
                         <ion-label color="primary" position="floating">Direccion</ion-label>
                         <!-- <ion-input name="address" #address="ngModel" type="text" (ionFocus)="addressHelper()" [disabled]="!selectedDepartment" [(ngModel)]="client.address" required> </ion-input> -->
-                        <ion-input name="address" #address="ngModel" type="text" [disabled]="!selectedDepartment"
-                            [(ngModel)]="client.address" required> </ion-input>
+                        <ion-input name="address" #address="ngModel" type="text" [disabled]="!selectedDepartment" [(ngModel)]="client.address" required> </ion-input>
                     </ion-item>
                     <ng-container *ngIf="!disabled && address.pristine">
                         <div class="ux-alert" lines="none">
@@ -162,8 +152,7 @@
                             <ion-label>{{addressInputHelperText}}</ion-label>
                         </div>
                     </ng-container>
-                    <ng-container
-                        *ngIf="address.invalid && ((address.dirty && address.touched) || desperationLevel > 3)">
+                    <ng-container *ngIf="address.invalid && ((address.dirty && address.touched) || desperationLevel > 3)">
                         <div class="ux-alert" lines="none" *ngIf="address.errors && address.errors.required">
                             <ion-icon slot="start" name="information-circle-outline"></ion-icon>
                             <ion-label>Campo Requerido</ion-label>
@@ -175,8 +164,7 @@
 
                 <ng-container *ngIf="!disabled">
                     <div class="ion-padding" (click)=desperateUser()>
-                        <ion-button type="ngSubmit" color="primary" shape="round" expand="block"
-                            [disabled]="myForm.form.invalid">
+                        <ion-button type="ngSubmit" color="primary" shape="round" expand="block" [disabled]="myForm.form.invalid">
                             <ion-label color="light"> Editar Perfil</ion-label>
                         </ion-button>
                         <div class="button-helper" lines="none" *ngIf="desperationLevel > 3">
@@ -185,11 +173,119 @@
                         </div>
                     </div>
                 </ng-container>
+            </form>
+
+        </ion-card-content>
+    </ion-card>
 
 
+
+
+
+
+
+
+    <ion-card>
+
+        <ion-card-header>
+            <ion-card-subtitle>Contraseña</ion-card-subtitle>
+            <!-- <ion-card-title>Información personal</ion-card-title> -->
+        </ion-card-header>
+
+
+        <ng-container *ngIf="disabledPass">
+            <ion-button color="primary" class="boton-edit" shape="round" expand="block" (click)=changeDisabledPass()>
+                <ion-label Slots="start" color="light">Cambiar Contraseña</ion-label>
+                <ion-icon Slots="end" name="create"></ion-icon>
+            </ion-button>
+        </ng-container>
+
+
+        <ng-container *ngIf="!disabledPass">
+            <ion-button color="danger" class="button-cancel" item-end shape="round" (click)=changeDisabledPass()>
+                <ion-label color="light"> X </ion-label>
+            </ion-button>
+        </ng-container>
+
+        <ion-card-content>
+            <form #resetForm="ngForm" (ngSubmit)="resetPass(resetForm)">
+                <ion-list *ngIf="!disabledPass">
+
+                    <!-- constraseña actual -->
+
+                    <ion-item [(disabled)]="disabledPass">
+                        <ion-label color="primary" position="floating">Contraseña Actual</ion-label>
+                        <ion-input [(ngModel)]="password" #actualPass="ngModel" name="actualPass" minlength="4" [type]=" togglePass ? 'text':'password'" pattern="[A-Za-z0-9._-]+" required>
+                        </ion-input>
+                        <ion-icon class="eye" *ngIf="!togglePass" name="eye" (click)="togglePassword()" slot="end"></ion-icon>
+                        <ion-icon class="eye" *ngIf="togglePass" name="eye-off" (click)="togglePassword()" slot="end"></ion-icon>
+                    </ion-item>
+                    <ng-container *ngIf="actualPass.invalid && ((actualPass.dirty && actualPass.touched) || desperationLevel > 3)">
+                        <div class="ux-alert" lines="none" *ngIf="actualPass.errors && actualPass.errors.required">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Campo Requerido</ion-label>
+                        </div>
+                        <div class="ux-alert" lines="none" *ngIf="actualPass.errors && actualPass.errors.minlength">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>4 caracteres de longitud mínima</ion-label>
+                        </div>
+                        <div class="ux-alert" lines="none" *ngIf="actualPass.errors && actualPass.errors.pattern">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Solo letras, números, guiones y puntos</ion-label>
+                        </div>
+                    </ng-container>
+
+                    <!-- constraseña nueva -->
+
+                    <ion-item [(disabled)]="disabledPass">
+                        <ion-label color="primary" position="floating">Nueva Contraseña</ion-label>
+                        <ion-input [(ngModel)]="newPassword" #newPass="ngModel" name="newPass" minlength="4" [type]=" togglePass ? 'text':'password'" pattern="[A-Za-z0-9._-]+" required>
+                        </ion-input>
+                        <!-- <ion-icon class="eye" *ngIf="!togglePass" name="eye" (click)="togglePassword()" slot="end"></ion-icon>
+                        <ion-icon class="eye" *ngIf="togglePass" name="eye-off" (click)="togglePassword()" slot="end"></ion-icon> -->
+                    </ion-item>
+                    <ng-container *ngIf="newPass.invalid && ((newPass.dirty && newPass.touched) || desperationLevel > 3)">
+                        <div class="ux-alert" lines="none" *ngIf="newPass.errors && newPass.errors.required">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Campo Requerido</ion-label>
+                        </div>
+                        <div class="ux-alert" lines="none" *ngIf="newPass.errors && newPass.errors.minlength">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>4 caracteres de longitud mínima</ion-label>
+                        </div>
+                        <div class="ux-alert" lines="none" *ngIf="newPass.errors && newPass.errors.pattern">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Solo letras, números, guiones y puntos</ion-label>
+                        </div>
+                    </ng-container>
+
+                </ion-list>
+
+                <!-- boton de confirmacion -->
+
+                <ng-container *ngIf="!disabledPass">
+                    <div class="ion-padding" (click)=desperateUser()>
+                        <ion-button type="ngSubmit" color="primary" shape="round" expand="block" [disabled]="resetForm.form.invalid">
+                            <ion-label color="light">Guardar</ion-label>
+                        </ion-button>
+                        <div class="button-helper" lines="none" *ngIf="desperationLevel > 3">
+                            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                            <ion-label>Revise si le quedaron campos sin completar</ion-label>
+                        </div>
+                    </div>
+                </ng-container>
 
             </form>
 
         </ion-card-content>
     </ion-card>
+
+    <div class="paddingbotton"></div>
+
+
+
+
+
+
+
 </ion-content>
