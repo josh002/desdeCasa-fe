@@ -40,7 +40,7 @@ export class AlertService {
                     text: 'Pedir Turno',
                     cssClass: 'getAppointment',
                     handler: ()=> {
-                        this.router.navigate(['/tabs/get-appointment/',commerceId]);
+                        this.router.navigate(['/tabs/maps/get-appointment/',commerceId]);
                     }
                 },
                 {

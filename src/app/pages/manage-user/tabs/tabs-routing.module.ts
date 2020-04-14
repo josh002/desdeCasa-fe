@@ -57,7 +57,22 @@ const routes: Routes = [
 
             {
                 path: 'maps',
-                loadChildren: () => import('./maps/maps.module').then(m => m.MapsPageModule)
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () => import('./maps/maps.module').then(m => m.MapsPageModule)
+                    },
+                    {
+                        path: 'logout',
+                        loadChildren: () => import('./logout/logout.module').then(m => m.LogoutPageModule)
+                    },
+                    {
+                        path: 'get-appointment/:id',
+                        loadChildren: () => import('./get-appointment/get-appointment.module').then(m => m.GetAppointmentPageModule)
+                    },
+                    
+                ]
+
             },
 
         ]

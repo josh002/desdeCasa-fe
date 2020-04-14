@@ -32,6 +32,7 @@
         "@ionic-native/facebook": "*",
         "@ionic-native/geolocation": "^5.23.0",
         "@ionic-native/google-maps": "^5.5.0",
+        "@ionic-native/native-geocoder": "^5.23.0",
         "@ionic-native/photo-viewer": "*",
         "@ionic-native/splash-screen": "*",
         "@ionic-native/status-bar": "*",
@@ -46,6 +47,7 @@
         "cordova-plugin-facebook4": "*",
         "cordova-plugin-geolocation": "^4.0.2",
         "cordova-plugin-googlemaps": "^2.6.2",
+        "cordova-plugin-nativegeocoder": "^3.4.0",
         "core-js": "^3.4.2",
         "corejs": "^1.0.0",
         "crypto-js": "^3.1.9-1",
@@ -121,7 +123,8 @@
                 "API_KEY_FOR_ANDROID": "AIzaSyBvnvlf-C4kmhammlz61Q7mbCiFGlgkCrc",
                 "PLAY_SERVICES_VERSION": "15.0.1",
                 "ANDROID_SUPPORT_V4_VERSION": "27.+"
-            }
+            },
+            "cordova-plugin-nativegeocoder": {}
         },
         "platforms": [
             "android"
