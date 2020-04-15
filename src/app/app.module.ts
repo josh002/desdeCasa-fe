@@ -27,6 +27,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 registerLocaleData(localeEsAr, 'es-Ar');
 library.add(fas,far,fab)
@@ -58,6 +59,7 @@ library.add(fas,far,fab)
     LoadingService,
     Geolocation,
     NativeGeocoder,
+    LocalNotifications,
     { provide: LOCALE_ID, useValue: 'es-AR' }
   ],
   bootstrap: [AppComponent]

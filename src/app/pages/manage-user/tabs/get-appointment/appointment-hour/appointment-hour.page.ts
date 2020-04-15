@@ -13,6 +13,7 @@ import { Client } from 'src/app/models/client.model';
 import { LocalStorageService } from 'src/app/services/localStorageService';
 import { AuthService } from 'src/app/services/authService';
 import * as moment from 'moment';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Component({
     selector: 'app-appointment-hour',
@@ -52,7 +53,8 @@ export class AppointmentHourPage implements OnInit {
         private boookingService: BookingService,
         private localStorageService: LocalStorageService,
         private timetableService: TimetableService,
-        private authService: AuthService
+        private authService: AuthService,
+        private localNotifications: LocalNotifications
     ) { }
 
     ngOnInit() {
@@ -229,13 +231,28 @@ export class AppointmentHourPage implements OnInit {
             commerceId: this.commerce.id,
             timetableId: this.selectedTimetable.id,
             created: moment().format('YYYY-MM-DD'),
+        };
+        const commerceData = {
+            commerceName: this.commerce.shopName,
         }
-        console.log(booking)
+        const notificationTime = moment(`${booking.created} ${this.selectedTimetable.description}`).subtract(15, 'minutes').format('YYYY-MM-DD HH:mm');
+        this.alertService.simpleAlert('hora'+ this.selectedTimetable.description);
+        this.alertService.simpleAlert('fecha' + booking.created);
+        this.alertService.simpleAlert('notificationTime' + notificationTime);
+        
+        // this.alertService.simpleAlert('quitar el return');
+        // return
         this.boookingService.createBooking(booking)
             .then((resp: any) => {
                 const { message } = resp;
                 this.alertService.headerAlert('Agendado!', message)
-                this.router.navigate(['/tabs/home'])
+                this.router.navigate(['/tabs/home']);
+                this.localNotifications.schedule({
+                    text: `Tiene un turno en 15 minutos en ${commerceData.commerceName}`,
+                    trigger: { at: new Date(notificationTime) },
+                    led: 'FF0000',
+                    sound: null
+                });
             })
             .catch(err => {
                 console.log('err', err);
