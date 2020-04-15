@@ -57,8 +57,9 @@ export class MapsPage implements OnInit {
                 this.router.navigate(['/start']);
             });
         this.getGeocoder();
-        // this.loadMap();
+        
     }
+    
     getGeocoder() {
         this.nativeGeocoder.forwardGeocode(this.client.address)
             .then((result: NativeGeocoderResult[]) => {
@@ -67,17 +68,17 @@ export class MapsPage implements OnInit {
             })
             .catch((error: any) => console.log(error));
     }
+
     ionViewDidEnter() {
         this.backButtonSubscription = this.platform.backButton.subscribe(() => {
             navigator['app'].exitApp();
         });       
     }
+
     ngAfterViewInit() {
 		this.platform.ready().then(() => this.loadMap());
 	}
-    // ionViewDidLoad(){
-    //     this.loadMap();
-    //   }
+    
     ionViewWillLeave() {
         this.backButtonSubscription.unsubscribe();
     }
@@ -85,37 +86,6 @@ export class MapsPage implements OnInit {
     loadMap() {
         /* The create() function will take the ID of your map element */
         this.map = GoogleMaps.create('map');
-
-        // this.map.addEventListener(GoogleMapsEvent.MAP_READY).subscribe(() => {
-        //     var coordinates: LatLng = new LatLng(this.mylat, this.mylng);
-        //     //POSICION DEL USUARIO
-        //     this.map.setCameraTarget(coordinates);
-        //     this.map.setCameraZoom(15);
-
-        //     this.map.addMarker({
-        //         title: 'Mi Casa',
-        //         icon: 'red',
-        //         animation: 'DROP',
-        //         position: coordinates,
-        //     }).then((marker: Marker) => {
-        //         marker.showInfoWindow();
-        //     });
-        //     //MOSTRANDO LOS COMERCIOS CERDA DEL USUARIO EN EL MAPA
-        //     this.commerces.forEach((commerce) => {
-        //         this.map.addMarker({
-        //             title: commerce.shopName,
-        //             icon: 'rgb(2, 119, 172)',
-        //             animation: 'DROP',
-        //             position: {
-        //                 lat: commerce.latitude,
-        //                 lng: commerce.longitude,
-        //             }
-        //         }).then((marker: Marker) => {
-        //             marker.showInfoWindow();
-        //             this.onMarketClick(marker, commerce);
-        //         });
-        //     })
-        // });
 
         this.map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
             const coordinates: LatLng = new LatLng(this.mylat, this.mylng);
