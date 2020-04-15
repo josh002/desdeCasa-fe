@@ -208,7 +208,7 @@ export class ProfilePage implements OnInit {
                                     this.localStorageService.setObject('client', temporaryClient);
                                     this.disabled = true;
                                     this.alertService.headerAlert('Exito', message)
-                                    this.router.navigate(['start/tabs/home'])
+                                    this.router.navigate(['/tabs/home'])
                                 } else {
                                     if (resp.error) {
                                         this.alertService.simpleAlert(resp.error.message)
