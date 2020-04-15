@@ -57,9 +57,9 @@ export class MapsPage implements OnInit {
                 this.router.navigate(['/start']);
             });
         this.getGeocoder();
-        
+        // this.loadMap()
     }
-    
+
     getGeocoder() {
         this.nativeGeocoder.forwardGeocode(this.client.address)
             .then((result: NativeGeocoderResult[]) => {
@@ -76,7 +76,8 @@ export class MapsPage implements OnInit {
     }
 
     ngAfterViewInit() {
-		this.platform.ready().then(() => this.loadMap());
+        // this.platform.ready().then(() => this.loadMap());
+        this.loadMap()
 	}
     
     ionViewWillLeave() {
