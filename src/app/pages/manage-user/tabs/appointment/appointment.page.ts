@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { Booking } from 'src/app/models/booking.model';
 import { onlyDate } from 'src/app/constants/constants';
 import * as moment from 'moment';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Component({
     selector: 'app-appointment',
@@ -19,6 +20,7 @@ export class AppointmentPage implements OnInit {
     client: Client;
     bookings: Booking[];
     cancelBookingId: number;
+    cancelNotificationId: number;
     private backButtonSubscription;
     constructor(
         public alertController: AlertController,
@@ -27,7 +29,7 @@ export class AppointmentPage implements OnInit {
         private localStorageService: LocalStorageService,
         private router: Router,
         private platform: Platform,
-
+        private localNotifications: LocalNotifications
     ) { }
 
     ngOnInit() { }
@@ -91,10 +93,13 @@ export class AppointmentPage implements OnInit {
             .catch((err: any) => {
                 console.log('err', err);
             });
+        this.localNotifications.cancel(this.cancelNotificationId);
+        
     }
 
     async myAppointment(booking: Booking) {
         this.cancelBookingId = booking.id;
+        this.cancelNotificationId = booking.commerceId;
         const alert = await this.alertController.create({
             header: booking.shopName,
             subHeader: `${onlyDate(booking.created)} - ${booking.description.slice(0, 5)}`,

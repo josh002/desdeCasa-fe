@@ -32,7 +32,7 @@ export class AppointmentHourPage implements OnInit {
 
     // Esta linea luego podrá usarse cuando el día sea variable
     whatDayIsIt: string = new Date().toLocaleDateString();
-
+    misIds;
     startMinute1: number;
     endMinute1: number;
     startMinute2: number;
@@ -124,10 +124,8 @@ export class AppointmentHourPage implements OnInit {
                         }
                         this.router.navigate(['/tabs/home']);
                     });
-
             })
     }
-
     manageWorkHours = () => {
         // Guardo los minutos y las horas de apertura y cierre 
         this.startMinute1 = asDate(this.commerce.openTime1).getMinutes();
@@ -235,24 +233,24 @@ export class AppointmentHourPage implements OnInit {
         const commerceData = {
             commerceName: this.commerce.shopName,
         }
+        //notificaciones
         const notificationTime = moment(`${booking.created} ${this.selectedTimetable.description}`).subtract(15, 'minutes').format('YYYY-MM-DD HH:mm');
-        this.alertService.simpleAlert('hora'+ this.selectedTimetable.description);
-        this.alertService.simpleAlert('fecha' + booking.created);
-        this.alertService.simpleAlert('notificationTime' + notificationTime);
-        
-        // this.alertService.simpleAlert('quitar el return');
-        // return
+        console.log(notificationTime);
         this.boookingService.createBooking(booking)
             .then((resp: any) => {
                 const { message } = resp;
                 this.alertService.headerAlert('Agendado!', message)
                 this.router.navigate(['/tabs/home']);
                 this.localNotifications.schedule({
+                    id: booking.commerceId,
+                    title:'Turnos' ,
+                    vibrate: true,
                     text: `Tiene un turno en 15 minutos en ${commerceData.commerceName}`,
                     trigger: { at: new Date(notificationTime) },
                     led: 'FF0000',
                     sound: null
                 });
+
             })
             .catch(err => {
                 console.log('err', err);
