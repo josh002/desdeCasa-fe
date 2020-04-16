@@ -76,8 +76,8 @@ export class MapsPage implements OnInit {
     }
 
     ngAfterViewInit() {
-        // this.platform.ready().then(() => this.loadMap());
-        this.loadMap()
+        this.platform.ready().then(() => this.loadMap());
+     
 	}
     
     ionViewWillLeave() {
