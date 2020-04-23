@@ -18,6 +18,7 @@ interface OccupiedShifts {
     templateUrl: './get-appointment.page.html',
     styleUrls: ['./get-appointment.page.scss'],
 })
+
 export class GetAppointmentPage implements OnInit {
     commerce: Commerce;
     id: number;
@@ -34,6 +35,10 @@ export class GetAppointmentPage implements OnInit {
     // Arreglo con horas
     hours: OccupiedShifts[];
 
+    days: Array<any>=[];
+    selectedDay: number = 0; //indice del arreglo que tiene los dias
+   
+
     constructor(
         private commerceService: CommerceService,
         private bookingService: BookingService,
@@ -42,7 +47,26 @@ export class GetAppointmentPage implements OnInit {
         private route: ActivatedRoute,
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {  
+        moment.locale('es');
+
+        for (let index = 0; index < 7; index++) {
+            this.days[index] = moment().clone().add(index, 'day').format("D MMMM");
+        }
+    }
+
+
+    changeDay(amount: boolean) {
+        //que no se pase del array      
+        if ((amount) && (this.selectedDay < this.days.length - 1)) {
+            this.selectedDay++;
+        } else if ((!amount) && (this.selectedDay != 0)) {
+            this.selectedDay--;
+        }
+    }
+
+
+
 
     ionViewWillEnter() {
         this.currentHour = new Date().getHours();

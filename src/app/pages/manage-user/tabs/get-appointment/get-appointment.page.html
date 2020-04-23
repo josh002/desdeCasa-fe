@@ -8,20 +8,43 @@
         <ion-card-title class=ion-text-center>Seleccionar Turno</ion-card-title>
     </ion-card-header>
 
+
+    <ion-card>
+
+        <!-- <ion-card-header>
+            <ion-card-subtitle class="ion-text-center">Elegir día</ion-card-subtitle>
+        </ion-card-header> -->
+
+        <div class="daypiker" *ngIf="days">
+
+            <ion-fab-button [disabled]="selectedDay == 0" (click)="changeDay(0)">
+                <ion-icon name="arrow-back"></ion-icon>
+            </ion-fab-button>
+
+            <h3 *ngIf="selectedDay == 0; else elseBlock">Hoy</h3>
+            <ng-template #elseBlock>
+                <h3>{{days[selectedDay]}}</h3>
+            </ng-template>
+
+
+            <ion-fab-button [disabled]="!(selectedDay < this.days.length-1)" (click)="changeDay(1)">
+                <ion-icon name="arrow-forward"></ion-icon>
+            </ion-fab-button>
+        </div>
+    </ion-card>
+
+
     <ion-list lines="none">
         <ng-container *ngFor="let hour of hours">
-            <ion-item [disabled]="currentHour >= hour.hour"
-                *ngIf="(hour.hour >= startHour1 && hour.hour < endHour1) || (hour.hour >= startHour2 && hour.hour < endHour2)">
-                
-                <ion-card *ngIf="hour.taken < commerce.maxClients * (6 / commerce.shoppingMinutes)" class="my-shift"
-                    color="light" expand="block" [routerLink]="['./appointment-hour', hour.hour]">
+            <ion-item [disabled]="(currentHour >= hour.hour) && (selectedDay == 0)" *ngIf="(hour.hour >= startHour1 && hour.hour < endHour1) || (hour.hour >= startHour2 && hour.hour < endHour2)">
+
+                <ion-card *ngIf="hour.taken < commerce.maxClients * (6 / commerce.shoppingMinutes)" class="my-shift" color="light" expand="block" [routerLink]="['./appointment-hour', hour.hour]">
                     <ion-item>
                         <ion-label class="eon6-graycolor">{{+hour.hour}}HS A {{+hour.hour+1}}HS</ion-label>
                         <ion-label color="success">Disponible</ion-label>
                     </ion-item>
                 </ion-card>
-                <ion-card *ngIf="hour.taken >= commerce.maxClients * (6 / commerce.shoppingMinutes)" class="my-shift"
-                    color="light" expand="block">
+                <ion-card *ngIf="hour.taken >= commerce.maxClients * (6 / commerce.shoppingMinutes)" class="my-shift" color="light" expand="block">
                     <ion-item>
                         <ion-label class="eon6-graycolor">{{+hour.hour}}HS A {{+hour.hour+1}}HS</ion-label>
                         <ion-label color="danger">Completo</ion-label>
